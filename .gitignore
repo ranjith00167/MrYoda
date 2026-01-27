@@ -1,0 +1,18 @@
+# Test reports
+allure-results/
+allure-report/
+
+# Build outputs
+target/
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# Env
+.env

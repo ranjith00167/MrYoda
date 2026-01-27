@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Report API Preview Suite" verbose="2">
+    <test name="Report Preview" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <parameter name="visitNumber" value="MYD9208"/>
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.COD_01_LoginTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+</suite>

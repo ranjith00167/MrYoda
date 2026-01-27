@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Master Test Suite - All Modular COD Flows" verbose="2">
+    <suite-files>
+        <suite-file path="testng_member_cod_modular.xml" />
+        <suite-file path="testng_non_member_cod_modular.xml" />
+        <suite-file path="testng_new_user_cod_modular.xml" />
+    </suite-files>
+</suite>
