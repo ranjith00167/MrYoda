@@ -18,9 +18,13 @@ public class APIEndpoints {
     // ========== LOCATION & SEARCH ==========
     public static final String GET_LOCATION = "/tests/getlocations";
     public static final String GLOBAL_SEARCH = "tests/adminTests";
+    public static final String GET_ALL_TESTS = "/tests/getAllTests";
+    public static final String GET_FETAL_MEDICINE_TESTS = "/tests/getFetalMedicineTests";
+    public static final String GET_ALL_PACKAGES = "/tests/getAllPackages";
 
     // ========== BRAND & MEMBERSHIP ==========
     public static final String GET_ALL_BRANDS = "https://staging-api-membership.yodaprojects.com/brand/getAllBrands";
+    public static final String GET_REWARDS_BY_MOBILE = "/reward/getRewardsByMobile/{mobile_number}";
 
     // ========== CART MANAGEMENT ==========
     public static final String ADD_TO_CART = "/carts/v2/addCart";
@@ -60,4 +64,5 @@ public class APIEndpoints {
     public static final String APPROVE_PAYMENT = "/order/approvepayment";
     public static final String VISIT_STATUS_UAT = "http://uat.yodalifeline.in/yoda_uat_8.0/api/StatusApi/GetStatus";
     public static final String GET_REPORT_DETAILS = "/report/getReportDetailsByVisitNumber/{visit_Number}";
+    public static final String UPDATE_ORDER = "/order/v2updateOrder";
 }

@@ -929,8 +929,6 @@ public class RequestContext {
     // Generic getter for selected slot (used by all user types)
     public static String getSelectedSlotGuid() {
         // Return the first non-null slot GUID
-        if (currentSlotGuid != null)
-            return currentSlotGuid;
         if (existingMemberSlotGuid != null)
             return existingMemberSlotGuid;
         if (memberSlotGuid != null)
@@ -1025,7 +1023,7 @@ public class RequestContext {
     public static String getNewUserOrderId() {
         return newUserOrderId;
     }
-
+    
     // ============================================================
     // API PERFORMANCE TRACKING
     // ============================================================
@@ -1126,4 +1124,37 @@ public class RequestContext {
     public static void clearExpectedTestResults() {
         expectedTestResults.clear();
     }
+
+    // ============================================================
+    // REWARDS DATA
+    // ============================================================
+    private static double initialTotalRewards;
+    private static double finalTotalRewards;
+    private static double rewardsGain;
+    private static double currentDueAmount;
+
+    public static void setInitialTotalRewards(double v) { initialTotalRewards = v; }
+    public static double getInitialTotalRewards() { return initialTotalRewards; }
+    public static void setFinalTotalRewards(double v) { finalTotalRewards = v; }
+    public static double getFinalTotalRewards() { return finalTotalRewards; }
+    public static void setRewardsGain(double v) { rewardsGain = v; }
+    public static double getRewardsGain() { return rewardsGain; }
+    public static void setCurrentDueAmount(double v) { currentDueAmount = v; }
+    public static double getCurrentDueAmount() { return currentDueAmount; }
+
+    // ============================================================
+    // PACKAGE COMPONENTS STORAGE
+    // ============================================================
+    private static List<String> packageTestNames = new ArrayList<>();
+    public static List<String> getPackageTestNames() { return packageTestNames; }
+    public static void setPackageTestNames(List<String> list) { packageTestNames = list; }
+    public static void addPackageTestNames(List<String> list) {
+        if (packageTestNames == null) packageTestNames = new ArrayList<>();
+        packageTestNames.addAll(list);
+    }
+    public static void clearPackageTestNames() { packageTestNames.clear(); }
+
+    private static int packageTestCount;
+    public static int getPackageTestCount() { return packageTestCount; }
+    public static void setPackageTestCount(int count) { packageTestCount = count; }
 }

@@ -27,6 +27,15 @@ public class COD_16_VisitStatusAPITest {
         if (RequestContext.getAllStoredTests() != null) {
             expectedTestNames.addAll(RequestContext.getAllStoredTests().keySet());
         }
+        
+        // --- KEY FIX FOR PACKAGES ---
+        // If we booked a package (e.g., "Full Body Checkup"), the API returns its COMPONENT tests.
+        // We must add these component names to our expected list.
+        List<String> packageTests = RequestContext.getPackageTestNames();
+        if (packageTests != null && !packageTests.isEmpty()) {
+            System.out.println("   📦 Adding Package Component Tests to Expected List: " + packageTests);
+            expectedTestNames.addAll(packageTests);
+        }
 
         System.out.println("   Extracted Visit Number (LabNo): " + visitNumber);
         System.out.println("   Expected SIN No (from UI): " + expectedSinNo);
@@ -77,11 +86,15 @@ public class COD_16_VisitStatusAPITest {
                             
                             System.out.print("      - [" + itemName + "] | Barcode: " + barcode + " | Status: " + status);
                             
-                            boolean isExpected = expectedTestNames.stream().anyMatch(e -> e.equalsIgnoreCase(itemName));
+                            // Robust Normalization for matching
+                            String normalizedItem = normalize(itemName);
+                            boolean isExpected = expectedTestNames.stream()
+                                    .anyMatch(e -> normalize(e).equals(normalizedItem));
+                            
                             boolean isApproved = "Approved".equalsIgnoreCase(status);
                             
                             if (isExpected && isApproved) {
-                                foundAndApprovedTests.add(itemName.toLowerCase());
+                                foundAndApprovedTests.add(normalizedItem);
                                 foundBarcodes.add(barcode);
                                 System.out.println(" -> ✅ VALID");
                             } else {
@@ -96,11 +109,27 @@ public class COD_16_VisitStatusAPITest {
 
                         // Final logic for multi-test success:
                         // 1. All expected tests must be found and approved.
-                        // 2. All items in the response must be approved.
-                        // 3. At least one barcode should match the extracted SIN No (if available).
+                        //    NOTE: Package Parent name is skipped if components are found.
+                        boolean allExpectedFound = true;
+                        List<String> missingTests = new ArrayList<>();
                         
-                        boolean allExpectedFound = expectedTestNames.stream()
-                                .allMatch(e -> foundAndApprovedTests.contains(e.toLowerCase()));
+                        // Identify mandatory names (Exclude the parent package name from mandatory list if components are found)
+                        Set<String> mandatoryNormalized = new HashSet<>();
+                        boolean hasPackageComponents = (packageTests != null && !packageTests.isEmpty());
+                        
+                        for(String expected : expectedTestNames) {
+                             String normExp = normalize(expected);
+                             // If it's a package name AND we have components, it's not mandatory as a distinct item
+                             boolean isPackageParent = hasPackageComponents && expectedTestNames.size() > packageTests.size() && !packageTests.contains(expected);
+                             
+                             if (!isPackageParent) {
+                                  mandatoryNormalized.add(normExp);
+                                  if (!foundAndApprovedTests.contains(normExp)) {
+                                       allExpectedFound = false;
+                                       missingTests.add(expected);
+                                  }
+                             }
+                        }
                         
                         boolean sinMatch = true;
                         if (expectedSinNo != null && !expectedSinNo.isEmpty()) {
@@ -109,13 +138,13 @@ public class COD_16_VisitStatusAPITest {
 
                         if (allExpectedFound && allFoundItemsApproved && sinMatch) {
                             System.out.println("\n✅ VALIDATION SUCCESS:");
-                            System.out.println("   - All expected tests (" + expectedTestNames.size() + ") are Approved.");
+                            System.out.println("   - All expected tests (" + mandatoryNormalized.size() + ") are Approved.");
                             System.out.println("   - SIN No check passed: " + (expectedSinNo != null ? expectedSinNo : "N/A"));
                             validated = true;
                             break;
                         } else {
                             System.out.println("\n⚠️ Validation incomplete:");
-                            if (!allExpectedFound) System.out.println("   - Missing or unapproved tests. Expected: " + expectedTestNames);
+                            if (!allExpectedFound) System.out.println("   - Missing or unapproved tests: " + missingTests);
                             if (!allFoundItemsApproved) System.out.println("   - Some items are not yet Approved.");
                             if (!sinMatch) System.out.println("   - SIN No " + expectedSinNo + " not found in barcodes " + foundBarcodes);
                         }
@@ -131,5 +160,18 @@ public class COD_16_VisitStatusAPITest {
         }
 
         Assert.assertTrue(validated, "Multi-test validation failed after retries.");
+    }
+
+    /**
+     * Normalizes names for comparison:
+     * - Removes special characters: ( ) [ ] - _
+     * - Removes spaces
+     * - Converts to lower case
+     */
+    private String normalize(String name) {
+        if (name == null) return "";
+        return name.toLowerCase()
+                .replaceAll("[\\(\\)\\[\\]\\-_\\s]", "") // Remove ( ) [ ] - _ and spaces
+                .trim();
     }
 }

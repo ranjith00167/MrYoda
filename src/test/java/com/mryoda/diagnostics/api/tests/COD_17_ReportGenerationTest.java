@@ -204,10 +204,30 @@ public class COD_17_ReportGenerationTest extends BaseTest {
 
             // --- PHASE 2a: UI Booking Check ---
             Map<String, String> uiExpectedResults = RequestContext.getAllExpectedTestResults();
+            List<String> packageComponents = RequestContext.getPackageTestNames();
+
             if (bookedTests != null) {
                 for (String testName : bookedTests.keySet()) {
                     totalChecks++;
-                    boolean found = pdfText.toLowerCase().contains(testName.toLowerCase());
+                    String normExpected = normalize(testName);
+                    boolean found = normalize(pdfText).contains(normExpected);
+                    
+                    // If not found, check if it's a package and if its components are present
+                    if (!found && packageComponents != null && !packageComponents.isEmpty()) {
+                         LoggerUtil.info("   ℹ️ Item '" + testName + "' not in PDF, checking if it's a package with components...");
+                         boolean allCompFound = true;
+                         for(String comp : packageComponents) {
+                             if(!normalize(pdfText).contains(normalize(comp))) {
+                                 allCompFound = false;
+                                 break;
+                             }
+                         }
+                         if(allCompFound) {
+                             found = true;
+                             LoggerUtil.info("   ✅ All components of '" + testName + "' found in PDF. Marking as FOUND.");
+                         }
+                    }
+
                     if (found) matchCount++;
                     auditTrail.add(String.format("%-15s | %-30s | %-20s | %-20s | %s", "UI-Booking", "Test Existence", testName, found ? "FOUND" : "NOT FOUND", found ? "✅" : "❌"));
                 }
@@ -281,7 +301,6 @@ public class COD_17_ReportGenerationTest extends BaseTest {
     }
 
     private boolean validateNumericalResultInPdf(String pdfText, String testName, String expectedValue) {
-        String escapedName = Pattern.quote(testName);
         // Look for number within 100 characters after the test name
         int index = pdfText.toLowerCase().indexOf(testName.toLowerCase());
         if (index == -1) return false;
@@ -301,5 +320,12 @@ public class COD_17_ReportGenerationTest extends BaseTest {
             } catch (Exception ignored) {}
         }
         return false;
+    }
+
+    private String normalize(String str) {
+        if (str == null) return "";
+        return str.toLowerCase()
+                  .replaceAll("[^a-z0-9]", "")
+                  .replaceAll("\\s+", "");
     }
 }

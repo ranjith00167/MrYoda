@@ -70,7 +70,28 @@ public class TestNGExtentReportListener implements ITestListener {
         injectBusinessData(result);
     }
     
-    // ... (onTestFailure, onTestSkipped remain same) ...
+    @Override
+    public void onTestFailure(ITestResult result) {
+        String methodName = result.getMethod().getMethodName();
+        String logText = "<b>" + methodName + " failed.</b>";
+        
+        test.get().log(Status.FAIL, MarkupHelper.createLabel(logText, ExtentColor.RED));
+        test.get().log(Status.FAIL, result.getThrowable());
+        
+        // Log snapshot of context data even on failure
+        injectBusinessData(result);
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        String methodName = result.getMethod().getMethodName();
+        String logText = "<b>" + methodName + " skipped.</b>";
+        
+        test.get().log(Status.SKIP, MarkupHelper.createLabel(logText, ExtentColor.YELLOW));
+        if (result.getThrowable() != null) {
+            test.get().log(Status.SKIP, result.getThrowable());
+        }
+    }
 
     /**
      * Injects context-specific business data into the report based on the test method execution.

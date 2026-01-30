@@ -1758,6 +1758,21 @@ public class CreateOrderCODAPITest extends BaseTest {
         AssertionUtil.verifyTrue(success, "Approve Payment success flag should be true");
         System.out.println("✅ Payment Approved Successfully");
 
+        // 🔍 NEW: Store rewards gain for separate validation class
+        Object rewardsGainObj = response.jsonPath().get("data[0].rewards_gain");
+        if (rewardsGainObj == null) {
+            rewardsGainObj = response.jsonPath().get("data.0.rewards_gain");
+        }
+        
+        if (rewardsGainObj != null) {
+            double actualRewardsGain = rewardsGainObj instanceof Number ? ((Number) rewardsGainObj).doubleValue() : Double.parseDouble(rewardsGainObj.toString());
+            RequestContext.setRewardsGain(actualRewardsGain);
+            RequestContext.setCurrentDueAmount(dueAmount.doubleValue());
+            System.out.println("🎁 Rewards Gain Stored: " + actualRewardsGain + " (Due: " + dueAmount + ")");
+        } else {
+            System.out.println("⚠️ Warning: 'rewards_gain' not found in response.");
+        }
+
         // Extract Visit Number
         String visitNo = response.jsonPath().getString("data.visit_number");
         if (visitNo == null) {

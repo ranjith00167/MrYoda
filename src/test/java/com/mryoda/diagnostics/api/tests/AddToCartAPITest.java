@@ -71,7 +71,7 @@ public class AddToCartAPITest extends BaseTest {
             return null;
         }
 
-        final int MAX_TESTS_TO_CHECK = 2; // Restore limit
+        final int MAX_TESTS_TO_CHECK = 10; // Increased limit to ensure all searched tests are added
         List<Map<String, Object>> productDetailsList = new ArrayList<>();
         int testsChecked = 0;
 

@@ -86,6 +86,10 @@ public class GlobalSearchHelper {
         System.out.println("\n📦 EXTRACTING & STORING TEST DETAILS");
         System.out.println("   Tests already found: " + allTests.size());
 
+        // CLEAR PREVIOUS PACKAGE DATA before extracting new ones
+        RequestContext.clearPackageTestNames();
+        int totalAppendedComponents = 0;
+
         for (String testName : requiredTests) {
 
             Map<String, Object> found = allTests.stream()
@@ -236,6 +240,54 @@ public class GlobalSearchHelper {
                 }
             }
             System.out.println("   Home Collection: " + homeCollectionDisplay);
+
+            // SPECIAL HANDLING FOR PACKAGES & PROFILES
+            // Store component count and names for UI Automation
+            Object componentsObj = storeData.get("components");
+            Object packageId = storeData.get("package_id");
+            
+            if (componentsObj instanceof List && !((List<?>) componentsObj).isEmpty()) {
+                List<?> components = (List<?>) componentsObj;
+                
+                // Heuristic: It's a real package if it has package_id OR more than 1 component
+                boolean isRealPackage = (packageId != null && !packageId.toString().isEmpty()) || components.size() > 1;
+                
+                if (isRealPackage) {
+                    System.out.println("\n   📦 REAL PACKAGE/PROFILE DETECTED: " + actualTestName);
+                    
+                    List<String> componentNames = new ArrayList<>();
+                    for (Object comp : components) {
+                        if (comp != null) {
+                            if (comp instanceof String) {
+                                String compStr = comp.toString();
+                                // Ignore long description sentences
+                                if (compStr.length() < 100 && !compStr.contains(".")) {
+                                    componentNames.add(compStr);
+                                }
+                            } else if (comp instanceof Map) {
+                                Map<?, ?> compMap = (Map<?, ?>) comp;
+                                Object compName = compMap.get("name");
+                                if (compName == null) compName = compMap.get("test_name");
+                                if (compName == null && compMap.get("test") instanceof Map) {
+                                    compName = ((Map<?, ?>)compMap.get("test")).get("test_name");
+                                }
+                                if (compName != null) {
+                                    componentNames.add(compName.toString());
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (!componentNames.isEmpty()) {
+                        RequestContext.addPackageTestNames(componentNames);
+                        totalAppendedComponents += componentNames.size();
+                        RequestContext.setPackageTestCount(totalAppendedComponents);
+                        System.out.println("      Stored in RequestContext: " + componentNames);
+                    }
+                } else {
+                    System.out.println("\n   ℹ️  Item has components but treated as SINGLE TEST (Description only): " + actualTestName);
+                }
+            }
         }
 
         System.out.println("\n✅ All requested tests extracted and stored successfully!");

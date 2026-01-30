@@ -33,6 +33,8 @@
                     <include name="testGlobalSearch_ForNonMember"/>
                 </methods>
             </class>
+              <!-- 2.5 Catalog Verification -->
+            <class name="com.mryoda.diagnostics.api.tests.CatalogVerificationAPITest"/>
             
             <!-- 3. Add to Cart (Populate Cart) -->
             <class name="com.mryoda.diagnostics.api.tests.AddToCartAPITest">

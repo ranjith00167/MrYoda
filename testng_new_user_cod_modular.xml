@@ -40,7 +40,8 @@
                     <include name="testGlobalSearch_ForNewUser"/>
                 </methods>
             </class>
-            
+              <!-- 2.5 Catalog Verification -->
+            <class name="com.mryoda.diagnostics.api.tests.CatalogVerificationAPITest"/>
             <!-- 4. Add to Cart -->
             <class name="com.mryoda.diagnostics.api.tests.AddToCartAPITest">
                 <methods>

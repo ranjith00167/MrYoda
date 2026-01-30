@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Catalog Only Suite" verbose="2">
+    <test name="Catalog Test Steps" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <listeners>
+            <listener class-name="utilities.TestNGExtentReportListener"/>
+        </listeners>
+        <classes>
+             <!-- Dependencies -->
+            <class name="com.mryoda.diagnostics.api.tests.LoginAPITest">
+                 <methods><include name="testLoginWithOTP"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.LocationAPITest">
+                 <methods><include name="testGetLocations_ForMember"/></methods>
+            </class>
+            
+            <!-- Target Test -->
+            <class name="com.mryoda.diagnostics.api.tests.CatalogVerificationAPITest"/>
+        </classes>
+    </test>
+</suite>
