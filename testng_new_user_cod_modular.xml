@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="New User COD Flow Modular Suite" verbose="2">
+    <test name="New User Modular COD Flow Steps" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+        <listeners>
+            <listener class-name="utilities.TestNGExtentReportListener"/>
+        </listeners>
+        <classes>
+            <!-- 0. User Registration (Required for New User Login) -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods>
+                    <include name="testUserRegistration_CreateNewUser"/>
+                </methods>
+            </class>
+
+            <!-- 1. Login (Depends on Registration) -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLoginWithOTP_NewlyRegisteredUser"/>
+                </methods>
+            </class>
+
+            <!-- 2. Login Context Bridge -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+            
+            <!-- 3. Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods>
+                    <include name="testGetLocations_ForNewUser"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods>
+                    <include name="testGetBrands_ForNewUser"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods>
+                    <include name="testGlobalSearch_ForNewUser"/>
+                </methods>
+            </class>
+              <!-- 2.5 Catalog Verification -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            <!-- 4. Add to Cart -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods>
+                    <include name="testAddToCart_ForNewUser"/>
+                </methods>
+            </class>
+            
+            <!-- 5. Detailed COD Flow Steps -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_06_PhlebotomistLoginTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_07_AssignOrderTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_08_VerifyStatusAssignedTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_09_UpdateOrderTrackingTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_10_FinalVerificationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_11_AdminVerifyOtpTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.COD_12_GetSampleTypeTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_13_UpdateStatusSamplesCollectedTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_14_VerifySamplesCollectedStatusTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+
+        </classes>
+    </test>
+</suite>
