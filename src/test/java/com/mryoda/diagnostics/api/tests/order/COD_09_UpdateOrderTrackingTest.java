@@ -7,23 +7,21 @@ public class COD_09_UpdateOrderTrackingTest extends CreateOrderCODAPITest {
 
     @Test
     public void step09_UpdateOrderTracking() {
-        System.out.println("\n>>> STEP 9: UPDATE ORDER TRACKING <<<");
+        System.out.println("\n>>> STEP 9: UPDATE ORDER TRACKING (MULTI-ORDER) <<<");
 
         String lat = RequestContext.getLocationLatitude("UserAddress");
         String lng = RequestContext.getLocationLongitude("UserAddress");
-        String name = RequestContext.getLocationId("UserAddressName"); // using key as 'id' field in generic map
+        String name = RequestContext.getLocationId("UserAddressName");
 
-        // If not found in generic map (since I used loose keys in step 3), fallback or
-        // ensure Step 3 sets them correctly.
-        // In Step 3 I used:
-        // RequestContext.storeLocationCoordinates("UserAddress", lat, lng);
-        // RequestContext.storeLocation("UserAddressName", name);
-        // NOTE: storeLocation puts it in 'locations' map. getLocationId gets it from
-        // 'locations'. Correct.
+        java.util.List<String> trackingIds = RequestContext.getCurrentOrderTrackingIds();
+        java.util.List<String> orderIds = RequestContext.getCurrentOrderIds();
 
-        String orderTrackingId = RequestContext.getCurrentOrderTrackingId();
-        String orderId = RequestContext.getCurrentOrderId();
+        for (int i = 0; i < trackingIds.size(); i++) {
+            String tid = trackingIds.get(i);
+            String oid = (i < orderIds.size()) ? orderIds.get(i) : orderIds.get(0);
 
-        callUpdateOrderTrackingAPI(orderTrackingId, orderId, lat, lng, name);
+            System.out.println("   -> Updating Tracking for Order: " + oid + " (TID: " + tid + ")");
+            callUpdateOrderTrackingAPI(tid, oid, lat, lng, name);
+        }
     }
 }

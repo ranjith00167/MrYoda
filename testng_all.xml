@@ -5,5 +5,6 @@
         <suite-file path="testng_member_cod_modular.xml" />
         <suite-file path="testng_non_member_cod_modular.xml" />
         <suite-file path="testng_new_user_cod_modular.xml" />
+        <suite-file path="testng_family_member_complete.xml" />
     </suite-files>
 </suite>

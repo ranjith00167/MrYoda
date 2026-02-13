@@ -62,11 +62,11 @@ public class OrderPayloadBuilder {
         payload.put("lab_location_id", labLocationId);
         return payload;
     }
-    
+
     /**
      * Builds the payload for CreateOrder (if used separately).
      */
-    public static Map<String, Object> buildCreateOrderPayload(String cartId, String userId, String addressId, 
+    public static Map<String, Object> buildCreateOrderPayload(String cartId, String userId, String addressId,
             String slotId, String date, String time, String labLocationId, int totalAmount, String orderType) {
         Map<String, Object> payload = new HashMap<>();
         payload.put("cart_id", cartId);
@@ -80,6 +80,49 @@ public class OrderPayloadBuilder {
         payload.put("total_amount", totalAmount);
         payload.put("lab_location_id", labLocationId);
         payload.put("order_type", orderType);
+        return payload;
+    }
+
+    public static Map<String, Object> buildAddFamilyMemberPayload(String userId, String firstName, String lastName,
+            String middleName, String mobile, String gender, String countryCode, String dob, String profilePic,
+            String profileColor, String relation, String title) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("user_id", userId);
+        payload.put("first_name", firstName);
+        payload.put("last_name", lastName);
+        payload.put("middle_name", middleName);
+        payload.put("mobile", mobile);
+        payload.put("gender", gender);
+        payload.put("country_code", countryCode);
+        payload.put("dob", dob);
+        payload.put("profile_pic", profilePic);
+        payload.put("profile_color", profileColor);
+        payload.put("relation", relation);
+        payload.put("title", title);
+        return payload;
+    }
+
+    /**
+     * Builds the payload for updating a family member.
+     */
+    public static Map<String, Object> buildUpdateFamilyMemberPayload(String id, String userId, String firstName,
+            String lastName,
+            String middleName, String mobile, String gender, String countryCode, String dob, String profilePic,
+            String profileColor, String relation, String title) {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("guid", id);
+        payload.put("user_id", userId);
+        payload.put("first_name", firstName);
+        payload.put("last_name", lastName);
+        payload.put("middle_name", middleName);
+        payload.put("mobile", mobile);
+        payload.put("gender", gender);
+        payload.put("country_code", countryCode);
+        payload.put("dob", dob);
+        payload.put("profile_pic", profilePic);
+        payload.put("profile_color", profileColor);
+        payload.put("relation", relation);
+        payload.put("title", title);
         return payload;
     }
 }

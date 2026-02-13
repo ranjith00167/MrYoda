@@ -245,16 +245,16 @@ public class GlobalSearchHelper {
             // Store component count and names for UI Automation
             Object componentsObj = storeData.get("components");
             Object packageId = storeData.get("package_id");
-            
+
             if (componentsObj instanceof List && !((List<?>) componentsObj).isEmpty()) {
                 List<?> components = (List<?>) componentsObj;
-                
+
                 // Heuristic: It's a real package if it has package_id OR more than 1 component
                 boolean isRealPackage = (packageId != null && !packageId.toString().isEmpty()) || components.size() > 1;
-                
+
                 if (isRealPackage) {
                     System.out.println("\n   📦 REAL PACKAGE/PROFILE DETECTED: " + actualTestName);
-                    
+
                     List<String> componentNames = new ArrayList<>();
                     for (Object comp : components) {
                         if (comp != null) {
@@ -267,17 +267,33 @@ public class GlobalSearchHelper {
                             } else if (comp instanceof Map) {
                                 Map<?, ?> compMap = (Map<?, ?>) comp;
                                 Object compName = compMap.get("name");
-                                if (compName == null) compName = compMap.get("test_name");
+                                if (compName == null)
+                                    compName = compMap.get("test_name");
                                 if (compName == null && compMap.get("test") instanceof Map) {
-                                    compName = ((Map<?, ?>)compMap.get("test")).get("test_name");
+                                    compName = ((Map<?, ?>) compMap.get("test")).get("test_name");
                                 }
                                 if (compName != null) {
-                                    componentNames.add(compName.toString());
+                                    String nameStr = compName.toString();
+                                    componentNames.add(nameStr);
+
+                                    // Store ID mapping if available for recovery in Report Validation
+                                    Object compId = compMap.get("test_id");
+                                    if (compId == null)
+                                        compId = compMap.get("_id");
+                                    if (compId == null && compMap.get("test") instanceof Map) {
+                                        compId = ((Map<?, ?>) compMap.get("test")).get("test_id");
+                                        if (compId == null)
+                                            compId = ((Map<?, ?>) compMap.get("test")).get("_id");
+                                    }
+                                    if (compId != null) {
+                                        RequestContext.storeComponentIdMapping(compId.toString(), nameStr);
+                                        System.out.println("      🆔 Mapped Component: " + compId + " → " + nameStr);
+                                    }
                                 }
                             }
                         }
                     }
-                    
+
                     if (!componentNames.isEmpty()) {
                         RequestContext.addPackageTestNames(componentNames);
                         totalAppendedComponents += componentNames.size();
@@ -285,7 +301,8 @@ public class GlobalSearchHelper {
                         System.out.println("      Stored in RequestContext: " + componentNames);
                     }
                 } else {
-                    System.out.println("\n   ℹ️  Item has components but treated as SINGLE TEST (Description only): " + actualTestName);
+                    System.out.println("\n   ℹ️  Item has components but treated as SINGLE TEST (Description only): "
+                            + actualTestName);
                 }
             }
         }
@@ -304,6 +321,9 @@ public class GlobalSearchHelper {
         }
 
         System.out.println("\n🔍 SEARCHING FOR " + fullTestNames.length + " TESTS");
+
+        // Override location to Madhapur as per user request
+        locationName = "Madhapur";
 
         // Set location
         RequestContext.setSelectedLocation(locationName);

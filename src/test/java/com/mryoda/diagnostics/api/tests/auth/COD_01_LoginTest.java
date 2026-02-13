@@ -18,7 +18,7 @@ public class COD_01_LoginTest extends CreateOrderCODAPITest {
         RequestContext.setVisitNumber(null);
         RequestContext.setCurrentOrderId(null);
         RequestContext.setCurrentPaymentId(null);
-        
+
         // Clear ScenarioContext variables to avoid using previous flow's data
         try {
             utilities.ScenarioContext.extractedSinNo = null;

@@ -6,7 +6,6 @@ import io.restassured.specification.RequestSpecification;
 import com.mryoda.diagnostics.api.utils.LogManager;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,16 +115,26 @@ public class RequestBuilder {
             req.headers(headers);
         }
 
-        // priority: bodyParams → setRequestBody()
-        if (!bodyParams.isEmpty()) {
-            req.contentType("application/json");
+        // Set Content-Type with UTF-8 charset explicitly to avoid "unsupported charset
+        // ISO-8859-1"
+        // Some servers/middlewares default to ISO-8859-1 if not specified or send it
+        // back on error
+        req.contentType("application/json; charset=UTF-8");
+
+        if (bodyParams != null && !bodyParams.isEmpty()) {
+            System.out.println("Request Body Params: " + bodyParams);
             req.body(bodyParams);
         } else if (body != null) {
-            req.contentType("application/json");
+            System.out.println("Request Body: " + body);
             req.body(body);
+        } else {
+            // For POST/PUT with no body, some servers might still expect a JSON structure
+            // Using an empty JSON object as a safe default for application/json
+            req.body("{}");
         }
 
         if (queryParams != null && !queryParams.isEmpty()) {
+            System.out.println("Query Params: " + queryParams);
             req.queryParams(queryParams);
         }
 
@@ -201,7 +210,6 @@ public class RequestBuilder {
 
         // Store in RequestContext for debugging/post-execution analysis
         RequestContext.storeApiPerformance(endpoint, time);
-
 
         System.out.println("----------------------------\n");
     }

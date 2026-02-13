@@ -32,7 +32,7 @@ public class COD_19_OrderCancellationTest {
         if (statusObj == null) {
             statusObj = response.jsonPath().get("data[0].order_status");
         }
-        
+
         String orderStatus;
         if (statusObj instanceof java.util.List) {
             java.util.List<?> list = (java.util.List<?>) statusObj;
@@ -40,16 +40,17 @@ public class COD_19_OrderCancellationTest {
         } else {
             orderStatus = statusObj != null ? statusObj.toString() : null;
         }
-        
+
         System.out.println("✅ Current Order Status: " + orderStatus);
-        // Usually it should be 'samples_collected' or 'paid' at this point in the modular flow
+        // Usually it should be 'samples_collected' or 'paid' at this point in the
+        // modular flow
     }
 
     @Test(groups = "cancel_flow", dependsOnMethods = "step19_A_VerifyOrderBeforeCancellation")
     public void step19_B_CancelOrder() {
         System.out.println("\n>>> STEP 19-B: CANCEL ORDER <<<");
         String orderId = RequestContext.getCurrentOrderId();
-        
+
         Map<String, Object> payload = new HashMap<>();
         payload.put("order_guid", orderId);
         payload.put("order_status", "Cancelled");
@@ -64,12 +65,13 @@ public class COD_19_OrderCancellationTest {
                 .post();
 
         System.out.println("Response Status: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
         AssertionUtil.verifyEquals(response.getStatusCode(), 200, "Update Order Status should return 200");
 
         String msg = response.jsonPath().getString("msg");
         System.out.println("Response Message: " + msg);
         AssertionUtil.verifyEquals(msg, "Order updated successfully", "Success message should match");
-        
+
         System.out.println("✅ Order Status Updated to 'Cancelled' successfully.");
     }
 
@@ -93,7 +95,7 @@ public class COD_19_OrderCancellationTest {
         if (statusObj == null) {
             statusObj = response.jsonPath().get("data[0].order_status");
         }
-        
+
         String orderStatus;
         if (statusObj instanceof java.util.List) {
             java.util.List<?> list = (java.util.List<?>) statusObj;
@@ -101,10 +103,10 @@ public class COD_19_OrderCancellationTest {
         } else {
             orderStatus = statusObj != null ? statusObj.toString() : null;
         }
-        
+
         System.out.println("✅ Final Order Status: " + orderStatus);
         AssertionUtil.verifyEquals(orderStatus, "Cancelled", "Order status should be 'Cancelled'");
-        
+
         System.out.println("✅ Cancellation Flow Verified Mathematically and via API.");
     }
 }

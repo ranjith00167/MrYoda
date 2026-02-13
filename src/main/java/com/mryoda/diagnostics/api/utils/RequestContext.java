@@ -14,6 +14,15 @@ public class RequestContext {
     private static String existingMemberToken;
     private static String newUserToken;
     private static String currentFlowName = "default";
+    private static List<Map<String, Object>> activeProductDetails;
+
+    public static void setActiveProductDetails(List<Map<String, Object>> details) {
+        activeProductDetails = details;
+    }
+
+    public static List<Map<String, Object>> getActiveProductDetails() {
+        return activeProductDetails;
+    }
 
     public static void setCurrentFlowName(String name) {
         currentFlowName = name;
@@ -32,16 +41,66 @@ public class RequestContext {
     private static String currentCartId;
     private static String currentAddressGuid;
     private static String currentAddressId;
+    private static List<String> currentOrderIds = new ArrayList<>();
+    private static List<String> currentOrderTrackingIds = new ArrayList<>();
+    private static List<String> currentVisitNumbers = new ArrayList<>();
+    private static Map<String, String> orderVisitMap = new HashMap<>();
+    private static Map<String, String> visitSinMap = new HashMap<>();
     private static int currentTotalPrice;
     private static String currentSampleType;
 
     public static void setVisitNumber(String v) {
         visitNumber = v;
+        if (v != null && !v.isEmpty() && !currentVisitNumbers.contains(v)) {
+            currentVisitNumbers.add(v);
+        }
         System.out.println(">>> STORED VISIT NUMBER: " + visitNumber);
     }
 
     public static String getVisitNumber() {
         return visitNumber;
+    }
+
+    public static void setCurrentVisitNumbers(List<String> visits) {
+        currentVisitNumbers = visits;
+        if (visits != null && !visits.isEmpty()) {
+            visitNumber = visits.get(0);
+        }
+    }
+
+    public static List<String> getCurrentVisitNumbers() {
+        return currentVisitNumbers;
+    }
+
+    public static void mapOrderToVisit(String orderId, String visitNo) {
+        if (orderId != null && visitNo != null) {
+            orderVisitMap.put(orderId, visitNo);
+            if (!currentVisitNumbers.contains(visitNo)) {
+                currentVisitNumbers.add(visitNo);
+            }
+            if (visitNumber == null) {
+                visitNumber = visitNo;
+            }
+        }
+    }
+
+    public static String getVisitForOrder(String orderId) {
+        return orderVisitMap.get(orderId);
+    }
+
+    public static Map<String, String> getOrderVisitMap() {
+        return orderVisitMap;
+    }
+
+    public static void setSinNumberForVisit(String visitNo, String sinNo) {
+        if (visitNo != null && sinNo != null) {
+            visitSinMap.put(visitNo, sinNo);
+            System.out.println(">>> MAPPED Visit: " + visitNo + " → SIN: " + sinNo);
+        }
+    }
+
+    public static String getSinNumberForVisit(String visitNo) {
+        return visitSinMap.get(visitNo);
     }
 
     public static void setCurrentOrderId(String v) {
@@ -50,6 +109,17 @@ public class RequestContext {
 
     public static String getCurrentOrderId() {
         return currentOrderId;
+    }
+
+    public static void setCurrentOrderIds(List<String> ids) {
+        currentOrderIds = ids;
+        if (ids != null && !ids.isEmpty()) {
+            currentOrderId = ids.get(0); // Fallback for single ID getters
+        }
+    }
+
+    public static List<String> getCurrentOrderIds() {
+        return currentOrderIds;
     }
 
     public static void setCurrentPaymentId(String v) {
@@ -68,12 +138,52 @@ public class RequestContext {
         return currentOrderTrackingId;
     }
 
+    public static void setCurrentOrderTrackingIds(List<String> ids) {
+        currentOrderTrackingIds = ids;
+        if (ids != null && !ids.isEmpty()) {
+            currentOrderTrackingId = ids.get(0); // Fallback for single ID getters
+        }
+    }
+
+    public static List<String> getCurrentOrderTrackingIds() {
+        return currentOrderTrackingIds;
+    }
+
     public static void setCurrentPhleboGuid(String v) {
         currentPhleboGuid = v;
     }
 
     public static String getCurrentPhleboGuid() {
         return currentPhleboGuid;
+    }
+
+    private static String phleboToken;
+
+    public static void setPhleboToken(String token) {
+        phleboToken = token;
+    }
+
+    public static String getPhleboToken() {
+        return phleboToken;
+    }
+
+    private static String adminToken;
+    private static String adminGuid;
+
+    public static void setAdminToken(String token) {
+        adminToken = token;
+    }
+
+    public static String getAdminToken() {
+        return adminToken;
+    }
+
+    public static void setAdminGuid(String guid) {
+        adminGuid = guid;
+    }
+
+    public static String getAdminGuid() {
+        return adminGuid;
     }
 
     public static void setCurrentSlotGuid(String v) {
@@ -1023,7 +1133,7 @@ public class RequestContext {
     public static String getNewUserOrderId() {
         return newUserOrderId;
     }
-    
+
     // ============================================================
     // API PERFORMANCE TRACKING
     // ============================================================
@@ -1037,6 +1147,7 @@ public class RequestContext {
     /**
      * Stores the response time for a given endpoint.
      * Appends to existing list if endpoint has been called before.
+     * 
      * @param endpoint The API endpoint URL or name
      * @param timeInMs Execution time in milliseconds
      */
@@ -1046,6 +1157,7 @@ public class RequestContext {
 
     /**
      * Retrieves all stored performance metrics.
+     * 
      * @return Map of endpoint -> List of response times
      */
     public static Map<String, List<Long>> getAllApiPerformance() {
@@ -1054,6 +1166,7 @@ public class RequestContext {
 
     /**
      * Gets performance history for a specific endpoint.
+     * 
      * @param endpoint The endpoint to look up
      * @return List of times in ms, or empty list if not found
      */
@@ -1063,6 +1176,7 @@ public class RequestContext {
 
     /**
      * Gets the latest performance time for a specific endpoint.
+     * 
      * @param endpoint The endpoint to look up
      * @return Time in ms, or -1 if not found
      */
@@ -1095,14 +1209,15 @@ public class RequestContext {
                 long total = times.stream().mapToLong(Long::longValue).sum();
                 long avg = total / count;
                 long max = times.stream().mapToLong(Long::longValue).max().orElse(0);
-                
+
                 String emoji = avg < 1000 ? "⚡" : (avg < 5000 ? "🐢" : "🐌");
-                
+
                 System.out.printf("   %-80s\n", endpoint);
-                System.out.printf("   > Status: %s | Avg: %d ms | Max: %d ms | Calls: %d\n", 
-                                  emoji, avg, max, count);
+                System.out.printf("   > Status: %s | Avg: %d ms | Max: %d ms | Calls: %d\n",
+                        emoji, avg, max, count);
                 System.out.println("   > History: " + times.toString());
-                System.out.println("   --------------------------------------------------------------------------------");
+                System.out
+                        .println("   --------------------------------------------------------------------------------");
             });
         }
         System.out.println("====================================================\n");
@@ -1133,28 +1248,89 @@ public class RequestContext {
     private static double rewardsGain;
     private static double currentDueAmount;
 
-    public static void setInitialTotalRewards(double v) { initialTotalRewards = v; }
-    public static double getInitialTotalRewards() { return initialTotalRewards; }
-    public static void setFinalTotalRewards(double v) { finalTotalRewards = v; }
-    public static double getFinalTotalRewards() { return finalTotalRewards; }
-    public static void setRewardsGain(double v) { rewardsGain = v; }
-    public static double getRewardsGain() { return rewardsGain; }
-    public static void setCurrentDueAmount(double v) { currentDueAmount = v; }
-    public static double getCurrentDueAmount() { return currentDueAmount; }
+    public static void setInitialTotalRewards(double v) {
+        initialTotalRewards = v;
+    }
+
+    public static double getInitialTotalRewards() {
+        return initialTotalRewards;
+    }
+
+    public static void setFinalTotalRewards(double v) {
+        finalTotalRewards = v;
+    }
+
+    public static double getFinalTotalRewards() {
+        return finalTotalRewards;
+    }
+
+    public static void setRewardsGain(double v) {
+        rewardsGain = v;
+    }
+
+    public static double getRewardsGain() {
+        return rewardsGain;
+    }
+
+    public static void setCurrentDueAmount(double v) {
+        currentDueAmount = v;
+    }
+
+    public static double getCurrentDueAmount() {
+        return currentDueAmount;
+    }
 
     // ============================================================
     // PACKAGE COMPONENTS STORAGE
     // ============================================================
     private static List<String> packageTestNames = new ArrayList<>();
-    public static List<String> getPackageTestNames() { return packageTestNames; }
-    public static void setPackageTestNames(List<String> list) { packageTestNames = list; }
+
+    public static List<String> getPackageTestNames() {
+        return packageTestNames;
+    }
+
+    public static void setPackageTestNames(List<String> list) {
+        packageTestNames = list;
+    }
+
     public static void addPackageTestNames(List<String> list) {
-        if (packageTestNames == null) packageTestNames = new ArrayList<>();
+        if (packageTestNames == null)
+            packageTestNames = new ArrayList<>();
         packageTestNames.addAll(list);
     }
-    public static void clearPackageTestNames() { packageTestNames.clear(); }
+
+    public static void clearPackageTestNames() {
+        packageTestNames.clear();
+        componentIdToNameMap.clear();
+    }
+
+    private static Map<String, String> componentIdToNameMap = new HashMap<>();
+
+    public static void storeComponentIdMapping(String id, String name) {
+        if (id != null && name != null) {
+            componentIdToNameMap.put(id, name);
+        }
+    }
+
+    public static String getComponentNameById(String id) {
+        return componentIdToNameMap.get(id);
+    }
+
+    public static Map<String, String> getComponentIdToNameMap() {
+        return componentIdToNameMap;
+    }
+
+    public static void clearComponentMappings() {
+        componentIdToNameMap.clear();
+    }
 
     private static int packageTestCount;
-    public static int getPackageTestCount() { return packageTestCount; }
-    public static void setPackageTestCount(int count) { packageTestCount = count; }
+
+    public static int getPackageTestCount() {
+        return packageTestCount;
+    }
+
+    public static void setPackageTestCount(int count) {
+        packageTestCount = count;
+    }
 }

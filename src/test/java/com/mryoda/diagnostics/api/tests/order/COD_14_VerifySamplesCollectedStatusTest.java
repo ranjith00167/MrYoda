@@ -9,37 +9,40 @@ public class COD_14_VerifySamplesCollectedStatusTest extends CreateOrderCODAPITe
 
     @Test
     public void step14_VerifySamplesCollectedStatus() {
-        System.out.println("\n>>> STEP 14: VERIFY STATUS (SAMPLES COLLECTED) IN ORDER DETAILS <<<");
+        System.out.println("\n>>> STEP 14: VERIFY STATUS (SAMPLES COLLECTED) IN ORDER DETAILS - MULTI-ORDER <<<");
         String token = RequestContext.getToken();
-        String orderId = RequestContext.getCurrentOrderId();
+        java.util.List<String> orderIds = RequestContext.getCurrentOrderIds();
 
-        Response response = callGetOrderByIdAPI(token, orderId);
-        Assert.assertEquals(response.getStatusCode(), 200, "GetOrderById should return 200");
+        for (String oid : orderIds) {
+            System.out.println("   -> Verifying Status for Order ID: " + oid);
+            Response response = callGetOrderByIdAPI(token, oid);
+            Assert.assertEquals(response.getStatusCode(), 200, "GetOrderById should return 200 for: " + oid);
 
-        Object statusObj = response.jsonPath().get("data.order_status");
-        String status = null;
+            Object statusObj = response.jsonPath().get("data.order_status");
+            String status = null;
 
-        if (statusObj instanceof java.util.List) {
-            java.util.List<?> list = (java.util.List<?>) statusObj;
-            if (!list.isEmpty()) {
-                status = list.get(0).toString();
+            if (statusObj instanceof java.util.List) {
+                java.util.List<?> list = (java.util.List<?>) statusObj;
+                if (!list.isEmpty()) {
+                    status = list.get(0).toString();
+                }
+            } else if (statusObj != null) {
+                status = statusObj.toString();
             }
-        } else if (statusObj != null) {
-            status = statusObj.toString();
-        }
 
-        System.out.println("   Current Order Status (Raw): " + statusObj);
-        System.out.println("   Current Order Status (Extracted): " + status);
+            System.out.println("      Current Order Status (Raw): " + statusObj);
+            System.out.println("      Current Order Status (Extracted): " + status);
 
-        Assert.assertNotNull(status, "Order Status should not be null");
+            Assert.assertNotNull(status, "Order Status should not be null for: " + oid);
 
-        String normalizedStatus = status.toLowerCase().replace(" ", "_").replace("[", "").replace("]", "");
+            String normalizedStatus = status.toLowerCase().replace(" ", "_").replace("[", "").replace("]", "");
 
-        if (normalizedStatus.contains("sample_collected") || normalizedStatus.contains("samples_collected")) {
-            System.out.println("✅ Order Status Verified: " + status);
-        } else {
-            Assert.fail("Order Status mismatch! Expected 'samples_collected' or 'Sample Collected' but got '" + status
-                    + "'");
+            if (normalizedStatus.contains("sample_collected") || normalizedStatus.contains("samples_collected")) {
+                System.out.println("      ✅ Order Status Verified: " + status);
+            } else {
+                Assert.fail("Order Status mismatch for order " + oid + "! Expected 'samples_collected' but got '"
+                        + status + "'");
+            }
         }
     }
 }

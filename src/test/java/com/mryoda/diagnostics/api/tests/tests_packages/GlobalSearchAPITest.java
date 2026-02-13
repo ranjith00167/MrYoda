@@ -54,7 +54,7 @@ public class GlobalSearchAPITest extends BaseTest {
         System.out.println("   ✅ This location will be used for Global Search");
 
         String[] testsToSearch = {
-               "Bone Profile -1","RANDOM BLOOD GLUCOSE (RBS)","CLOTTING TIME"
+                "Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME", "Complete Blood Count (CBC)"
         };
 
         System.out.println("\n⚠️  IMPORTANT: We are NOT searching for CBC!");
@@ -169,17 +169,19 @@ public class GlobalSearchAPITest extends BaseTest {
         System.out.println("\n📦 VALIDATING PACKAGE CONTENT (Stored in Context)");
         int pkgCount = RequestContext.getPackageTestCount();
         List<String> pkgTests = RequestContext.getPackageTestNames();
-        
+
         if (pkgCount > 0) {
-             System.out.println("   ✅ Package Test Count Verified: " + pkgCount);
-             System.out.println("   ✅ Package Test Names Recovered: " + pkgTests);
-             AssertionUtil.verifyTrue(pkgTests != null && !pkgTests.isEmpty(), "Package test names list should not be empty");
+            System.out.println("   ✅ Package Test Count Verified: " + pkgCount);
+            System.out.println("   ✅ Package Test Names Recovered: " + pkgTests);
+            AssertionUtil.verifyTrue(pkgTests != null && !pkgTests.isEmpty(),
+                    "Package test names list should not be empty");
         } else {
-             // Only a warning if we didn't search for a package, but if we did, this is good info
-             System.out.println("   ℹ️  No package content stored (Context is empty or no package found)");
-             if (java.util.Arrays.asList(testsToSearch).contains("Full Body Health Checkup")) {
-                 System.out.println("   ⚠️  WARNING: We searched for 'Full Body Health Checkup' but found no content?");
-             }
+            // Only a warning if we didn't search for a package, but if we did, this is good
+            // info
+            System.out.println("   ℹ️  No package content stored (Context is empty or no package found)");
+            if (java.util.Arrays.asList(testsToSearch).contains("Full Body Health Checkup")) {
+                System.out.println("   ⚠️  WARNING: We searched for 'Full Body Health Checkup' but found no content?");
+            }
         }
 
         System.out.println("\n✅ GLOBAL SEARCH COMPLETE (Stored " + foundCount + " tests)");

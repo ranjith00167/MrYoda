@@ -19,8 +19,9 @@ public class COD_05_CrossApiValidationTest extends CreateOrderCODAPITest {
         String addressId = RequestContext.getCurrentAddressId();
         String slotGuid = RequestContext.getCurrentSlotGuid();
 
+        String orderType = (addressId != null) ? "home" : "lab";
         Response paymentResponse = callGetPaymentByIdAPI(token, paymentId);
-        Response cartResponse = callGetCartAPI(token, userId);
+        Response cartResponse = callGetCartAPI(token, userId, orderType);
 
         // Extract Product Names for validation
         List<String> expectedProductNames = new java.util.ArrayList<>();

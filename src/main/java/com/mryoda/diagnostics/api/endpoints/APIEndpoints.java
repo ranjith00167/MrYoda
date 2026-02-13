@@ -65,4 +65,12 @@ public class APIEndpoints {
     public static final String VISIT_STATUS_UAT = "http://uat.yodalifeline.in/yoda_uat_8.0/api/StatusApi/GetStatus";
     public static final String GET_REPORT_DETAILS = "/report/getReportDetailsByVisitNumber/{visit_Number}";
     public static final String UPDATE_ORDER = "/order/v2updateOrder";
+
+    // ========== FAMILY MEMBER ==========
+    public static final String GET_ALL_FAMILY_MEMBERS = "/familymembers/GetAllFamilyMembersByUser/{user_id}";
+    public static final String ADD_FAMILY_MEMBER = "/familymembers/addFamilyMember";
+    public static final String GET_FAMILY_MEMBER_BY_ID = "/familymembers/GetFamilyMemberById/{guid}";
+    public static final String UPDATE_FAMILY_MEMBER = "/familymembers/updateFamilyMember";
+    public static final String DELETE_FAMILY_MEMBER_BY_ID = "/familymembers/deleteFamilyMemberById/{guid}";
+    public static final String ADMIN_LOGIN = "/auth/login";
 }

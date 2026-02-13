@@ -7,12 +7,15 @@ public class COD_13_UpdateStatusSamplesCollectedTest extends CreateOrderCODAPITe
 
     @Test
     public void step13_UpdateStatusSamplesCollected() {
-        System.out.println("\n>>> STEP 13: UPDATE STATUS (SAMPLES COLLECTED) <<<");
+        System.out.println("\n>>> STEP 13: UPDATE STATUS (SAMPLES COLLECTED - MULTI-ORDER) <<<");
         String sampleType = RequestContext.getCurrentSampleType();
-        String orderTrackingId = RequestContext.getCurrentOrderTrackingId();
+        java.util.List<String> trackingIds = RequestContext.getCurrentOrderTrackingIds();
 
         if (sampleType != null) {
-            callUpdateOrderSamplesCollectedAPI(orderTrackingId, sampleType);
+            for (String tid : trackingIds) {
+                System.out.println("   -> Updating Samples Collected for Tracking ID: " + tid);
+                callUpdateOrderSamplesCollectedAPI(tid, sampleType);
+            }
         } else {
             System.out.println("⚠️ Skipping Step 13: No Sample Type available from previous step.");
         }

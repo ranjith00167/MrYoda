@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Family Member API - Full Validation Suite" verbose="1">
+    
+    <test name="Comprehensive Validations">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.family.FamilyMemberCompleteTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.family.FamilyMemberFlowTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.family.AddFamilyMemberTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.family.UpdateFamilyMemberTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.family.FamilyMemberNegativeTest"/>
+        </classes>
+    </test>
+    
+</suite>

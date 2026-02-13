@@ -124,8 +124,8 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
 
     @Test(priority = 2, dependsOnMethods = "step01_LoginAndSetup")
     public void step02_VerifyCartAndPrice() {
-        System.out.println("\n>>> STEP 2: GET CART & VERIFY PRICE <<<");
-        Response response = callGetCartAPI(token, userId);
+        String flowOrderType = (addressGuid != null) ? "home" : "lab";
+        Response response = callGetCartAPI(token, userId, flowOrderType);
 
         Object dataObj = response.jsonPath().get("data");
         String dataPath = (dataObj instanceof java.util.List) ? "data[0]" : "data";
@@ -167,8 +167,8 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
 
         // Need Date/Time/LabId which are usually extracted from responses.
         // Assuming defaults or extracted.
-        // Re-fetching cart to get latest LabLocationID if needed or using default.
-        Response cartRes = callGetCartAPI(token, userId);
+        String flowOrderType = (addressGuid != null) ? "home" : "lab";
+        Response cartRes = callGetCartAPI(token, userId, flowOrderType);
         Object dataObj = cartRes.jsonPath().get("data");
         String dataPath = (dataObj instanceof java.util.List) ? "data[0]" : "data";
         String labLocationId = cartRes.jsonPath().getString(dataPath + ".lab_location_id");
@@ -185,8 +185,9 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
     public void step05_CrossApiValidation() {
         System.out.println("\n>>> STEP 5: CROSS-API VALIDATION <<<");
 
+        String currentOrderType = (addressGuid != null) ? "home" : "lab";
         Response paymentResponse = callGetPaymentByIdAPI(token, paymentId);
-        Response cartResponse = callGetCartAPI(token, userId);
+        Response cartResponse = callGetCartAPI(token, userId, currentOrderType);
 
         // Extract Product Names for validation
         List<String> expectedProductNames = new java.util.ArrayList<>();
@@ -241,7 +242,10 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         String name = addressDetails.get("name");
 
         // WAIT for OTP Verification to complete on server
-        try { Thread.sleep(3000); } catch (InterruptedException e) {}
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+        }
 
         callUpdateOrderTrackingAPI(orderTrackingId, orderId, lat, lng, name);
     }
@@ -339,67 +343,78 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
             Assert.assertEquals(response.getStatusCode(), 200);
 
             // Extract Product Details from Order
-            // Assuming structure: data.product_details -> List of objects with 'product_name' or 'test_name'
+            // Assuming structure: data.product_details -> List of objects with
+            // 'product_name' or 'test_name'
             List<Map<String, Object>> orderedProducts = response.jsonPath().getList("data.product_details");
-            
+
             if (orderedProducts == null || orderedProducts.isEmpty()) {
-                 // Try list structure fallback just in case
-                 orderedProducts = response.jsonPath().getList("data[0].product_details");
+                // Try list structure fallback just in case
+                orderedProducts = response.jsonPath().getList("data[0].product_details");
             }
-            
+
             Assert.assertNotNull(orderedProducts, "Order should contain product details");
 
             System.out.println("   🛒 Ordered Products Found: " + orderedProducts.size());
-            
+
             // Collect actual names from order
             List<String> actualOrderedTestNames = new java.util.ArrayList<>();
             for (Map<String, Object> prod : orderedProducts) {
                 String pName = (String) prod.get("product_name");
-                if (pName == null) pName = (String) prod.get("name");
-                if (pName == null) pName = (String) prod.get("test_name"); // Fallback
-                
+                if (pName == null)
+                    pName = (String) prod.get("name");
+                if (pName == null)
+                    pName = (String) prod.get("test_name"); // Fallback
+
                 if (pName != null) {
                     actualOrderedTestNames.add(pName);
                     // Also check if this product has sub-components if it's the package itself?
-                    // Usually order contains the Package Name lines AND/OR individual test lines depending on backend.
-                    // If the order JUST lists "Full Body Checks", we might need another API to see content, 
-                    // BUT user prompt suggests we validate what's in the box vs what we expected from Global Search.
-                    
-                    // Actually, typically Result Entry flow (next phase) needs these names. 
+                    // Usually order contains the Package Name lines AND/OR individual test lines
+                    // depending on backend.
+                    // If the order JUST lists "Full Body Checks", we might need another API to see
+                    // content,
+                    // BUT user prompt suggests we validate what's in the box vs what we expected
+                    // from Global Search.
+
+                    // Actually, typically Result Entry flow (next phase) needs these names.
                     // Here we are just verifying the persistence.
                 }
             }
-            
+
             System.out.println("   Actual Ordered Items: " + actualOrderedTestNames);
 
             // Validation Logic:
-            // The User wants to ensure the "Test Names" recovered from Global Search are present/relevant.
-            // If the Order contains the Package Name itself (e.g. "Full Body Checkup"), we validated the package is there.
-            // If the User meant we need to validate these names match the *Result Entry* screen later, 
+            // The User wants to ensure the "Test Names" recovered from Global Search are
+            // present/relevant.
+            // If the Order contains the Package Name itself (e.g. "Full Body Checkup"), we
+            // validated the package is there.
+            // If the User meant we need to validate these names match the *Result Entry*
+            // screen later,
             // then storing them in RequestContext (which we did) is the key.
             // Currently, this step confirms we HAVE the data ready for that future UI step.
-            
+
             boolean packageFoundInOrder = actualOrderedTestNames.stream()
-                .anyMatch(name -> name.toLowerCase().contains("full body") || name.toLowerCase().contains("package"));
-            
-            if(packageFoundInOrder) {
-                 System.out.println("   ✅ Package found in Order Details.");
+                    .anyMatch(
+                            name -> name.toLowerCase().contains("full body") || name.toLowerCase().contains("package"));
+
+            if (packageFoundInOrder) {
+                System.out.println("   ✅ Package found in Order Details.");
             } else {
-                 System.out.println("   ⚠️ Package name not explicitly found in text, might be ID matched.");
+                System.out.println("   ⚠️ Package name not explicitly found in text, might be ID matched.");
             }
-            
+
             System.out.println("   ✅ Package Test Names are stored in Context for UI Result Entry Validation.");
 
         } else {
-            System.out.println("   ℹ️  No Package Content to verify (Not a package order or Global Search didn't run package logic).");
+            System.out.println(
+                    "   ℹ️  No Package Content to verify (Not a package order or Global Search didn't run package logic).");
         }
     }
-    
-    @Test(priority = 17, dependsOnMethods = "step15_ApprovePayment")
+
+    @Test(priority = 17, dependsOnMethods = "step16_VerifyPackageContents")
     public void step17_ProcessResultEntryCheck() {
-         // Placeholder for strict UI validation if needed here, 
-         // but actual UI test logic is usually in separate classes.
-         // This step ensures the sequence continues.
-         System.out.println("✅ Data ready for UI Result Entry.");
+        // Placeholder for strict UI validation if needed here,
+        // but actual UI test logic is usually in separate classes.
+        // This step ensures the sequence continues.
+        System.out.println("✅ Data ready for UI Result Entry.");
     }
 }

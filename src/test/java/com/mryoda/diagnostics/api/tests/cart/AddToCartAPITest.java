@@ -7,6 +7,8 @@ import com.mryoda.diagnostics.api.utils.RequestContext;
 import com.mryoda.diagnostics.api.builders.RequestBuilder;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -34,7 +36,8 @@ public class AddToCartAPITest extends BaseTest {
             Map<String, String> allBrands = RequestContext.getAllBrands();
             if (!allBrands.isEmpty()) {
                 brandId = allBrands.values().iterator().next();
-                System.out.println("   ⚠️ Brand ID not found strictly for '" + brandName + "', using first available: " + brandId);
+                System.out.println(
+                        "   ⚠️ Brand ID not found strictly for '" + brandName + "', using first available: " + brandId);
             } else {
                 System.out.println("   ❌ Brand ID not found for '" + brandName + "' and no brands available.");
                 Assert.fail("Brand ID required for AddToCart");
@@ -43,26 +46,27 @@ public class AddToCartAPITest extends BaseTest {
         }
 
         if (locationId == null || locationId.isEmpty()) {
-             System.out.println("⚠️ Direct match for location '" + locationName + "' failed. searching for partial match...");
-             Map<String, String> allLocs = RequestContext.getAllLocations();
-             for (Map.Entry<String, String> entry : allLocs.entrySet()) {
-                 if (entry.getKey().contains(locationName)) {
-                     locationId = entry.getValue();
-                     System.out.println("   ✅ Found partial match: " + entry.getKey() + " -> " + locationId);
-                     break;
-                 }
-             }
-             // Fallback to first available if still null
-             if (locationId == null && !allLocs.isEmpty()) {
-                 locationId = allLocs.values().iterator().next();
-                 System.out.println("   ⚠️ Fallback to first available location: " + locationId);
-             }
-             
-             if (locationId == null) {
-                 System.out.println("   ❌ Location ID not found and no locations available.");
-                 Assert.fail("Location ID required for AddToCart");
-                 return null;
-             }
+            System.out.println(
+                    "⚠️ Direct match for location '" + locationName + "' failed. searching for partial match...");
+            Map<String, String> allLocs = RequestContext.getAllLocations();
+            for (Map.Entry<String, String> entry : allLocs.entrySet()) {
+                if (entry.getKey().contains(locationName)) {
+                    locationId = entry.getValue();
+                    System.out.println("   ✅ Found partial match: " + entry.getKey() + " -> " + locationId);
+                    break;
+                }
+            }
+            // Fallback to first available if still null
+            if (locationId == null && !allLocs.isEmpty()) {
+                locationId = allLocs.values().iterator().next();
+                System.out.println("   ⚠️ Fallback to first available location: " + locationId);
+            }
+
+            if (locationId == null) {
+                System.out.println("   ❌ Location ID not found and no locations available.");
+                Assert.fail("Location ID required for AddToCart");
+                return null;
+            }
         }
 
         Map<String, Map<String, Object>> allTests = RequestContext.getAllTests();
@@ -71,13 +75,12 @@ public class AddToCartAPITest extends BaseTest {
             return null;
         }
 
-        final int MAX_TESTS_TO_CHECK = 10; // Increased limit to ensure all searched tests are added
+        String flowType = System.getProperty("orderType", "home"); // Use System property set by TestNG or CLI
+        System.out.println("   Final Flow Type determined: " + flowType);
+
         List<Map<String, Object>> productDetailsList = new ArrayList<>();
-        int testsChecked = 0;
 
         for (Map.Entry<String, Map<String, Object>> entry : allTests.entrySet()) {
-            if (testsChecked >= MAX_TESTS_TO_CHECK)
-                break;
 
             Map<String, Object> testData = entry.getValue();
             String testId = (String) testData.get("_id");
@@ -96,44 +99,45 @@ public class AddToCartAPITest extends BaseTest {
                 }
             }
 
-            String testType = isHome ? "home" : "lab";
-
-            if (isHome) {
+            // For Lab Visit flow, we add tests even if they DON'T support home collection
+            if (flowType.equals("lab") || isHome) {
                 Map<String, Object> productDetail = new HashMap<>();
                 productDetail.put("product_id", testId);
                 productDetail.put("quantity", 1);
-                productDetail.put("type", testType);
+                productDetail.put("type", isHome && flowType.equals("home") ? "home" : "lab");
                 productDetail.put("brand_id", brandId);
                 productDetail.put("location_id", locationId);
 
-                // Reverting to List<String> as it was working (partially) and allows debugging
                 List<String> familyMemberIds = new ArrayList<>();
                 familyMemberIds.add(userId);
                 productDetail.put("family_member_id", familyMemberIds);
 
                 productDetailsList.add(productDetail);
-                System.out.println("      ✅ Added test to payload: " + entry.getKey() + " (Type: " + testType + ")");
+                System.out.println("      ✅ Added test to payload: " + entry.getKey() + " (Type: "
+                        + productDetail.get("type") + ")");
             } else {
                 System.out.println("      ⏭️  Skipped test (No Home Collection): " + entry.getKey());
             }
-            testsChecked++;
         }
 
         if (productDetailsList.isEmpty()) {
-            System.out.println("   ⚠️  No home collection tests were added to payload.");
+            System.out.println("   ⚠️  No suitable tests were added to payload.");
             return null;
         }
 
-        // Store selected items for Report Visibility using generic storage which Listener can read
-        // The listener reads RequestContext.getMemberCartItems() which returns List<Map<String, Object>>
-        // We will store it there. Ideally we should strictly match user type, but for reporting this is sufficient given sequential execution.
-        RequestContext.setMemberCartItems(productDetailsList); 
+        // Store selected items for Report Visibility using generic storage which
+        // Listener can read
+        // The listener reads RequestContext.getMemberCartItems() which returns
+        // List<Map<String, Object>>
+        // We will store it there. Ideally we should strictly match user type, but for
+        // reporting this is sufficient given sequential execution.
+        RequestContext.setMemberCartItems(productDetailsList);
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("user_id", userId);
         payload.put("product_details", productDetailsList);
         // Explicitly adding order_type as requested for home sample collection flow
-        payload.put("order_type", "home");
+        payload.put("order_type", flowType);
 
         return payload;
     }
@@ -155,6 +159,9 @@ public class AddToCartAPITest extends BaseTest {
         if (hasHome && labLoc != null) {
             payload.put("order_type", "home");
             payload.put("lab_location_id", labLoc);
+        } else if (!hasHome && labLoc != null) {
+            payload.put("order_type", "lab");
+            payload.put("lab_location_id", labLoc);
         }
 
         Response response = new RequestBuilder()
@@ -170,7 +177,6 @@ public class AddToCartAPITest extends BaseTest {
 
         return response;
     }
-
 
     private void validateAddToCartResponse(Response response, String userType) {
         if (response.getStatusCode() != 200 && response.getStatusCode() != 201) {
@@ -207,12 +213,13 @@ public class AddToCartAPITest extends BaseTest {
         System.out.println("   ✅ Cart Data Stored for " + userType + " (GUID: " + cartGuid + ")");
     }
 
+    @Parameters({ "orderType" })
     @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForMember")
-    public void testAddToCart_ForMember() {
-        System.out.println("\n--- AddToCart For Member ---");
+    public void testAddToCart_ForMember(@Optional("home") String orderType) {
+        System.out.println("\n--- AddToCart For Member (Parameter: " + orderType + ") ---");
+        System.setProperty("orderType", orderType);
         String token = RequestContext.getMemberToken();
         String userId = RequestContext.getMemberUserId();
-
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {
@@ -221,12 +228,13 @@ public class AddToCartAPITest extends BaseTest {
         }
     }
 
+    @Parameters({ "orderType" })
     @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNonMember")
-    public void testAddToCart_ForNonMember() {
-        System.out.println("\n--- AddToCart For Non-Member ---");
+    public void testAddToCart_ForNonMember(@Optional("home") String orderType) {
+        System.out.println("\n--- AddToCart For Non-Member (Parameter: " + orderType + ") ---");
+        System.setProperty("orderType", orderType);
         String token = RequestContext.getNonMemberToken();
         String userId = RequestContext.getNonMemberUserId();
-
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {
@@ -235,12 +243,13 @@ public class AddToCartAPITest extends BaseTest {
         }
     }
 
+    @Parameters({ "orderType" })
     @Test(priority = 9, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNewUser")
-    public void testAddToCart_ForNewUser() {
-        System.out.println("\n--- AddToCart For New User ---");
+    public void testAddToCart_ForNewUser(@Optional("home") String orderType) {
+        System.out.println("\n--- AddToCart For New User (Parameter: " + orderType + ") ---");
+        System.setProperty("orderType", orderType);
         String token = RequestContext.getNewUserToken();
         String userId = RequestContext.getNewUserUserId();
-
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {

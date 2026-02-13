@@ -49,4 +49,10 @@ public interface ConfigManager extends Config {
     @DefaultValue("Madhapur")
     String defaultLocationName();
 
+    @Key("username_ITDose")
+    String adminUsername();
+
+    @Key("password_ITDose")
+    String adminPassword();
+
 }

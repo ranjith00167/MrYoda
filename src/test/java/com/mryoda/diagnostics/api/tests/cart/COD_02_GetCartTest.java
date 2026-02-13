@@ -18,34 +18,41 @@ public class COD_02_GetCartTest extends CreateOrderCODAPITest {
         Assert.assertNotNull(token, "Token required from Step 1");
         Assert.assertNotNull(userId, "User ID required from Step 1");
 
-        Response response = callGetCartAPI(token, userId);
+        String orderType = "home";
+        if (RequestContext.getCurrentAddressId() == null && RequestContext.getSelectedLocationId() != null) {
+            orderType = "lab";
+        }
+
+        Response response = callGetCartAPI(token, userId, orderType);
 
         int totalPrice = 0;
         String cartId = null;
-        String orderType = null;
 
-        // Check if API failed but we have data in context (Bypass logic triggered in callGetCartAPI)
+        // Check if API failed but we have data in context (Bypass logic triggered in
+        // callGetCartAPI)
         if (response.getStatusCode() != 200) {
-             System.out.println("⚠️ GetCart API returned " + response.getStatusCode() + ". Checking for fallback data in context...");
-             
-             // Check if fallback data is available in RequestContext
-             // Using generic getters for current flow
-             if (RequestContext.getCurrentCartId() != null && RequestContext.getCurrentTotalPrice() > 0) {
-                 System.out.println("✅ Fallback Data Found! Using data stored from AddToCart step.");
-                 cartId = RequestContext.getCurrentCartId();
-                 totalPrice = RequestContext.getCurrentTotalPrice();
-                 orderType = "home"; // Defaulting since we can't get it from failed API, mainly for logging
-             } else {
-                 // Try member specific if generic not set (though AddToCart sets specific ones)
-                 if (RequestContext.getMemberCartId() != null && RequestContext.getMemberTotalAmount() != null) {
-                     System.out.println("✅ Fallback Data Found (Member)! Using data stored from AddToCart step.");
-                     cartId = RequestContext.getMemberCartId();
-                     totalPrice = RequestContext.getMemberTotalAmount();
-                     orderType = "home"; 
-                 } else {
-                     Assert.fail("GetCart API failed (" + response.getStatusCode() + ") and no fallback data found in RequestContext.");
-                 }
-             }
+            System.out.println("⚠️ GetCart API returned " + response.getStatusCode()
+                    + ". Checking for fallback data in context...");
+
+            // Check if fallback data is available in RequestContext
+            // Using generic getters for current flow
+            if (RequestContext.getCurrentCartId() != null && RequestContext.getCurrentTotalPrice() > 0) {
+                System.out.println("✅ Fallback Data Found! Using data stored from AddToCart step.");
+                cartId = RequestContext.getCurrentCartId();
+                totalPrice = RequestContext.getCurrentTotalPrice();
+                orderType = "home"; // Defaulting since we can't get it from failed API, mainly for logging
+            } else {
+                // Try member specific if generic not set (though AddToCart sets specific ones)
+                if (RequestContext.getMemberCartId() != null && RequestContext.getMemberTotalAmount() != null) {
+                    System.out.println("✅ Fallback Data Found (Member)! Using data stored from AddToCart step.");
+                    cartId = RequestContext.getMemberCartId();
+                    totalPrice = RequestContext.getMemberTotalAmount();
+                    orderType = "home";
+                } else {
+                    Assert.fail("GetCart API failed (" + response.getStatusCode()
+                            + ") and no fallback data found in RequestContext.");
+                }
+            }
         } else {
             // Success 200 - Parse Response
             Object dataObj = response.jsonPath().get("data");

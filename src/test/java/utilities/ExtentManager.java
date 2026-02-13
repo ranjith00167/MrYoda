@@ -18,7 +18,7 @@ public class ExtentManager {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(fileName);
         htmlReporter.config().setTheme(Theme.DARK);
         htmlReporter.config().setDocumentTitle("MrYoda Automation Execution Report");
-        htmlReporter.config().setReportName("API & UI Hybrid Automation Test Results");
+        htmlReporter.config().setReportName("API & UI Automation Test Results");
         htmlReporter.config().setEncoding("utf-8");
         htmlReporter.config().setTimelineEnabled(true);
 

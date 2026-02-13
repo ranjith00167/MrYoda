@@ -20,12 +20,17 @@ public class COD_04_VerifyPaymentPreCheckTest extends CreateOrderCODAPITest {
         String slotGuid = RequestContext.getCurrentSlotGuid();
         int totalPrice = RequestContext.getCurrentTotalPrice();
 
+        // Determine orderType
+        String orderType = (addressId != null) ? "home" : "lab";
+
         // Fetch Cart again to get labLocationId
-        Response cartRes = callGetCartAPI(token, userId);
+        Response cartRes = callGetCartAPI(token, userId, orderType);
         Object dataObj = cartRes.jsonPath().get("data");
         String dataPath = (dataObj instanceof java.util.List) ? "data[0]" : "data";
         String labLocationId = cartRes.jsonPath().getString(dataPath + ".lab_location_id");
-        String orderType = cartRes.jsonPath().getString(dataPath + ".order_type");
+        String cartOrderType = cartRes.jsonPath().getString(dataPath + ".order_type");
+        if (cartOrderType != null)
+            orderType = cartOrderType;
 
         // Need Date/Time from slot search.
         String date = RequestContext.getSlotStartDate();

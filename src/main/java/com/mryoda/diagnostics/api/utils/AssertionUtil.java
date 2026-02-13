@@ -54,8 +54,28 @@ public class AssertionUtil {
                 break;
             }
         }
-        assertTrue(found, "Status code " + actualStatusCode + " not found in expected list");
+        if (!found) {
+            StringBuilder expectedStr = new StringBuilder();
+            for (int i = 0; i < expectedStatusCodes.length; i++) {
+                expectedStr.append(expectedStatusCodes[i]);
+                if (i < expectedStatusCodes.length - 1)
+                    expectedStr.append("/");
+            }
+            throw new AssertionError("❌ Status code mismatch — expected: "
+                    + expectedStr.toString() + " but found: " + actualStatusCode);
+        }
         LoggerUtil.info("Status Code Verified: " + actualStatusCode);
+    }
+
+    /**
+     * Verify the response status is a 4xx error
+     */
+    public static void verifyErrorStatus(Response response, String context) {
+        int status = response.getStatusCode();
+        if (status < 400 || status >= 500) {
+            throw new AssertionError("❌ " + context + " mismatch — expected: 4xx Error but found: " + status);
+        }
+        LoggerUtil.info("✔ " + context + " error status verified: " + status);
     }
 
     /**

@@ -26,19 +26,20 @@ public class ExtentReportListener implements ConcurrentEventListener {
         // initializeExtentReports(); // Handled by ExtentManager
         extent = ExtentManager.getInstance();
     }
-/*
-    private void initializeExtentReports() {
-        ExtentSparkReporter spark = new ExtentSparkReporter("target/ExtentReport/ExtentReport.html");
-        spark.config().setTheme(Theme.STANDARD);
-        spark.config().setDocumentTitle("Automation Test Report");
-        spark.config().setReportName("EMR Flow Execution Report");
-        spark.config().setTimelineEnabled(true);
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-        extent.setSystemInfo("OS", System.getProperty("os.name"));
-        extent.setSystemInfo("User", System.getProperty("user.name"));
-    }
-*/
+    /*
+     * private void initializeExtentReports() {
+     * ExtentSparkReporter spark = new
+     * ExtentSparkReporter("target/ExtentReport/ExtentReport.html");
+     * spark.config().setTheme(Theme.STANDARD);
+     * spark.config().setDocumentTitle("Automation Test Report");
+     * spark.config().setReportName("EMR Flow Execution Report");
+     * spark.config().setTimelineEnabled(true);
+     * extent = new ExtentReports();
+     * extent.attachReporter(spark);
+     * extent.setSystemInfo("OS", System.getProperty("os.name"));
+     * extent.setSystemInfo("User", System.getProperty("user.name"));
+     * }
+     */
 
     @Override
     public void setEventPublisher(EventPublisher publisher) {
@@ -58,7 +59,7 @@ public class ExtentReportListener implements ConcurrentEventListener {
 
     private void onTestCaseStarted(TestCaseStarted event) {
         ExtentTest scenario = featureTest.get()
-            .createNode("🧪 Scenario: " + event.getTestCase().getName());
+                .createNode("🧪 Scenario: " + event.getTestCase().getName());
         scenarioTest.set(scenario);
     }
 
@@ -71,7 +72,7 @@ public class ExtentReportListener implements ConcurrentEventListener {
 
             if (event.getResult().getError() != null) {
                 scenarioTest.get().log(status, stepText)
-                    .fail(event.getResult().getError());
+                        .fail(event.getResult().getError());
             } else {
                 scenarioTest.get().log(status, stepText);
             }

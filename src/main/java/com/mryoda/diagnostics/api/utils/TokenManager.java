@@ -68,6 +68,9 @@ public class TokenManager {
                 RequestContext.setMemberFirstName(firstName);
                 RequestContext.setMemberLastName(lastName);
                 RequestContext.setMemberUserId(userId);
+                // Also set generic context for compatibility
+                RequestContext.setToken(token);
+                RequestContext.setUserId(userId);
                 break;
 
             case NON_MEMBER:
@@ -76,6 +79,9 @@ public class TokenManager {
                 RequestContext.setNonMemberFirstName(firstName);
                 RequestContext.setNonMemberLastName(lastName);
                 RequestContext.setNonMemberUserId(userId);
+                // Also set generic context for compatibility
+                RequestContext.setToken(token);
+                RequestContext.setUserId(userId);
                 break;
 
             case NEW_USER:
@@ -83,6 +89,18 @@ public class TokenManager {
                 RequestContext.setNewUserFirstName(firstName);
                 RequestContext.setNewUserLastName(lastName);
                 RequestContext.setNewUserUserId(userId);
+                // Also set generic context for compatibility
+                RequestContext.setToken(token);
+                RequestContext.setUserId(userId);
+                break;
+
+            case "phlebo":
+                // For phlebotomist, we store in System properties and specific Phlebo GUID
+                // field
+                // to avoid overwriting the current customer's context
+                System.setProperty("phlebo.token", token);
+                RequestContext.setCurrentPhleboGuid(userId);
+                System.out.println("   [TokenManager] Phlebo Token & GUID stored separately.");
                 break;
 
             case GENERIC:
