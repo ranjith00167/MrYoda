@@ -17,7 +17,8 @@ public class RandomDataUtil {
     }
 
     public static String getRandomMiddleName() {
-        return String.valueOf((char) ('A' + rand.nextInt(26)));
+        String[] middleNames = { "James", "Kumar", "Singh", "Robert", "Marie", "Anne", "Lynn", "Lee" };
+        return middleNames[rand.nextInt(middleNames.length)];
     }
 
     public static String getRandomGender() {

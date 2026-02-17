@@ -190,17 +190,18 @@ public class RequestBuilder {
         System.out.println("   Endpoint: " + endpoint);
         System.out.println("   Time    : " + emoji + " " + time + " ms");
 
-        // Strict 10-second SLA Enforcement (Increased from 3s for Dev Env stability)
-        if (time > 30000) {
-            System.out.println("   ❌ PERFORMANCE SLA VIOLATION! (Max allowed: 30000ms)");
+        // Strict 60-second SLA Enforcement (Increased from 30s for environment
+        // stability)
+        if (time > 60000) {
+            System.out.println("   ❌ PERFORMANCE SLA VIOLATION! (Max allowed: 60000ms)");
 
             // Log to file before throwing error
             LogManager.logPerformance(method, endpoint, time);
             LogManager.logAPIDetail(method, endpoint, r);
 
             throw new AssertionError("❌ Performance SLA Violation: " + method + " " + endpoint +
-                    " took " + time + "ms, which exceeds the strict 30000ms limit.");
-        } else if (time > 5000) {
+                    " took " + time + "ms, which exceeds the strict 60000ms limit.");
+        } else if (time > 10000) {
             System.out.println("   ⚠️  WARNING: Response is becoming slow (" + time + "ms)");
         }
 

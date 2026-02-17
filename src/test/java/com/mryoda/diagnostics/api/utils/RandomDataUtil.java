@@ -23,7 +23,7 @@ public class RandomDataUtil {
     }
 
     public static String getRandomMiddleName() {
-        return ""; // Optional
+        return "Kumar"; // Fixed: 5 characters > 3
     }
 
     public static String getRandomMobile() {
@@ -48,6 +48,6 @@ public class RandomDataUtil {
     }
 
     public static String getRandomProfilePic() {
-        return ""; // Empty string for now
+        return "https://cdn.test.com/profile/default_avatar_12345.png"; // Fixed: > 15 characters
     }
 }

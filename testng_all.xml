@@ -6,5 +6,14 @@
         <suite-file path="testng_non_member_cod_modular.xml" />
         <suite-file path="testng_new_user_cod_modular.xml" />
         <suite-file path="testng_family_member_complete.xml" />
+        <suite-file path="testng_labvisit_member_flow.xml" />
+        <suite-file path="testng_labvisit_non_member_flow.xml" />
+        <suite-file path="testng_labvisit_new_user_flow.xml" />
+        <suite-file path="testng_labvisit_multimember_flow.xml" />
+        <suite-file path="testng_labvisit_new_user_family_flow.xml" />
+        <suite-file path="testng_labvisit_non_member_family_flow.xml" />
+        <suite-file path="testng_familymember_member_flow.xml" />
+        <suite-file path="testng_home_non_member_family_flow.xml" />
+        <suite-file path="testng_home_new_user_family_flow.xml" />
     </suite-files>
 </suite>

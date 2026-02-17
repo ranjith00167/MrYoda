@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="New User Lab Visit Flow Suite" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="New User Lab Visit Flow" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+        <parameter name="flowType" value="full"/>
+        <parameter name="orderType" value="lab"/>
+
+        <classes>
+
+            <!-- 0. User Registration (Required for New User Login) -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods>
+                    <include name="testUserRegistration_CreateNewUser"/>
+                </methods>
+            </class>
+
+            <!-- 1. Login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLoginWithOTP_NewlyRegisteredUser"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- 2. Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForNewUser"/></methods>
+            </class>
+
+            <!-- 3. COD Flow -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddLabSlotTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+
+            <!-- Rewards (Will skip for new user usually, but included for completeness) -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_A_VerifyInitialRewards"/>
+                </methods>
+            </class>
+
+            <!-- 4. Approve Payment -->
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+
+            <!-- Rewards (Post-Payment) -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_B_VerifyRewardsGain"/>
+                    <include name="step18_C_VerifyFinalRewardsBalance"/>
+                </methods>
+            </class>
+
+            <!-- 5. Continue Full Flow (UI & Status) -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+
+        </classes>
+    </test>
+
+</suite>
