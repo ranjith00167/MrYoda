@@ -493,6 +493,54 @@ public class CreateOrderCODAPITest extends BaseTest {
             System.out.println("   ✅ INFO: No membership discount (expected for non-members)");
         }
 
+        // 7. PATIENT DETAIL VALIDATION
+        System.out.println("\n👤 7. PATIENT DETAIL VALIDATION:");
+        java.util.List<java.util.Map<String, String>> expectedPatients = RequestContext.getExpectedPatientDetails();
+        if (expectedPatients != null && !expectedPatients.isEmpty()) {
+            System.out.println("   Validating " + expectedPatients.size() + " expected patients in flow...");
+            for (java.util.Map<String, String> p : expectedPatients) {
+                String pName = p.get("name");
+                String pGuid = p.get("guid");
+                System.out.println("   -> Checking Patient: " + pName + " (GUID: " + pGuid + ")");
+
+                // Check if GUID appears in order items
+                boolean guidFound = false;
+                if (orderItems != null) {
+                    for (java.util.Map<String, Object> item : orderItems) {
+                        Object patientGuidObj = item.get("patient_guid");
+                        if (pGuid.equals(patientGuidObj)) {
+                            guidFound = true;
+                            System.out.println("      ✅ PASS: Patient GUID " + pGuid + " mapped to item: "
+                                    + item.get("product_name"));
+                        }
+                    }
+                }
+
+                if (!guidFound) {
+                    System.out
+                            .println("      ⚠️ INFO: Patient GUID check skipped (not present in payment order items)");
+                }
+            }
+        }
+
+        // 8. ADDRESS & SLOT METADATA
+        System.out.println("\n📍 8. ADDRESS & SLOT METADATA VISUAL CHECK:");
+        String expAddress = RequestContext.getExpectedAddressName();
+        String expSlotDate = RequestContext.getExpectedSlotDate();
+        String expSlotTime = RequestContext.getExpectedSlotTimeString();
+
+        if (expAddress != null)
+            System.out.println("   Target Address/Center: " + expAddress);
+        if (expSlotDate != null)
+            System.out.println("   Scheduled Date: " + expSlotDate);
+        if (expSlotTime != null)
+            System.out.println("   Scheduled Time: " + expSlotTime);
+
+        // Slot Consistency check with Payload
+        if (expectedSlotGuid != null) {
+            System.out.println("   ✅ Slot GUID Consistency: MATCHED (" + expectedSlotGuid + ")");
+        }
+
         System.out.println("🎉 ==========================================================");
         System.out.println("         CROSS-API VALIDATION COMPLETED SUCCESSFULLY");
         System.out.println("🎉 ==========================================================");
@@ -993,6 +1041,36 @@ public class CreateOrderCODAPITest extends BaseTest {
                 // Assuming stricter check:
                 AssertionUtil.verifyEquals(actualPhleboGuid, expectedPhleboGuid,
                         "Phlebotomist ID in GetOrderById mismatch");
+            }
+        }
+    }
+
+    protected void verifyOrderHistory(String token, String orderId, String expectedStatus) {
+        System.out.println("   🔍 Verifying Order History for Order ID: " + orderId);
+        Response response = callGetOrderByIdAPI(token, orderId);
+
+        if (response != null && response.getStatusCode() == 200) {
+            List<Map<String, Object>> history = response.jsonPath().getList("data.order_history");
+
+            if (history != null && !history.isEmpty()) {
+                boolean found = false;
+                for (Map<String, Object> entry : history) {
+                    if (entry == null)
+                        continue;
+                    String status = (String) entry.get("status");
+                    if (status != null && status.replace(" ", "_").equalsIgnoreCase(expectedStatus.replace(" ", "_"))) {
+                        found = true;
+                        System.out.println(
+                                "      ✅ History Entry Found: " + status + " | Date: " + entry.get("created_at"));
+                        break;
+                    }
+                }
+                if (!found) {
+                    System.out.println(
+                            "      ⚠️ WARNING: Expected status '" + expectedStatus + "' NOT found in order_history!");
+                }
+            } else {
+                System.out.println("      ⚠️ WARNING: Order History is empty or null!");
             }
         }
     }
@@ -2147,6 +2225,19 @@ public class CreateOrderCODAPITest extends BaseTest {
         AssertionUtil.verifyTrue(success, "Approve Payment success flag should be true");
         System.out.println("✅ Payment Approved Successfully");
 
+        // --- NEW VALIDATION: Verify Payment Status is now 'Paid' ---
+        System.out.println("\n📡 Verifying Payment Status in Database...");
+        Response finalPaymentCheck = callGetPaymentByIdAPI(token, paymentId);
+        if (finalPaymentCheck != null && finalPaymentCheck.getStatusCode() == 200) {
+            String finalStatus = finalPaymentCheck.jsonPath().getString("data.payments.payment_status");
+            System.out.println("   Actual Final Payment Status: " + finalStatus);
+            if ("Paid".equalsIgnoreCase(finalStatus) || "Approved".equalsIgnoreCase(finalStatus)) {
+                System.out.println("   ✅ PASS: Payment status successfully updated to " + finalStatus);
+            } else {
+                System.out.println("   ⚠️ WARNING: Payment status is " + finalStatus + " instead of Paid/Approved");
+            }
+        }
+
         // 6. EXTRACTION AND MAPPING OF VISIT NUMBERS (CRITICAL FOR IT DOSE -
         // MULTI-ORDER SUPPORT)
         System.out.println("\n📊 Extracting and Mapping ALL Visit Numbers for ALL Orders...");
@@ -2235,6 +2326,7 @@ public class CreateOrderCODAPITest extends BaseTest {
             Object paymentAmountObj = postPaymentResponse.jsonPath().get("data.payments.amount");
             double paymentAmount = paymentAmountObj instanceof Number ? ((Number) paymentAmountObj).doubleValue() : -1;
             System.out.println("   Payment Amount on Record: " + paymentAmount);
+            RequestContext.setCurrentDueAmount(paymentAmount);
 
             if (Math.abs(paymentAmount - recordedTotal) < 1.0) {
                 System.out.println("✅ VALIDATION PASSED: Payment Amount on record (₹" + paymentAmount

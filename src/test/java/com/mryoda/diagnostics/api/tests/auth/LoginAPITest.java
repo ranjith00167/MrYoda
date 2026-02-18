@@ -27,6 +27,9 @@ public class LoginAPITest extends BaseTest {
         System.out.println("   First Name: " + RequestContext.getMemberFirstName());
         System.out.println("   Last Name: " + RequestContext.getMemberLastName());
         System.out.println("   User ID: " + RequestContext.getMemberUserId());
+
+        RequestContext.storeExpectedPatient(RequestContext.getMemberUserId(),
+                RequestContext.getMemberFirstName() + " " + RequestContext.getMemberLastName());
     }
 
     @Test(priority = 1)
@@ -48,6 +51,9 @@ public class LoginAPITest extends BaseTest {
         System.out.println("   First Name: " + RequestContext.getNonMemberFirstName());
         System.out.println("   Last Name: " + RequestContext.getNonMemberLastName());
         System.out.println("   User ID: " + RequestContext.getNonMemberUserId());
+
+        RequestContext.storeExpectedPatient(RequestContext.getNonMemberUserId(),
+                RequestContext.getNonMemberFirstName() + " " + RequestContext.getNonMemberLastName());
     }
 
     @Test(priority = 2, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest.testUserRegistration_CreateNewUser")
@@ -67,6 +73,9 @@ public class LoginAPITest extends BaseTest {
         System.out.println("   First Name: " + RequestContext.getNewUserFirstName());
         System.out.println("   Last Name: " + RequestContext.getNewUserLastName());
         System.out.println("   User ID: " + RequestContext.getNewUserUserId());
+
+        RequestContext.storeExpectedPatient(RequestContext.getNewUserUserId(),
+                RequestContext.getNewUserFirstName() + " " + RequestContext.getNewUserLastName());
     }
 
 }

@@ -16,6 +16,43 @@ public class RequestContext {
     private static String currentFlowName = "default";
     private static List<Map<String, Object>> activeProductDetails;
 
+    private static List<Map<String, String>> expectedPatientDetails = new ArrayList<>();
+    private static String expectedAddressName;
+    private static String expectedSlotTimeString;
+    private static String expectedSlotDate;
+
+    public static void storeExpectedPatient(String guid, String name) {
+        Map<String, String> patient = new HashMap<>();
+        patient.put("guid", guid);
+        patient.put("name", name);
+        expectedPatientDetails.add(patient);
+    }
+
+    public static List<Map<String, String>> getExpectedPatientDetails() {
+        return expectedPatientDetails;
+    }
+
+    public static void setExpectedAddressName(String name) {
+        expectedAddressName = name;
+    }
+
+    public static String getExpectedAddressName() {
+        return expectedAddressName;
+    }
+
+    public static void setExpectedSlotTiming(String date, String time) {
+        expectedSlotDate = date;
+        expectedSlotTimeString = time;
+    }
+
+    public static String getExpectedSlotTimeString() {
+        return expectedSlotTimeString;
+    }
+
+    public static String getExpectedSlotDate() {
+        return expectedSlotDate;
+    }
+
     public static void setActiveProductDetails(List<Map<String, Object>> details) {
         activeProductDetails = details;
     }
@@ -1243,94 +1280,103 @@ public class RequestContext {
     // ============================================================
     // REWARDS DATA
     // ============================================================
-    private static double initialTotalRewards;
-    private static double finalTotalRewards;
-    private static double rewardsGain;
-    private static double currentDueAmount;
+    // ============================================================
+    // REWARDS DATA
+    // ============================================================
+    private static final ThreadLocal<Double> initialTotalRewards = new ThreadLocal<>();
+    private static final ThreadLocal<Double> finalTotalRewards = new ThreadLocal<>();
+    private static final ThreadLocal<Double> rewardsGain = new ThreadLocal<>();
+    private static final ThreadLocal<Double> currentDueAmount = new ThreadLocal<>();
 
     public static void setInitialTotalRewards(double v) {
-        initialTotalRewards = v;
+        initialTotalRewards.set(v);
     }
 
     public static double getInitialTotalRewards() {
-        return initialTotalRewards;
+        return initialTotalRewards.get() != null ? initialTotalRewards.get() : 0.0;
     }
 
     public static void setFinalTotalRewards(double v) {
-        finalTotalRewards = v;
+        finalTotalRewards.set(v);
     }
 
     public static double getFinalTotalRewards() {
-        return finalTotalRewards;
+        return finalTotalRewards.get() != null ? finalTotalRewards.get() : 0.0;
     }
 
     public static void setRewardsGain(double v) {
-        rewardsGain = v;
+        rewardsGain.set(v);
     }
 
     public static double getRewardsGain() {
-        return rewardsGain;
+        return rewardsGain.get() != null ? rewardsGain.get() : 0.0;
     }
 
     public static void setCurrentDueAmount(double v) {
-        currentDueAmount = v;
+        currentDueAmount.set(v);
     }
 
     public static double getCurrentDueAmount() {
-        return currentDueAmount;
+        return currentDueAmount.get() != null ? currentDueAmount.get() : 0.0;
     }
 
     // ============================================================
     // PACKAGE COMPONENTS STORAGE
     // ============================================================
-    private static List<String> packageTestNames = new ArrayList<>();
+    // ============================================================
+    // PACKAGE COMPONENTS STORAGE
+    // ============================================================
+    private static final ThreadLocal<List<String>> packageTestNames = new ThreadLocal<>();
 
     public static List<String> getPackageTestNames() {
-        return packageTestNames;
+        return packageTestNames.get();
     }
 
     public static void setPackageTestNames(List<String> list) {
-        packageTestNames = list;
+        packageTestNames.set(list);
     }
 
     public static void addPackageTestNames(List<String> list) {
-        if (packageTestNames == null)
-            packageTestNames = new ArrayList<>();
-        packageTestNames.addAll(list);
+        if (packageTestNames.get() == null)
+            packageTestNames.set(new ArrayList<>());
+        packageTestNames.get().addAll(list);
     }
 
     public static void clearPackageTestNames() {
-        packageTestNames.clear();
-        componentIdToNameMap.clear();
+        if (packageTestNames.get() != null)
+            packageTestNames.get().clear();
+        if (componentIdToNameMap.get() != null)
+            componentIdToNameMap.get().clear();
     }
 
-    private static Map<String, String> componentIdToNameMap = new HashMap<>();
+    private static final ThreadLocal<Map<String, String>> componentIdToNameMap = ThreadLocal.withInitial(HashMap::new);
 
     public static void storeComponentIdMapping(String id, String name) {
         if (id != null && name != null) {
-            componentIdToNameMap.put(id, name);
+            componentIdToNameMap.get().put(id, name);
         }
     }
 
     public static String getComponentNameById(String id) {
-        return componentIdToNameMap.get(id);
+        return componentIdToNameMap.get().get(id);
     }
 
     public static Map<String, String> getComponentIdToNameMap() {
-        return componentIdToNameMap;
+        return componentIdToNameMap.get();
     }
 
     public static void clearComponentMappings() {
-        componentIdToNameMap.clear();
+        if (componentIdToNameMap.get() != null)
+            componentIdToNameMap.get().clear();
     }
 
-    private static int packageTestCount;
+    private static final ThreadLocal<Integer> packageTestCount = new ThreadLocal<>();
 
     public static int getPackageTestCount() {
-        return packageTestCount;
+        return packageTestCount.get() != null ? packageTestCount.get() : 0;
     }
 
     public static void setPackageTestCount(int count) {
-        packageTestCount = count;
+        packageTestCount.set(count);
     }
 }

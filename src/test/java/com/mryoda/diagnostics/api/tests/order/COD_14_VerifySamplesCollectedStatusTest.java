@@ -39,6 +39,20 @@ public class COD_14_VerifySamplesCollectedStatusTest extends CreateOrderCODAPITe
 
             if (normalizedStatus.contains("sample_collected") || normalizedStatus.contains("samples_collected")) {
                 System.out.println("      ✅ Order Status Verified: " + status);
+
+                // --- NEW VALIDATION: Verify Visit & SIN Numbers ---
+                String visitNo = response.jsonPath().getString("data.visit_number");
+                String sinNo = response.jsonPath().getString("data.visit_sin");
+
+                System.out.println("      Visit Number: " + visitNo);
+                System.out.println("      SIN Number: " + sinNo);
+
+                Assert.assertNotNull(visitNo, "Visit Number should be generated for: " + oid);
+                Assert.assertNotNull(sinNo, "SIN Number should be generated for: " + oid);
+
+                // --- Verify History ---
+                verifyOrderHistory(token, oid, "samples_collected");
+
             } else {
                 Assert.fail("Order Status mismatch for order " + oid + "! Expected 'samples_collected' but got '"
                         + status + "'");

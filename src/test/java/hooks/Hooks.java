@@ -35,7 +35,7 @@ public class Hooks {
         ScenarioContext.scenario = scenario;
 
         // ================================
-        //  Extent Report Setup
+        // Extent Report Setup
         // ================================
         if (extent == null) {
             ExtentSparkReporter spark = new ExtentSparkReporter("target/extent-reports/extent-report.html");
@@ -54,11 +54,11 @@ public class Hooks {
         }
 
         // ================================
-        //  WebDriver Setup
+        // WebDriver Setup
         // ================================
         String browser = System.getProperty("browser", "chrome");
         if (browser == null || browser.isEmpty() || browser.startsWith("$")) {
-             browser = "chrome";
+            browser = "chrome";
         }
         WebDriver driver = DriverFactory.getDriver(browser);
         BaseClass.driver = driver;
@@ -66,31 +66,33 @@ public class Hooks {
         Collection<String> tags = scenario.getSourceTagNames();
 
         // ================================
-        //  SHEET NAME SELECTION ONLY
+        // SHEET NAME SELECTION ONLY
         // ================================
-//        Map<String, String> tagToSheetKey = Map.of(
-//            "@diagnostics", "excel.sheetName",
-//            "@dnadecoder", "excel.sheetName_dna"
-//        );
-//
-//        BaseClass.currentSheet = ConfigReader.get("excel.sheetName"); // default sheet
-//
-//        for (String tag : tags) {
-//            String lowerTag = tag.toLowerCase();
-//            if (tagToSheetKey.containsKey(lowerTag)) {
-//                String configKey = tagToSheetKey.get(lowerTag);
-//                BaseClass.currentSheet = ConfigReader.get(configKey);
-//                System.out.println("📘 Sheet selected via tag " + tag + ": " + BaseClass.currentSheet);
-//            }
-//        }
+        // Map<String, String> tagToSheetKey = Map.of(
+        // "@diagnostics", "excel.sheetName",
+        // "@dnadecoder", "excel.sheetName_dna"
+        // );
+        //
+        // BaseClass.currentSheet = ConfigReader.get("excel.sheetName"); // default
+        // sheet
+        //
+        // for (String tag : tags) {
+        // String lowerTag = tag.toLowerCase();
+        // if (tagToSheetKey.containsKey(lowerTag)) {
+        // String configKey = tagToSheetKey.get(lowerTag);
+        // BaseClass.currentSheet = ConfigReader.get(configKey);
+        // System.out.println("📘 Sheet selected via tag " + tag + ": " +
+        // BaseClass.currentSheet);
+        // }
+        // }
 
         // ❗ IMPORTANT:
-        // DO NOT LOAD EXCEL ROW HERE. 
+        // DO NOT LOAD EXCEL ROW HERE.
         // Steps will call: BaseClass.loadExcelRow("3")
         // to get correct testData.
 
         // ================================
-        //  EXTENT REPORT BLOCK
+        // EXTENT REPORT BLOCK
         // ================================
         String uri = scenario.getUri() != null ? scenario.getUri().toString() : "default.feature";
         String featureName = uri.substring(uri.lastIndexOf("/") + 1).replace(".feature", "");
@@ -133,9 +135,10 @@ public class Hooks {
                 String base64 = ts.getScreenshotAs(OutputType.BASE64);
 
                 File screenshotDir = new File("target/extent-reports/screenshots");
-                if (!screenshotDir.exists()) screenshotDir.mkdirs();
+                if (!screenshotDir.exists())
+                    screenshotDir.mkdirs();
 
-                String fileName = scenario.getName().replaceAll("[^a-zA-Z0-9.-]", "_") 
+                String fileName = scenario.getName().replaceAll("[^a-zA-Z0-9.-]", "_")
                         + "_" + UUID.randomUUID() + ".png";
 
                 try (FileOutputStream out = new FileOutputStream(new File(screenshotDir, fileName))) {

@@ -28,8 +28,19 @@ public class COD_03_AddLabSlotTest extends CreateOrderCODAPITest {
         Assert.assertNotNull(slotGuid, "Lab Slot GUID required");
 
         RequestContext.setCurrentSlotGuid(slotGuid);
-        RequestContext.setSlotStartDate(slotDetails.get("date"));
-        RequestContext.setMemberSlotTime(slotDetails.get("time"));
+        RequestContext.setExpectedSlotTiming(slotDetails.get("date"), slotDetails.get("time"));
+
+        // Store Location Name for Validation
+        String locationName = DEFAULT_LOCATION;
+        if (RequestContext.getSelectedLocationId() != null) {
+            for (Map.Entry<String, String> entry : RequestContext.getAllLocations().entrySet()) {
+                if (entry.getValue().equals(centerId)) {
+                    locationName = entry.getKey();
+                    break;
+                }
+            }
+        }
+        RequestContext.setExpectedAddressName(locationName);
 
         // Update cart for lab visit (order_type: lab, address_id: null)
         updateCartWithLabSlot(token, userId, slotGuid, centerId);

@@ -23,6 +23,9 @@ public class COD_10_FinalVerificationTest extends CreateOrderCODAPITest {
 
             // 2. Phlebo Check
             verifyPhlebotomistAssignment(token, oid, phleboGuid);
+
+            // 3. History Check
+            verifyOrderHistory(token, oid, "inprogress");
         }
 
         System.out.println("✅ Detailed COD Flow Step 10 Completed for all orders.");

@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 
+
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -61,23 +62,22 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 public class BaseClass {
-    public static String currentSheet;
+	public static String currentSheet;
 
     // --- CRITICAL CHANGE: Declaring static WebDriver here ---
     public static WebDriver driver;
     // --- END CRITICAL CHANGE ---
     protected static String[] testNames;
-    public static By modalScrollContainer = By
-            .xpath("//div[contains(@class,'flex-col') and contains(@class,'overflow-y-auto')]");
-
-    public static Map<String, String> testData;
+   public static By modalScrollContainer = By.xpath("//div[contains(@class,'flex-col') and contains(@class,'overflow-y-auto')]");
+ 
+   public static Map<String, String> testData;
 
     public static WebElement getWebElement(By locator, Duration timeout) {
         return waitForElementToBeVisible(locator, timeout);
     }
     // --- END NEW REUSABLE GET METHOD ---
+
 
     public static void openUrl(String url) {
         driver.get(url);
@@ -86,7 +86,6 @@ public class BaseClass {
     public static String getPageTitle() {
         return driver.getTitle();
     }
-
     public static void loadExcelData(String sheetName, String rowNum) {
 
         currentSheet = sheetName;
@@ -99,6 +98,7 @@ public class BaseClass {
         System.out.println("🔥 Loaded Excel → Sheet: " + sheetName + ", Row: " + index);
     }
 
+
     public static List<String> getUiFormattedMemberNames(String memberNamesCell) {
         List<String> formattedNames = new ArrayList<>();
 
@@ -106,8 +106,7 @@ public class BaseClass {
         for (String raw : memberArray) {
 
             String cleaned = raw.replace("(Self)", "").trim();
-            if (cleaned.isEmpty())
-                continue;
+            if (cleaned.isEmpty()) continue;
 
             String[] parts = cleaned.split("\\s+");
 
@@ -125,15 +124,15 @@ public class BaseClass {
         return formattedNames;
     }
 
+
+
     public static String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
-
     public static void scrollDown(int pixels) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0, arguments[0]);", pixels);
     }
-
     public static void scrollModal(int pixels) {
         WebElement modal = driver.findElement(modalScrollContainer);
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -143,9 +142,10 @@ public class BaseClass {
     public static void sleep(long ms) {
         try {
             Thread.sleep(ms);
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
     }
+
+
 
     public static void uploadUsingRobot(String filePath) throws AWTException {
         // Copy the file path to the clipboard
@@ -166,7 +166,6 @@ public class BaseClass {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
     }
-
     public static String[] getTestNamesFromExcel(String sheetName) {
         String filePath = ConfigReader.get("excel.filePath");
         String rowNumStr = ConfigReader.get("excel.rowNum");
@@ -193,65 +192,65 @@ public class BaseClass {
         return tests;
     }
 
-    public static String replaceAccessionIdInCsv(String csvFilePath, String newAccessionId) throws IOException {
-        Path path = Paths.get(csvFilePath);
-        String fileName = path.getFileName().toString();
-        String updatedFileName = fileName.replace(".csv", "_" + newAccessionId + ".csv");
-        Path updatedFilePath = path.getParent().resolve(updatedFileName);
+        public static String replaceAccessionIdInCsv(String csvFilePath, String newAccessionId) throws IOException {
+            Path path = Paths.get(csvFilePath);
+            String fileName = path.getFileName().toString();
+            String updatedFileName = fileName.replace(".csv", "_" + newAccessionId + ".csv");
+            Path updatedFilePath = path.getParent().resolve(updatedFileName);
 
-        // Updated regex: 2-3 letters + 9 digits
-        Pattern accessionPattern = Pattern.compile("[A-Z]{2,3}\\d{9}");
+            // Updated regex: 2-3 letters + 9 digits
+            Pattern accessionPattern = Pattern.compile("[A-Z]{2,3}\\d{9}");
 
-        try (
+            try (
                 BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-                BufferedWriter writer = Files.newBufferedWriter(updatedFilePath, StandardCharsets.UTF_8,
-                        StandardOpenOption.CREATE)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Matcher matcher = accessionPattern.matcher(line);
-                String updatedLine = matcher.replaceAll(newAccessionId);
-                writer.write(updatedLine);
-                writer.newLine();
+                BufferedWriter writer = Files.newBufferedWriter(updatedFilePath, StandardCharsets.UTF_8, StandardOpenOption.CREATE)
+            ) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    Matcher matcher = accessionPattern.matcher(line);
+                    String updatedLine = matcher.replaceAll(newAccessionId);
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
             }
+
+            System.out.println("✅ CSV accession content replaced and saved at: " + updatedFilePath);
+            return updatedFilePath.toAbsolutePath().toString();
         }
+        public static String replaceAccessionIdInTxt(String txtFilePath, String newAccessionId) throws IOException {
+            Path path = Paths.get(txtFilePath);
+            String fileName = path.getFileName().toString();
+            
+            // Change extension to include accession ID
+            String updatedFileName;
+            if (fileName.endsWith(".txt")) {
+                updatedFileName = fileName.replace(".txt", "_" + newAccessionId + ".txt");
+            } else {
+                updatedFileName = fileName + "_" + newAccessionId + ".txt";
+            }
+            
+            Path updatedFilePath = path.getParent().resolve(updatedFileName);
 
-        System.out.println("✅ CSV accession content replaced and saved at: " + updatedFilePath);
-        return updatedFilePath.toAbsolutePath().toString();
-    }
+            // Regex pattern for 2-3 uppercase letters followed by 9 digits
+            Pattern accessionPattern = Pattern.compile("[A-Z]{2,3}\\d{9}");
 
-    public static String replaceAccessionIdInTxt(String txtFilePath, String newAccessionId) throws IOException {
-        Path path = Paths.get(txtFilePath);
-        String fileName = path.getFileName().toString();
-
-        // Change extension to include accession ID
-        String updatedFileName;
-        if (fileName.endsWith(".txt")) {
-            updatedFileName = fileName.replace(".txt", "_" + newAccessionId + ".txt");
-        } else {
-            updatedFileName = fileName + "_" + newAccessionId + ".txt";
-        }
-
-        Path updatedFilePath = path.getParent().resolve(updatedFileName);
-
-        // Regex pattern for 2-3 uppercase letters followed by 9 digits
-        Pattern accessionPattern = Pattern.compile("[A-Z]{2,3}\\d{9}");
-
-        try (
+            try (
                 BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-                BufferedWriter writer = Files.newBufferedWriter(updatedFilePath, StandardCharsets.UTF_8,
-                        StandardOpenOption.CREATE)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Matcher matcher = accessionPattern.matcher(line);
-                String updatedLine = matcher.replaceAll(newAccessionId);
-                writer.write(updatedLine);
-                writer.newLine();
+                BufferedWriter writer = Files.newBufferedWriter(updatedFilePath, StandardCharsets.UTF_8, StandardOpenOption.CREATE)
+            ) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    Matcher matcher = accessionPattern.matcher(line);
+                    String updatedLine = matcher.replaceAll(newAccessionId);
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
             }
+
+            System.out.println("✅ TXT accession content replaced and saved at: " + updatedFilePath);
+            return updatedFilePath.toAbsolutePath().toString();
         }
 
-        System.out.println("✅ TXT accession content replaced and saved at: " + updatedFilePath);
-        return updatedFilePath.toAbsolutePath().toString();
-    }
 
     public static void closeFileDialog() {
         try {
@@ -264,7 +263,6 @@ public class BaseClass {
             throw new RuntimeException("❌ Failed to close file dialog using Robot.", e);
         }
     }
-
     public static boolean isVisible(By locator) {
         try {
             return driver.findElement(locator).isDisplayed();
@@ -285,11 +283,9 @@ public class BaseClass {
             return "";
         }
     }
-
     public static void assertTextEquals(String actual, String expected, boolean ignoreCase, boolean trimText) {
         if (actual == null || expected == null) {
-            throw new AssertionError(
-                    "❌ One or both strings are null. Actual: [" + actual + "] | Expected: [" + expected + "]");
+            throw new AssertionError("❌ One or both strings are null. Actual: [" + actual + "] | Expected: [" + expected + "]");
         }
 
         String actualProcessed = trimText ? actual.trim() : actual;
@@ -300,8 +296,7 @@ public class BaseClass {
                 : actualProcessed.equals(expectedProcessed);
 
         if (!result) {
-            throw new AssertionError(
-                    "❌ Assertion Failed:\nExpected: [" + expectedProcessed + "]\nActual:   [" + actualProcessed + "]");
+            throw new AssertionError("❌ Assertion Failed:\nExpected: [" + expectedProcessed + "]\nActual:   [" + actualProcessed + "]");
         } else {
             System.out.println("✅ Assertion Passed: " + actualProcessed + " == " + expectedProcessed);
         }
@@ -332,230 +327,226 @@ public class BaseClass {
     public static void click(WebElement element) {
         element.click();
     }
-
     public static boolean compareChildSpanTexts(WebElement container1, WebElement container2,
             boolean ignoreOrder, boolean ignoreCase, boolean trimText) {
-        try {
-            // Find all <span> children under each container
-            List<WebElement> list1Elements = container1.findElements(By.tagName("span"));
-            List<WebElement> list2Elements = container2.findElements(By.tagName("span"));
+try {
+// Find all <span> children under each container
+List<WebElement> list1Elements = container1.findElements(By.tagName("span"));
+List<WebElement> list2Elements = container2.findElements(By.tagName("span"));
 
-            List<String> list1Texts = extractTextList(list1Elements, trimText, ignoreCase);
-            List<String> list2Texts = extractTextList(list2Elements, trimText, ignoreCase);
+List<String> list1Texts = extractTextList(list1Elements, trimText, ignoreCase);
+List<String> list2Texts = extractTextList(list2Elements, trimText, ignoreCase);
 
-            if (ignoreOrder) {
-                return new HashSet<>(list1Texts).equals(new HashSet<>(list2Texts));
-            } else {
-                return list1Texts.equals(list2Texts);
+if (ignoreOrder) {
+return new HashSet<>(list1Texts).equals(new HashSet<>(list2Texts));
+} else {
+return list1Texts.equals(list2Texts);
+}
+
+} catch (Exception e) {
+System.err.println("❌ Error comparing span texts: " + e.getMessage());
+return false;
+}
+}
+
+/**
+* Extracts text from a list of WebElements with optional trimming and case conversion.
+*/
+private static List<String> extractTextList(List<WebElement> elements, boolean trim, boolean toLower) {
+List<String> texts = new ArrayList<>();
+for (WebElement el : elements) {
+String text = el.getText();
+if (trim) text = text.trim();
+if (toLower) text = text.toLowerCase();
+texts.add(text);
+}
+return texts;
+}
+
+public static void printSpanTexts(WebElement container, String label) {
+    try {
+        List<WebElement> spans = container.findElements(By.tagName(".//span"));
+        System.out.println("🔹 " + label + " (" + spans.size() + " items):");
+        for (WebElement span : spans) {
+            String text = span.getText().trim();
+            if (!text.isEmpty()) {
+                System.out.println("• " + text);
             }
+        }
+    } catch (Exception e) {
+        System.err.println("❌ Failed to print span texts for: " + label);
+        e.printStackTrace();
+    }
+}
+
+public static void waitAndClick(WebElement element, int timeoutInSeconds) {
+    int maxRetries = 3;
+    int retryCount = 0;
+    boolean isClicked = false;
+
+    while (retryCount < maxRetries && !isClicked) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+
+            // Step 1: Wait until the element is clickable
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            System.out.println("✅ Element is clickable: " + element);
+
+            // Step 2: Click the element
+            element.click();
+            System.out.println("✅ Clicked the element successfully.");
+
+            // Step 3: Optional wait for UI stability
+            Thread.sleep(100); // small wait
+
+            // Step 4: Optional - Post-click condition (customize below if needed)
+            // For example: check for modal/dialog or page change
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("someExpectedElementAfterClick")));
+
+            isClicked = true; // If no exception, assume success
 
         } catch (Exception e) {
-            System.err.println("❌ Error comparing span texts: " + e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Extracts text from a list of WebElements with optional trimming and case
-     * conversion.
-     */
-    private static List<String> extractTextList(List<WebElement> elements, boolean trim, boolean toLower) {
-        List<String> texts = new ArrayList<>();
-        for (WebElement el : elements) {
-            String text = el.getText();
-            if (trim)
-                text = text.trim();
-            if (toLower)
-                text = text.toLowerCase();
-            texts.add(text);
-        }
-        return texts;
-    }
-
-    public static void printSpanTexts(WebElement container, String label) {
-        try {
-            List<WebElement> spans = container.findElements(By.tagName(".//span"));
-            System.out.println("🔹 " + label + " (" + spans.size() + " items):");
-            for (WebElement span : spans) {
-                String text = span.getText().trim();
-                if (!text.isEmpty()) {
-                    System.out.println("• " + text);
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("❌ Failed to print span texts for: " + label);
+            retryCount++;
+            System.err.println("❌ Attempt " + retryCount + " failed to click element: " + element);
             e.printStackTrace();
-        }
-    }
 
-    public static void waitAndClick(WebElement element, int timeoutInSeconds) {
-        int maxRetries = 3;
-        int retryCount = 0;
-        boolean isClicked = false;
+            if (retryCount == maxRetries) {
+                throw new RuntimeException("Clicking element failed after " + maxRetries + " attempts: " + e.getMessage());
+            }
 
-        while (retryCount < maxRetries && !isClicked) {
             try {
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-
-                // Step 1: Wait until the element is clickable
-                wait.until(ExpectedConditions.elementToBeClickable(element));
-                System.out.println("✅ Element is clickable: " + element);
-
-                // Step 2: Click the element
-                element.click();
-                System.out.println("✅ Clicked the element successfully.");
-
-                // Step 3: Optional wait for UI stability
-                Thread.sleep(100); // small wait
-
-                // Step 4: Optional - Post-click condition (customize below if needed)
-                // For example: check for modal/dialog or page change
-                // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("someExpectedElementAfterClick")));
-
-                isClicked = true; // If no exception, assume success
-
-            } catch (Exception e) {
-                retryCount++;
-                System.err.println("❌ Attempt " + retryCount + " failed to click element: " + element);
-                e.printStackTrace();
-
-                if (retryCount == maxRetries) {
-                    throw new RuntimeException(
-                            "Clicking element failed after " + maxRetries + " attempts: " + e.getMessage());
-                }
-
-                try {
-                    Thread.sleep(200); // Wait before retrying
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                }
+                Thread.sleep(200); // Wait before retrying
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
             }
         }
     }
+}
+public static void scrollThenClick(By locator, int timeoutInSeconds) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
 
-    public static void scrollThenClick(By locator, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+    for (int attempt = 1; attempt <= 2; attempt++) {
+        try {
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
-        for (int attempt = 1; attempt <= 2; attempt++) {
-            try {
-                WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            ((JavascriptExecutor) driver).executeScript(
+                "document.body.style.overflow='auto';" +
+                "document.documentElement.style.overflow='auto';"
+            );
 
-                ((JavascriptExecutor) driver).executeScript(
-                        "document.body.style.overflow='auto';" +
-                                "document.documentElement.style.overflow='auto';");
+            ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'});", element
+            );
 
-                ((JavascriptExecutor) driver).executeScript(
-                        "arguments[0].scrollIntoView({block:'center'});", element);
+            wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+            System.out.println("✔ Normal click success");
+            return;
 
-                wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
-                System.out.println("✔ Normal click success");
+        } catch (Exception e) {
+            System.err.println("⚠ Attempt " + attempt + " failed: " + e.getMessage());
+
+            if (attempt == 2) {
+                WebElement element = driver.findElement(locator);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+                System.out.println("🔥 JS Forced Click success");
                 return;
-
-            } catch (Exception e) {
-                System.err.println("⚠ Attempt " + attempt + " failed: " + e.getMessage());
-
-                if (attempt == 2) {
-                    WebElement element = driver.findElement(locator);
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-                    System.out.println("🔥 JS Forced Click success");
-                    return;
-                }
-                sleep(600);
             }
+            sleep(600);
         }
     }
+}
 
     public static void enterValuesInResultTable() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        Actions actions = new Actions(driver);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    Actions actions = new Actions(driver);
 
-        WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@id='divInvestigation']//table[contains(@class,'htCore')]")));
+    WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(
+        By.xpath("//div[@id='divInvestigation']//table[contains(@class,'htCore')]")
+    ));
 
-        List<WebElement> rows = table.findElements(By.xpath(".//tbody/tr"));
+    List<WebElement> rows = table.findElements(By.xpath(".//tbody/tr"));
 
-        for (WebElement row : rows) {
+    for (WebElement row : rows) {
 
-            // Skip department headers & comments
-            String rowClass = row.getAttribute("class");
-            if (rowClass != null && (rowClass.contains("DeptHeader") || rowClass.contains("InvHeader"))) {
-                continue;
-            }
-
-            List<WebElement> cells = row.findElements(By.tagName("td"));
-            if (cells.size() < 12)
-                continue;
-
-            // Extract values
-            String readingFormat = cells.get(9).getText().trim();
-            String minValue = cells.get(10).getText().trim();
-            String maxValue = cells.get(11).getText().trim();
-
-            // STRICT VALIDATION: Check formatted strings and ensure min/max are numeric
-            if (readingFormat.isEmpty() || minValue.isEmpty() || maxValue.isEmpty()) {
-                continue;
-            }
-
-            // Skip if values are placeholders (e.g. hyphens)
-            if (minValue.equals("-") || maxValue.equals("-")) {
-                continue;
-            }
-
-            int enteredValue;
-            try {
-                double minD = Double.parseDouble(minValue);
-                double maxD = Double.parseDouble(maxValue);
-                enteredValue = (int) ((minD + maxD) / 2);
-            } catch (NumberFormatException e) {
-                continue;
-            }
-
-            WebElement valueCell = cells.get(2);
-            String currentValue = valueCell.getText().trim();
-
-            // skip if value is already entered (not empty, not 0)
-            if (!currentValue.isEmpty() && !currentValue.equals("0") && !currentValue.equals("0.0")) {
-                System.out.println("Skipping row [" + cells.get(1).getText().trim() + "] as it already has value: "
-                        + currentValue);
-                continue;
-            }
-
-            // Scroll
-            js.executeScript("arguments[0].scrollIntoView({block:'center', inline: 'nearest'});", valueCell);
-
-            String valStr = String.valueOf(enteredValue);
-            System.out.println(
-                    "Attempting to enter: " + valStr + " into cell (Range: " + minValue + "-" + maxValue + ")");
-
-            try {
-                actions.moveToElement(valueCell).click().perform();
-                Thread.sleep(100);
-
-                // Try JS click if actions fail or focus is lost
-                js.executeScript("arguments[0].focus();", valueCell);
-
-                // Send keys globally to active element
-                actions.sendKeys(valStr).perform();
-                Thread.sleep(100);
-                actions.sendKeys(Keys.ENTER).perform();
-
-                // Extract test name from the row to store with its value
-                String testName = cells.get(1).getText().trim();
-                RequestContext.storeExpectedTestResult(testName, valStr);
-
-                System.out.println("✅ Actions Typed value: " + valStr + " for " + testName);
-                Thread.sleep(200);
-
-            } catch (Exception e) {
-                System.err.println("❌ Error entering value for row: " + e.getMessage());
-                // Fallback: JS value set (might not trigger app logic but better than nothing)
-                js.executeScript("arguments[0].innerText = arguments[1];", valueCell, valStr);
-            }
+        // Skip department headers & comments
+        String rowClass = row.getAttribute("class");
+        if (rowClass != null && (rowClass.contains("DeptHeader") || rowClass.contains("InvHeader"))) {
+            continue;
         }
-        System.out.println("✅ Completed entry for all eligible rows in the investigation table.");
+
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        if (cells.size() < 12) continue;
+
+        // Extract values
+        String readingFormat = cells.get(9).getText().trim();
+        String minValue = cells.get(10).getText().trim();
+        String maxValue = cells.get(11).getText().trim();
+
+        // STRICT VALIDATION: Check formatted strings and ensure min/max are numeric
+        if (readingFormat.isEmpty() || minValue.isEmpty() || maxValue.isEmpty()) {
+            continue;
+        }
+        
+        // Skip if values are placeholders (e.g. hyphens)
+        if (minValue.equals("-") || maxValue.equals("-")) {
+            continue;
+        }
+
+        int enteredValue;
+        try {
+            double minD = Double.parseDouble(minValue);
+            double maxD = Double.parseDouble(maxValue);
+            enteredValue = (int) ((minD + maxD) / 2);
+        } catch (NumberFormatException e) {
+            continue;
+        }
+
+        WebElement valueCell = cells.get(2);
+        String currentValue = valueCell.getText().trim();
+
+        // skip if value is already entered (not empty, not 0)
+        if (!currentValue.isEmpty() && !currentValue.equals("0") && !currentValue.equals("0.0")) {
+            System.out.println("Skipping row [" + cells.get(1).getText().trim() + "] as it already has value: " + currentValue);
+            continue;
+        }
+
+        // Scroll
+        js.executeScript("arguments[0].scrollIntoView({block:'center', inline: 'nearest'});", valueCell);
+        
+        String valStr = String.valueOf(enteredValue);
+        System.out.println("Attempting to enter: " + valStr + " into cell (Range: " + minValue + "-" + maxValue + ")");
+
+        try {
+            actions.moveToElement(valueCell).click().perform();
+            Thread.sleep(100); 
+            
+            // Try JS click if actions fail or focus is lost
+            js.executeScript("arguments[0].focus();", valueCell);
+            
+            // Send keys globally to active element
+            actions.sendKeys(valStr).perform();
+            Thread.sleep(100);
+            actions.sendKeys(Keys.ENTER).perform();
+            
+            // Extract test name from the row to store with its value
+            String testName = cells.get(1).getText().trim();
+            RequestContext.storeExpectedTestResult(testName, valStr);
+            
+            System.out.println("✅ Actions Typed value: " + valStr + " for " + testName);
+            Thread.sleep(200); 
+            
+        } catch (Exception e) {
+            System.err.println("❌ Error entering value for row: " + e.getMessage());
+            // Fallback: JS value set (might not trigger app logic but better than nothing)
+            js.executeScript("arguments[0].innerText = arguments[1];", valueCell, valStr);
+        }
     }
+    System.out.println("✅ Completed entry for all eligible rows in the investigation table.");
+}
+
+
 
     public static void waitForUploadCompletion(WebElement element, int timeoutSeconds) {
         try {
@@ -576,7 +567,6 @@ public class BaseClass {
         element.clear();
         element.sendKeys(text);
     }
-
     public static void jsInput(WebElement element, String text) {
         if (text == null) {
             throw new IllegalArgumentException("Input text cannot be NULL");
@@ -597,8 +587,9 @@ public class BaseClass {
 
             // Trigger input events (React needs this)
             js.executeScript(
-                    "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));",
-                    element);
+                "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));",
+                element
+            );
 
             System.out.println("✅ JS Input entered: " + text);
 
@@ -612,7 +603,7 @@ public class BaseClass {
             try {
                 // Dynamic XPath based on label text
                 String xpath = "//label[.//span[normalize-space(text())='" + testName + "']]"
-                        + "//input[@type='checkbox' and not(@disabled)]";
+                             + "//input[@type='checkbox' and not(@disabled)]";
 
                 // Use BaseClass driver
                 List<WebElement> elements = BaseClass.driver.findElements(By.xpath(xpath));
@@ -624,9 +615,9 @@ public class BaseClass {
 
                 // Pick only the displayed element (avoid duplicates like 1 of 11)
                 WebElement checkbox = elements.stream()
-                        .filter(WebElement::isDisplayed)
-                        .findFirst()
-                        .orElse(null);
+                                              .filter(WebElement::isDisplayed)
+                                              .findFirst()
+                                              .orElse(null);
 
                 if (checkbox == null) {
                     System.out.println("❌ No visible checkbox found for: " + testName);
@@ -646,14 +637,15 @@ public class BaseClass {
             }
         }
     }
-
     public static void waitUntilPageReady(WebElement keyElement, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
 
         try {
             // 1️⃣ Wait for document.readyState = complete
-            wait.until(webDriver -> ((JavascriptExecutor) webDriver)
-                    .executeScript("return document.readyState").equals("complete"));
+            wait.until(webDriver -> 
+                ((JavascriptExecutor) webDriver)
+                    .executeScript("return document.readyState").equals("complete")
+            );
 
             // 2️⃣ Wait for key element to be visible (ensures UI content is ready)
             wait.until(ExpectedConditions.visibilityOf(keyElement));
@@ -664,6 +656,7 @@ public class BaseClass {
             throw e;
         }
     }
+
 
     public static void waitAndClickWithRetries(WebElement element, int timeoutInSeconds, int maxRetries) {
         int attempts = 0;
@@ -677,15 +670,11 @@ public class BaseClass {
             } catch (Exception e) {
                 System.err.println("⚠️ Attempt " + (attempts + 1) + " failed: " + e.getMessage());
                 attempts++;
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ignored) {
-                }
+                try { Thread.sleep(500); } catch (InterruptedException ignored) {}
             }
         }
         throw new RuntimeException("❌ Failed to click after " + maxRetries + " attempts: " + describeElement(element));
     }
-
     public static void waitAndClickWithJSFallback(WebElement element, int timeoutInSeconds) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
@@ -704,7 +693,6 @@ public class BaseClass {
             throw new RuntimeException(e);
         }
     }
-
     public static void pressEnter(WebElement element) {
         try {
             if (element != null) {
@@ -720,7 +708,6 @@ public class BaseClass {
             throw e;
         }
     }
-
     public static void waitInSeconds(int seconds) {
         try {
             Thread.sleep(seconds * 1000L);
@@ -752,12 +739,10 @@ public class BaseClass {
             return "[Unable to describe element: " + e.getMessage() + "]";
         }
     }
-
     /**
      * Validates the text displayed after selecting a value from a custom dropdown.
      *
-     * @param displayElement The WebElement where the selected value appears (e.g.,
-     *                       dropdown field).
+     * @param displayElement The WebElement where the selected value appears (e.g., dropdown field).
      * @param expectedText   The expected visible text (e.g., "Covid-19").
      */
     public static void validateDropdownSelectedValue(WebElement displayElement, String expectedText) {
@@ -766,8 +751,7 @@ public class BaseClass {
         }
 
         String actualText = displayElement.getText().trim();
-        System.out.println(
-                "🔍 Validating dropdown selection: expected = '" + expectedText + "', actual = '" + actualText + "'");
+        System.out.println("🔍 Validating dropdown selection: expected = '" + expectedText + "', actual = '" + actualText + "'");
 
         Assert.assertEquals(actualText, expectedText, "❌ Dropdown value mismatch.");
     }
@@ -794,13 +778,10 @@ public class BaseClass {
             e.printStackTrace();
         }
     }
-
     public static String getInputValue(WebElement element) {
         return element.getAttribute("value").trim();
     }
-
-    public static void selectDropdownOptionByVisibleText(WebElement inputField, String optionText,
-            int timeoutInSeconds) {
+    public static void selectDropdownOptionByVisibleText(WebElement inputField, String optionText, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         try {
             inputField.clear();
@@ -817,9 +798,7 @@ public class BaseClass {
             e.printStackTrace();
         }
     }
-
-    public static void selectDropdownOptionByPartialText(WebElement inputField, String partialText,
-            int timeoutInSeconds) {
+    public static void selectDropdownOptionByPartialText(WebElement inputField, String partialText, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         try {
             inputField.clear();
@@ -846,162 +825,159 @@ public class BaseClass {
         element.clear();
     }
 
-    public static String getValueFromElement(WebElement element, int timeoutInSeconds) {
+
+public static String getValueFromElement(WebElement element, int timeoutInSeconds) {
+    try {
+        // Wait for the element to be visible
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        wait.until(ExpectedConditions.visibilityOf(element));
+
+        // Get the value attribute
+        String value = element.getAttribute("value");
+        if (value != null && !value.isEmpty()) {
+            System.out.println("✅ Value fetched from element: " + value);
+            return value;
+        } else {
+            System.out.println("⚠️ Element is visible but value is empty.");
+        }
+    } catch (Exception e) {
+        System.out.println("❌ Failed to fetch value from element: " + e.getMessage());
+    }
+
+    throw new AssertionError("❌ Unable to fetch value from the element within the timeout.");
+}
+
+public static String getTextSafe(WebElement element, int timeoutInSeconds, int maxRetries) {
+    int attempts = 0;
+
+    while (attempts < maxRetries) {
         try {
             // Wait for the element to be visible
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
             wait.until(ExpectedConditions.visibilityOf(element));
 
-            // Get the value attribute
-            String value = element.getAttribute("value");
-            if (value != null && !value.isEmpty()) {
-                System.out.println("✅ Value fetched from element: " + value);
-                return value;
+            // Get and trim the text
+            String text = element.getText().trim();
+
+            if (!text.isEmpty()) {
+                System.out.println("✅ Text fetched from element: " + text);
+                return text;
             } else {
-                System.out.println("⚠️ Element is visible but value is empty.");
+                System.out.println("⚠️ Attempt " + (attempts + 1) + ": Element is visible but text is empty.");
             }
-        } catch (Exception e) {
-            System.out.println("❌ Failed to fetch value from element: " + e.getMessage());
-        }
-
-        throw new AssertionError("❌ Unable to fetch value from the element within the timeout.");
-    }
-
-    public static String getTextSafe(WebElement element, int timeoutInSeconds, int maxRetries) {
-        int attempts = 0;
-
-        while (attempts < maxRetries) {
-            try {
-                // Wait for the element to be visible
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-                wait.until(ExpectedConditions.visibilityOf(element));
-
-                // Get and trim the text
-                String text = element.getText().trim();
-
-                if (!text.isEmpty()) {
-                    System.out.println("✅ Text fetched from element: " + text);
-                    return text;
-                } else {
-                    System.out.println("⚠️ Attempt " + (attempts + 1) + ": Element is visible but text is empty.");
-                }
-            } catch (TimeoutException e) {
-                System.out.println("⏳ Retry " + (attempts + 1) + " failed: TimeoutException - " + e.getMessage());
-            } catch (StaleElementReferenceException e) {
-                System.out.println(
-                        "⏳ Retry " + (attempts + 1) + " failed: StaleElementReferenceException - " + e.getMessage());
-            } catch (Exception e) {
-                System.out.println("⏳ Retry " + (attempts + 1) + " failed: " + e.getClass().getSimpleName() + " - "
-                        + e.getMessage());
-            }
-
-            attempts++;
-
-            // Wait before the next retry
-            try {
-                Thread.sleep(200); // 200ms delay
-            } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt();
-                throw new RuntimeException("Retry sleep interrupted", ie);
-            }
-        }
-
-        // If no valid text found after all retries
-        throw new AssertionError("❌ Failed to fetch non-empty text from element after " + maxRetries + " attempts.");
-    }
-
-    // Utility wait for loader
-    public static void waitForLoaderToDisappear(WebDriver driver, WebDriverWait wait) {
-        try {
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                    By.xpath("//div[contains(@class,'el-loading-mask')]")));
         } catch (TimeoutException e) {
-            System.out.println("⚠️ Loader still visible after timeout, continuing...");
-        }
-    }
-
-    public static String toTitleCase(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            return input;
-        }
-
-        // Split by spaces
-        String[] words = input.trim().split("\\s+");
-
-        // If only one word → return as-is (no modification)
-        if (words.length == 1) {
-            return input;
-        }
-
-        // If multiple words → apply InitCap
-        StringBuilder titleCase = new StringBuilder();
-        for (String word : words) {
-            if (word.length() > 0) {
-                titleCase.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1).toLowerCase())
-                        .append(" ");
-            }
-        }
-
-        return titleCase.toString().trim();
-    }
-
-    public static void safeClick(WebElement element) {
-        waitForOverlayInvisibility(3);
-        try {
-            // Explicit wait for element to be clickable
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-
-            // Try clicking
-            element.click();
-            System.out.println("✅ Clicked successfully: [" + element.getTagName() + "]");
-
-        } catch (ElementClickInterceptedException e) {
-            // Retry with JS if intercepted
-            System.out.println("⚠️ ElementClickInterceptedException, trying with JS Click...");
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-
+            System.out.println("⏳ Retry " + (attempts + 1) + " failed: TimeoutException - " + e.getMessage());
         } catch (StaleElementReferenceException e) {
-            // Re-find and retry if stale
-            System.out.println("⚠️ StaleElementReferenceException, retrying...");
-            try {
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-            } catch (Exception e2) {
-                System.out.println("❌ Failed after refresh: " + e2.getMessage());
-            }
-
-        } catch (TimeoutException e) {
-            System.out.println("❌ Timeout waiting for element to be clickable: " + element);
-            throw e;
-
+            System.out.println("⏳ Retry " + (attempts + 1) + " failed: StaleElementReferenceException - " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("❌ Unexpected exception during safeClick: " + e.getMessage());
-            // Final attempt with JS
-            try {
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-            } catch (Exception ignored) {
-            }
+            System.out.println("⏳ Retry " + (attempts + 1) + " failed: " + e.getClass().getSimpleName() + " - " + e.getMessage());
         }
-    }
 
-    public static void waitForOverlayInvisibility(int timeoutSeconds) {
+        attempts++;
+
+        // Wait before the next retry
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
-            // Common ITDose overlays
-            By blockingLoader = By.id("modelBlockUI");
-            By modalBackdrop = By.className("modal-backdrop");
-
-            if (driver.findElements(blockingLoader).size() > 0) {
-                wait.until(ExpectedConditions.invisibilityOfElementLocated(blockingLoader));
-            }
-            if (driver.findElements(modalBackdrop).size() > 0) {
-                wait.until(ExpectedConditions.invisibilityOfElementLocated(modalBackdrop));
-            }
-        } catch (Exception e) {
-            // Ignore if not present or timeout
+            Thread.sleep(200); // 200ms delay
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Retry sleep interrupted", ie);
         }
     }
+
+    // If no valid text found after all retries
+    throw new AssertionError("❌ Failed to fetch non-empty text from element after " + maxRetries + " attempts.");
+}
+
+//Utility wait for loader
+public static void waitForLoaderToDisappear(WebDriver driver, WebDriverWait wait) {
+ try {
+     wait.until(ExpectedConditions.invisibilityOfElementLocated(
+         By.xpath("//div[contains(@class,'el-loading-mask')]")
+     ));
+ } catch (TimeoutException e) {
+     System.out.println("⚠️ Loader still visible after timeout, continuing...");
+ }
+}
+
+public static String toTitleCase(String input) {
+    if (input == null || input.trim().isEmpty()) {
+        return input;
+    }
+
+    // Split by spaces
+    String[] words = input.trim().split("\\s+");
+
+    // If only one word → return as-is (no modification)
+    if (words.length == 1) {
+        return input;
+    }
+
+    // If multiple words → apply InitCap
+    StringBuilder titleCase = new StringBuilder();
+    for (String word : words) {
+        if (word.length() > 0) {
+            titleCase.append(Character.toUpperCase(word.charAt(0)))
+                     .append(word.substring(1).toLowerCase())
+                     .append(" ");
+        }
+    }
+
+    return titleCase.toString().trim();
+}
+public static void safeClick(WebElement element) {
+    waitForOverlayInvisibility(3);
+    try {
+        // Explicit wait for element to be clickable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+        // Try clicking
+        element.click();
+        System.out.println("✅ Clicked successfully: [" + element.getTagName() + "]");
+
+    } catch (ElementClickInterceptedException e) {
+        // Retry with JS if intercepted
+        System.out.println("⚠️ ElementClickInterceptedException, trying with JS Click...");
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
+    } catch (StaleElementReferenceException e) {
+        // Re-find and retry if stale
+        System.out.println("⚠️ StaleElementReferenceException, retrying...");
+        try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        } catch (Exception e2) {
+            System.out.println("❌ Failed after refresh: " + e2.getMessage());
+        }
+
+    } catch (TimeoutException e) {
+        System.out.println("❌ Timeout waiting for element to be clickable: " + element);
+        throw e;
+
+    } catch (Exception e) {
+        System.out.println("❌ Unexpected exception during safeClick: " + e.getMessage());
+        // Final attempt with JS
+        try { ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element); } catch (Exception ignored) {}
+    }
+}
+
+public static void waitForOverlayInvisibility(int timeoutSeconds) {
+    try {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        // Common ITDose overlays
+        By blockingLoader = By.id("modelBlockUI");
+        By modalBackdrop = By.className("modal-backdrop");
+        
+        if (driver.findElements(blockingLoader).size() > 0) {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(blockingLoader));
+        }
+        if (driver.findElements(modalBackdrop).size() > 0) {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(modalBackdrop));
+        }
+    } catch (Exception e) {
+        // Ignore if not present or timeout
+    }
+}
+
 
     public static String getText(WebElement element, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
@@ -1018,8 +994,7 @@ public class BaseClass {
                 System.out.println("✅ Action succeeded on attempt: " + (attempts + 1));
                 return;
             } catch (Exception e) {
-                System.out.println("⏳ Retry " + (attempts + 1) + " failed: " + e.getClass().getSimpleName() + " - "
-                        + e.getMessage());
+                System.out.println("⏳ Retry " + (attempts + 1) + " failed: " + e.getClass().getSimpleName() + " - " + e.getMessage());
             }
 
             attempts++;
@@ -1065,6 +1040,7 @@ public class BaseClass {
         select.selectByVisibleText(visibleText);
     }
 
+    
     public void retryClick(WebElement element, int attempts, int intervalMs) throws Throwable {
         for (int i = 0; i < attempts; i++) {
             try {
@@ -1087,6 +1063,8 @@ public class BaseClass {
         }
     }
 
+
+   
     public static void selectByValue(WebElement element, String value) {
         Select select = new Select(element);
         select.selectByValue(value);
@@ -1122,8 +1100,7 @@ public class BaseClass {
         return wait.until(ExpectedConditions.titleContains(partialTitle));
     }
 
-    public static WebElement waitForElementToContainText(By locator, String text, Duration timeout) { // Driver param
-                                                                                                      // removed
+    public static WebElement waitForElementToContainText(By locator, String text, Duration timeout) { // Driver param removed
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         WebElement element = getWebElement(locator, timeout); // Using the new getWebElement
         wait.until(ExpectedConditions.textToBePresentInElement(element, text));
@@ -1142,9 +1119,9 @@ public class BaseClass {
 
     public static WebElement fluentWait(By locator, int timeoutSeconds, int pollingMillis) { // Driver param removed
         Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(timeoutSeconds))
-                .pollingEvery(Duration.ofMillis(pollingMillis))
-                .ignoring(NoSuchElementException.class);
+            .withTimeout(Duration.ofSeconds(timeoutSeconds))
+            .pollingEvery(Duration.ofMillis(pollingMillis))
+            .ignoring(NoSuchElementException.class);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -1163,24 +1140,20 @@ public class BaseClass {
         }
     }
 
-    public static boolean waitForAttributeValue(By locator, String attribute, String expectedValue,
-            int timeoutSeconds) { // Driver param removed
+    public static boolean waitForAttributeValue(By locator, String attribute, String expectedValue, int timeoutSeconds) { // Driver param removed
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
         try {
             return wait.until(ExpectedConditions.attributeToBe(locator, attribute, expectedValue));
         } catch (TimeoutException e) {
-            System.out.println("Element " + locator + " attribute '" + attribute + "' did not become '" + expectedValue
-                    + "' within " + timeoutSeconds + " seconds.");
+            System.out.println("Element " + locator + " attribute '" + attribute + "' did not become '" + expectedValue + "' within " + timeoutSeconds + " seconds.");
             return false;
         }
     }
 
     public static void waitForPageLoadComplete(Duration timeout) { // Driver param removed
         new WebDriverWait(driver, timeout).until(
-                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState")
-                        .equals("complete"));
+            webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
-
     public static String waitForNewId(WebElement element, Duration timeout) {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
 
@@ -1189,11 +1162,11 @@ public class BaseClass {
 
         // wait until text is NOT equal to old one
         wait.until(ExpectedConditions.not(
-                ExpectedConditions.textToBePresentInElement(element, oldText)));
+            ExpectedConditions.textToBePresentInElement(element, oldText)
+        ));
 
         return element.getText();
     }
-
     public static boolean isClickable(WebDriver driver, WebElement element, int seconds) {
         try {
             WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
@@ -1247,7 +1220,6 @@ public class BaseClass {
     public static void switchToDefaultContent() { // Driver param removed
         driver.switchTo().defaultContent();
     }
-
     public static void switchToRazorpayFrame() {
 
         driver.switchTo().defaultContent();
@@ -1284,8 +1256,8 @@ public class BaseClass {
                 // 🟩 2️⃣ PAYMENT FORM FRAME (Card / UPI)
                 // ==========================================
                 if (isPresent(By.xpath("//input[@placeholder='Card Number']")) ||
-                        isPresent(By.xpath("//input[contains(@placeholder,'UPI')]")) ||
-                        isPresent(By.xpath("//button[contains(text(),'Continue')]"))) {
+                    isPresent(By.xpath("//input[contains(@placeholder,'UPI')]")) ||
+                    isPresent(By.xpath("//button[contains(text(),'Continue')]"))) {
 
                     System.out.println("🟢 Active Frame: PAYMENT FORM (Index " + i + ")");
                     return;
@@ -1295,7 +1267,7 @@ public class BaseClass {
                 // 🟨 3️⃣ OTP / BANK AUTH FRAME (Final step)
                 // =================================================
                 if (isPresent(By.xpath("//*[contains(text(),'Verify')]")) ||
-                        isPresent(By.xpath("//*[contains(text(),'Pay')]"))) {
+                    isPresent(By.xpath("//*[contains(text(),'Pay')]"))) {
 
                     System.out.println("🟢 Active Frame: OTP/AUTH (Index " + i + ")");
                     return;
@@ -1309,30 +1281,34 @@ public class BaseClass {
         driver.switchTo().defaultContent();
         throw new RuntimeException("❌ No matching Razorpay frame found after scanning all iframes!");
     }
-
     public static void handleSaveCardPopup() {
-        // Complete solution
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    	// Complete solution
+    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        try {
-            // First, try without iframe
-            WebElement noThanksButton = wait.until(
-                    ExpectedConditions.elementToBeClickable(
-                            By.xpath("//button[text()='No, thanks']")));
-            noThanksButton.click();
-        } catch (Exception e) {
-            // If failed, try with iframe
-            System.out.println("Trying with iframe...");
-            WebElement iframe = driver.findElement(
-                    By.xpath("//iframe[contains(@src, 'api.razorpay')]"));
-            driver.switchTo().frame(iframe);
-
-            WebElement noThanksButton = wait.until(
-                    ExpectedConditions.elementToBeClickable(
-                            By.xpath("//button[text()='No, thanks']")));
-            noThanksButton.click();
-            driver.switchTo().defaultContent();
-        }
+    	try {
+    	    // First, try without iframe
+    	    WebElement noThanksButton = wait.until(
+    	        ExpectedConditions.elementToBeClickable(
+    	            By.xpath("//button[text()='No, thanks']")
+    	        )
+    	    );
+    	    noThanksButton.click();
+    	} catch (Exception e) {
+    	    // If failed, try with iframe
+    	    System.out.println("Trying with iframe...");
+    	    WebElement iframe = driver.findElement(
+    	        By.xpath("//iframe[contains(@src, 'api.razorpay')]")
+    	    );
+    	    driver.switchTo().frame(iframe);
+    	    
+    	    WebElement noThanksButton = wait.until(
+    	        ExpectedConditions.elementToBeClickable(
+    	            By.xpath("//button[text()='No, thanks']")
+    	        )
+    	    );
+    	    noThanksButton.click();
+    	    driver.switchTo().defaultContent();
+    	}
     }
 
     /** Helper: safe element check */
@@ -1343,6 +1319,7 @@ public class BaseClass {
             return false;
         }
     }
+
 
     public static void takeScreenshot(String fileName) { // Driver param removed
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -1361,11 +1338,9 @@ public class BaseClass {
             System.out.println("Failed to save element screenshot: " + e.getMessage());
         }
     }
-
     public static void scrollToElement(WebElement element) {
         try {
-            ((JavascriptExecutor) driver)
-                    .executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center'});", element);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center'});", element);
             Thread.sleep(300); // slight buffer for rendering
         } catch (Exception e) {
             System.out.println("⚠️ Scroll failed: " + e.getMessage());
@@ -1381,7 +1356,6 @@ public class BaseClass {
             e.printStackTrace();
         }
     }
-
     public static void assertElementDisplayed(WebElement element, String elementName) {
         if (element != null && element.isDisplayed()) {
             System.out.println("✅ '" + elementName + "' is displayed.");
@@ -1430,7 +1404,7 @@ public class BaseClass {
 
             // Attempt scrollIntoView first
             js.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", element);
-            Thread.sleep(300); // Small pause after scroll
+            Thread.sleep(300);  // Small pause after scroll
 
             System.out.println("✅ Scrolled to element using scrollIntoView: " + describeElement(element));
             return;
@@ -1461,8 +1435,7 @@ public class BaseClass {
         } catch (Exception e3) {
             System.err.println("❌ All scroll attempts failed for element: " + describeElement(element));
             e3.printStackTrace();
-            throw new RuntimeException(
-                    "Scroll to element failed after trying all methods for " + timeoutInSeconds + " seconds");
+            throw new RuntimeException("Scroll to element failed after trying all methods for " + timeoutInSeconds + " seconds");
         }
     }
 
@@ -1507,7 +1480,6 @@ public class BaseClass {
             throw new RuntimeException("Pixel scrolling failed.");
         }
     }
-
     public static void highlightElement(WebElement element) { // Driver param removed
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.border='3px solid red'", element);
@@ -1518,13 +1490,11 @@ public class BaseClass {
     }
 
     public static void setLocalStorageItem(String key, String value) { // Driver param removed
-        ((JavascriptExecutor) driver)
-                .executeScript(String.format("window.localStorage.setItem('%s', '%s');", key, value));
+        ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.setItem('%s', '%s');", key, value));
     }
 
     public static String getLocalStorageItem(String key) { // Driver param removed
-        return (String) ((JavascriptExecutor) driver)
-                .executeScript(String.format("return window.localStorage.getItem('%s');", key));
+        return (String) ((JavascriptExecutor) driver).executeScript(String.format("return window.localStorage.getItem('%s');", key));
     }
 
     public static void hoverOverElement(WebElement element) { // Driver param removed
@@ -1555,6 +1525,8 @@ public class BaseClass {
     public static void sendKeyToElement(WebElement element, Keys key) {
         element.sendKeys(key);
     }
+
+   
 
     public static void pressTab(WebElement element) {
         element.sendKeys(Keys.TAB);
@@ -1644,7 +1616,6 @@ public class BaseClass {
         }
         return links;
     }
-
     public static void assertDropdownValueSelected(WebElement dropdown, String expectedValue, int timeout) {
         waitForVisibility(dropdown, timeout);
         Select select = new Select(dropdown);
@@ -1653,6 +1624,7 @@ public class BaseClass {
             throw new AssertionError("❌ Dropdown mismatch! Expected: " + expectedValue + ", but got: " + selected);
         }
     }
+
 
     public static void addCookie(String name, String value) { // Driver param removed
         Cookie cookie = new Cookie(name, value);
@@ -1692,9 +1664,7 @@ public class BaseClass {
             return false;
         }
     }
-
-    // ✅ Extracts both the test count and total price from the checkout summary
-    // header
+ // ✅ Extracts both the test count and total price from the checkout summary header
     public static Map<String, Object> extractCheckoutSummary(WebElement headerElement) {
         String headerText = headerElement.getText().trim();
         System.out.println("🧾 Checkout Summary Text: " + headerText);
@@ -1725,14 +1695,12 @@ public class BaseClass {
 
         return summary;
     }
-
     public static void waitUntilVisible(By locator, int timeoutInSeconds) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         } catch (TimeoutException e) {
-            throw new AssertionError(
-                    "❌ Element not visible after waiting for " + timeoutInSeconds + " seconds: " + locator);
+            throw new AssertionError("❌ Element not visible after waiting for " + timeoutInSeconds + " seconds: " + locator);
         }
     }
 
@@ -1745,8 +1713,7 @@ public class BaseClass {
             return false;
         }
     }
-
-    // Wait until element is visible
+ // Wait until element is visible
     public static void waitForVisibility(WebElement element, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -1764,17 +1731,14 @@ public class BaseClass {
             waitForVisibility(element, timeoutInSeconds);
             System.out.println("✅ Element is visible: " + element.toString());
         } catch (TimeoutException e) {
-            throw new AssertionError(
-                    "❌ Element NOT visible within " + timeoutInSeconds + " seconds: " + element.toString());
+            throw new AssertionError("❌ Element NOT visible within " + timeoutInSeconds + " seconds: " + element.toString());
         }
     }
-
     public static void waitUntilSelected(WebElement element, int timeoutInSeconds) {
         new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds))
-                .until(ExpectedConditions.elementToBeSelected(element));
+            .until(ExpectedConditions.elementToBeSelected(element));
     }
-
-    public static WebElement scrollToElement(WebElement element, String elementName) throws Throwable {
+    public static WebElement scrollToElement(WebElement element, String elementName) throws Throwable{
         JavascriptExecutor js = (JavascriptExecutor) driver;
         int maxScrollAttempts = 5;
 
@@ -1785,8 +1749,7 @@ public class BaseClass {
                     js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
                     return element;
                 }
-            } catch (StaleElementReferenceException | NoSuchElementException ignored) {
-            }
+            } catch (StaleElementReferenceException | NoSuchElementException ignored) {}
 
             js.executeScript("window.scrollBy(0, 300);");
             Thread.sleep(500);
@@ -1799,8 +1762,7 @@ public class BaseClass {
                     js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
                     return element;
                 }
-            } catch (StaleElementReferenceException | NoSuchElementException ignored) {
-            }
+            } catch (StaleElementReferenceException | NoSuchElementException ignored) {}
 
             js.executeScript("window.scrollBy(0, -300);");
             Thread.sleep(500);
@@ -1816,8 +1778,7 @@ public class BaseClass {
             wait.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("body"), expectedText));
             System.out.println("✅ Text found in page: " + expectedText);
         } catch (TimeoutException e) {
-            throw new AssertionError(
-                    "❌ Text NOT found in page within " + timeoutInSeconds + " seconds: " + expectedText);
+            throw new AssertionError("❌ Text NOT found in page within " + timeoutInSeconds + " seconds: " + expectedText);
         }
     }
 
@@ -1828,11 +1789,9 @@ public class BaseClass {
             waitForVisibility(element, timeoutInSeconds);
             System.out.println("✅ Element is visible after scroll: " + element.toString());
         } catch (TimeoutException e) {
-            throw new AssertionError("❌ Element NOT visible after scroll within " + timeoutInSeconds + " seconds: "
-                    + element.toString());
+            throw new AssertionError("❌ Element NOT visible after scroll within " + timeoutInSeconds + " seconds: " + element.toString());
         }
     }
-
     public static void scrollAndClick(WebDriver driver, WebElement element) {
         int maxRetries = 5;
 
@@ -1855,6 +1814,7 @@ public class BaseClass {
         }
     }
 
+
     public static void assertElementValueMatches(WebElement element, String expectedValue, int timeout) {
         waitForVisibility(element, timeout);
         String actualValue = element.getAttribute("value");
@@ -1870,7 +1830,6 @@ public class BaseClass {
             System.out.println("Actual value: " + actualValue + " | Expected Value: " + expectedValue);
         }
     }
-
     public static void pressEscapeKey() {
         try {
             Actions action = new Actions(driver);
@@ -1887,16 +1846,15 @@ public class BaseClass {
             waitForVisibility(element, timeoutInSeconds);
             String actualText = element.getText().trim();
             if (!actualText.equals(expectedText)) {
-                throw new AssertionError(
-                        "❌ Text mismatch: Expected [" + expectedText + "] but found [" + actualText + "]");
+                throw new AssertionError("❌ Text mismatch: Expected [" + expectedText + "] but found [" + actualText + "]");
             } else {
                 System.out.println("✅ Text matches: " + expectedText);
             }
         } catch (TimeoutException e) {
-            throw new AssertionError(
-                    "❌ Element text not found within " + timeoutInSeconds + " seconds for validation: " + expectedText);
+            throw new AssertionError("❌ Element text not found within " + timeoutInSeconds + " seconds for validation: " + expectedText);
         }
     }
+
 
     public static String getCssValue(WebElement element, String propertyName) {
         return element.getCssValue(propertyName);
@@ -1914,7 +1872,6 @@ public class BaseClass {
     public static boolean isCheckboxSelected(WebElement element) {
         return element.isSelected();
     }
-
     public static void assertElementTextContainsWithRetry(WebElement element, String expected, int timeout) {
         int attempts = 0;
         int maxAttempts = 2;
@@ -1931,11 +1888,11 @@ public class BaseClass {
 
                 if (!actual.contains(expected)) {
                     throw new AssertionError(
-                            "❌ Text mismatch!\nExpected to contain: [" + expected + "]\nActual: [" + actual + "]");
+                        "❌ Text mismatch!\nExpected to contain: [" + expected + "]\nActual: [" + actual + "]"
+                    );
                 }
 
-                System.out.println(
-                        "✅ Text verified successfully.\nExpected: [" + expected + "]\nActual: [" + actual + "]");
+                System.out.println("✅ Text verified successfully.\nExpected: [" + expected + "]\nActual: [" + actual + "]");
                 return; // success
 
             } catch (StaleElementReferenceException e) {
@@ -1943,15 +1900,16 @@ public class BaseClass {
                 attempts++;
             } catch (TimeoutException e) {
                 throw new AssertionError(
-                        "❌ Timeout after " + timeout + "s\nExpected text: [" + expected
-                                + "] was not found in element.");
+                    "❌ Timeout after " + timeout + "s\nExpected text: [" + expected + "] was not found in element."
+                );
             }
         }
 
         throw new AssertionError(
-                "❌ Failed after " + maxAttempts + " retries.\nExpected text: [" + expected
-                        + "] was not found in element.");
+            "❌ Failed after " + maxAttempts + " retries.\nExpected text: [" + expected + "] was not found in element."
+        );
     }
+
 
     public static boolean validateElementText(By locator, String expectedText) { // Driver param removed
         String actual = getWebElement(locator, Duration.ofSeconds(10)).getText().trim();
@@ -1963,9 +1921,7 @@ public class BaseClass {
         return actual.contains(partialText);
     }
 
-    public static boolean validateAttributeContains(By locator, String attribute, String expectedValue) { // Driver
-                                                                                                          // param
-                                                                                                          // removed
+    public static boolean validateAttributeContains(By locator, String attribute, String expectedValue) { // Driver param removed
         String actual = getWebElement(locator, Duration.ofSeconds(10)).getAttribute(attribute);
         return actual != null && actual.contains(expectedValue);
     }
@@ -1985,7 +1941,7 @@ public class BaseClass {
     public static boolean dropdownContainsOption(By locator, String expectedOption) { // Driver param removed
         Select select = new Select(driver.findElement(locator));
         return select.getOptions().stream()
-                .anyMatch(opt -> opt.getText().trim().equalsIgnoreCase(expectedOption));
+                     .anyMatch(opt -> opt.getText().trim().equalsIgnoreCase(expectedOption));
     }
 
     public static boolean validateSelectedOption(By locator, String expectedOption) { // Driver param removed
@@ -2059,8 +2015,7 @@ public class BaseClass {
 
     public static String getCellData(Sheet sheet, int rowNum, int colNum) {
         Row row = sheet.getRow(rowNum);
-        if (row == null)
-            return "";
+        if (row == null) return "";
         Cell cell = row.getCell(colNum);
         return getFormattedCellValue(cell);
     }
@@ -2068,12 +2023,10 @@ public class BaseClass {
     public static void setCellData(Sheet sheet, String filePath, int rowNum, int colNum, String value) {
         try {
             Row row = sheet.getRow(rowNum);
-            if (row == null)
-                row = sheet.createRow(rowNum);
+            if (row == null) row = sheet.createRow(rowNum);
 
             Cell cell = row.getCell(colNum);
-            if (cell == null)
-                cell = row.createCell(colNum);
+            if (cell == null) cell = row.createCell(colNum);
 
             cell.setCellValue(value);
             try (FileOutputStream fos = new FileOutputStream(filePath)) {
@@ -2088,15 +2041,13 @@ public class BaseClass {
         List<Map<String, String>> dataList = new ArrayList<>();
         int rowCount = getRowCount(sheet);
 
-        if (rowCount <= 1)
-            return dataList;
+        if (rowCount <= 1) return dataList;
 
         Row headerRow = sheet.getRow(0);
         int colCount = headerRow.getLastCellNum();
         for (int i = 1; i < rowCount; i++) {
             Row row = sheet.getRow(i);
-            if (row == null)
-                continue;
+            if (row == null) continue;
 
             Map<String, String> rowMap = new LinkedHashMap<>();
             for (int j = 0; j < colCount; j++) {
@@ -2110,16 +2061,14 @@ public class BaseClass {
     }
 
     public static String getFormattedCellValue(Cell cell) {
-        if (cell == null)
-            return "";
+        if (cell == null) return "";
         DataFormatter formatter = new DataFormatter();
         return formatter.formatCellValue(cell);
     }
 
     public static void closeWorkbook(Workbook workbook) {
         try {
-            if (workbook != null)
-                workbook.close();
+            if (workbook != null) workbook.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -2136,8 +2085,7 @@ public class BaseClass {
 
         for (int i = 0; i < rowCount; i++) {
             Row row = sheet.getRow(i);
-            if (row == null)
-                continue;
+            if (row == null) continue;
             int colCount = getColumnCount(sheet, i);
             Object[] rowData = new Object[colCount];
             for (int j = 0; j < colCount; j++) {
@@ -2230,10 +2178,7 @@ public class BaseClass {
                 break;
             } catch (StaleElementReferenceException e) {
                 tries++;
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ignored) {
-                }
+                try { Thread.sleep(500); } catch (InterruptedException ignored) {}
             }
         }
     }
@@ -2252,7 +2197,6 @@ public class BaseClass {
         element.sendKeys(password);
         System.out.println("Password entered [MASKED]");
     }
-
     public String selectRandomTestName(List<WebElement> elements) {
 
         if (elements == null || elements.isEmpty()) {
@@ -2267,15 +2211,13 @@ public class BaseClass {
 
         return selectedName;
     }
-
     public static void waitUntilVisible(WebElement element, int timeoutInSeconds) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
             wait.until(ExpectedConditions.visibilityOf(element));
             System.out.println("👁️ Element is visible: " + element.toString());
         } catch (TimeoutException e) {
-            throw new AssertionError(
-                    "❌ Element not visible after " + timeoutInSeconds + " seconds: " + element.toString());
+            throw new AssertionError("❌ Element not visible after " + timeoutInSeconds + " seconds: " + element.toString());
         } catch (Exception e) {
             throw new RuntimeException("⚠️ Error while waiting for element visibility: " + e.getMessage(), e);
         }

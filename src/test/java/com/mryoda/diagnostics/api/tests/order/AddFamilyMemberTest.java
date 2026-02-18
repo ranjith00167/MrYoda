@@ -86,7 +86,7 @@ public class AddFamilyMemberTest extends BaseTest {
         System.out.println("   ✅ Family Member Added. GUID: " + familyMemberGuid);
 
         // Store in Context if needed by subsequent steps
-        // RequestContext.setLastCreatedFamilyMemberId(familyMemberGuid);
+        RequestContext.storeExpectedPatient(familyMemberGuid, dynamicFirstName + " " + dynamicLastName);
 
         System.out.println("\n>>> TEST: UPDATE CART WITH FAMILY MEMBER <<<");
 

@@ -40,9 +40,9 @@ public class COD_03_AddAddressAndSlotTest extends CreateOrderCODAPITest {
         Assert.assertNotNull(slotGuid, "Slot GUID required");
 
         RequestContext.setCurrentSlotGuid(slotGuid);
-        // Store date/time if needed? VerifyPayment uses it.
-        RequestContext.setSlotStartDate(slotDetails.get("date"));
-        RequestContext.setMemberSlotTime(slotDetails.get("time")); // reusing variable, or add currentSlotDate/Time
+        RequestContext.setExpectedSlotTiming(slotDetails.get("date"), slotDetails.get("time"));
+        RequestContext.setExpectedAddressName(addressDetails.get("address")); // Assuming "address" is the key from
+                                                                              // callAddAddressAPI
 
         updateCartWithSlot(token, userId, slotGuid, addressGuid);
         System.out.println("✅ Address & Slot Configured.");
