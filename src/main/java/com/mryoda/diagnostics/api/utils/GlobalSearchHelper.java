@@ -176,6 +176,49 @@ public class GlobalSearchHelper {
             // Array/List fields
             storeData.put("components", found.get("components"));
             storeData.put("locations", found.get("locations"));
+
+            // ========== VALIDATE LOCATION AVAILABILITY ==========
+            String searchedLocationId = RequestContext.getSelectedLocationId();
+            Object locationsObj = found.get("locations");
+            boolean isLocationAvailable = false;
+
+            if (locationsObj instanceof List) {
+                List<?> locationsList = (List<?>) locationsObj;
+                for (Object loc : locationsList) {
+                    if (loc != null && loc.toString().equals(searchedLocationId)) {
+                        isLocationAvailable = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isLocationAvailable) {
+                System.out.println("   ✅ Location Validation: Test is available in location ID: " + searchedLocationId);
+            } else {
+                System.out.println(
+                        "   ❌ Location Validation FAILED: Test is NOT available in location ID: " + searchedLocationId);
+                System.out.println("      Available Locations for this test: " + locationsObj);
+            }
+            // ====================================================
+
+            // ========== VALIDATE STATUS ==========
+            String status = (String) found.get("status");
+            if (status != null && !"ACTIVE".equalsIgnoreCase(status)) {
+                System.out.println("   ⚠️ WARNING: Test Status is '" + status + "' (Expected: ACTIVE)");
+            }
+            // =====================================
+
+            // ========== VALIDATE PRICE ==========
+            Object priceObj = found.get("price");
+            if (priceObj instanceof Number) {
+                double price = ((Number) priceObj).doubleValue();
+                if (price < 0) {
+                    System.out.println("   ❌ FAILED: Invalid Price: " + price);
+                }
+            } else {
+                System.out.println("   ⚠️ WARNING: Price is missing or invalid format");
+            }
+            // ====================================
             storeData.put("genders", found.get("genders"));
             storeData.put("business_type", found.get("business_type"));
             storeData.put("stability", found.get("stability"));
