@@ -72,5 +72,6 @@ public class APIEndpoints {
     public static final String GET_FAMILY_MEMBER_BY_ID = "/familymembers/GetFamilyMemberById/{guid}";
     public static final String UPDATE_FAMILY_MEMBER = "/familymembers/updateFamilyMember";
     public static final String DELETE_FAMILY_MEMBER_BY_ID = "/familymembers/deleteFamilyMemberById/{guid}";
+    public static final String GET_ALL_COUPONS = "/coupons/getAllCoupons";
     public static final String ADMIN_LOGIN = "/auth/login";
 }

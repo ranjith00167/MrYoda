@@ -12,7 +12,7 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
     public void step18_A_VerifyInitialRewards() {
         System.out.println("\n>>> STEP 18-A: VERIFY INITIAL REWARDS (Pre-Payment) <<<");
         String mobile = RequestContext.getMobile();
-        
+
         if (!"member_flow".equalsIgnoreCase(RequestContext.getCurrentFlowName())) {
             System.out.println("⏩ Skipping Rewards check for non-member flow.");
             return;
@@ -26,7 +26,7 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
     @Test(groups = "reward_validation", dependsOnMethods = "com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest.step15_ApprovePayment")
     public void step18_B_VerifyRewardsGain() {
         System.out.println("\n>>> STEP 18-B: VERIFY REWARDS GAIN (From Payment) <<<");
-        
+
         if (!"member_flow".equalsIgnoreCase(RequestContext.getCurrentFlowName())) {
             System.out.println("⏩ Skipping Rewards check for non-member flow.");
             return;
@@ -34,7 +34,7 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
 
         double actualGain = RequestContext.getRewardsGain();
         double dueAmount = RequestContext.getCurrentDueAmount();
-        
+
         RewardHelper.validateRewardsGain(actualGain, dueAmount);
         System.out.println("✅ Rewards Gain Validation Completed.");
     }
@@ -51,25 +51,29 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
 
         double finalRewards = RewardHelper.callGetRewardsByMobileAPI(mobile);
         RequestContext.setFinalTotalRewards(finalRewards);
-        
+
         double initial = RequestContext.getInitialTotalRewards();
-        double paidAmount = RequestContext.getCurrentDueAmount();
-        double calculatedGain = Math.ceil(paidAmount * 0.05);
-        double expectedFinal = initial + calculatedGain;
-        
+
+        // Use the actual rewards_gain from the Approve Payment API response
+        // (stored in RequestContext by callApprovePaymentAPI via data[0].rewards_gain)
+        double rewardsGainFromAPI = RequestContext.getRewardsGain();
+        double expectedFinal = initial + rewardsGainFromAPI;
+
         System.out.println("📊 MATHEMATICAL REWARD VALIDATION:");
         System.out.println("   Initial Balance (A)    : " + initial);
-        System.out.println("   Calculated Gain (B)   : " + calculatedGain + " (5% of " + paidAmount + " ceiled)");
+        System.out.println("   Rewards Gain from API (B): " + rewardsGainFromAPI + " (from Approve Payment response)");
         System.out.println("   Expected Total (A+B)  : " + expectedFinal);
         System.out.println("   Actual API Balance    : " + finalRewards);
 
         if (Math.abs(finalRewards - expectedFinal) < 0.1) {
-            System.out.println("✅ VALIDATION PASSED: Mathematically correct. Initial ("+initial+") + Calculated Gain ("+calculatedGain+") = Final API Balance ("+finalRewards+").");
+            System.out.println("✅ VALIDATION PASSED: Mathematically correct. Initial (" + initial
+                    + ") + Rewards Gain (" + rewardsGainFromAPI + ") = Final API Balance (" + finalRewards + ").");
         } else {
             System.err.println("❌ VALIDATION FAILED: Final Rewards Balance mismatch!");
             System.err.println("   Expected: " + expectedFinal + ", but API returned: " + finalRewards);
             // In a strict automation, we might throw an assertion error here
-            // throw new AssertionError("Reward Balance Mismatch! Expected: " + expectedFinal + ", Actual: " + finalRewards);
+            // throw new AssertionError("Reward Balance Mismatch! Expected: " +
+            // expectedFinal + ", Actual: " + finalRewards);
         }
     }
 }

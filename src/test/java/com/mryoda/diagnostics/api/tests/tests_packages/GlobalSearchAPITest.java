@@ -54,7 +54,8 @@ public class GlobalSearchAPITest extends BaseTest {
         System.out.println("   ✅ This location will be used for Global Search");
 
         String[] testsToSearch = {
-                "Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME", "Complete Blood Count (CBC)"
+                "Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME", "Complete Blood Count (CBC)",
+                "Full Body Health Checkup"
         };
 
         System.out.println("\n⚠️  IMPORTANT: We are NOT searching for CBC!");
@@ -162,6 +163,12 @@ public class GlobalSearchAPITest extends BaseTest {
                 System.out.println("\n✅ Validated stored test: " + testName);
                 System.out.println("   Test ID: " + testId);
                 System.out.println("   Product ID: " + productId);
+
+                // User requested additional validation details
+                System.out.println("   Rewards Percentage: " + test.get("rewards_percentage"));
+                System.out.println("   B2B Price: " + test.get("b2b_price"));
+                System.out.println("   Disease: " + test.get("diseases"));
+                System.out.println("   Organ: " + test.get("organ"));
             }
         }
 
