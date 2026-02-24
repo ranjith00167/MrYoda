@@ -23,4 +23,4 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Run Hybrid Tests
-run: mvn test -Dsurefire.suiteXmlFiles=testng_all.xml -Dheadless=true
+        run: mvn test -Dsurefire.suiteXmlFiles=testng_all.xml -Dheadless=true
