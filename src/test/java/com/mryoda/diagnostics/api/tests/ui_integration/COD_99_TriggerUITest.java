@@ -1,24 +1,27 @@
 package com.mryoda.diagnostics.api.tests.ui_integration;
 
 import org.testng.annotations.Test;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
-import testRunner.RunnerTest;
+import org.testng.TestNG;
+import com.mryoda.diagnostics.api.utils.RequestContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class COD_99_TriggerUITest {
 
     @Test
     public void triggerUIAutomation() {
+
         System.out.println("\n=======================================================");
-        System.out.println(">>> TRIGGERING UI AUTOMATION (Cucumber JUnit Runner) <<<");
+        System.out.println(">>> TRIGGERING UI AUTOMATION (Cucumber TestNG Runner) <<<");
         System.out.println("=======================================================");
 
-        java.util.List<String> visits = com.mryoda.diagnostics.api.utils.RequestContext.getCurrentVisitNumbers();
+        List<String> visits = RequestContext.getCurrentVisitNumbers();
+
         if (visits == null || visits.isEmpty()) {
-            String v = com.mryoda.diagnostics.api.utils.RequestContext.getVisitNumber();
+            String v = RequestContext.getVisitNumber();
             if (v != null) {
-                visits = new java.util.ArrayList<>();
+                visits = new ArrayList<>();
                 visits.add(v);
             }
         }
@@ -29,34 +32,26 @@ public class COD_99_TriggerUITest {
 
         System.out.println("📊 Found " + visits.size() + " visits to process in IT Dose.");
 
-        boolean anyFailure = false;
-        StringBuilder failureTrace = new StringBuilder();
-
         for (String visit : visits) {
+
             System.out.println("\n🚀 RUNNING UI AUTOMATION FOR VISIT: " + visit);
-            com.mryoda.diagnostics.api.utils.RequestContext.setVisitNumber(visit);
+            RequestContext.setVisitNumber(visit);
 
-            // This will run the Cucumber Runner within the same JVM, preserving
-            // RequestContext
-            Result result = JUnitCore.runClasses(RunnerTest.class);
+            TestNG testng = new TestNG();
+            testng.setTestClasses(new Class[] { testRunner.RunnerTest.class });
 
-            System.out.println("   -> Visit " + visit + " Execution Time: " + result.getRunTime() + "ms");
+            long start = System.currentTimeMillis();
+            testng.run();
+            long end = System.currentTimeMillis();
 
-            if (!result.wasSuccessful()) {
-                anyFailure = true;
-                for (Failure failure : result.getFailures()) {
-                    failureTrace.append("\n[Visit: ").append(visit).append("] ").append(failure.toString());
-                }
+            System.out.println("   -> Visit " + visit + " Execution Time: " + (end - start) + "ms");
+
+            if (testng.hasFailure()) {
                 System.out.println("   ❌ UI Automation FAILED for visit: " + visit);
+                throw new RuntimeException("UI Automation failed for visit: " + visit);
             } else {
                 System.out.println("   ✅ UI Automation PASSED for visit: " + visit);
             }
-        }
-
-        if (anyFailure) {
-            System.out.println("\n❌ UI Automation failed for one or more visits!");
-            System.err.println(failureTrace.toString());
-            throw new RuntimeException("UI Automation Failed for visits:" + failureTrace.toString());
         }
 
         System.out.println("\n✅ ALL UI AUTOMATION SESSIONS COMPLETED SUCCESSFULLY!");

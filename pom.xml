@@ -82,7 +82,12 @@
         <version>4.27.0</version>
         <scope>test</scope>
     </dependency>
-
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-testng</artifactId>
+    <version>7.15.0</version>
+    <scope>test</scope>
+</dependency>
      <!-- Jsoup -->
     <dependency>
         <groupId>org.jsoup</groupId>
@@ -332,7 +337,8 @@
         <id>junit-tests</id>
         <activation>
             <property>
-                <name>!suiteXmlFile</name>
+                <name>runJunit</name>
+                <value>true</value>
             </property>
         </activation>
         <build>
