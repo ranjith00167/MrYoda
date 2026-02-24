@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Coupon Full Coverage With COD" verbose="2" parallel="none">
+    <suite-files>
+        <suite-file path="testng_coupon_usertype_listing.xml"/>
+        <suite-file path="testng_coupon_comprehensive.xml"/>
+        <suite-file path="testng_member_cod_coupon_validation.xml"/>
+    </suite-files>
+</suite>

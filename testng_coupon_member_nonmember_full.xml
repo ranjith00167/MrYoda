@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Coupon Member + NonMember Full Validation" verbose="2" parallel="none">
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- MEMBER FLOW -->
+    <test name="Member Full Coupon Validation" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <parameter name="flowType" value="full"/>
+        <parameter name="applyCoupon" value="true"/>
+        <parameter name="orderType" value="home"/>
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLoginWithOTP"/>
+                    <include name="testLoginWithOTP_NonMember"/>
+                </methods>
+            </class>
+
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods>
+                    <include name="testGetLocations_ForMember"/>
+                </methods>
+            </class>
+
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods>
+                    <include name="testGetBrands_ForMember"/>
+                </methods>
+            </class>
+
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods>
+                    <include name="testGlobalSearch_ForMember"/>
+                </methods>
+            </class>
+
+            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponValidationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponComprehensiveTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.coupons.MemberCouponAdminFlowTest"/>
+        </classes>
+    </test>
+
+    <!-- NON-MEMBER FLOW -->
+    <test name="NonMember Full Coupon Validation" preserve-order="true">
+        <parameter name="userType" value="nonmember"/>
+        <parameter name="flowType" value="full"/>
+        <parameter name="applyCoupon" value="true"/>
+        <parameter name="orderType" value="home"/>
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLoginWithOTP_NonMember"/>
+                    <include name="testLoginWithOTP"/>
+                </methods>
+            </class>
+
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods>
+                    <include name="testGetLocations_ForNonMember"/>
+                </methods>
+            </class>
+
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods>
+                    <include name="testGetBrands_ForNonMember"/>
+                </methods>
+            </class>
+
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods>
+                    <include name="testGlobalSearch_ForNonMember"/>
+                </methods>
+            </class>
+
+            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponValidationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponComprehensiveTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.coupons.MemberCouponAdminFlowTest"/>
+        </classes>
+    </test>
+</suite>

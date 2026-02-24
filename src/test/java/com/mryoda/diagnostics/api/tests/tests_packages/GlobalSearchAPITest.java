@@ -55,7 +55,7 @@ public class GlobalSearchAPITest extends BaseTest {
 
         String[] testsToSearch = {
                 "Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME", "Complete Blood Count (CBC)",
-                "Full Body Health Checkup"
+                "T4 - THYROXINE"
         };
 
         System.out.println("\n⚠️  IMPORTANT: We are NOT searching for CBC!");

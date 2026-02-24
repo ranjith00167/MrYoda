@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Member COD Two Scenario Suite" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ===================================================== -->
+    <!-- SCENARIO 1 — FULL FLOW (NO ORDER CANCELLATION)       -->
+    <!-- ===================================================== -->
+
+    <test name="Member COD Full Flow - No Cancel" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <parameter name="flowType" value="full"/>
+        <parameter name="applyCoupon" value="true"/>
+
+        <classes>
+
+            <!-- Login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForMember"/></methods>
+            </class>
+
+            <!-- COD Flow -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            
+        </classes>
+    </test>
+
+
+    
+
+</suite>

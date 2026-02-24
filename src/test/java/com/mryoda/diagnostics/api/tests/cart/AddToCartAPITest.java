@@ -24,6 +24,55 @@ import java.util.Map;
  */
 public class AddToCartAPITest extends BaseTest {
 
+    private String resolveLabLocationId(Map<String, Object> payload) {
+        Object payloadLabLocation = payload.get("lab_location_id");
+        if (payloadLabLocation != null && !payloadLabLocation.toString().trim().isEmpty()) {
+            return payloadLabLocation.toString().trim();
+        }
+
+        Object productDetailsObj = payload.get("product_details");
+        if (productDetailsObj instanceof List) {
+            List<?> productDetails = (List<?>) productDetailsObj;
+            for (Object item : productDetails) {
+                if (item instanceof Map) {
+                    Object locationObj = ((Map<?, ?>) item).get("location_id");
+                    if (locationObj != null && !locationObj.toString().trim().isEmpty()) {
+                        return locationObj.toString().trim();
+                    }
+                }
+            }
+        }
+
+        String selectedLocationId = RequestContext.getSelectedLocationId();
+        if (selectedLocationId != null && !selectedLocationId.trim().isEmpty()) {
+            return selectedLocationId.trim();
+        }
+
+        String defaultLocationId = RequestContext.getLocationId(DEFAULT_LOCATION);
+        if (defaultLocationId != null && !defaultLocationId.trim().isEmpty()) {
+            return defaultLocationId.trim();
+        }
+
+        return null;
+    }
+
+    private void attachCouponAndLocation(Map<String, Object> payload, String applyCoupon, String couponUserType) {
+        String resolvedLabLocation = resolveLabLocationId(payload);
+        if (resolvedLabLocation != null) {
+            payload.put("lab_location_id", resolvedLabLocation);
+        }
+
+        if ("true".equalsIgnoreCase(applyCoupon)) {
+            String couponGuid = fetchCouponGuid(couponUserType);
+            if (couponGuid != null && !couponGuid.trim().isEmpty()) {
+                payload.put("coupon_guid", couponGuid.trim());
+                System.out.println("   ✅ coupon_guid attached: " + couponGuid);
+            } else {
+                System.out.println("   ⚠️ applyCoupon=true but no coupon_guid found for type: " + couponUserType);
+            }
+        }
+    }
+
     private Map<String, Object> buildCartPayloadWithAllTests(String userId, String brandName, String locationName) {
 
         System.out.println("\n🔍 CUSTOM PAYLOAD BUILDER for " + userId);
@@ -138,6 +187,7 @@ public class AddToCartAPITest extends BaseTest {
         payload.put("product_details", productDetailsList);
         // Explicitly adding order_type as requested for home sample collection flow
         payload.put("order_type", flowType);
+        payload.put("lab_location_id", locationId);
 
         return payload;
     }
@@ -162,6 +212,11 @@ public class AddToCartAPITest extends BaseTest {
         } else if (!hasHome && labLoc != null) {
             payload.put("order_type", "lab");
             payload.put("lab_location_id", labLoc);
+        } else {
+            String fallbackLabLocation = resolveLabLocationId(payload);
+            if (fallbackLabLocation != null) {
+                payload.put("lab_location_id", fallbackLabLocation);
+            }
         }
 
         Response response = new RequestBuilder()
@@ -178,17 +233,60 @@ public class AddToCartAPITest extends BaseTest {
         return response;
     }
 
-    private void validateAddToCartResponse(Response response, String userType) {
+    private void validateAddToCartResponse(Response response, String userType, Map<String, Object> payload) {
+        System.out.println("\n🔍 VALIDATING ADD TO CART RESPONSE for " + userType);
+
         if (response.getStatusCode() != 200 && response.getStatusCode() != 201) {
+            System.out.println("   ❌ FAILED RESPONSE Body: " + response.getBody().asString());
             Assert.fail("AddToCart failed with status " + response.getStatusCode());
         }
+
+        // Print response for visibility
+        System.out.println("   📄 Response Body: " + response.getBody().asString());
 
         Boolean success = response.jsonPath().getBoolean("success");
         AssertionUtil.verifyTrue(success, "Success flag");
 
+        // Validate basic fields
         String cartGuid = response.jsonPath().getString("data.guid");
         Integer cartId = response.jsonPath().getInt("data.id");
         Integer totalAmount = response.jsonPath().getInt("total_amount");
+
+        AssertionUtil.verifyNotNull(cartGuid, "Cart GUID");
+        AssertionUtil.verifyNotNull(cartId, "Cart Numeric ID");
+
+        // --- STRICT CROSS-VALIDATION WITH PAYLOAD ---
+        System.out.println("   🔍 Cross-validating response with requested payload...");
+
+        // 1. User ID Validation
+        String reqUserId = (String) payload.get("user_id");
+        String respUserId = response.jsonPath().getString("data.user_id");
+        AssertionUtil.verifyEquals(respUserId, reqUserId, "User ID Persistence");
+
+        // 2. Lab Location ID Validation
+        if (payload.containsKey("lab_location_id")) {
+            String reqLabLoc = (String) payload.get("lab_location_id");
+            String respLabLoc = response.jsonPath().getString("data.lab_location_id");
+            AssertionUtil.verifyEquals(respLabLoc, reqLabLoc, "Lab Location ID Persistence");
+        }
+
+        // 3. Coupon GUID Validation
+        if (payload.containsKey("coupon_guid")) {
+            String reqCoupon = (String) payload.get("coupon_guid");
+            String respCoupon = response.jsonPath().getString("data.coupon_guid");
+
+            // Try nested if not found at root of data
+            if (respCoupon == null) {
+                respCoupon = response.jsonPath().getString("data.coupon.guid");
+            }
+
+            if (respCoupon != null) {
+                AssertionUtil.verifyEquals(respCoupon, reqCoupon, "Coupon GUID Persistence");
+            } else {
+                System.out.println("   ⚠️  WARNING: coupon_guid was sent (" + reqCoupon
+                        + ") but NOT echoed in response data object.");
+            }
+        }
 
         switch (userType) {
             case "MEMBER":
@@ -210,51 +308,89 @@ public class AddToCartAPITest extends BaseTest {
                     RequestContext.setNewUserTotalAmount(totalAmount);
                 break;
         }
-        System.out.println("   ✅ Cart Data Stored for " + userType + " (GUID: " + cartGuid + ")");
+        System.out.println("   ✅ Cart Data Validated and Stored for " + userType + " (GUID: " + cartGuid + ")");
     }
 
-    @Parameters({ "orderType" })
+    private String fetchCouponGuid(String couponUserType) {
+        System.out.println("\n--- DEBUG: Fetching Coupon for " + couponUserType + " ---");
+        Map<String, String> payload = new HashMap<>();
+        payload.put("coupon_user_type", couponUserType);
+
+        io.restassured.response.Response response = io.restassured.RestAssured.given()
+                .baseUri(APIEndpoints.DIAGNOSTICS_BASE_URL)
+                .contentType(io.restassured.http.ContentType.JSON)
+                .body(payload)
+                .post(APIEndpoints.GET_ALL_COUPONS);
+
+        if (response.getStatusCode() == 200) {
+            String body = response.asString();
+            System.out.println("   DEBUG: Full Response Body: " + body);
+            List<Map<String, Object>> coupons = response.jsonPath().get("data");
+            if (coupons != null && !coupons.isEmpty()) {
+                Map<String, Object> coupon = coupons.get(0);
+                System.out.println("   DEBUG: First Coupon Data: " + coupon);
+
+                Object guidObj = coupon.get("guid");
+                if (guidObj != null) {
+                    String guid = guidObj.toString().trim();
+                    System.out.println("   DEBUG: Extracted GUID: [" + guid + "]");
+                    return guid;
+                }
+            }
+        }
+        System.out.println(
+                "   ERROR: Could not find coupon for " + couponUserType + ". Status: " + response.getStatusCode());
+        return null;
+    }
+
+    @Parameters({ "orderType", "applyCoupon" })
     @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForMember")
-    public void testAddToCart_ForMember(@Optional("home") String orderType) {
-        System.out.println("\n--- AddToCart For Member (Parameter: " + orderType + ") ---");
+    public void testAddToCart_ForMember(@Optional("home") String orderType, @Optional("false") String applyCoupon) {
+        System.out.println(
+                "\n--- AddToCart For Member (Parameter: " + orderType + ", applyCoupon: " + applyCoupon + ") ---");
         System.setProperty("orderType", orderType);
         String token = RequestContext.getMemberToken();
         String userId = RequestContext.getMemberUserId();
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {
+            attachCouponAndLocation(payload, applyCoupon, "prime");
             Response response = callAddToCartAPI(token, payload);
-            validateAddToCartResponse(response, "MEMBER");
+            validateAddToCartResponse(response, "MEMBER", payload);
         }
     }
 
-    @Parameters({ "orderType" })
+    @Parameters({ "orderType", "applyCoupon" })
     @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNonMember")
-    public void testAddToCart_ForNonMember(@Optional("home") String orderType) {
-        System.out.println("\n--- AddToCart For Non-Member (Parameter: " + orderType + ") ---");
+    public void testAddToCart_ForNonMember(@Optional("home") String orderType, @Optional("false") String applyCoupon) {
+        System.out.println(
+                "\n--- AddToCart For Non-Member (Parameter: " + orderType + ", applyCoupon: " + applyCoupon + ") ---");
         System.setProperty("orderType", orderType);
         String token = RequestContext.getNonMemberToken();
         String userId = RequestContext.getNonMemberUserId();
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {
+            attachCouponAndLocation(payload, applyCoupon, "nonPrime");
             Response response = callAddToCartAPI(token, payload);
-            validateAddToCartResponse(response, "NON_MEMBER");
+            validateAddToCartResponse(response, "NON_MEMBER", payload);
         }
     }
 
-    @Parameters({ "orderType" })
+    @Parameters({ "orderType", "applyCoupon" })
     @Test(priority = 9, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNewUser")
-    public void testAddToCart_ForNewUser(@Optional("home") String orderType) {
-        System.out.println("\n--- AddToCart For New User (Parameter: " + orderType + ") ---");
+    public void testAddToCart_ForNewUser(@Optional("home") String orderType, @Optional("false") String applyCoupon) {
+        System.out.println(
+                "\n--- AddToCart For New User (Parameter: " + orderType + ", applyCoupon: " + applyCoupon + ") ---");
         System.setProperty("orderType", orderType);
         String token = RequestContext.getNewUserToken();
         String userId = RequestContext.getNewUserUserId();
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {
+            attachCouponAndLocation(payload, applyCoupon, "nonPrime");
             Response response = callAddToCartAPI(token, payload);
-            validateAddToCartResponse(response, "NEW_USER");
+            validateAddToCartResponse(response, "NEW_USER", payload);
         }
     }
 }
