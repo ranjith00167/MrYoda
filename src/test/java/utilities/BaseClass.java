@@ -389,50 +389,54 @@ public class BaseClass {
     }
 
     public static void waitAndClick(WebElement element, int timeoutInSeconds) {
-        int maxRetries = 3;
-        int retryCount = 0;
-        boolean isClicked = false;
 
-        while (retryCount < maxRetries && !isClicked) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+    int maxRetries = 3;
+    int attempt = 0;
+
+    while (attempt < maxRetries) {
+        try {
+            // Wait until clickable
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+
+            // Scroll element into center
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+
+            Thread.sleep(200); // small stabilization wait
+
             try {
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-
-                // Step 1: Wait until the element is clickable
-                wait.until(ExpectedConditions.elementToBeClickable(element));
-                System.out.println("✅ Element is clickable: " + element);
-
-                // Step 2: Click the element
                 element.click();
-                System.out.println("✅ Clicked the element successfully.");
+                System.out.println("✅ Click successful on attempt " + (attempt + 1));
+                return;
+            } catch (ElementClickInterceptedException e) {
+                System.out.println("⚠ Click intercepted on attempt " + (attempt + 1));
 
-                // Step 3: Optional wait for UI stability
-                Thread.sleep(100); // small wait
-
-                // Step 4: Optional - Post-click condition (customize below if needed)
-                // For example: check for modal/dialog or page change
-                // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("someExpectedElementAfterClick")));
-
-                isClicked = true; // If no exception, assume success
-
-            } catch (Exception e) {
-                retryCount++;
-                System.err.println("❌ Attempt " + retryCount + " failed to click element: " + element);
-                e.printStackTrace();
-
-                if (retryCount == maxRetries) {
-                    throw new RuntimeException(
-                            "Clicking element failed after " + maxRetries + " attempts: " + e.getMessage());
-                }
-
-                try {
-                    Thread.sleep(200); // Wait before retrying
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                }
+                // Wait for possible overlay to disappear
+                Thread.sleep(500);
             }
+
+        } catch (StaleElementReferenceException e) {
+            System.out.println("⚠ Stale element on attempt " + (attempt + 1));
+        } catch (Exception e) {
+            System.out.println("⚠ General click failure on attempt " + (attempt + 1));
         }
+
+        attempt++;
     }
 
+    // Final fallback → JS click
+    try {
+        System.out.println("⚠ Using JS fallback click...");
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", element);
+        System.out.println("✅ JS click successful.");
+    } catch (Exception e) {
+        throw new RuntimeException("❌ Click failed after retries and JS fallback: " + e.getMessage(), e);
+    }
+}
     public static void scrollThenClick(By locator, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
 
