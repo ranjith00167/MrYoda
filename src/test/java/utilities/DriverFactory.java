@@ -33,27 +33,32 @@ public class DriverFactory {
             switch (browserName.toLowerCase()) {
 
                 case "chrome":
-                    WebDriverManager.chromedriver().setup();
+    WebDriverManager.chromedriver().setup();
 
-                    ChromeOptions chromeOptions = new ChromeOptions();
+    ChromeOptions chromeOptions = new ChromeOptions();
 
-                    // ✅ Allow location automatically (no popup)
-                    Map<String, Object> prefs = new HashMap<>();
-                    Map<String, Object> profile = new HashMap<>();
-                    Map<String, Object> contentSettings = new HashMap<>();
+    Map<String, Object> prefs = new HashMap<>();
+    Map<String, Object> profile = new HashMap<>();
+    Map<String, Object> contentSettings = new HashMap<>();
 
-                    contentSettings.put("geolocation", 1); // 1 = Allow, 2 = Block
-                    profile.put("managed_default_content_settings", contentSettings);
-                    prefs.put("profile", profile);
+    contentSettings.put("geolocation", 1);
+    profile.put("managed_default_content_settings", contentSettings);
+    prefs.put("profile", profile);
 
-                    chromeOptions.setExperimentalOption("prefs", prefs);
+    chromeOptions.setExperimentalOption("prefs", prefs);
 
-                    if (isHeadless) {
-                        chromeOptions.addArguments("--headless=new", "--window-size=1920,1080");
-                    }
+    if (isHeadless) {
+        chromeOptions.addArguments("--headless=new");
+        chromeOptions.addArguments("--window-size=1920,1080");
+        chromeOptions.addArguments("--start-maximized");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("--remote-allow-origins=*");
+    }
 
-                    driver.set(new ChromeDriver(chromeOptions));
-                    break;
+    driver.set(new ChromeDriver(chromeOptions));
+    break;
 
                 case "firefox":
 
