@@ -623,7 +623,8 @@ public class CodItDose extends BaseSteps {
                 WebElement btn = driver.findElement(By.id("btnApprovedLabObs"));
                 if (btn.isDisplayed() && btn.isEnabled()) {
                     System.out.println("Clicking approve button (final check)...");
-                    BaseClass.safeClick(btn);
+                    BaseClass.waitAndClick(btn, 10);
+                    System.out.println("Approve button clicked successfully");
                 } else {
                     System.out.println("✅ No visible approve button (already handled by loop).");
                 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class COD_99_TriggerUITest {
 
     @Test
-    public void triggerUIAutomation() {
+    public void triggerUIAutomation() throws Throwable{
 
         System.out.println("\n=======================================================");
         System.out.println(">>> TRIGGERING UI AUTOMATION (Cucumber TestNG Runner) <<<");
@@ -55,5 +55,5 @@ public class COD_99_TriggerUITest {
         }
 
         System.out.println("\n✅ ALL UI AUTOMATION SESSIONS COMPLETED SUCCESSFULLY!");
-    }
+        Thread.sleep(8000);    }
 }
