@@ -301,12 +301,12 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the collect button")
     public void i_click_on_the_collect_button() {
-        BaseClass.safeClick(LocatorsPage.collectButton);
+        BaseClass.waitAndClick(LocatorsPage.collectButton, 10);
     }
 
     @When("I click on the sample receive area")
     public void i_click_on_the_sample_receive_area() {
-        BaseClass.safeClick(LocatorsPage.sampleReceiveAreaLink);
+        BaseClass.waitAndClick(LocatorsPage.sampleReceiveAreaLink, 10);
     }
 
     @When("I extract the SIN NO from the UI")
@@ -363,7 +363,7 @@ public class CodItDose extends BaseSteps {
                         "arguments[0].scrollIntoView({block: 'center'});", LocatorsPage.showIcon);
 
                 // 3. Click with JS Fallback
-                BaseClass.waitAndClickWithJSFallback(LocatorsPage.showIcon, 3);
+                BaseClass.waitAndClick(LocatorsPage.showIcon, 3);
                 System.out.println("✅ Click successful.");
                 return;
             } catch (Exception e) {
@@ -426,12 +426,12 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the save button")
     public void i_click_on_the_save_button() {
-        BaseClass.safeClick(LocatorsPage.saveButton);
+        BaseClass.waitAndClick(LocatorsPage.saveButton, 10);
     }
 
     @When("I click on the Department receive button")
     public void i_click_on_the_department_receive_button() {
-        BaseClass.safeClick(LocatorsPage.departmentReceiveLink);
+        BaseClass.waitAndClick(LocatorsPage.departmentReceiveLink, 10);
     }
 
     @When("I select the SIN NO in the dropdown")
@@ -499,23 +499,23 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the sample receive checkbox")
     public void i_click_on_the_sample_receive_checkbox() {
-        BaseClass.safeClick(LocatorsPage.selectDepartmentCheckbox);
+        BaseClass.waitAndClick(LocatorsPage.selectDepartmentCheckbox, 10);
     }
 
     @When("I click on the receive button")
     public void i_click_on_the_receive_button() throws Throwable {
         Thread.sleep(5000);
-        BaseClass.safeClick(LocatorsPage.receiveButton);
+        BaseClass.waitAndClick(LocatorsPage.receiveButton, 10);
     }
 
     @When("I click on the sample processing button")
     public void i_click_on_the_sample_processing_button() {
-        BaseClass.safeClick(LocatorsPage.sampleProcessingLink);
+        BaseClass.waitAndClick(LocatorsPage.sampleProcessingLink, 10);
     }
 
     @When("I click on the result entry button")
     public void i_click_on_the_result_entry_button() {
-        BaseClass.safeClick(LocatorsPage.resultEntryLink);
+        BaseClass.waitAndClick(LocatorsPage.resultEntryLink, 10);
     }
 
     @When("I enter the value of the tests")
