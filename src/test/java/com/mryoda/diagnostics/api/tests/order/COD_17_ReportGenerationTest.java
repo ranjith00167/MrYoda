@@ -44,7 +44,7 @@ public class COD_17_ReportGenerationTest extends BaseTest {
         for (String visitNumber : visits) {
             LoggerUtil.info("\n" + "=".repeat(60));
             LoggerUtil.info("📄 VALIDATING REPORT FOR VISIT: " + visitNumber);
-            LoggerUtil.info("=".repeat(60));
+            LoggerUtil.info("=".repeat(120));
 
             // Polling Configuration
             int maxRetries = 20;
