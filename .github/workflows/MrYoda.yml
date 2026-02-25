@@ -24,3 +24,10 @@ jobs:
 
       - name: Run Hybrid Tests
         run: mvn test -Dsurefire.suiteXmlFiles=testng_all.xml -Dheadless=true
+
+      - name: Upload Extent Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Extent-Report
+          path: target/ExtentReport/
