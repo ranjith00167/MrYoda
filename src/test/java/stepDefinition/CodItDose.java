@@ -30,7 +30,7 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter valid credentials")
-    public void i_enter_valid_credentials() {
+    public void i_enter_valid_credentials() throws Throwable {
         BaseClass.waitAndInput(LocatorsPage.usernameInput, ConfigReader.get("username_ITDose"), 3);
         BaseClass.waitAndInput(LocatorsPage.passwordInput, ConfigReader.get("password_ITDose"), 3);
         BaseClass.waitAndClick(LocatorsPage.loginButton, 3);
@@ -99,7 +99,7 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter the visit number")
-    public void i_enter_the_visit_number() {
+    public void i_enter_the_visit_number() throws Throwable {
         System.out.println("\n==========================================================");
         System.out.println("🔍 UI AUTOMATION: Retrieving Visit Number from RequestContext");
         System.out.println("==========================================================");
@@ -561,21 +561,36 @@ public class CodItDose extends BaseSteps {
             // 1. Re-enter SIN and Search (Ensure search type is SIN No.)
             System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
             try {
+                WebElement searchBox = LocatorsPage.sinNo_searchBox;
+                BaseClass.waitForVisibility(searchBox, 10);
+                searchBox.clear();
+
                 // EXPLICITLY SELECT SIN No. DROP DOWN
                 try {
                     BaseClass.selectByVisibleText(LocatorsPage.searchTypeDropdown, "SIN No.");
+                    BaseClass.waitInSeconds(1);
                 } catch (Exception e) {
                     System.out.println("⚠️ Could not select 'SIN No.' in dropdown, continuing anyway...");
                 }
 
-                WebElement searchBox = LocatorsPage.sinNo_searchBox;
-                BaseClass.waitForVisibility(searchBox, 10);
-                searchBox.clear();
                 searchBox.sendKeys(sinNo);
+
+                // Check initial count to detect refresh
+                int initialCount = driver
+                        .findElements(
+                                By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"))
+                        .size();
 
                 // Use JS click for search to be sure
                 js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                BaseClass.waitInSeconds(2);
+
+                // Wait for results
+                BaseClass.waitInSeconds(4);
+                int newCount = driver
+                        .findElements(
+                                By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"))
+                        .size();
+                System.out.println("   Search complete. Rows: " + initialCount + " -> " + newCount);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
                 continue;
@@ -598,17 +613,24 @@ public class CodItDose extends BaseSteps {
             // Loop through links to find our target visit
             for (WebElement visit : visitLinks) {
                 visitId = visit.getText().trim();
-                if (targetVisit == null || visitId.equalsIgnoreCase(targetVisit)) {
+                System.out.println("   Checking row: [" + visitId + "]");
+                if (targetVisit == null || visitId.equalsIgnoreCase(targetVisit) || visitId.contains(targetVisit)) {
                     visitToOpen = visit;
                     break;
                 }
             }
 
             if (visitToOpen == null) {
-                System.out.println("⚠️ Target visit " + targetVisit
-                        + " not found in current results. Opening first available as fallback...");
-                visitToOpen = visitLinks.get(0);
-                visitId = visitToOpen.getText().trim();
+                System.out.println("⚠️ Target visit " + targetVisit + " not found in current results.");
+                // Fallback: If after 2 retries it's still missing, refresh the page
+                if (i > 1 && i % 2 == 0) {
+                    System.out.println("🔄 Stale data detected. Refreshing page...");
+                    driver.navigate().refresh();
+                    BaseClass.waitInSeconds(5);
+                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+                    BaseClass.waitInSeconds(3);
+                }
+                continue;
             }
 
             try {

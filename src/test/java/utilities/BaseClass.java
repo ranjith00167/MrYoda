@@ -390,53 +390,54 @@ public class BaseClass {
 
     public static void waitAndClick(WebElement element, int timeoutInSeconds) {
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-    int maxRetries = 3;
-    int attempt = 0;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        int maxRetries = 3;
+        int attempt = 0;
 
-    while (attempt < maxRetries) {
-        try {
-            // Wait until clickable
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-
-            // Scroll element into center
-            ((JavascriptExecutor) driver)
-                    .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
-
-            Thread.sleep(200); // small stabilization wait
-
+        while (attempt < maxRetries) {
             try {
-                element.click();
-                System.out.println("✅ Click successful on attempt " + (attempt + 1));
-                return;
-            } catch (ElementClickInterceptedException e) {
-                System.out.println("⚠ Click intercepted on attempt " + (attempt + 1));
+                // Wait until clickable
+                wait.until(ExpectedConditions.elementToBeClickable(element));
 
-                // Wait for possible overlay to disappear
-                Thread.sleep(500);
+                // Scroll element into center
+                ((JavascriptExecutor) driver)
+                        .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+
+                Thread.sleep(200); // small stabilization wait
+
+                try {
+                    element.click();
+                    System.out.println("✅ Click successful on attempt " + (attempt + 1));
+                    return;
+                } catch (ElementClickInterceptedException e) {
+                    System.out.println("⚠ Click intercepted on attempt " + (attempt + 1));
+
+                    // Wait for possible overlay to disappear
+                    Thread.sleep(500);
+                }
+
+            } catch (StaleElementReferenceException e) {
+                System.out.println("⚠ Stale element on attempt " + (attempt + 1));
+            } catch (Exception e) {
+                System.out.println("⚠ General click failure on attempt " + (attempt + 1));
             }
 
-        } catch (StaleElementReferenceException e) {
-            System.out.println("⚠ Stale element on attempt " + (attempt + 1));
-        } catch (Exception e) {
-            System.out.println("⚠ General click failure on attempt " + (attempt + 1));
+            attempt++;
         }
 
-        attempt++;
+        // Final fallback → JS click
+        try {
+            System.out.println("⚠ Using JS fallback click...");
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();", element);
+            System.out.println("✅ JS click successful.");
+        } catch (Exception e) {
+            throw new RuntimeException("❌ Click failed after retries and JS fallback: " + e.getMessage(), e);
+        }
     }
 
-    // Final fallback → JS click
-    try {
-        System.out.println("⚠ Using JS fallback click...");
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].click();", element);
-        System.out.println("✅ JS click successful.");
-    } catch (Exception e) {
-        throw new RuntimeException("❌ Click failed after retries and JS fallback: " + e.getMessage(), e);
-    }
-}
     public static void scrollThenClick(By locator, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
 
@@ -574,10 +575,11 @@ public class BaseClass {
         }
     }
 
-    public static void waitAndInput(WebElement element, String text, int timeoutInSeconds) {
+    public static void waitAndInput(WebElement element, String text, int timeoutInSeconds) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
+        Thread.sleep(2000);
         element.sendKeys(text);
     }
 
