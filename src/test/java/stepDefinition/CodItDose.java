@@ -30,7 +30,8 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter valid credentials")
-    public void i_enter_valid_credentials() {
+    public void i_enter_valid_credentials()  throws Throwable {
+        
         BaseClass.waitAndInput(LocatorsPage.usernameInput, ConfigReader.get("username_ITDose"), 3);
         BaseClass.waitAndInput(LocatorsPage.passwordInput, ConfigReader.get("password_ITDose"), 3);
         BaseClass.waitAndClick(LocatorsPage.loginButton, 3);
@@ -99,7 +100,7 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter the visit number")
-    public void i_enter_the_visit_number() {
+    public void i_enter_the_visit_number()  throws Throwable{
         System.out.println("\n==========================================================");
         System.out.println("🔍 UI AUTOMATION: Retrieving Visit Number from RequestContext");
         System.out.println("==========================================================");
