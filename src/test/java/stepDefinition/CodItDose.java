@@ -462,6 +462,12 @@ public class CodItDose extends BaseSteps {
 
         for (int i = 0; i < 5; i++) { // Retry up to 5 times
             try {
+                // Ensure search type is set to SIN No.
+                try {
+                    BaseClass.selectByVisibleText(LocatorsPage.departmentSearchTypeDropdown, "SIN No.");
+                } catch (Exception e) {
+                }
+
                 BaseClass.waitForVisibility(input, 10);
                 input.click();
                 input.clear();
@@ -529,7 +535,9 @@ public class CodItDose extends BaseSteps {
             sinNo = RequestContext.getVisitNumber();
         }
 
-        System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
+        String targetVisit = RequestContext.getVisitNumber();
+        System.out.println(
+                ">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo + " (Target Visit: " + targetVisit + ")");
 
         for (int i = 0; i < 15; i++) {
             BaseClass.waitInSeconds(3);
@@ -541,7 +549,6 @@ public class CodItDose extends BaseSteps {
             if (isDetailsPage) {
                 System.out.println("Iteration " + (i + 1) + ": On details page, navigating back to list...");
                 try {
-                    // Try clicking the sidebar link using JS to bypass visibility/menu issues
                     js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
                 } catch (Exception e) {
                     System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
@@ -551,9 +558,16 @@ public class CodItDose extends BaseSteps {
                 BaseClass.waitInSeconds(3);
             }
 
-            // 1. Re-enter SIN and Search
+            // 1. Re-enter SIN and Search (Ensure search type is SIN No.)
             System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
             try {
+                // EXPLICITLY SELECT SIN No. DROP DOWN
+                try {
+                    BaseClass.selectByVisibleText(LocatorsPage.searchTypeDropdown, "SIN No.");
+                } catch (Exception e) {
+                    System.out.println("⚠️ Could not select 'SIN No.' in dropdown, continuing anyway...");
+                }
+
                 WebElement searchBox = LocatorsPage.sinNo_searchBox;
                 BaseClass.waitForVisibility(searchBox, 10);
                 searchBox.clear();
@@ -561,7 +575,7 @@ public class CodItDose extends BaseSteps {
 
                 // Use JS click for search to be sure
                 js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                BaseClass.waitInSeconds(1);
+                BaseClass.waitInSeconds(2);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
                 continue;
@@ -576,14 +590,32 @@ public class CodItDose extends BaseSteps {
                 break;
             }
 
-            System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
-            WebElement visit = visitLinks.get(0);
+            System.out.println("Found " + visitLinks.size() + " pending rows. Looking for Visit: " + targetVisit);
+
+            WebElement visitToOpen = null;
+            String visitId = "";
+
+            // Loop through links to find our target visit
+            for (WebElement visit : visitLinks) {
+                visitId = visit.getText().trim();
+                if (targetVisit == null || visitId.equalsIgnoreCase(targetVisit)) {
+                    visitToOpen = visit;
+                    break;
+                }
+            }
+
+            if (visitToOpen == null) {
+                System.out.println("⚠️ Target visit " + targetVisit
+                        + " not found in current results. Opening first available as fallback...");
+                visitToOpen = visitLinks.get(0);
+                visitId = visitToOpen.getText().trim();
+            }
 
             try {
                 // 3. Open Visit
-                String visitId = visit.getText().trim();
-                js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
-                js.executeScript("arguments[0].click();", visit);
+                System.out.println("Opening visit: " + visitId);
+                js.executeScript("arguments[0].scrollIntoView({block:'center'});", visitToOpen);
+                js.executeScript("arguments[0].click();", visitToOpen);
 
                 // 4. Fill Values
                 wait.until(ExpectedConditions.or(
