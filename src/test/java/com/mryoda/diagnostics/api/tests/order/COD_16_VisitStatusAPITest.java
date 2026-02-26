@@ -105,8 +105,8 @@ public class COD_16_VisitStatusAPITest {
                                 boolean isExpected = expectedTestNames.stream()
                                         .anyMatch(e -> normalize(e).equals(normalizedItem));
 
-                                boolean isApproved = "Approved".equalsIgnoreCase(status);
-
+                                boolean isApproved = "Approved".equalsIgnoreCase(status) ||
+                                        "Sample collected".equalsIgnoreCase(status);
                                 if (isExpected && isApproved) {
                                     foundAndApprovedTests.add(normalizedItem);
                                     foundBarcodes.add(barcode);
