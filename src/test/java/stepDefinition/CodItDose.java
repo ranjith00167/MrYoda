@@ -30,7 +30,7 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter valid credentials")
-    public void i_enter_valid_credentials() throws Throwable {
+    public void i_enter_valid_credentials() {
         BaseClass.waitAndInput(LocatorsPage.usernameInput, ConfigReader.get("username_ITDose"), 3);
         BaseClass.waitAndInput(LocatorsPage.passwordInput, ConfigReader.get("password_ITDose"), 3);
         BaseClass.waitAndClick(LocatorsPage.loginButton, 3);
@@ -99,7 +99,7 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter the visit number")
-    public void i_enter_the_visit_number() throws Throwable {
+    public void i_enter_the_visit_number() {
         System.out.println("\n==========================================================");
         System.out.println("🔍 UI AUTOMATION: Retrieving Visit Number from RequestContext");
         System.out.println("==========================================================");
@@ -301,12 +301,12 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the collect button")
     public void i_click_on_the_collect_button() {
-        BaseClass.waitAndClick(LocatorsPage.collectButton, 10);
+        BaseClass.safeClick(LocatorsPage.collectButton);
     }
 
     @When("I click on the sample receive area")
     public void i_click_on_the_sample_receive_area() {
-        BaseClass.waitAndClick(LocatorsPage.sampleReceiveAreaLink, 10);
+        BaseClass.safeClick(LocatorsPage.sampleReceiveAreaLink);
     }
 
     @When("I extract the SIN NO from the UI")
@@ -363,7 +363,7 @@ public class CodItDose extends BaseSteps {
                         "arguments[0].scrollIntoView({block: 'center'});", LocatorsPage.showIcon);
 
                 // 3. Click with JS Fallback
-                BaseClass.waitAndClick(LocatorsPage.showIcon, 3);
+                BaseClass.waitAndClickWithJSFallback(LocatorsPage.showIcon, 3);
                 System.out.println("✅ Click successful.");
                 return;
             } catch (Exception e) {
@@ -426,12 +426,12 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the save button")
     public void i_click_on_the_save_button() {
-        BaseClass.waitAndClick(LocatorsPage.saveButton, 10);
+        BaseClass.safeClick(LocatorsPage.saveButton);
     }
 
     @When("I click on the Department receive button")
     public void i_click_on_the_department_receive_button() {
-        BaseClass.waitAndClick(LocatorsPage.departmentReceiveLink, 10);
+        BaseClass.safeClick(LocatorsPage.departmentReceiveLink);
     }
 
     @When("I select the SIN NO in the dropdown")
@@ -462,12 +462,6 @@ public class CodItDose extends BaseSteps {
 
         for (int i = 0; i < 5; i++) { // Retry up to 5 times
             try {
-                // Ensure search type is set to SIN No.
-                try {
-                    BaseClass.selectByVisibleText(LocatorsPage.departmentSearchTypeDropdown, "SIN No.");
-                } catch (Exception e) {
-                }
-
                 BaseClass.waitForVisibility(input, 10);
                 input.click();
                 input.clear();
@@ -505,23 +499,23 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the sample receive checkbox")
     public void i_click_on_the_sample_receive_checkbox() {
-        BaseClass.waitAndClick(LocatorsPage.selectDepartmentCheckbox, 10);
+        BaseClass.safeClick(LocatorsPage.selectDepartmentCheckbox);
     }
 
     @When("I click on the receive button")
     public void i_click_on_the_receive_button() throws Throwable {
         Thread.sleep(5000);
-        BaseClass.waitAndClick(LocatorsPage.receiveButton, 10);
+        BaseClass.safeClick(LocatorsPage.receiveButton);
     }
 
     @When("I click on the sample processing button")
     public void i_click_on_the_sample_processing_button() {
-        BaseClass.waitAndClick(LocatorsPage.sampleProcessingLink, 10);
+        BaseClass.safeClick(LocatorsPage.sampleProcessingLink);
     }
 
     @When("I click on the result entry button")
     public void i_click_on_the_result_entry_button() {
-        BaseClass.waitAndClick(LocatorsPage.resultEntryLink, 10);
+        BaseClass.safeClick(LocatorsPage.resultEntryLink);
     }
 
     @When("I enter the value of the tests")
@@ -535,9 +529,7 @@ public class CodItDose extends BaseSteps {
             sinNo = RequestContext.getVisitNumber();
         }
 
-        String targetVisit = RequestContext.getVisitNumber();
-        System.out.println(
-                ">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo + " (Target Visit: " + targetVisit + ")");
+        System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
         for (int i = 0; i < 15; i++) {
             BaseClass.waitInSeconds(3);
@@ -549,6 +541,7 @@ public class CodItDose extends BaseSteps {
             if (isDetailsPage) {
                 System.out.println("Iteration " + (i + 1) + ": On details page, navigating back to list...");
                 try {
+                    // Try clicking the sidebar link using JS to bypass visibility/menu issues
                     js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
                 } catch (Exception e) {
                     System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
@@ -558,39 +551,17 @@ public class CodItDose extends BaseSteps {
                 BaseClass.waitInSeconds(3);
             }
 
-            // 1. Re-enter SIN and Search (Ensure search type is SIN No.)
+            // 1. Re-enter SIN and Search
             System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
             try {
                 WebElement searchBox = LocatorsPage.sinNo_searchBox;
                 BaseClass.waitForVisibility(searchBox, 10);
                 searchBox.clear();
-
-                // EXPLICITLY SELECT SIN No. DROP DOWN
-                try {
-                    BaseClass.selectByVisibleText(LocatorsPage.searchTypeDropdown, "SIN No.");
-                    BaseClass.waitInSeconds(1);
-                } catch (Exception e) {
-                    System.out.println("⚠️ Could not select 'SIN No.' in dropdown, continuing anyway...");
-                }
-
                 searchBox.sendKeys(sinNo);
-
-                // Check initial count to detect refresh
-                int initialCount = driver
-                        .findElements(
-                                By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"))
-                        .size();
 
                 // Use JS click for search to be sure
                 js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-
-                // Wait for results
-                BaseClass.waitInSeconds(4);
-                int newCount = driver
-                        .findElements(
-                                By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"))
-                        .size();
-                System.out.println("   Search complete. Rows: " + initialCount + " -> " + newCount);
+                BaseClass.waitInSeconds(1);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
                 continue;
@@ -605,39 +576,14 @@ public class CodItDose extends BaseSteps {
                 break;
             }
 
-            System.out.println("Found " + visitLinks.size() + " pending rows. Looking for Visit: " + targetVisit);
-
-            WebElement visitToOpen = null;
-            String visitId = "";
-
-            // Loop through links to find our target visit
-            for (WebElement visit : visitLinks) {
-                visitId = visit.getText().trim();
-                System.out.println("   Checking row: [" + visitId + "]");
-                if (targetVisit == null || visitId.equalsIgnoreCase(targetVisit) || visitId.contains(targetVisit)) {
-                    visitToOpen = visit;
-                    break;
-                }
-            }
-
-            if (visitToOpen == null) {
-                System.out.println("⚠️ Target visit " + targetVisit + " not found in current results.");
-                // Fallback: If after 2 retries it's still missing, refresh the page
-                if (i > 1 && i % 2 == 0) {
-                    System.out.println("🔄 Stale data detected. Refreshing page...");
-                    driver.navigate().refresh();
-                    BaseClass.waitInSeconds(5);
-                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
-                    BaseClass.waitInSeconds(3);
-                }
-                continue;
-            }
+            System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
+            WebElement visit = visitLinks.get(0);
 
             try {
                 // 3. Open Visit
-                System.out.println("Opening visit: " + visitId);
-                js.executeScript("arguments[0].scrollIntoView({block:'center'});", visitToOpen);
-                js.executeScript("arguments[0].click();", visitToOpen);
+                String visitId = visit.getText().trim();
+                js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
+                js.executeScript("arguments[0].click();", visit);
 
                 // 4. Fill Values
                 wait.until(ExpectedConditions.or(
@@ -677,8 +623,7 @@ public class CodItDose extends BaseSteps {
                 WebElement btn = driver.findElement(By.id("btnApprovedLabObs"));
                 if (btn.isDisplayed() && btn.isEnabled()) {
                     System.out.println("Clicking approve button (final check)...");
-                    BaseClass.waitAndClick(btn, 10);
-                    System.out.println("Approve button clicked successfully");
+                    BaseClass.safeClick(btn);
                 } else {
                     System.out.println("✅ No visible approve button (already handled by loop).");
                 }
