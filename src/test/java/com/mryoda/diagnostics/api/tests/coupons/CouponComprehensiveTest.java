@@ -46,10 +46,19 @@ public class CouponComprehensiveTest extends BaseTest {
     private String findWorkingCoupon() {
         String userId = RequestContext.getMemberUserId();
         String token = RequestContext.getMemberToken();
-        if (userId == null || token == null)
-            return null;
 
-        System.out.println("📌 Searching for a working coupon for user " + userId + "...");
+        // Fallback to non-member context if member context is null
+        if (userId == null || token == null) {
+            userId = RequestContext.getNonMemberUserId();
+            token = RequestContext.getNonMemberToken();
+        }
+
+        if (userId == null || token == null) {
+            System.out.println("   [WARN] No active user context found (Member or Non-Member).");
+            return null;
+        }
+
+        System.out.println("[INFO] Searching for a working coupon for user " + userId + "...");
         String[] types = { "prime", "nonPrime" };
         for (String type : types) {
             Map<String, String> payload = new HashMap<>();
@@ -59,6 +68,7 @@ public class CouponComprehensiveTest extends BaseTest {
                     .contentType(ContentType.JSON)
                     .body(payload)
                     .post(APIEndpoints.GET_ALL_COUPONS);
+            RequestContext.storeApiPerformance(APIEndpoints.GET_ALL_COUPONS, response.getTime());
 
             if (response.getStatusCode() == 200) {
                 List<Map<String, Object>> coupons = response.jsonPath().getList("data");
@@ -71,13 +81,17 @@ public class CouponComprehensiveTest extends BaseTest {
                         // Try applying to cart
                         Map<String, Object> cartPayload = buildCartPayload(userId, guid, curMin, true);
                         Response cartRes = callAddCart(token, cartPayload);
+                        RequestContext.storeApiPerformance(APIEndpoints.ADD_TO_CART, cartRes.getTime());
                         System.out.println("   -> Applying coupon " + guid + " to cart... AddCart Status: "
                                 + cartRes.getStatusCode());
                         if (cartRes.getStatusCode() == 200 || cartRes.getStatusCode() == 201) {
-                            Map<String, Object> res = callGetCart(token, userId).jsonPath().getMap("data.couponResult");
+                            Response getCartResponse = callGetCart(token, userId);
+                            RequestContext.storeApiPerformance(APIEndpoints.GET_CART_BY_ID, getCartResponse.getTime());
+                            Map<String, Object> res = getCartResponse.jsonPath().getMap("data.couponResult");
 
                             if (res != null && Boolean.TRUE.equals(res.get("valid"))) {
-                                System.out.println("   ✅ Found WORKING coupon: " + guid + " (Type: " + type + ")");
+                                System.out.println(
+                                        "   [SUCCESS] Found WORKING coupon: " + guid + " (Type: " + type + ")");
                                 minOrderAmount = curMin;
                                 return guid;
                             } else {
@@ -109,14 +123,16 @@ public class CouponComprehensiveTest extends BaseTest {
 
         Map<String, Object> payload = buildCartPayload(userId, validCouponGuid, minOrderAmount, true);
         Response addResponse = callAddCart(token, payload);
+        RequestContext.storeApiPerformance(APIEndpoints.ADD_TO_CART, addResponse.getTime());
         AssertionUtil.verifyStatusCode(addResponse, 200);
 
         Response getCart = callGetCart(token, userId);
+        RequestContext.storeApiPerformance(APIEndpoints.GET_CART_BY_ID, getCart.getTime());
         Map<String, Object> couponResult = getCart.jsonPath().getMap("data.couponResult");
         Assert.assertNotNull(couponResult, "couponResult missing");
         Assert.assertTrue((Boolean) couponResult.get("valid"),
                 "Coupon should be valid. Error: " + couponResult.get("msg"));
-        System.out.println("   ✅ TC_CPN_012 passed. Discount: " + couponResult.get("discount_amount"));
+        System.out.println("   [SUCCESS] TC_CPN_012 passed. Discount: " + couponResult.get("discount_amount"));
     }
 
     @Test(priority = 13, description = "TC_CPN_013: Apply expired coupon")
@@ -256,7 +272,7 @@ public class CouponComprehensiveTest extends BaseTest {
         System.out.println("   Cart API Total: " + totalPrice);
 
         AssertionUtil.verifyEquals(totalPrice.doubleValue(), expectedTotal, "Total Price Calculation");
-        System.out.println("   ✅ Price subtraction verified.");
+        System.out.println("   [SUCCESS] Price subtraction verified.");
     }
 
     @Test(priority = 17, description = "TC_CPN_017: Validate remaining payable after coupon")
@@ -581,7 +597,9 @@ public class CouponComprehensiveTest extends BaseTest {
         for (Map<String, Object> c : coupons) {
             Instant end = parseInstant(c.get("end_date"));
             if (end != null && end.isBefore(now)) {
-                throw new SkipException("API returned expired coupon due to delayed cleanup in staging environment. Guid: " + c.get("guid"));
+                throw new SkipException(
+                        "API returned expired coupon due to delayed cleanup in staging environment. Guid: "
+                                + c.get("guid"));
             }
         }
     }
@@ -1074,4 +1092,3 @@ public class CouponComprehensiveTest extends BaseTest {
         return selected;
     }
 }
-

@@ -16,6 +16,28 @@ import java.util.Map;
 
 public class SlotAndCartUpdateAPITest extends BaseTest {
 
+    private String resolveCouponGuidForUserType(String userType) {
+        switch (userType) {
+            case "MEMBER":
+                if (!RequestContext.isMemberCouponFlowEnabled()) {
+                    return null;
+                }
+                return RequestContext.getMemberCouponGuid();
+            case "NON_MEMBER":
+                if (!RequestContext.isNonMemberCouponFlowEnabled()) {
+                    return null;
+                }
+                return RequestContext.getNonMemberCouponGuid();
+            case "NEW_USER":
+                if (!RequestContext.isNewUserCouponFlowEnabled()) {
+                    return null;
+                }
+                return RequestContext.getNewUserCouponGuid();
+            default:
+                return null;
+        }
+    }
+
     // -------------------------------
     // HELPER: Find Available Slot
     // -------------------------------
@@ -145,6 +167,11 @@ public class SlotAndCartUpdateAPITest extends BaseTest {
         payload.put("slot_guid", slotGuid);
         payload.put("lab_location_id", labLocationId);
         payload.put("order_type", "home");
+        String couponGuid = resolveCouponGuidForUserType(userType);
+        if (couponGuid != null && !couponGuid.trim().isEmpty()) {
+            payload.put("coupon_guid", couponGuid);
+            System.out.println("   ✅ Re-attached coupon_guid for " + userType + ": " + couponGuid);
+        }
         Response response = new RequestBuilder()
                 .setEndpoint(APIEndpoints.ADD_TO_CART)
                 .addHeader("Authorization", token)

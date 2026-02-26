@@ -20,27 +20,45 @@
                 </methods>
             </class>
 
+            <!-- Tests & Packages -->
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
-                <methods>
-                    <include name="testGetLocations_ForMember"/>
-                </methods>
+                <methods><include name="testGetLocations_ForMember"/></methods>
             </class>
-
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
-                <methods>
-                    <include name="testGetBrands_ForMember"/>
-                </methods>
+                <methods><include name="testGetBrands_ForMember"/></methods>
             </class>
-
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
-                <methods>
-                    <include name="testGlobalSearch_ForMember"/>
-                </methods>
+                <methods><include name="testGlobalSearch_ForMember"/></methods>
             </class>
-
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            
+            <!-- Add to Cart -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForMember"/></methods>
+            </class>
+            
+            <!-- Coupon Validations -->
             <class name="com.mryoda.diagnostics.api.tests.coupons.CouponValidationTest"/>
             <class name="com.mryoda.diagnostics.api.tests.coupons.CouponComprehensiveTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.coupons.MemberCouponAdminFlowTest"/>
+            
+            <!-- E2E COD Flow -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_06_PhlebotomistLoginTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_07_AssignOrderTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_08_VerifyStatusAssignedTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_09_UpdateOrderTrackingTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_10_FinalVerificationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_11_AdminVerifyOtpTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.COD_12_GetSampleTypeTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_13_UpdateStatusSamplesCollectedTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_14_VerifySamplesCollectedStatusTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
         </classes>
     </test>
 
@@ -58,28 +76,106 @@
                     <include name="testLoginWithOTP"/>
                 </methods>
             </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
 
+            <!-- Tests & Packages -->
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
-                <methods>
-                    <include name="testGetLocations_ForNonMember"/>
-                </methods>
+                <methods><include name="testGetLocations_ForNonMember"/></methods>
             </class>
-
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
-                <methods>
-                    <include name="testGetBrands_ForNonMember"/>
-                </methods>
+                <methods><include name="testGetBrands_ForNonMember"/></methods>
             </class>
-
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
-                <methods>
-                    <include name="testGlobalSearch_ForNonMember"/>
-                </methods>
+                <methods><include name="testGlobalSearch_ForNonMember"/></methods>
             </class>
-
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            
+            <!-- Add to Cart -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForNonMember"/></methods>
+            </class>
+            
+            <!-- Coupon Validations -->
             <class name="com.mryoda.diagnostics.api.tests.coupons.CouponValidationTest"/>
             <class name="com.mryoda.diagnostics.api.tests.coupons.CouponComprehensiveTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.coupons.MemberCouponAdminFlowTest"/>
+            
+            <!-- E2E COD Flow -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_06_PhlebotomistLoginTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_07_AssignOrderTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_08_VerifyStatusAssignedTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_09_UpdateOrderTrackingTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_10_FinalVerificationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_11_AdminVerifyOtpTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.COD_12_GetSampleTypeTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_13_UpdateStatusSamplesCollectedTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_14_VerifySamplesCollectedStatusTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+
+    <!-- NEW USER FLOW -->
+    <test name="New User Full Coupon Validation" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+        <parameter name="flowType" value="full"/>
+        <parameter name="applyCoupon" value="true"/>
+        <parameter name="orderType" value="home"/>
+
+        <classes>
+            <!-- User Registration & Login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods><include name="testUserRegistration_CreateNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP_NewlyRegisteredUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            
+            <!-- Add to Cart -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForNewUser"/></methods>
+            </class>
+            
+            <!-- Coupon Validations -->
+            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponValidationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponComprehensiveTest"/>
+            
+            <!-- E2E COD Flow -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_06_PhlebotomistLoginTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_07_AssignOrderTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_08_VerifyStatusAssignedTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_09_UpdateOrderTrackingTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_10_FinalVerificationTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_11_AdminVerifyOtpTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.COD_12_GetSampleTypeTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_13_UpdateStatusSamplesCollectedTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_14_VerifySamplesCollectedStatusTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
         </classes>
     </test>
 </suite>

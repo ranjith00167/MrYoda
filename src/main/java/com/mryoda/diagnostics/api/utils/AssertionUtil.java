@@ -61,7 +61,7 @@ public class AssertionUtil {
                 if (i < expectedStatusCodes.length - 1)
                     expectedStr.append("/");
             }
-            throw new AssertionError("❌ Status code mismatch — expected: "
+            throw new AssertionError("[ERROR] Status code mismatch — expected: "
                     + expectedStr.toString() + " but found: " + actualStatusCode);
         }
         LoggerUtil.info("Status Code Verified: " + actualStatusCode);
@@ -73,9 +73,9 @@ public class AssertionUtil {
     public static void verifyErrorStatus(Response response, String context) {
         int status = response.getStatusCode();
         if (status < 400 || status >= 500) {
-            throw new AssertionError("❌ " + context + " mismatch — expected: 4xx Error but found: " + status);
+            throw new AssertionError("[ERROR] " + context + " mismatch — expected: 4xx Error but found: " + status);
         }
-        LoggerUtil.info("✔ " + context + " error status verified: " + status);
+        LoggerUtil.info("[SUCCESS] " + context + " error status verified: " + status);
     }
 
     /**
@@ -90,29 +90,29 @@ public class AssertionUtil {
 
     public static void verifyNotNull(Object value, String fieldName) {
         if (value == null) {
-            throw new AssertionError("❌ " + fieldName + " should NOT be NULL");
+            throw new AssertionError("[ERROR] " + fieldName + " should NOT be NULL");
         }
-        LoggerUtil.info("✔ " + fieldName + " is valid: " + value);
+        LoggerUtil.info("[SUCCESS] " + fieldName + " is valid: " + value);
     }
 
     public static void verifyEquals(Object actual, Object expected, String fieldName) {
         if (actual == null || expected == null) {
-            throw new AssertionError("❌ " + fieldName + " comparison failed — NULL value found");
+            throw new AssertionError("[ERROR] " + fieldName + " comparison failed — NULL value found");
         }
 
         if (!actual.equals(expected)) {
-            throw new AssertionError("❌ " + fieldName + " mismatch — expected: "
+            throw new AssertionError("[ERROR] " + fieldName + " mismatch — expected: "
                     + expected + " but found: " + actual);
         }
 
-        LoggerUtil.info("✔ " + fieldName + " is correct: " + actual);
+        LoggerUtil.info("[SUCCESS] " + fieldName + " is correct: " + actual);
     }
 
     public static void verifyNotNull(String value, String fieldName) {
         if (value == null || value.trim().isEmpty()) {
-            throw new AssertionError("❌ " + fieldName + " should NOT be NULL or EMPTY");
+            throw new AssertionError("[ERROR] " + fieldName + " should NOT be NULL or EMPTY");
         }
-        LoggerUtil.info("✔ " + fieldName + " is valid: " + value);
+        LoggerUtil.info("[SUCCESS] " + fieldName + " is valid: " + value);
     }
 
     /**
@@ -210,10 +210,10 @@ public class AssertionUtil {
      */
     public static void verifyTrue(boolean condition, String message) {
         if (!condition) {
-            LoggerUtil.error("❌ Validation Failed: " + message);
-            throw new AssertionError("❌ " + message + " - Condition is FALSE");
+            LoggerUtil.error("[ERROR] Validation Failed: " + message);
+            throw new AssertionError("[ERROR] " + message + " - Condition is FALSE");
         }
-        LoggerUtil.info("✔ " + message + " - Condition is TRUE");
+        LoggerUtil.info("[SUCCESS] " + message + " - Condition is TRUE");
     }
 
     /**
@@ -221,10 +221,10 @@ public class AssertionUtil {
      */
     public static void verifyFalse(boolean condition, String message) {
         if (condition) {
-            LoggerUtil.error("❌ Validation Failed: " + message);
-            throw new AssertionError("❌ " + message + " - Condition is TRUE (expected FALSE)");
+            LoggerUtil.error("[ERROR] Validation Failed: " + message);
+            throw new AssertionError("[ERROR] " + message + " - Condition is TRUE (expected FALSE)");
         }
-        LoggerUtil.info("✔ " + message + " - Condition is FALSE");
+        LoggerUtil.info("[SUCCESS] " + message + " - Condition is FALSE");
     }
 
     public static void softVerifyJsonFieldValue(Response response, String fieldPath, Object expectedValue) {

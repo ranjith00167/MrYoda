@@ -20,6 +20,57 @@ public class RequestContext {
     private static String expectedAddressName;
     private static String expectedSlotTimeString;
     private static String expectedSlotDate;
+    private static String memberCouponGuid;
+    private static String nonMemberCouponGuid;
+    private static String newUserCouponGuid;
+    private static boolean memberCouponFlowEnabled;
+    private static boolean nonMemberCouponFlowEnabled;
+    private static boolean newUserCouponFlowEnabled;
+
+    public static void clearFlowState() {
+        System.out.println("\n[CLEANING] RequestContext Flow State...");
+        visitNumber = null;
+        currentOrderId = null;
+        currentPaymentId = null;
+        currentOrderTrackingId = null;
+        currentPhleboGuid = null;
+        currentSlotGuid = null;
+        currentCartId = null;
+        currentAddressGuid = null;
+        currentAddressId = null;
+
+        if (currentOrderIds != null)
+            currentOrderIds.clear();
+        if (currentOrderTrackingIds != null)
+            currentOrderTrackingIds.clear();
+        if (currentVisitNumbers != null)
+            currentVisitNumbers.clear();
+        if (orderVisitMap != null)
+            orderVisitMap.clear();
+        if (visitSinMap != null)
+            visitSinMap.clear();
+
+        currentTotalPrice = 0;
+        currentSampleType = null;
+        activeProductDetails = null;
+        if (expectedPatientDetails != null)
+            expectedPatientDetails.clear();
+        expectedAddressName = null;
+        expectedSlotTimeString = null;
+        expectedSlotDate = null;
+
+        clearAllTests();
+        clearExpectedTestResults();
+        couponAmount = 0.0;
+        memberCouponGuid = null;
+        nonMemberCouponGuid = null;
+        newUserCouponGuid = null;
+        memberCouponFlowEnabled = false;
+        nonMemberCouponFlowEnabled = false;
+        newUserCouponFlowEnabled = false;
+
+        System.out.println("[SUCCESS] RequestContext State Successfully Cleared.");
+    }
 
     public static void storeExpectedPatient(String guid, String name) {
         Map<String, String> patient = new HashMap<>();
@@ -872,6 +923,57 @@ public class RequestContext {
         return newUserCartItems;
     }
 
+    // ============================================================
+    // COUPON STORAGE (Separate for each user type)
+    // ============================================================
+    public static void setMemberCouponGuid(String couponGuid) {
+        memberCouponGuid = couponGuid;
+    }
+
+    public static String getMemberCouponGuid() {
+        return memberCouponGuid;
+    }
+
+    public static void setMemberCouponFlowEnabled(boolean enabled) {
+        memberCouponFlowEnabled = enabled;
+    }
+
+    public static boolean isMemberCouponFlowEnabled() {
+        return memberCouponFlowEnabled;
+    }
+
+    public static void setNonMemberCouponGuid(String couponGuid) {
+        nonMemberCouponGuid = couponGuid;
+    }
+
+    public static String getNonMemberCouponGuid() {
+        return nonMemberCouponGuid;
+    }
+
+    public static void setNonMemberCouponFlowEnabled(boolean enabled) {
+        nonMemberCouponFlowEnabled = enabled;
+    }
+
+    public static boolean isNonMemberCouponFlowEnabled() {
+        return nonMemberCouponFlowEnabled;
+    }
+
+    public static void setNewUserCouponGuid(String couponGuid) {
+        newUserCouponGuid = couponGuid;
+    }
+
+    public static String getNewUserCouponGuid() {
+        return newUserCouponGuid;
+    }
+
+    public static void setNewUserCouponFlowEnabled(boolean enabled) {
+        newUserCouponFlowEnabled = enabled;
+    }
+
+    public static boolean isNewUserCouponFlowEnabled() {
+        return newUserCouponFlowEnabled;
+    }
+
     // Legacy methods for backward compatibility
     public static void storeCartId(String id) {
         memberCartId = id;
@@ -1237,7 +1339,7 @@ public class RequestContext {
      * Shows average, max, and call count for each endpoint.
      */
     public static void printPerformanceSummary() {
-        System.out.println("\n📊 === COMPREHENSIVE API PERFORMANCE SUMMARY === 📊");
+        System.out.println("\n[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===");
         if (apiPerformanceMetrics.isEmpty()) {
             System.out.println("   No performance data recorded.");
         } else {
@@ -1247,7 +1349,7 @@ public class RequestContext {
                 long avg = total / count;
                 long max = times.stream().mapToLong(Long::longValue).max().orElse(0);
 
-                String emoji = avg < 1000 ? "⚡" : (avg < 5000 ? "🐢" : "🐌");
+                String emoji = avg < 1000 ? "[FAST]" : (avg < 5000 ? "[SLOW]" : "[VERY SLOW]");
 
                 System.out.printf("   %-80s\n", endpoint);
                 System.out.printf("   > Status: %s | Avg: %d ms | Max: %d ms | Calls: %d\n",
@@ -1378,5 +1480,16 @@ public class RequestContext {
 
     public static void setPackageTestCount(int count) {
         packageTestCount.set(count);
+    }
+
+    private static double couponAmount = 0.0;
+
+    public static void setCouponAmount(double amount) {
+        couponAmount = amount;
+        System.out.println(">>> RequestContext: Stored Coupon Discount: ₹" + amount);
+    }
+
+    public static double getCouponAmount() {
+        return couponAmount;
     }
 }

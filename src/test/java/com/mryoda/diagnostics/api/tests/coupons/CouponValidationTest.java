@@ -5,7 +5,9 @@ import com.mryoda.diagnostics.api.endpoints.APIEndpoints;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import com.mryoda.diagnostics.api.utils.RequestContext;
 import org.testng.Assert;
+
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -28,13 +30,14 @@ public class CouponValidationTest extends BaseTest {
                 .post(APIEndpoints.GET_ALL_COUPONS);
 
         System.out.println("Response Status: " + response.getStatusCode());
+        RequestContext.storeApiPerformance(APIEndpoints.GET_ALL_COUPONS, response.getTime());
 
         Assert.assertEquals(response.getStatusCode(), 200, "Expected status code 200 for Prime coupons");
 
         Object data = response.jsonPath().get("data");
         if (data instanceof List) {
             List<Map<String, Object>> coupons = (List<Map<String, Object>>) data;
-            System.out.println("✅ Coupons found: " + coupons.size());
+            System.out.println("[SUCCESS] Coupons found: " + coupons.size());
             Assert.assertFalse(coupons.isEmpty(), "Coupons list should not be empty for Prime");
 
             // Validate fields for each coupon
@@ -69,6 +72,7 @@ public class CouponValidationTest extends BaseTest {
                 .post(APIEndpoints.GET_ALL_COUPONS);
 
         System.out.println("Response Status: " + response.getStatusCode());
+        RequestContext.storeApiPerformance(APIEndpoints.GET_ALL_COUPONS, response.getTime());
 
         Assert.assertEquals(response.getStatusCode(), 200,
                 "Expected status code 200 for NonPrime coupons. Response: " + response.getBody().asString());
@@ -76,7 +80,7 @@ public class CouponValidationTest extends BaseTest {
         Object data = response.jsonPath().get("data");
         if (data instanceof List) {
             List<Map<String, Object>> coupons = (List<Map<String, Object>>) data;
-            System.out.println("✅ Coupons found: " + coupons.size());
+            System.out.println("[SUCCESS] Coupons found: " + coupons.size());
             Assert.assertFalse(coupons.isEmpty(), "Coupons list should not be empty for NonPrime");
 
             for (Map<String, Object> coupon : coupons) {
@@ -104,6 +108,10 @@ public class CouponValidationTest extends BaseTest {
                 .post(APIEndpoints.GET_ALL_COUPONS);
 
         System.out.println("Status: " + response.getStatusCode());
+        if (response.getStatusCode() != 200) {
+            System.out.println("Response: " + response.getBody().asString());
+        }
+        RequestContext.storeApiPerformance(APIEndpoints.GET_ALL_COUPONS, response.getTime());
 
         if (response.getStatusCode() == 200) {
             Object data = response.jsonPath().get("data");
@@ -127,6 +135,10 @@ public class CouponValidationTest extends BaseTest {
                 .post(APIEndpoints.GET_ALL_COUPONS);
 
         System.out.println("Status: " + response.getStatusCode());
+        if (response.getStatusCode() != 200) {
+            System.out.println("Response: " + response.getBody().asString());
+        }
+        RequestContext.storeApiPerformance(APIEndpoints.GET_ALL_COUPONS, response.getTime());
         Assert.assertNotEquals(response.getStatusCode(), 200, "Should not return success for empty user type");
     }
 }

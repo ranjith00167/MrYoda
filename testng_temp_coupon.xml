@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Temp Coupon Suite">
+    <test name="NonMember Coupon Test">
+        <parameter name="userType" value="nonmember"/>
+        <parameter name="applyCoupon" value="true"/>
+        <parameter name="orderType" value="home"/>
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLoginWithOTP_NonMember"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods>
+                    <include name="testGetLocations_ForNonMember"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods>
+                    <include name="testGetBrands_ForNonMember"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods>
+                    <include name="testGlobalSearch_ForNonMember"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods>
+                    <include name="testAddToCart_ForNonMember"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+        </classes>
+    </test>
+</suite>

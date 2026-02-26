@@ -17,5 +17,6 @@
         <suite-file path="testng_home_new_user_family_flow.xml" />
         <suite-file path="testng_coupon_member_nonmember_full.xml" />
         <suite-file path="testng_coupon_34_scenarios.xml" />
+        <suite-file path="testng_new_user_cod_coupon_validation.xml" />
     </suite-files>
 </suite>
