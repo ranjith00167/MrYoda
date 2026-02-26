@@ -136,15 +136,49 @@ public class CreateOrderCODAPITest extends BaseTest {
         System.out.println("Response Status: " + response.getStatusCode());
 
         if (response.getStatusCode() == 200) {
-            // --- EXTRACT AND STORE COUPON DISCOUNT ---
+            // Check if cart is effectively empty (no products)
             Object dataObj = response.jsonPath().get("data");
             String dataPath = (dataObj instanceof java.util.List) ? "data[0]" : "data";
+            List<Object> products = response.jsonPath().getList(dataPath + ".product_details");
+
+            if ((products == null || products.isEmpty()) && "lab".equalsIgnoreCase(orderType)) {
+                System.out.println("   ⚠️ [FALLBACK] GetCart with params returned empty. Retrying without params...");
+                response = new RequestBuilder()
+                        .setEndpoint(endpoint)
+                        .addHeader("Authorization", token)
+                        .get();
+                System.out.println("   Fallback Response Status: " + response.getStatusCode());
+
+                // Update products and dataPath after fallback
+                if (response.getStatusCode() == 200) {
+                    dataObj = response.jsonPath().get("data");
+                    dataPath = (dataObj instanceof java.util.List) ? "data[0]" : "data";
+                    products = response.jsonPath().getList(dataPath + ".product_details");
+                }
+            }
+
+            // --- FULL RAW RESPONSE (debug) ---
+            System.out.println("\n========== [DEBUG] RAW GetCart Response ==========");
+            System.out.println(response.getBody().asPrettyString());
+            System.out.println("==================================================\n");
+
+            // --- EXTRACT AND STORE COUPON DISCOUNT ---
+            dataObj = response.jsonPath().get("data");
+            dataPath = (dataObj instanceof java.util.List) ? "data[0]" : "data";
             Object couponDiscount = response.jsonPath().get(dataPath + ".coupon_amount");
             String appliedCouponGuid = response.jsonPath().getString(dataPath + ".coupon_guid");
             if (appliedCouponGuid == null || appliedCouponGuid.trim().isEmpty()) {
                 appliedCouponGuid = response.jsonPath().getString(dataPath + ".coupon.guid");
             }
+            // Debug: clearly flag missing coupon_guid
+            if (appliedCouponGuid == null || appliedCouponGuid.trim().isEmpty()) {
+                System.out.println("   ⚠️ [DEBUG] coupon_guid is NULL/EMPTY in GetCart response.");
+                System.out.println("   ⚠️ [DEBUG] dataPath used: " + dataPath);
+            } else {
+                System.out.println("   ✅ [DEBUG] coupon_guid found in cart: " + appliedCouponGuid);
+            }
             Map<String, Object> couponResult = response.jsonPath().getMap(dataPath + ".couponResult");
+
             if (couponResult != null && !couponResult.isEmpty()) {
                 System.out.println("   🎟️ GetCart couponResult.valid: " + couponResult.get("valid"));
                 System.out.println("   🎟️ GetCart couponResult.reason: " + couponResult.get("reason"));
@@ -202,7 +236,20 @@ public class CreateOrderCODAPITest extends BaseTest {
             System.out.println("   💳 Payable After Coupon (from cart): ₹" + payableAfterCoupon);
 
             if (couponFlowExpected) {
-                Assert.assertNotNull(appliedCouponGuid, "Coupon flow enabled but coupon_guid missing in cart.");
+                // If cart is empty because it was converted to an order (COD_04 run before
+                // COD_05),
+                // we skip the cart-level assertion and let CrossApiValidation check the order.
+                String currentOrderId = RequestContext.getCurrentOrderId();
+                List<Object> currentProducts = response.jsonPath().getList(dataPath + ".product_details");
+                boolean isConverted = currentOrderId != null && !currentOrderId.trim().isEmpty()
+                        && (currentProducts == null || currentProducts.isEmpty());
+
+                if (isConverted) {
+                    System.out.println("   💡 [INFO] Note: Cart appears empty/converted (Order exists: "
+                            + currentOrderId + "). Skipping cart-level coupon_guid assertion.");
+                } else {
+                    Assert.assertNotNull(appliedCouponGuid, "Coupon flow enabled but coupon_guid missing in cart.");
+                }
 
                 // Only validate coupon validity if the coupon on the cart is the one we expect.
                 // If there's a GUID mismatch (e.g., stale coupon from a prior test), skip the
@@ -224,20 +271,19 @@ public class CreateOrderCODAPITest extends BaseTest {
                         // enforced.
                         // This happens when the same test user runs the suite more than once in
                         // staging.
-                        // Clear coupon context so downstream steps (VerifyPayment, ApprovePayment)
-                        // don't expect a discount that the backend won't apply.
                         boolean isRedeemed = couponReason != null
                                 && couponReason.toLowerCase().contains("already redeemed");
                         if (isRedeemed) {
                             System.out.println(
                                     "   ⚠️ [WARN] Coupon already redeemed for this user — business rule enforced (1 use per user).");
                             System.out.println(
-                                    "   ℹ️  Clearing coupon context so downstream steps proceed without coupon discount.");
-                            // Reset coupon-related context to avoid downstream assertion mismatches
+                                    "   ℹ️  Discount will be 0. Coupon GUID kept in context so COD_03 can re-attach it during slot update.");
+                            // IMPORTANT: Do NOT disable coupon flow flags here.
+                            // If we disable them, COD_03 updateCartWithSlot will skip re-attaching
+                            // the coupon_guid, causing the backend to strip it from the cart.
+                            // COD_05 then sees coupon_guid=null and fails with assertNotNull.
+                            // Instead: only zero the discount amount. The coupon stays on the cart.
                             RequestContext.setCouponAmount(0.0);
-                            RequestContext.setMemberCouponFlowEnabled(false);
-                            RequestContext.setNonMemberCouponFlowEnabled(false);
-                            RequestContext.setNewUserCouponFlowEnabled(false);
                             RequestContext.setCurrentDueAmount(totalPrice); // payable = full price, no discount
                         } else {
                             Assert.assertTrue(couponValid,

@@ -400,6 +400,10 @@ public class RequestContext {
         selectedLocationId = id;
     }
 
+    public static void setSelectedLocationId(String id) {
+        selectedLocationId = id;
+    }
+
     public static String getSelectedLocationId() {
         return selectedLocationId;
     }
@@ -1491,5 +1495,15 @@ public class RequestContext {
 
     public static double getCouponAmount() {
         return couponAmount;
+    }
+
+    private static List<String> memberIds;
+
+    public static void setMemberIds(List<String> ids) {
+        memberIds = ids;
+    }
+
+    public static List<String> getMemberIds() {
+        return memberIds;
     }
 }

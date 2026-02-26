@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Coupon Split Validation Suite" verbose="2">
+    <test name="Coupon Split Verification" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <parameter name="flowType" value="full"/>
+        <parameter name="orderType" value="lab"/>
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.AddFamilyMemberTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponMultiMemberTest"/>
+        </classes>
+    </test>
+</suite>

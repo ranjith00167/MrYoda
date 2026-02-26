@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="E2E Lab Order Coupon Flow - Member + NonMember + New User" verbose="2" parallel="none">
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ================================================================ -->
+    <!-- FLOW 1: MEMBER (Prime User) - Lab Visit with Prime Coupon        -->
+    <!-- ================================================================ -->
+    <test name="Member Lab Order Coupon Flow" preserve-order="true">
+        <parameter name="userType"    value="member"/>
+        <parameter name="flowType"    value="full"/>
+        <parameter name="applyCoupon" value="true"/>
+        <parameter name="orderType"   value="lab"/>
+
+        <classes>
+            <!-- Step 1: Login MEMBER ONLY -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLoginWithOTP"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Step 2: Location, Brand, Search -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+
+            <!-- Step 3: Add to Cart (Lab) with Prime Coupon -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForMember"/></methods>
+            </class>
+
+            <!-- Step 4: Get Cart & Verify -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+
+            <!-- Step 5: Lab Slot (no address needed for lab visit) -->
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddLabSlotTest"/>
+
+            <!-- Step 6: Verify Payment Pre-Check & Cross-API Validation -->
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+
+            <!-- Step 7: Rewards Check (before payment) -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_A_VerifyInitialRewards"/>
+                </methods>
+            </class>
+
+            <!-- Step 8: Approve Payment (Lab order - no phlebo assignment needed) -->
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+
+            <!-- Step 9: Rewards Check (after payment) -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_B_VerifyRewardsGain"/>
+                    <include name="step18_C_VerifyFinalRewardsBalance"/>
+                </methods>
+            </class>
+
+            <!-- Step 10: UI, Visit Status, Report -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+
+    <!-- ================================================================ -->
+    <!-- FLOW 2: NON-MEMBER (NonPrime) - Lab Visit with NonPrime Coupon   -->
+    <!-- ================================================================ -->
+    <test name="NonMember Lab Order Coupon Flow" preserve-order="true">
+        <parameter name="userType"    value="nonmember"/>
+        <parameter name="flowType"    value="full"/>
+        <parameter name="applyCoupon" value="true"/>
+        <parameter name="orderType"   value="lab"/>
+
+        <classes>
+            <!-- Step 1: Login NON-MEMBER ONLY -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLoginWithOTP_NonMember"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Step 2: Location, Brand, Search -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForNonMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForNonMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForNonMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+
+            <!-- Step 3: Add to Cart (Lab) with NonPrime Coupon -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForNonMember"/></methods>
+            </class>
+
+            <!-- Step 4: Get Cart & Verify -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+
+            <!-- Step 5: Lab Slot -->
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddLabSlotTest"/>
+
+            <!-- Step 6: Verify Payment Pre-Check & Cross-API Validation -->
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+
+            <!-- Step 7: Rewards Check (before payment - will skip for non-member) -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_A_VerifyInitialRewards"/>
+                </methods>
+            </class>
+
+            <!-- Step 8: Approve Payment -->
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+
+            <!-- Step 9: Rewards Check (after payment - will skip for non-member) -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_B_VerifyRewardsGain"/>
+                    <include name="step18_C_VerifyFinalRewardsBalance"/>
+                </methods>
+            </class>
+
+            <!-- Step 10: UI, Visit Status, Report -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+
+    <!-- ================================================================ -->
+    <!-- FLOW 3: NEW USER - Lab Visit with NonPrime Coupon                -->
+    <!-- ================================================================ -->
+    <test name="New User Lab Order Coupon Flow" preserve-order="true">
+        <parameter name="userType"    value="new_user"/>
+        <parameter name="flowType"    value="full"/>
+        <parameter name="applyCoupon" value="true"/>
+        <parameter name="orderType"   value="lab"/>
+
+        <classes>
+            <!-- Step 0: Register New User -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods><include name="testUserRegistration_CreateNewUser"/></methods>
+            </class>
+
+            <!-- Step 1: Login NEW USER ONLY -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLoginWithOTP_NewlyRegisteredUser"/>
+                </methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Step 2: Location, Brand, Search -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+
+            <!-- Step 3: Add to Cart (Lab) with NonPrime Coupon -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForNewUser"/></methods>
+            </class>
+
+            <!-- Step 4: Get Cart & Verify -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+
+            <!-- Step 5: Lab Slot -->
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddLabSlotTest"/>
+
+            <!-- Step 6: Verify Payment Pre-Check & Cross-API Validation -->
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+
+            <!-- Step 7: Rewards Check (before payment - will skip for new user) -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_A_VerifyInitialRewards"/>
+                </methods>
+            </class>
+
+            <!-- Step 8: Approve Payment -->
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+
+            <!-- Step 9: Rewards Check (after payment - will skip for new user) -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_B_VerifyRewardsGain"/>
+                    <include name="step18_C_VerifyFinalRewardsBalance"/>
+                </methods>
+            </class>
+
+            <!-- Step 10: UI, Visit Status, Report -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+
+</suite>

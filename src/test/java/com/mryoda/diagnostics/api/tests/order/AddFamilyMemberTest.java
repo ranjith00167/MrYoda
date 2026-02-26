@@ -137,6 +137,7 @@ public class AddFamilyMemberTest extends BaseTest {
         }
 
         Assert.assertNotNull(labLocationId, "Lab Location ID not found in Context");
+        RequestContext.setSelectedLocationId(labLocationId);
         Assert.assertNotNull(brandId, "Brand ID not found in Context");
         Assert.assertTrue(!productIds.isEmpty(), "No suitable Products found for " + orderType + " flow!");
 
@@ -152,6 +153,7 @@ public class AddFamilyMemberTest extends BaseTest {
         java.util.List<String> familyIds = new java.util.ArrayList<>();
         familyIds.add(userId); // User ID first as per sample
         familyIds.add(familyMemberGuid); // Family Member ID second
+        RequestContext.setMemberIds(familyIds);
 
         System.out.println("   Adding selected tests to cart for " + orderType + " flow...");
 
