@@ -10,9 +10,15 @@
                 <methods><include name="testLoginWithOTP"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest"/>
-            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest"/>
-            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForMember"/></methods>
+            </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.AddFamilyMemberTest"/>
             <class name="com.mryoda.diagnostics.api.tests.coupons.CouponMultiMemberTest"/>

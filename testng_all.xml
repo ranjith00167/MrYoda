@@ -21,6 +21,5 @@
         <suite-file path="testng_multimember_coupon_all_Lab_usertypes.xml" />
         <suite-file path="testng_verify_coupon_split.xml" />
         <suite-file path="testng_coupon_usertype_listing.xml" />
-        
-            </suite-files>
+    </suite-files>
 </suite>
