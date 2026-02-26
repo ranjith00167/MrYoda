@@ -9,8 +9,9 @@ import org.testng.annotations.Test;
 
 public class COD_02_GetCartTest extends CreateOrderCODAPITest {
 
+    @org.testng.annotations.Parameters({ "orderType" })
     @Test
-    public void step02_VerifyCartAndPrice() {
+    public void step02_VerifyCartAndPrice(@org.testng.annotations.Optional("home") String orderTypeParam) {
         System.out.println("\n>>> STEP 2: GET CART & VERIFY PRICE <<<");
         String token = RequestContext.getToken();
         String userId = RequestContext.getUserId();
@@ -18,10 +19,11 @@ public class COD_02_GetCartTest extends CreateOrderCODAPITest {
         Assert.assertNotNull(token, "Token required from Step 1");
         Assert.assertNotNull(userId, "User ID required from Step 1");
 
-        String orderType = "home";
-        if (RequestContext.getCurrentAddressId() == null && RequestContext.getSelectedLocationId() != null) {
-            orderType = "lab";
-        }
+        // Use the orderType from XML parameter directly (home/lab).
+        // Do NOT infer from address presence — address hasn't been added yet at this
+        // step.
+        String orderType = (orderTypeParam != null && !orderTypeParam.isEmpty()) ? orderTypeParam : "home";
+        System.out.println("   Order Type (from XML param): " + orderType);
 
         Response response = callGetCartAPI(token, userId, orderType);
 

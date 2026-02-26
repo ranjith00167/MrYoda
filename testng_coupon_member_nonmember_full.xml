@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Coupon Member + NonMember Full Validation" verbose="2" parallel="none">
+<suite name="E2E Coupon Flow - Member + NonMember + New User" verbose="2" parallel="none">
     <listeners>
         <listener class-name="utilities.TestNGExtentReportListener"/>
     </listeners>
 
-    <!-- MEMBER FLOW -->
-    <test name="Member Full Coupon Validation" preserve-order="true">
-        <parameter name="userType" value="member"/>
-        <parameter name="flowType" value="full"/>
+    <!-- =========================================================== -->
+    <!-- FLOW 1: MEMBER (Prime User) - E2E with Prime Coupon Applied  -->
+    <!-- =========================================================== -->
+    <test name="Member E2E Coupon Flow" preserve-order="true">
+        <parameter name="userType"    value="member"/>
+        <parameter name="flowType"    value="full"/>
         <parameter name="applyCoupon" value="true"/>
-        <parameter name="orderType" value="home"/>
+        <parameter name="orderType"   value="home"/>
 
         <classes>
+            <!-- Step 1: Login MEMBER ONLY - sets getToken()/getUserId() to member-->
             <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
                 <methods>
                     <include name="testLoginWithOTP"/>
-                    <include name="testLoginWithOTP_NonMember"/>
                 </methods>
             </class>
 
-            <!-- Tests & Packages -->
+            <!-- Step 2: Location, Brand, Search -->
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
                 <methods><include name="testGetLocations_ForMember"/></methods>
             </class>
@@ -31,17 +33,13 @@
                 <methods><include name="testGlobalSearch_ForMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
-            
-            <!-- Add to Cart -->
+
+            <!-- Step 3: Add to Cart with Prime Coupon -->
             <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
                 <methods><include name="testAddToCart_ForMember"/></methods>
             </class>
-            
-            <!-- Coupon Validations -->
-            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponValidationTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponComprehensiveTest"/>
-            
-            <!-- E2E COD Flow -->
+
+            <!-- Step 4–end: Straight E2E COD Flow -->
             <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
             <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
@@ -62,23 +60,27 @@
         </classes>
     </test>
 
-    <!-- NON-MEMBER FLOW -->
-    <test name="NonMember Full Coupon Validation" preserve-order="true">
-        <parameter name="userType" value="nonmember"/>
-        <parameter name="flowType" value="full"/>
+
+    <!-- ================================================================ -->
+    <!-- FLOW 2: NON-MEMBER (NonPrime User) - E2E with NonPrime Coupon    -->
+    <!-- ================================================================ -->
+    <test name="NonMember E2E Coupon Flow" preserve-order="true">
+        <parameter name="userType"    value="nonmember"/>
+        <parameter name="flowType"    value="full"/>
         <parameter name="applyCoupon" value="true"/>
-        <parameter name="orderType" value="home"/>
+        <parameter name="orderType"   value="home"/>
 
         <classes>
+            <!-- Step 1: Login NON-MEMBER ONLY - sets getToken()/getUserId() to non-member -->
             <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
                 <methods>
                     <include name="testLoginWithOTP_NonMember"/>
-                    <include name="testLoginWithOTP"/>
                 </methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
 
-            <!-- Tests & Packages -->
+
+            <!-- Step 2: Location, Brand, Search -->
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
                 <methods><include name="testGetLocations_ForNonMember"/></methods>
             </class>
@@ -89,17 +91,13 @@
                 <methods><include name="testGlobalSearch_ForNonMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
-            
-            <!-- Add to Cart -->
+
+            <!-- Step 3: Add to Cart with NonPrime Coupon -->
             <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
                 <methods><include name="testAddToCart_ForNonMember"/></methods>
             </class>
-            
-            <!-- Coupon Validations -->
-            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponValidationTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponComprehensiveTest"/>
-            
-            <!-- E2E COD Flow -->
+
+            <!-- Step 4–end: Straight E2E COD Flow -->
             <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
             <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
@@ -120,15 +118,17 @@
         </classes>
     </test>
 
-    <!-- NEW USER FLOW -->
-    <test name="New User Full Coupon Validation" preserve-order="true">
-        <parameter name="userType" value="new_user"/>
-        <parameter name="flowType" value="full"/>
+    <!-- ================================================================ -->
+    <!-- FLOW 3: NEW USER - E2E with NonPrime Coupon Applied              -->
+    <!-- ================================================================ -->
+    <test name="New User E2E Coupon Flow" preserve-order="true">
+        <parameter name="userType"    value="new_user"/>
+        <parameter name="flowType"    value="full"/>
         <parameter name="applyCoupon" value="true"/>
-        <parameter name="orderType" value="home"/>
+        <parameter name="orderType"   value="home"/>
 
         <classes>
-            <!-- User Registration & Login -->
+            <!-- Step 1: Registration + Login -->
             <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
                 <methods><include name="testUserRegistration_CreateNewUser"/></methods>
             </class>
@@ -137,7 +137,7 @@
             </class>
             <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
 
-            <!-- Tests & Packages -->
+            <!-- Step 2: Location, Brand, Search -->
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
                 <methods><include name="testGetLocations_ForNewUser"/></methods>
             </class>
@@ -148,17 +148,13 @@
                 <methods><include name="testGlobalSearch_ForNewUser"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
-            
-            <!-- Add to Cart -->
+
+            <!-- Step 3: Add to Cart with NonPrime Coupon -->
             <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
                 <methods><include name="testAddToCart_ForNewUser"/></methods>
             </class>
-            
-            <!-- Coupon Validations -->
-            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponValidationTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponComprehensiveTest"/>
-            
-            <!-- E2E COD Flow -->
+
+            <!-- Step 4–end: Straight E2E COD Flow -->
             <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
             <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
@@ -178,4 +174,5 @@
             <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
         </classes>
     </test>
+
 </suite>

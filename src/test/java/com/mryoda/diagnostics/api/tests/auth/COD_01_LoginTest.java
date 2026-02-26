@@ -9,6 +9,23 @@ import org.testng.annotations.Test;
 
 public class COD_01_LoginTest extends CreateOrderCODAPITest {
 
+    private String normalizeUserType(String userType) {
+        if (userType == null) {
+            return "";
+        }
+        String normalized = userType.trim().toLowerCase().replace("_", "").replace("-", "");
+        if ("member".equals(normalized)) {
+            return "member";
+        }
+        if ("nonmember".equals(normalized) || "existingmember".equals(normalized)) {
+            return "nonmember";
+        }
+        if ("newuser".equals(normalized)) {
+            return "new_user";
+        }
+        return normalized;
+    }
+
     @Test
     public void step01_LoginAndSetup() {
         System.out.println("\n>>> STEP 1: DETAILED FLOW - LOGIN & SETUP <<<");
@@ -32,20 +49,22 @@ public class COD_01_LoginTest extends CreateOrderCODAPITest {
 
         String userType = org.testng.Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest()
                 .getParameter("userType");
-        System.out.println("   Test Configuration User Type: " + (userType != null ? userType : "Default/Mixed"));
+        String normalizedUserType = normalizeUserType(userType);
+        System.out.println("   Test Configuration User Type: " + (userType != null ? userType : "Default/Mixed")
+                + " | normalized: " + (normalizedUserType.isEmpty() ? "default" : normalizedUserType));
 
         String token = null;
         String userId = null;
 
-        if ("member".equalsIgnoreCase(userType)) {
+        if ("member".equals(normalizedUserType)) {
             token = RequestContext.getMemberToken();
             userId = RequestContext.getMemberUserId();
             System.out.println("   Using MEMBER credentials.");
-        } else if ("non_member".equalsIgnoreCase(userType)) {
+        } else if ("nonmember".equals(normalizedUserType)) {
             token = RequestContext.getNonMemberToken();
             userId = RequestContext.getNonMemberUserId();
             System.out.println("   Using NON-MEMBER credentials.");
-        } else if ("new_user".equalsIgnoreCase(userType)) {
+        } else if ("new_user".equals(normalizedUserType)) {
             token = RequestContext.getNewUserToken();
             userId = RequestContext.getNewUserUserId();
 
@@ -72,10 +91,10 @@ public class COD_01_LoginTest extends CreateOrderCODAPITest {
             String mobile = "9003730394"; // Default member
             String tokenUserType = TokenManager.MEMBER;
 
-            if ("non_member".equalsIgnoreCase(userType)) {
+            if ("nonmember".equals(normalizedUserType)) {
                 mobile = "9666666665"; // Non-member mobile
                 tokenUserType = TokenManager.NON_MEMBER;
-            } else if ("new_user".equalsIgnoreCase(userType)) {
+            } else if ("new_user".equals(normalizedUserType)) {
                 // New User usually requires registration, but if we assume it exists or use
                 // generic
                 mobile = "9003730394"; // Fallback or needs distinct logic

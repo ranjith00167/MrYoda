@@ -11,6 +11,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,96 @@ public class AddToCartAPITest extends BaseTest {
             }
         }
         return defaultValue;
+    }
+
+    private String normalizeCouponUserType(String couponUserType) {
+        if (couponUserType == null || couponUserType.trim().isEmpty()) {
+            return "nonPrime";
+        }
+
+        String normalized = couponUserType.trim().toLowerCase().replace("_", "").replace("-", "");
+        if ("prime".equals(normalized) || "member".equals(normalized)) {
+            return "prime";
+        }
+        if ("nonprime".equals(normalized) || "nonmember".equals(normalized) || "newuser".equals(normalized)) {
+            return "nonPrime";
+        }
+        return couponUserType;
+    }
+
+    private LocalDate parseCouponDate(Object rawDate) {
+        if (rawDate == null) {
+            return null;
+        }
+        String value = rawDate.toString().trim();
+        if (value.isEmpty() || "null".equalsIgnoreCase(value)) {
+            return null;
+        }
+        try {
+            if (value.length() >= 10) {
+                return LocalDate.parse(value.substring(0, 10));
+            }
+            return LocalDate.parse(value);
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    private boolean isCouponActiveForToday(Map<String, Object> coupon, LocalDate today) {
+        if (!"active".equalsIgnoreCase(String.valueOf(coupon.get("status")))) {
+            return false;
+        }
+        LocalDate effectiveFrom = parseCouponDate(coupon.get("effective_from"));
+        LocalDate endDate = parseCouponDate(coupon.get("end_date"));
+
+        if (effectiveFrom != null && today.isBefore(effectiveFrom)) {
+            return false;
+        }
+        if (endDate != null && today.isAfter(endDate)) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean hasCouponRedemptionCapacity(Map<String, Object> coupon) {
+        double maxNumberOfCoupons = toDouble(coupon.get("max_number_of_coupon"), 0.0);
+        double redeemedCoupon = toDouble(coupon.get("redeemed_coupon"), 0.0);
+
+        return !(maxNumberOfCoupons > 0 && redeemedCoupon >= maxNumberOfCoupons);
+    }
+
+    private Map<String, Object> toCouponDetails(Map<String, Object> coupon) {
+        Map<String, Object> result = new HashMap<>();
+        Object guid = coupon.get("guid");
+        Object code = coupon.get("code");
+        result.put("guid", guid == null ? null : guid.toString());
+        result.put("code", code == null ? null : code.toString());
+        result.put("discount", coupon.get("discount"));
+        result.put("discount_type", coupon.get("discount_type"));
+        result.put("max_redeemable_amount", coupon.get("max_redeemable_amount"));
+
+        Object moa = coupon.get("min_order_amount");
+        result.put("min_order_amount", moa instanceof Number ? ((Number) moa).doubleValue() : toDouble(moa, 0.0));
+        return result;
+    }
+
+    private void setCouponGuidForFlow(String flowUserType, String couponGuid) {
+        if (flowUserType == null) {
+            return;
+        }
+        switch (flowUserType) {
+            case "MEMBER":
+                RequestContext.setMemberCouponGuid(couponGuid);
+                break;
+            case "NON_MEMBER":
+                RequestContext.setNonMemberCouponGuid(couponGuid);
+                break;
+            case "NEW_USER":
+                RequestContext.setNewUserCouponGuid(couponGuid);
+                break;
+            default:
+                break;
+        }
     }
 
     private double calculatePayloadSubtotal(Map<String, Object> payload) {
@@ -167,8 +258,11 @@ public class AddToCartAPITest extends BaseTest {
         return null;
     }
 
-    private void attachCouponAndLocation(Map<String, Object> payload, String applyCoupon, String couponUserType) {
+    private void attachCouponAndLocation(Map<String, Object> payload, String applyCoupon, String couponUserType,
+            String flowUserType) {
         RequestContext.setCouponAmount(0.0);
+        payload.remove("coupon_guid");
+        setCouponGuidForFlow(flowUserType, null);
 
         String resolvedLabLocation = resolveLabLocationId(payload);
         if (resolvedLabLocation != null) {
@@ -176,39 +270,43 @@ public class AddToCartAPITest extends BaseTest {
         }
 
         if ("true".equalsIgnoreCase(applyCoupon)) {
-            // First, find a suitable coupon and get its min order amount
-            Map<String, Object> couponDetails = fetchBestCouponDetails(couponUserType);
-            
+            String normalizedCouponUserType = normalizeCouponUserType(couponUserType);
+            double currentTotal = calculatePayloadSubtotal(payload);
+            Map<String, Object> couponDetails = fetchBestCouponDetails(normalizedCouponUserType, currentTotal);
+
             if (couponDetails != null) {
                 String couponGuid = (String) couponDetails.get("guid");
-                double minOrder = (Double) couponDetails.get("min_order_amount");
+                double minOrder = toDouble(couponDetails.get("min_order_amount"), 0.0);
                 String couponCode = (String) couponDetails.get("code");
-                
+
                 payload.put("coupon_guid", couponGuid);
-                
-                // Calculate current cart total
-                double currentTotal = 0;
+                setCouponGuidForFlow(flowUserType, couponGuid);
+
                 List<Map<String, Object>> products = (List<Map<String, Object>>) payload.get("product_details");
+                currentTotal = 0.0;
                 for (Map<String, Object> p : products) {
                     double price = getPriceForProduct(p.get("product_id").toString());
-                    currentTotal += (price * (int) p.get("quantity"));
+                    currentTotal += (price * toInt(p.get("quantity"), 1));
                 }
-                
-                System.out.println("   📊 Initial Cart Total: ₹" + currentTotal + " | Required for " + couponCode + ": ₹" + minOrder);
+
+                System.out.println("   📊 Initial Cart Total: ₹" + currentTotal + " | Required for " + couponCode
+                        + ": ₹" + minOrder);
 
                 if (currentTotal < minOrder && !products.isEmpty()) {
-                    System.out.println("   ⚠️  Cart total below minimum. Increasing quantity of first item to qualify...");
+                    System.out.println(
+                            "   ⚠️  Cart total below minimum. Increasing quantity of first item to qualify...");
                     Map<String, Object> firstProduct = products.get(0);
                     double firstPrice = getPriceForProduct(firstProduct.get("product_id").toString());
-                    
+
                     if (firstPrice > 0) {
                         double needed = minOrder - currentTotal;
                         int extraQty = (int) Math.ceil(needed / firstPrice);
-                        int currentQty = (int) firstProduct.get("quantity");
+                        int currentQty = toInt(firstProduct.get("quantity"), 1);
                         firstProduct.put("quantity", currentQty + extraQty);
-                        
+
                         double newTotal = currentTotal + (extraQty * firstPrice);
-                        System.out.println("   ✅ Quantity adjusted. New Cart Total: ₹" + newTotal + " (Qty: " + (currentQty + extraQty) + ")");
+                        System.out.println("   ✅ Quantity adjusted. New Cart Total: ₹" + newTotal + " (Qty: "
+                                + (currentQty + extraQty) + ")");
                     }
                 }
                 double finalSubtotal = calculatePayloadSubtotal(payload);
@@ -220,7 +318,21 @@ public class AddToCartAPITest extends BaseTest {
                         + ", coupon_amount=" + Math.round(couponAmount)
                         + ", payable_amount=" + Math.round(expectedPayable));
             } else {
-                System.out.println("   ⚠️ applyCoupon=true but no active coupon found for type: " + couponUserType);
+                // No eligible coupon found — this is expected on re-runs when the user's
+                // coupon is already exhausted (business rule: 1 redemption per user).
+                // Proceed without coupon: full price will be charged.
+                System.out.println("   ⚠️ [WARN] No eligible coupon found for type: " + couponUserType
+                        + ". Proceeding without coupon — full price will apply.");
+                RequestContext.setCouponAmount(0.0);
+                setCouponGuidForFlow(flowUserType, null);
+                // Disable coupon flow for this user type so downstream steps don't expect a
+                // discount
+                if ("MEMBER".equals(flowUserType))
+                    RequestContext.setMemberCouponFlowEnabled(false);
+                else if ("NON_MEMBER".equals(flowUserType))
+                    RequestContext.setNonMemberCouponFlowEnabled(false);
+                else if ("NEW_USER".equals(flowUserType))
+                    RequestContext.setNewUserCouponFlowEnabled(false);
             }
         }
     }
@@ -230,21 +342,15 @@ public class AddToCartAPITest extends BaseTest {
         switch (userType) {
             case "MEMBER":
                 RequestContext.setMemberCouponFlowEnabled(couponFlow);
-                if (!couponFlow) {
-                    RequestContext.setMemberCouponGuid(null);
-                }
+                RequestContext.setMemberCouponGuid(null);
                 break;
             case "NON_MEMBER":
                 RequestContext.setNonMemberCouponFlowEnabled(couponFlow);
-                if (!couponFlow) {
-                    RequestContext.setNonMemberCouponGuid(null);
-                }
+                RequestContext.setNonMemberCouponGuid(null);
                 break;
             case "NEW_USER":
                 RequestContext.setNewUserCouponFlowEnabled(couponFlow);
-                if (!couponFlow) {
-                    RequestContext.setNewUserCouponGuid(null);
-                }
+                RequestContext.setNewUserCouponGuid(null);
                 break;
             default:
                 break;
@@ -261,37 +367,96 @@ public class AddToCartAPITest extends BaseTest {
         return 0;
     }
 
-    private Map<String, Object> fetchBestCouponDetails(String couponUserType) {
+    private Map<String, Object> fetchBestCouponDetails(String couponUserType, double currentSubtotal) {
         System.out.println("\n--- 🔍 Discovering Best Coupon for: " + couponUserType + " ---");
         Map<String, String> payload = new HashMap<>();
-        payload.put("coupon_user_type", couponUserType);
+        String normalizedCouponType = normalizeCouponUserType(couponUserType);
+        payload.put("coupon_user_type", normalizedCouponType);
 
         Response response = new RequestBuilder()
                 .setEndpoint(APIEndpoints.GET_ALL_COUPONS)
                 .setRequestBody(payload)
                 .post();
 
-        if (response.getStatusCode() == 200) {
-            List<Map<String, Object>> coupons = response.jsonPath().get("data");
-            if (coupons != null && !coupons.isEmpty()) {
-                // For simplicity, pick the first active one, but ideally we'd pick one the user can reach
-                Map<String, Object> coupon = coupons.get(0);
-                Map<String, Object> result = new HashMap<>();
-                result.put("guid", coupon.get("guid").toString());
-                result.put("code", coupon.get("code").toString());
-                result.put("discount", coupon.get("discount"));
-                result.put("discount_type", coupon.get("discount_type"));
-                result.put("max_redeemable_amount", coupon.get("max_redeemable_amount"));
-                
-                Object moa = coupon.get("min_order_amount");
-                result.put("min_order_amount", moa instanceof Number ? ((Number) moa).doubleValue() : 0.0);
-                
-                return result;
+        if (response.getStatusCode() != 200) {
+            System.out.println("   ⚠️ Failed to fetch coupons. Status: " + response.getStatusCode());
+            return null;
+        }
+
+        List<Map<String, Object>> coupons = response.jsonPath().get("data");
+        if (coupons == null || coupons.isEmpty()) {
+            System.out.println("   ⚠️ No coupons returned for coupon_user_type=" + normalizedCouponType);
+            return null;
+        }
+
+        LocalDate today = LocalDate.now();
+        Map<String, Object> bestEligibleCoupon = null;
+        double bestEligibleDiscount = -1.0;
+
+        Map<String, Object> bestFallbackCoupon = null;
+        double bestFallbackMinOrder = Double.MAX_VALUE;
+
+        for (Map<String, Object> coupon : coupons) {
+            if (coupon == null) {
+                continue;
+            }
+
+            String couponTypeFromListing = normalizeCouponUserType(String.valueOf(coupon.get("coupon_user_type")));
+            if (!normalizedCouponType.equalsIgnoreCase(couponTypeFromListing)) {
+                continue;
+            }
+
+            if (!isCouponActiveForToday(coupon, today)) {
+                continue;
+            }
+
+            if (!hasCouponRedemptionCapacity(coupon)) {
+                continue;
+            }
+
+            Map<String, Object> details = toCouponDetails(coupon);
+            String guid = details.get("guid") == null ? null : details.get("guid").toString();
+            if (guid == null || guid.trim().isEmpty()) {
+                continue;
+            }
+
+            double minOrder = toDouble(details.get("min_order_amount"), 0.0);
+            double estimatedDiscount = calculateCouponAmount(Math.max(currentSubtotal, minOrder), details);
+
+            if (currentSubtotal >= minOrder) {
+                if (bestEligibleCoupon == null || estimatedDiscount > bestEligibleDiscount) {
+                    bestEligibleCoupon = details;
+                    bestEligibleDiscount = estimatedDiscount;
+                }
+            } else if (bestFallbackCoupon == null || minOrder < bestFallbackMinOrder) {
+                bestFallbackCoupon = details;
+                bestFallbackMinOrder = minOrder;
             }
         }
+
+        if (bestEligibleCoupon != null) {
+            return bestEligibleCoupon;
+        }
+        if (bestFallbackCoupon != null) {
+            return bestFallbackCoupon;
+        }
+
+        // Last fallback: return first guid-bearing coupon, even if metadata is
+        // incomplete.
+        for (Map<String, Object> coupon : coupons) {
+            String couponTypeFromListing = normalizeCouponUserType(String.valueOf(coupon.get("coupon_user_type")));
+            if (!normalizedCouponType.equalsIgnoreCase(couponTypeFromListing)) {
+                continue;
+            }
+            Map<String, Object> details = toCouponDetails(coupon);
+            String guid = details.get("guid") == null ? null : details.get("guid").toString();
+            if (guid != null && !guid.trim().isEmpty()) {
+                return details;
+            }
+        }
+
         return null;
     }
-
 
     private Map<String, Object> buildCartPayloadWithAllTests(String userId, String brandName, String locationName) {
 
@@ -468,9 +633,10 @@ public class AddToCartAPITest extends BaseTest {
         double payloadSubtotal = calculatePayloadSubtotal(payload);
         double payloadCouponAmount = RequestContext.getCouponAmount();
         double payloadPayable = Math.max(0.0, payloadSubtotal - payloadCouponAmount);
-        System.out.println("   💰 Amounts (computed from payload/coupon) => total_amount: " + Math.round(payloadSubtotal)
-                + ", coupon_amount: " + Math.round(payloadCouponAmount)
-                + ", payable_amount: " + Math.round(payloadPayable));
+        System.out
+                .println("   💰 Amounts (computed from payload/coupon) => total_amount: " + Math.round(payloadSubtotal)
+                        + ", coupon_amount: " + Math.round(payloadCouponAmount)
+                        + ", payable_amount: " + Math.round(payloadPayable));
 
         Boolean success = response.jsonPath().getBoolean("success");
         AssertionUtil.verifyTrue(success, "Success flag");
@@ -539,8 +705,6 @@ public class AddToCartAPITest extends BaseTest {
         System.out.println("   ✅ Cart Data Validated and Stored for " + userType + " (GUID: " + cartGuid + ")");
     }
 
-
-
     @Parameters({ "orderType", "applyCoupon" })
     @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForMember")
     public void testAddToCart_ForMember(@Optional("home") String orderType, @Optional("false") String applyCoupon) {
@@ -553,7 +717,7 @@ public class AddToCartAPITest extends BaseTest {
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {
-            attachCouponAndLocation(payload, applyCoupon, "prime");
+            attachCouponAndLocation(payload, applyCoupon, "prime", "MEMBER");
             Response response = callAddToCartAPI(token, payload);
             validateAddToCartResponse(response, "MEMBER", payload);
         }
@@ -571,7 +735,7 @@ public class AddToCartAPITest extends BaseTest {
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {
-            attachCouponAndLocation(payload, applyCoupon, "nonPrime");
+            attachCouponAndLocation(payload, applyCoupon, "nonPrime", "NON_MEMBER");
             Response response = callAddToCartAPI(token, payload);
             validateAddToCartResponse(response, "NON_MEMBER", payload);
         }
@@ -589,7 +753,7 @@ public class AddToCartAPITest extends BaseTest {
 
         Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
         if (payload != null) {
-            attachCouponAndLocation(payload, applyCoupon, "nonPrime");
+            attachCouponAndLocation(payload, applyCoupon, "nonPrime", "NEW_USER");
             Response response = callAddToCartAPI(token, payload);
             validateAddToCartResponse(response, "NEW_USER", payload);
         }
