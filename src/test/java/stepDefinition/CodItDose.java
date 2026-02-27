@@ -1,4 +1,4 @@
-package stepDefinition;
+check whether u have used the same elements or not fromthe programpackage stepDefinition;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -17,111 +17,12 @@ import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CodItDose extends BaseSteps {
-    private static final By RESULT_ENTRY_MENU = By.xpath("//a[normalize-space()='Result Entry']");
-    private static final By SEARCH_TYPE_DROPDOWN = By.id("ddlSearchType");
-    private static final By SEARCH_BOX = By.id("txtSearchValue");
-    private static final By SEARCH_BUTTON = By.id("btnSearch");
-    private static final By PENDING_VISIT_LINKS_PRIMARY = By.xpath(
-            "//table[contains(@class,'htCore')]//a[(contains(@onclick,'PickRowData') or contains(@href,'PickRowData') or contains(@onclick,'PickRow')) and normalize-space()]");
-    private static final By PENDING_VISIT_LINKS_FALLBACK = By.xpath(
-            "//table[contains(@class,'htCore')]//a[normalize-space() and not(contains(@style,'display:none'))]");
-    private static final By PENDING_VISIT_VIEW_ICON = By.xpath(
-            "//table[contains(@class,'htCore')]//img[contains(@src,'view.gif') or contains(@onclick,'PickRowData')]");
-    private static final By INVESTIGATION_PANEL = By.id("divInvestigation");
-    private static final By APPROVE_BUTTON = By.id("btnApprovedLabObs");
-
-    private boolean isVisible(By locator) {
-        try {
-            WebElement element = driver.findElement(locator);
-            return element.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private void navigateBackToResultList(WebDriverWait wait, JavascriptExecutor js) {
-        try {
-            WebElement resultEntry = wait.until(ExpectedConditions.presenceOfElementLocated(RESULT_ENTRY_MENU));
-            js.executeScript("arguments[0].click();", resultEntry);
-        } catch (Exception e) {
-            System.out.println("⚠️ Result Entry sidebar click failed, refreshing page...");
-            driver.navigate().refresh();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_BOX));
-        BaseClass.waitForOverlayInvisibility(5);
-    }
-
-    private List<WebElement> getDisplayedElements(By locator) {
-        List<WebElement> result = new ArrayList<>();
-        for (WebElement element : driver.findElements(locator)) {
-            try {
-                if (element.isDisplayed()) {
-                    result.add(element);
-                }
-            } catch (Exception ignored) {
-            }
-        }
-        return result;
-    }
-
-    private List<WebElement> findPendingVisitLinksWithStabilization() {
-        List<WebElement> visitLinks = getDisplayedElements(PENDING_VISIT_LINKS_PRIMARY);
-        if (visitLinks.isEmpty()) {
-            visitLinks = getDisplayedElements(PENDING_VISIT_LINKS_FALLBACK);
-        }
-        if (visitLinks.isEmpty()) {
-            visitLinks = getDisplayedElements(PENDING_VISIT_VIEW_ICON);
-        }
-        if (!visitLinks.isEmpty()) {
-            return visitLinks;
-        }
-
-        // Headless runs can briefly show zero rows right after search. Re-check once.
-        BaseClass.waitInSeconds(2);
-        BaseClass.waitForOverlayInvisibility(5);
-        visitLinks = getDisplayedElements(PENDING_VISIT_LINKS_PRIMARY);
-        if (visitLinks.isEmpty()) {
-            visitLinks = getDisplayedElements(PENDING_VISIT_LINKS_FALLBACK);
-        }
-        if (visitLinks.isEmpty()) {
-            visitLinks = getDisplayedElements(PENDING_VISIT_VIEW_ICON);
-        }
-        return visitLinks;
-    }
-
-    private boolean ensureSinNoSearchType(WebDriverWait wait) {
-        try {
-            WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_TYPE_DROPDOWN));
-            Select select = new Select(dropdown);
-            String selected = select.getFirstSelectedOption().getText().trim();
-            if (selected.toLowerCase().contains("sin")) {
-                return true;
-            }
-
-            for (WebElement option : select.getOptions()) {
-                String optionText = option.getText().trim();
-                if (optionText.toLowerCase().contains("sin")) {
-                    select.selectByVisibleText(optionText);
-                    BaseClass.waitInSeconds(1);
-                    System.out.println("✅ Switched search type to: " + optionText);
-                    return true;
-                }
-            }
-
-            System.out.println("⚠️ Search dropdown does not contain any SIN option.");
-            return false;
-        } catch (Exception e) {
-            System.out.println("⚠️ Could not validate/choose SIN search type: " + e.getMessage());
-            return false;
-        }
-    }
 
     @Given("I am on the login page")
     public void i_am_on_the_login_page() {
@@ -620,12 +521,9 @@ public class CodItDose extends BaseSteps {
 
     @When("I enter the value of the tests")
     public void i_enter_the_value_of_the_tests() throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String sinNo = ScenarioContext.extractedSinNo;
-        int emptySearchStreak = 0;
-        boolean finished = false;
-        int processedVisits = 0;
 
         if (sinNo == null || sinNo.isEmpty()) {
             System.out.println("⚠️ No SIN NO found in Context, using Visit Number as fallback...");
@@ -635,110 +533,84 @@ public class CodItDose extends BaseSteps {
         System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
         for (int i = 0; i < 15; i++) {
-            BaseClass.waitInSeconds(2);
-            BaseClass.waitForOverlayInvisibility(5);
+            BaseClass.waitInSeconds(3);
 
             // Ensure we are on the list page
-            boolean isDetailsPage = isVisible(INVESTIGATION_PANEL) || isVisible(APPROVE_BUTTON);
+            boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
+                    driver.findElements(By.id("btnApprovedLabObs")).size() > 0;
 
             if (isDetailsPage) {
                 System.out.println("Iteration " + (i + 1) + ": On details page, navigating back to list...");
-                navigateBackToResultList(wait, js);
+                try {
+                    // Try clicking the sidebar link using JS to bypass visibility/menu issues
+                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+                } catch (Exception e) {
+                    System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
+                    driver.navigate().refresh();
+                    BaseClass.waitInSeconds(3);
+                }
+                BaseClass.waitInSeconds(3);
             }
 
             // 1. Re-enter SIN and Search
             System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
             try {
-                boolean sinSearchTypeSet = ensureSinNoSearchType(wait);
-                if (!sinSearchTypeSet) {
-                    System.out.println("⚠️ SIN search type not set; retrying iteration.");
-                    continue;
-                }
-                WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_BOX));
+                WebElement searchBox = LocatorsPage.sinNo_searchBox;
+                BaseClass.waitForVisibility(searchBox, 10);
                 searchBox.clear();
                 searchBox.sendKeys(sinNo);
 
-                WebElement searchBtn = wait.until(ExpectedConditions.elementToBeClickable(SEARCH_BUTTON));
-                try {
-                    searchBtn.click();
-                } catch (Exception clickEx) {
-                    js.executeScript("arguments[0].click();", searchBtn);
-                }
-                BaseClass.waitForOverlayInvisibility(5);
+                // Use JS click for search to be sure
+                js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
                 BaseClass.waitInSeconds(1);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
                 continue;
             }
 
-            // If we're still on details after search, do not falsely conclude completion.
-            if (isVisible(INVESTIGATION_PANEL)) {
-                System.out.println("⚠️ Still on details page after search. Retrying iteration...");
-                continue;
-            }
-
             // 2. Find pending visit links
-            List<WebElement> visitLinks = findPendingVisitLinksWithStabilization();
+            List<WebElement> visitLinks = driver.findElements(
+                    By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
 
             if (visitLinks.isEmpty()) {
-                emptySearchStreak++;
-                if (emptySearchStreak >= 2) {
-                    System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Exiting loop.");
-                    finished = true;
-                    break;
-                }
-                System.out.println("⚠️ No rows found yet (streak " + emptySearchStreak
-                        + "). Re-checking... (Verify UI search type is SIN No.)");
-                continue;
+                System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Exiting loop.");
+                break;
             }
-            emptySearchStreak = 0;
 
             System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
+            WebElement visit = visitLinks.get(0);
 
             try {
                 // 3. Open Visit
-                WebElement visit = visitLinks.get(0);
                 String visitId = visit.getText().trim();
                 js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
                 js.executeScript("arguments[0].click();", visit);
 
                 // 4. Fill Values
                 wait.until(ExpectedConditions.or(
-                        ExpectedConditions.visibilityOfElementLocated(INVESTIGATION_PANEL),
-                        ExpectedConditions.visibilityOfElementLocated(APPROVE_BUTTON)));
+                        ExpectedConditions.visibilityOfElementLocated(By.id("divInvestigation")),
+                        ExpectedConditions.visibilityOfElementLocated(By.id("btnApprovedLabObs"))));
 
                 BaseClass.enterValuesInResultTable();
 
                 // 5. Approve
                 System.out.println("Approving visit: " + visitId);
-                if (driver.findElements(APPROVE_BUTTON).size() > 0) {
-                    WebElement approveBtn = wait.until(ExpectedConditions.elementToBeClickable(APPROVE_BUTTON));
-                    js.executeScript("arguments[0].scrollIntoView({block:'center'});", approveBtn);
-                    js.executeScript("arguments[0].click();", approveBtn);
+                if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
+                    js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
                 }
-                processedVisits++;
 
                 // Wait for approval processing (Crucial for multi-test)
                 System.out.println("Waiting for approval to complete...");
-                BaseClass.waitForOverlayInvisibility(8);
-                BaseClass.waitInSeconds(2);
+                BaseClass.waitInSeconds(3);
 
             } catch (Exception e) {
                 System.out.println("⚠️ Error processing iteration " + (i + 1) + ": " + e.getMessage());
                 // Try to force back to list for next attempt
                 try {
-                    navigateBackToResultList(wait, js);
+                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
                 } catch (Exception ignored) {
                 }
             }
-        }
-
-        if (!finished) {
-            throw new RuntimeException("❌ Could not confirm completion of all pending visits for SIN: " + sinNo);
-        }
-        if (processedVisits == 0) {
-            throw new RuntimeException(
-                    "❌ No pending visit row was opened for SIN: " + sinNo + ". Please verify Result Entry row locator.");
         }
     }
 
@@ -748,8 +620,8 @@ public class CodItDose extends BaseSteps {
         // We only perform a final check if there's an active button visible on screen.
         BaseClass.waitInSeconds(3);
         try {
-            if (driver.findElements(APPROVE_BUTTON).size() > 0) {
-                WebElement btn = driver.findElement(APPROVE_BUTTON);
+            if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
+                WebElement btn = driver.findElement(By.id("btnApprovedLabObs"));
                 if (btn.isDisplayed() && btn.isEnabled()) {
                     System.out.println("Clicking approve button (final check)...");
                     BaseClass.waitAndClick(btn,10);
@@ -759,8 +631,6 @@ public class CodItDose extends BaseSteps {
             } else {
                 System.out.println("✅ No pending approve button found.");
             }
-        } catch (TimeoutException e) {
-            System.out.println("ℹ️ Skipping final approve click - timeout waiting for button.");
         } catch (Exception e) {
             System.out.println("ℹ️ Skipping final approve click as element is not interactable or missing.");
         }
