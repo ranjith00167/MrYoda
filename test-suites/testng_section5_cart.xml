@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    ============================================================
+    SECTION 5 — CART OPERATIONS
+    ============================================================
+    Scenarios Covered:
+      CRT-01 : Add To Cart — Home Collection                      [Positive]
+      CRT-02 : Add To Cart — Lab Visit                            [Positive]
+      CRT-03 : Get Cart — Verify Coupon Math                      [Positive]
+      CRT-04 : Get Cart — Empty Cart (After Cancel / Clear)       [Negative]
+      CRT-05 : Add to Cart — Discount Cap (Zero Payable)          [Positive]
+      CRT-06 : Cart Updated After Slot Booking                    [Positive]
+    ============================================================
+-->
+
+<suite name="Section 5 — Cart Operations" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="CART — All Scenarios" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.cart.Section5_CartOperationsTest">
+                <methods>
+                    <!-- CRT-01: Add To Cart - Home -->
+                    <include name="CRT_01_AddToCart_HomeCollection"/>
+
+                    <!-- CRT-02: Add To Cart - Lab -->
+                    <include name="CRT_02_AddToCart_LabVisit"/>
+
+                    <!-- CRT-03: Get Cart - Verify Math -->
+                    <include name="CRT_03_GetCart_VerifyCouponMath"/>
+
+                    <!-- CRT-04: Get Cart - Empty Cart -->
+                    <include name="CRT_04_GetCart_EmptyCart"/>
+
+                    <!-- CRT-05: Discount Cap -->
+                    <include name="CRT_05_AddToCart_DiscountCap"/>
+
+                    <!-- CRT-06: Slot Booking Cart Update -->
+                    <include name="CRT_06_CartUpdatedAfterSlotBooking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

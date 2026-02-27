@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    ============================================================
+    SECTION 1 — AUTHENTICATION & USER SETUP
+    ============================================================
+    Scenarios Covered:
+      AUTH-01 : Member (Prime) OTP Login                 [Positive]
+      AUTH-02 : Non-Member OTP Login                     [Positive]
+      AUTH-03 : New User Registration + Login            [Positive]
+      AUTH-04 : Invalid OTP Rejected                     [Negative]
+      AUTH-05 : Admin Login                              [Positive]
+      AUTH-06 : Phlebotomist Login                       [Positive]
+      AUTH-07 : Missing Mobile Number Rejected           [Negative]
+      AUTH-08 : Empty OTP Field Rejected                 [Negative]
+      AUTH-09 : Valid Token Allows Protected API Access  [Positive]
+      AUTH-10 : Invalid Token Blocks Protected API       [Negative]
+    ============================================================
+-->
+
+<suite name="Section 1 — Authentication and User Setup" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 1 — ALL POSITIVE SCENARIOS (Run in priority order) -->
+    <!-- ============================================================ -->
+    <test name="AUTH — Positive Scenarios" preserve-order="true">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.Section1_AuthenticationTest">
+                <methods>
+                    <!-- AUTH-01: Member (Prime) OTP Login -->
+                    <include name="AUTH_01_MemberLogin"/>
+
+                    <!-- AUTH-02: Non-Member OTP Login -->
+                    <include name="AUTH_02_NonMemberLogin"/>
+
+                    <!-- AUTH-03: New User Registration + Login -->
+                    <include name="AUTH_03_NewUserRegistrationAndLogin"/>
+
+                    <!-- AUTH-05: REMOVED — Admin Login is UI-only, no REST API available -->
+
+                    <!-- AUTH-06: Phlebotomist Login -->
+                    <include name="AUTH_06_PhlebotomistLogin"/>
+
+                    <!-- AUTH-09: Valid Token Allows Protected API Access -->
+                    <include name="AUTH_09_ValidTokenAllowsAccess"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 2 — ALL NEGATIVE SCENARIOS                        -->
+    <!-- ============================================================ -->
+    <test name="AUTH — Negative Scenarios" preserve-order="true">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.Section1_AuthenticationTest">
+                <methods>
+                    <!-- AUTH-04: Invalid OTP Rejected -->
+                    <include name="AUTH_04_InvalidOtpRejected"/>
+
+                    <!-- AUTH-07: Missing Mobile Number Rejected -->
+                    <include name="AUTH_07_MissingMobileRejected"/>
+
+                    <!-- AUTH-08: Empty OTP Field Rejected -->
+                    <include name="AUTH_08_EmptyOtpRejected"/>
+
+                    <!-- AUTH-10: Invalid Token Blocks Protected API -->
+                    <include name="AUTH_10_InvalidTokenBlocksAccess"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 3 — FULL SECTION (All 10 scenarios, ordered)     -->
+    <!--   Use this block when running Section 1 as a full suite      -->
+    <!-- ============================================================ -->
+    <test name="AUTH — Full Section (All Scenarios)" preserve-order="true" enabled="false">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.Section1_AuthenticationTest"/>
+        </classes>
+
+    </test>
+
+</suite>

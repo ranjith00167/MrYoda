@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    ============================================================
+    SECTION 2 — LOCATION & CATALOG
+    ============================================================
+    Scenarios Covered:
+      CAT-01 : Get Lab Locations — _id + title verified         [Positive]
+      CAT-02 : Diagnostics Catalog — price + _id verified       [Positive]
+      CAT-03 : DNA Decoder Catalog — non-empty list             [Positive]
+      CAT-04 : PGX Catalog — non-empty with details            [Positive]
+      CAT-05 : Fetal Medicine Catalog                           [Positive]
+      CAT-06 : Packages Catalog — count + pricing               [Positive]
+      CAT-07 : Brands List — Diagnostics brand stored           [Positive]
+      CAT-08 : Invalid Location ID — graceful response          [Negative]
+      CAT-09 : Empty Catalog Result — random keyword            [Negative]
+    ============================================================
+-->
+
+<suite name="Section 2 — Location and Catalog" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 1 — POSITIVE SCENARIOS                            -->
+    <!-- ============================================================ -->
+    <test name="CAT — Positive Scenarios" preserve-order="true">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.Section2_LocationAndCatalogTest">
+                <methods>
+                    <!-- CAT-01: Lab Locations -->
+                    <include name="CAT_01_GetLabLocations"/>
+
+                    <!-- CAT-07: Brands (run before catalog to store Diagnostics brand) -->
+                    <include name="CAT_07_GetBrandsList"/>
+
+                    <!-- CAT-02: Diagnostics  -->
+                    <include name="CAT_02_DiagnosticsCatalog"/>
+
+                    <!-- CAT-03: DNA Decoder -->
+                    <include name="CAT_03_DnaDecoderCatalog"/>
+
+                    <!-- CAT-04: PGX -->
+                    <include name="CAT_04_PgxCatalog"/>
+
+                    <!-- CAT-05: Fetal Medicine -->
+                    <include name="CAT_05_FetalMedicineCatalog"/>
+
+                    <!-- CAT-06: Packages -->
+                    <include name="CAT_06_PackagesCatalog"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 2 — NEGATIVE SCENARIOS                            -->
+    <!-- ============================================================ -->
+    <test name="CAT — Negative Scenarios" preserve-order="true">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.Section2_LocationAndCatalogTest">
+                <methods>
+                    <!-- CAT-01 must run first to set location in context -->
+                    <include name="CAT_01_GetLabLocations"/>
+
+                    <!-- CAT-08: Invalid Location ID -->
+                    <include name="CAT_08_InvalidLocationId"/>
+
+                    <!-- CAT-09: Empty Catalog Result -->
+                    <include name="CAT_09_EmptyCatalogResult"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 3 — FULL SECTION (All 9 scenarios, ordered)      -->
+    <!--   Enable this block when doing a full Section 2 run          -->
+    <!-- ============================================================ -->
+    <test name="CAT — Full Section (All Scenarios)" preserve-order="true" enabled="false">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.Section2_LocationAndCatalogTest"/>
+        </classes>
+
+    </test>
+
+</suite>

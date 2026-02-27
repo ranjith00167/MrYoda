@@ -1,5 +1,8 @@
 package com.mryoda.diagnostics.api.tests.order;
 
+import com.mryoda.diagnostics.api.utils.GlobalSearchHelper;
+import com.mryoda.diagnostics.api.builders.RequestBuilder;
+import com.mryoda.diagnostics.api.endpoints.APIEndpoints;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -28,6 +31,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
     private static String phlebotomistGuid;
     private static String orderTrackingId;
     private static int totalPrice;
+
     private static Map<String, String> addressDetails;
     private static Map<String, String> slotDetails;
     private static String sampleType;
@@ -118,6 +122,43 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
 
         Assert.assertNotNull(token, "Token should not be null");
         Assert.assertNotNull(userId, "UserId should not be null");
+
+        // 4. INITIALIZE METADATA (Locations, Brands, etc.)
+        System.out.println("   Initializing location metadata...");
+        Response locResponse = new RequestBuilder().setEndpoint(APIEndpoints.GET_LOCATION)
+                .addHeader("Authorization", token).post();
+        List<Map<String, Object>> locs = locResponse.jsonPath().getList("data");
+        if (locs != null) {
+            locs.forEach(l -> RequestContext.storeLocation(
+                    String.valueOf(l.get("title")), String.valueOf(l.get("_id"))));
+        }
+        RequestContext.setSelectedLocation("Madhapur");
+
+        System.out.println("   Initializing brand metadata...");
+        try {
+            Response brandResp = new RequestBuilder().setEndpoint(APIEndpoints.GET_ALL_BRANDS).get();
+            if (brandResp.getStatusCode() == 200) {
+                List<Map<String, Object>> brands = brandResp.jsonPath().getList("data");
+                if (brands != null) {
+                    brands.forEach(b -> RequestContext.storeBrand(
+                            String.valueOf(b.get("title")), String.valueOf(b.get("guid"))));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("   ⚠️ Could not fetch brands: " + e.getMessage());
+        }
+        // Fallback for Diagnostics if not found
+        if (RequestContext.getBrandId("Diagnostics") == null) {
+            RequestContext.storeBrand("Diagnostics", "967a5f02-2e38-47c8-b850-c4aeee8898ed");
+        }
+        RequestContext.setSelectedBrand("Diagnostics");
+
+        // 5. GLOBAL SEARCH (Ensures tests exist in context for Cart operations)
+        System.out.println("   Performing Global Search for flow tests...");
+        String[] testNames = { "Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)" };
+        String locationId = RequestContext.getLocationId("Madhapur");
+        Response searchResp = GlobalSearchHelper.searchTestsByFullNames(testNames, locationId);
+        GlobalSearchHelper.extractAndStoreTests(searchResp, testNames);
 
         System.out.println("✅ Setup Complete for User: " + userId);
     }

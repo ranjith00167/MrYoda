@@ -2265,8 +2265,10 @@ public class CreateOrderCODAPITest extends BaseTest {
         Response response = new RequestBuilder().setEndpoint(verifyUrl).setRequestBody(verifyPayload).post();
 
         if (response.getStatusCode() == 200 && response.jsonPath().getBoolean("success")) {
-            String token = response.jsonPath().getString("data.token");
-            String userId = response.jsonPath().getString("data.guid");
+            String token = response.jsonPath().getString("data.access_token");
+        if (token == null)
+            token = response.jsonPath().getString("data.token");
+        String userId = response.jsonPath().getString("data.guid");
 
             RequestContext.setToken(token);
             RequestContext.setUserId(userId);

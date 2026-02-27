@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    ============================================================
+    SECTION 3 — CART OPERATIONS
+    ============================================================
+    Scenarios Covered:
+      CART-01 : Add to Cart — Member (Home Collection)         [Positive]
+      CART-02 : Add to Cart — Non-Member (Home Collection)     [Positive]
+      CART-03 : Add to Cart — New User (Home Collection)       [Positive]
+      CART-04 : Add to Cart — Lab Visit flow                   [Positive]
+      CART-05 : Get Cart — items, price, GUID verified         [Positive]
+      CART-06 : Update Quantity — price recalculates           [Positive]
+      CART-07 : Add Coupon — discount deducted                 [Positive]
+      CART-08 : Missing user_id                                [Negative]
+      CART-09 : Empty product list                             [Negative]
+      CART-10 : Invalid product_id                             [Negative]
+    ============================================================
+-->
+
+<suite name="Section 3 — Cart Operations" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 1 — POSITIVE SCENARIOS                            -->
+    <!-- ============================================================ -->
+    <test name="CART — Positive Scenarios" preserve-order="true">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.cart.Section3_CartOperationsTest">
+                <methods>
+                    <!-- CART-01: Member Home Collection -->
+                    <include name="CART_01_AddToCart_Member_Home"/>
+
+                    <!-- CART-02: Non-Member Home Collection -->
+                    <include name="CART_02_AddToCart_NonMember_Home"/>
+
+                    <!-- CART-03: New User Home Collection -->
+                    <include name="CART_03_AddToCart_NewUser_Home"/>
+
+                    <!-- CART-04: Lab Visit Flow -->
+                    <include name="CART_04_AddToCart_LabVisit"/>
+
+                    <!-- CART-05: Get Cart & Verify -->
+                    <include name="CART_05_GetCart_VerifyPriceAndItems"/>
+
+                    <!-- CART-06: Quantity Update -->
+                    <include name="CART_06_AddToCart_UpdateQuantity"/>
+
+                    <!-- CART-07: Add Coupon — discount applied -->
+                    <include name="CART_07_AddCouponToCart_DiscountVerified"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 2 — NEGATIVE SCENARIOS                            -->
+    <!-- ============================================================ -->
+    <test name="CART — Negative Scenarios" preserve-order="true">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.cart.Section3_CartOperationsTest">
+                <methods>
+                    <!-- CART-08: Missing user_id -->
+                    <include name="CART_08_AddToCart_MissingUserId"/>
+
+                    <!-- CART-09: Empty product list -->
+                    <include name="CART_09_AddToCart_EmptyProductList"/>
+
+                    <!-- CART-10: Invalid product_id -->
+                    <include name="CART_10_AddToCart_InvalidProductId"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 3 — FULL SECTION (All 10 scenarios, ordered)     -->
+    <!--   Enable this when doing a complete Section 3 run            -->
+    <!-- ============================================================ -->
+    <test name="CART — Full Section (All Scenarios)" preserve-order="true" enabled="false">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.cart.Section3_CartOperationsTest"/>
+        </classes>
+
+    </test>
+
+</suite>

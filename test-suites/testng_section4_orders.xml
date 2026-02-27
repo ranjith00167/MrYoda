@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    ============================================================
+    SECTION 4 — ORDER CREATION
+    ============================================================
+    Scenarios Covered:
+      ORD-01 : Add Delivery Address — Member                   [Positive]
+      ORD-02 : Get Delivery Centers                            [Positive]
+      ORD-03 : Get Available Slots for tomorrow                [Positive]
+      ORD-04 : Create COD Order — Member                       [Positive]
+      ORD-05 : Create COD Order — Non-Member                   [Positive]
+      ORD-06 : Create Prepaid Order — Member (Razorpay)        [Positive]
+      ORD-07 : Get Order By ID — verify fields                 [Positive]
+      ORD-08 : Create Order — Missing cart_id                  [Negative]
+      ORD-09 : Create Order — Invalid payment_mode             [Negative]
+      ORD-10 : Create Order — Past date slot                   [Negative]
+
+    Bug Tracking:
+      BUG-ORD-001 : Missing cart_id causes 500 (expected 400)
+      BUG-ORD-002 : Invalid payment_mode causes 500 (expected 400)
+      BUG-ORD-003 : Past date accepted (expected 400)
+      BUG-ORD-004 : Past date causes 500 (expected 400)
+    ============================================================
+-->
+
+<suite name="Section 4 — Order Creation" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 1 — POSITIVE SCENARIOS                            -->
+    <!-- ============================================================ -->
+    <test name="ORD — Positive Scenarios" preserve-order="true">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.order.Section4_OrderCreationTest">
+                <methods>
+                    <!-- ORD-01: Add Address -->
+                    <include name="ORD_01_AddAddress_Member"/>
+
+                    <!-- ORD-02: Get Delivery Centers -->
+                    <include name="ORD_02_GetDeliveryCenters"/>
+
+                    <!-- ORD-03: Get Available Slots -->
+                    <include name="ORD_03_GetAvailableSlots"/>
+
+                    <!-- ORD-04: COD Order — Member -->
+                    <include name="ORD_04_CreateCODOrder_Member"/>
+
+                    <!-- ORD-05: COD Order — Non-Member -->
+                    <include name="ORD_05_CreateCODOrder_NonMember"/>
+
+                    <!-- ORD-06: Prepaid Order — Member -->
+                    <include name="ORD_06_CreatePrepaidOrder_Member"/>
+
+                    <!-- ORD-07: Get Order By ID -->
+                    <include name="ORD_07_GetOrderById_VerifyFields"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 2 — NEGATIVE SCENARIOS                            -->
+    <!-- ============================================================ -->
+    <test name="ORD — Negative Scenarios" preserve-order="true">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.order.Section4_OrderCreationTest">
+                <methods>
+                    <!-- ORD-08: Missing cart_id -->
+                    <include name="ORD_08_CreateOrder_MissingCartId"/>
+
+                    <!-- ORD-09: Invalid payment_mode -->
+                    <include name="ORD_09_CreateOrder_InvalidPaymentMode"/>
+
+                    <!-- ORD-10: Past date -->
+                    <include name="ORD_10_CreateOrder_PastDateSlot"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <!-- ============================================================ -->
+    <!-- TEST BLOCK 3 — FULL SECTION (All 10 scenarios, ordered)     -->
+    <!--   Enable this when doing a complete Section 4 run            -->
+    <!-- ============================================================ -->
+    <test name="ORD — Full Section (All Scenarios)" preserve-order="true" enabled="false">
+
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.order.Section4_OrderCreationTest"/>
+        </classes>
+
+    </test>
+
+</suite>
