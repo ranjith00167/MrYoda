@@ -17,12 +17,53 @@ import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CodItDose extends BaseSteps {
+    private static final By RESULT_ENTRY_MENU = By.xpath("//a[normalize-space()='Result Entry']");
+    private static final By SEARCH_BOX = By.id("txtSearchValue");
+    private static final By SEARCH_BUTTON = By.id("btnSearch");
+    private static final By PENDING_VISIT_LINKS = By
+            .xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]");
+    private static final By INVESTIGATION_PANEL = By.id("divInvestigation");
+    private static final By APPROVE_BUTTON = By.id("btnApprovedLabObs");
+
+    private boolean isVisible(By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void navigateBackToResultList(WebDriverWait wait, JavascriptExecutor js) {
+        try {
+            WebElement resultEntry = wait.until(ExpectedConditions.presenceOfElementLocated(RESULT_ENTRY_MENU));
+            js.executeScript("arguments[0].click();", resultEntry);
+        } catch (Exception e) {
+            System.out.println("⚠️ Result Entry sidebar click failed, refreshing page...");
+            driver.navigate().refresh();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_BOX));
+        BaseClass.waitForOverlayInvisibility(5);
+    }
+
+    private List<WebElement> findPendingVisitLinksWithStabilization() {
+        List<WebElement> visitLinks = driver.findElements(PENDING_VISIT_LINKS);
+        if (!visitLinks.isEmpty()) {
+            return visitLinks;
+        }
+
+        // Headless runs can briefly show zero rows right after search. Re-check once.
+        BaseClass.waitInSeconds(2);
+        BaseClass.waitForOverlayInvisibility(5);
+        return driver.findElements(PENDING_VISIT_LINKS);
+    }
 
     @Given("I am on the login page")
     public void i_am_on_the_login_page() {
@@ -521,9 +562,11 @@ public class CodItDose extends BaseSteps {
 
     @When("I enter the value of the tests")
     public void i_enter_the_value_of_the_tests() throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String sinNo = ScenarioContext.extractedSinNo;
+        int emptySearchStreak = 0;
+        boolean finished = false;
 
         if (sinNo == null || sinNo.isEmpty()) {
             System.out.println("⚠️ No SIN NO found in Context, using Visit Number as fallback...");
@@ -533,84 +576,94 @@ public class CodItDose extends BaseSteps {
         System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
         for (int i = 0; i < 15; i++) {
-            BaseClass.waitInSeconds(3);
+            BaseClass.waitInSeconds(2);
+            BaseClass.waitForOverlayInvisibility(5);
 
             // Ensure we are on the list page
-            boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
-                    driver.findElements(By.id("btnApprovedLabObs")).size() > 0;
+            boolean isDetailsPage = isVisible(INVESTIGATION_PANEL) || isVisible(APPROVE_BUTTON);
 
             if (isDetailsPage) {
                 System.out.println("Iteration " + (i + 1) + ": On details page, navigating back to list...");
-                try {
-                    // Try clicking the sidebar link using JS to bypass visibility/menu issues
-                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
-                } catch (Exception e) {
-                    System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
-                    driver.navigate().refresh();
-                    BaseClass.waitInSeconds(3);
-                }
-                BaseClass.waitInSeconds(3);
+                navigateBackToResultList(wait, js);
             }
 
             // 1. Re-enter SIN and Search
             System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
             try {
-                WebElement searchBox = LocatorsPage.sinNo_searchBox;
-                BaseClass.waitForVisibility(searchBox, 10);
+                WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_BOX));
                 searchBox.clear();
                 searchBox.sendKeys(sinNo);
 
-                // Use JS click for search to be sure
-                js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                BaseClass.waitInSeconds(1);
+                WebElement searchBtn = wait.until(ExpectedConditions.elementToBeClickable(SEARCH_BUTTON));
+                js.executeScript("arguments[0].click();", searchBtn);
+                BaseClass.waitForOverlayInvisibility(5);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
                 continue;
             }
 
-            // 2. Find pending visit links
-            List<WebElement> visitLinks = driver.findElements(
-                    By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
-
-            if (visitLinks.isEmpty()) {
-                System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Exiting loop.");
-                break;
+            // If we're still on details after search, do not falsely conclude completion.
+            if (isVisible(INVESTIGATION_PANEL)) {
+                System.out.println("⚠️ Still on details page after search. Retrying iteration...");
+                continue;
             }
 
+            // 2. Find pending visit links
+            List<WebElement> visitLinks = findPendingVisitLinksWithStabilization();
+
+            if (visitLinks.isEmpty()) {
+                emptySearchStreak++;
+                if (emptySearchStreak >= 2) {
+                    System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Exiting loop.");
+                    finished = true;
+                    break;
+                }
+                System.out.println("⚠️ No rows found yet (streak " + emptySearchStreak + "). Re-checking...");
+                continue;
+            }
+            emptySearchStreak = 0;
+
             System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
-            WebElement visit = visitLinks.get(0);
 
             try {
                 // 3. Open Visit
+                WebElement visit = wait.until(ExpectedConditions.elementToBeClickable(PENDING_VISIT_LINKS));
                 String visitId = visit.getText().trim();
                 js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
                 js.executeScript("arguments[0].click();", visit);
 
                 // 4. Fill Values
                 wait.until(ExpectedConditions.or(
-                        ExpectedConditions.visibilityOfElementLocated(By.id("divInvestigation")),
-                        ExpectedConditions.visibilityOfElementLocated(By.id("btnApprovedLabObs"))));
+                        ExpectedConditions.visibilityOfElementLocated(INVESTIGATION_PANEL),
+                        ExpectedConditions.visibilityOfElementLocated(APPROVE_BUTTON)));
 
                 BaseClass.enterValuesInResultTable();
 
                 // 5. Approve
                 System.out.println("Approving visit: " + visitId);
-                if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
-                    js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                if (driver.findElements(APPROVE_BUTTON).size() > 0) {
+                    WebElement approveBtn = wait.until(ExpectedConditions.elementToBeClickable(APPROVE_BUTTON));
+                    js.executeScript("arguments[0].scrollIntoView({block:'center'});", approveBtn);
+                    js.executeScript("arguments[0].click();", approveBtn);
                 }
 
                 // Wait for approval processing (Crucial for multi-test)
                 System.out.println("Waiting for approval to complete...");
-                BaseClass.waitInSeconds(3);
+                BaseClass.waitForOverlayInvisibility(8);
+                BaseClass.waitInSeconds(2);
 
             } catch (Exception e) {
                 System.out.println("⚠️ Error processing iteration " + (i + 1) + ": " + e.getMessage());
                 // Try to force back to list for next attempt
                 try {
-                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+                    navigateBackToResultList(wait, js);
                 } catch (Exception ignored) {
                 }
             }
+        }
+
+        if (!finished) {
+            throw new RuntimeException("❌ Could not confirm completion of all pending visits for SIN: " + sinNo);
         }
     }
 
@@ -620,8 +673,8 @@ public class CodItDose extends BaseSteps {
         // We only perform a final check if there's an active button visible on screen.
         BaseClass.waitInSeconds(3);
         try {
-            if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
-                WebElement btn = driver.findElement(By.id("btnApprovedLabObs"));
+            if (driver.findElements(APPROVE_BUTTON).size() > 0) {
+                WebElement btn = driver.findElement(APPROVE_BUTTON);
                 if (btn.isDisplayed() && btn.isEnabled()) {
                     System.out.println("Clicking approve button (final check)...");
                     BaseClass.waitAndClick(btn,10);
@@ -631,6 +684,8 @@ public class CodItDose extends BaseSteps {
             } else {
                 System.out.println("✅ No pending approve button found.");
             }
+        } catch (TimeoutException e) {
+            System.out.println("ℹ️ Skipping final approve click - timeout waiting for button.");
         } catch (Exception e) {
             System.out.println("ℹ️ Skipping final approve click as element is not interactable or missing.");
         }
