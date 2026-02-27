@@ -25,10 +25,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CodItDose extends BaseSteps {
     private static final By RESULT_ENTRY_MENU = By.xpath("//a[normalize-space()='Result Entry']");
+    private static final By SEARCH_TYPE_DROPDOWN = By.id("ddlSearchType");
     private static final By SEARCH_BOX = By.id("txtSearchValue");
     private static final By SEARCH_BUTTON = By.id("btnSearch");
-    private static final By PENDING_VISIT_LINKS = By
-            .xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]");
+    private static final By PENDING_VISIT_LINKS_PRIMARY = By.xpath(
+            "//table[contains(@class,'htCore')]//a[(contains(@onclick,'PickRowData') or contains(@href,'PickRowData') or contains(@onclick,'PickRow')) and normalize-space()]");
+    private static final By PENDING_VISIT_LINKS_FALLBACK = By.xpath(
+            "//table[contains(@class,'htCore')]//a[normalize-space() and not(contains(@style,'display:none'))]");
+    private static final By PENDING_VISIT_VIEW_ICON = By.xpath(
+            "//table[contains(@class,'htCore')]//img[contains(@src,'view.gif') or contains(@onclick,'PickRowData')]");
     private static final By INVESTIGATION_PANEL = By.id("divInvestigation");
     private static final By APPROVE_BUTTON = By.id("btnApprovedLabObs");
 
@@ -53,8 +58,27 @@ public class CodItDose extends BaseSteps {
         BaseClass.waitForOverlayInvisibility(5);
     }
 
+    private List<WebElement> getDisplayedElements(By locator) {
+        List<WebElement> result = new ArrayList<>();
+        for (WebElement element : driver.findElements(locator)) {
+            try {
+                if (element.isDisplayed()) {
+                    result.add(element);
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        return result;
+    }
+
     private List<WebElement> findPendingVisitLinksWithStabilization() {
-        List<WebElement> visitLinks = driver.findElements(PENDING_VISIT_LINKS);
+        List<WebElement> visitLinks = getDisplayedElements(PENDING_VISIT_LINKS_PRIMARY);
+        if (visitLinks.isEmpty()) {
+            visitLinks = getDisplayedElements(PENDING_VISIT_LINKS_FALLBACK);
+        }
+        if (visitLinks.isEmpty()) {
+            visitLinks = getDisplayedElements(PENDING_VISIT_VIEW_ICON);
+        }
         if (!visitLinks.isEmpty()) {
             return visitLinks;
         }
@@ -62,7 +86,41 @@ public class CodItDose extends BaseSteps {
         // Headless runs can briefly show zero rows right after search. Re-check once.
         BaseClass.waitInSeconds(2);
         BaseClass.waitForOverlayInvisibility(5);
-        return driver.findElements(PENDING_VISIT_LINKS);
+        visitLinks = getDisplayedElements(PENDING_VISIT_LINKS_PRIMARY);
+        if (visitLinks.isEmpty()) {
+            visitLinks = getDisplayedElements(PENDING_VISIT_LINKS_FALLBACK);
+        }
+        if (visitLinks.isEmpty()) {
+            visitLinks = getDisplayedElements(PENDING_VISIT_VIEW_ICON);
+        }
+        return visitLinks;
+    }
+
+    private boolean ensureSinNoSearchType(WebDriverWait wait) {
+        try {
+            WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_TYPE_DROPDOWN));
+            Select select = new Select(dropdown);
+            String selected = select.getFirstSelectedOption().getText().trim();
+            if (selected.toLowerCase().contains("sin")) {
+                return true;
+            }
+
+            for (WebElement option : select.getOptions()) {
+                String optionText = option.getText().trim();
+                if (optionText.toLowerCase().contains("sin")) {
+                    select.selectByVisibleText(optionText);
+                    BaseClass.waitInSeconds(1);
+                    System.out.println("✅ Switched search type to: " + optionText);
+                    return true;
+                }
+            }
+
+            System.out.println("⚠️ Search dropdown does not contain any SIN option.");
+            return false;
+        } catch (Exception e) {
+            System.out.println("⚠️ Could not validate/choose SIN search type: " + e.getMessage());
+            return false;
+        }
     }
 
     @Given("I am on the login page")
@@ -567,6 +625,7 @@ public class CodItDose extends BaseSteps {
         String sinNo = ScenarioContext.extractedSinNo;
         int emptySearchStreak = 0;
         boolean finished = false;
+        int processedVisits = 0;
 
         if (sinNo == null || sinNo.isEmpty()) {
             System.out.println("⚠️ No SIN NO found in Context, using Visit Number as fallback...");
@@ -590,13 +649,23 @@ public class CodItDose extends BaseSteps {
             // 1. Re-enter SIN and Search
             System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
             try {
+                boolean sinSearchTypeSet = ensureSinNoSearchType(wait);
+                if (!sinSearchTypeSet) {
+                    System.out.println("⚠️ SIN search type not set; retrying iteration.");
+                    continue;
+                }
                 WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_BOX));
                 searchBox.clear();
                 searchBox.sendKeys(sinNo);
 
                 WebElement searchBtn = wait.until(ExpectedConditions.elementToBeClickable(SEARCH_BUTTON));
-                js.executeScript("arguments[0].click();", searchBtn);
+                try {
+                    searchBtn.click();
+                } catch (Exception clickEx) {
+                    js.executeScript("arguments[0].click();", searchBtn);
+                }
                 BaseClass.waitForOverlayInvisibility(5);
+                BaseClass.waitInSeconds(1);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
                 continue;
@@ -618,7 +687,8 @@ public class CodItDose extends BaseSteps {
                     finished = true;
                     break;
                 }
-                System.out.println("⚠️ No rows found yet (streak " + emptySearchStreak + "). Re-checking...");
+                System.out.println("⚠️ No rows found yet (streak " + emptySearchStreak
+                        + "). Re-checking... (Verify UI search type is SIN No.)");
                 continue;
             }
             emptySearchStreak = 0;
@@ -627,7 +697,7 @@ public class CodItDose extends BaseSteps {
 
             try {
                 // 3. Open Visit
-                WebElement visit = wait.until(ExpectedConditions.elementToBeClickable(PENDING_VISIT_LINKS));
+                WebElement visit = visitLinks.get(0);
                 String visitId = visit.getText().trim();
                 js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
                 js.executeScript("arguments[0].click();", visit);
@@ -646,6 +716,7 @@ public class CodItDose extends BaseSteps {
                     js.executeScript("arguments[0].scrollIntoView({block:'center'});", approveBtn);
                     js.executeScript("arguments[0].click();", approveBtn);
                 }
+                processedVisits++;
 
                 // Wait for approval processing (Crucial for multi-test)
                 System.out.println("Waiting for approval to complete...");
@@ -664,6 +735,10 @@ public class CodItDose extends BaseSteps {
 
         if (!finished) {
             throw new RuntimeException("❌ Could not confirm completion of all pending visits for SIN: " + sinNo);
+        }
+        if (processedVisits == 0) {
+            throw new RuntimeException(
+                    "❌ No pending visit row was opened for SIN: " + sinNo + ". Please verify Result Entry row locator.");
         }
     }
 
