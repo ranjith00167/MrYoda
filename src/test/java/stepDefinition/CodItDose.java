@@ -535,40 +535,43 @@ public class CodItDose extends BaseSteps {
         for (int i = 0; i < 15; i++) {
             BaseClass.waitInSeconds(3);
 
-            // Ensure we are on the list page
+            // 1. Check if we are ALREADY on a details page (e.g. automatically opened)
             boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
                     driver.findElements(By.id("btnApprovedLabObs")).size() > 0;
 
             if (isDetailsPage) {
-                System.out.println("Iteration " + (i + 1) + ": On details page, navigating back to list...");
+                System.out.println("Iteration " + (i + 1) + ": Already on details page. Processing current test...");
                 try {
-                    // Try clicking the sidebar link using JS to bypass visibility/menu issues
-                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+                    BaseClass.enterValuesInResultTable();
+                    if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
+                        System.out.println("Approving current test...");
+                        js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                        BaseClass.waitInSeconds(3);
+                    }
                 } catch (Exception e) {
-                    System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
-                    driver.navigate().refresh();
-                    BaseClass.waitInSeconds(3);
+                    System.out.println("⚠️ Error processing current view: " + e.getMessage());
                 }
+                
+                // Navigate back to list to check if more tests remain for this SIN
+                System.out.println("Navigating back to list results...");
+                js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
                 BaseClass.waitInSeconds(3);
             }
 
-            // 1. Re-enter SIN and Search
-            System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
+            // 2. Refresh search to see all pending visits for this SIN
+            System.out.println("Iteration " + (i + 1) + ": Searching for SIN: " + sinNo);
             try {
                 WebElement searchBox = LocatorsPage.sinNo_searchBox;
                 BaseClass.waitForVisibility(searchBox, 10);
                 searchBox.clear();
                 searchBox.sendKeys(sinNo);
-
-                // Use JS click for search to be sure
                 js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                BaseClass.waitInSeconds(1);
+                BaseClass.waitInSeconds(2); // Give time for table to populate
             } catch (Exception e) {
-                System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
-                continue;
+                System.out.println("⚠️ Search execution failed: " + e.getMessage());
             }
 
-            // 2. Find pending visit links
+            // 3. Find pending visit links in the table
             List<WebElement> visitLinks = driver.findElements(
                     By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
 
@@ -577,42 +580,41 @@ public class CodItDose extends BaseSteps {
                 break;
             }
 
-            System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
+            System.out.println("Found " + visitLinks.size() + " pending rows. Opening next visit...");
             WebElement visit = visitLinks.get(0);
 
             try {
-                // 3. Open Visit
+                // 4. Open Visit
                 String visitId = visit.getText().trim();
                 js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
                 js.executeScript("arguments[0].click();", visit);
 
-                // 4. Fill Values
+                // 5. Wait for Result Entry Page to load
                 wait.until(ExpectedConditions.or(
                         ExpectedConditions.visibilityOfElementLocated(By.id("divInvestigation")),
                         ExpectedConditions.visibilityOfElementLocated(By.id("btnApprovedLabObs"))));
 
+                // 6. Fill Values
                 BaseClass.enterValuesInResultTable();
 
-                // 5. Approve
-                System.out.println("Approving visit: " + visitId);
+                // 7. Approve
                 if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
+                    System.out.println("Approving visit: " + visitId);
                     js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                    BaseClass.waitInSeconds(3);
                 }
-
-                // Wait for approval processing (Crucial for multi-test)
-                System.out.println("Waiting for approval to complete...");
-                BaseClass.waitInSeconds(3);
 
             } catch (Exception e) {
                 System.out.println("⚠️ Error processing iteration " + (i + 1) + ": " + e.getMessage());
-                // Try to force back to list for next attempt
+                // Force navigation back to sidebar to recover
                 try {
                     js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
-                } catch (Exception ignored) {
-                }
+                    BaseClass.waitInSeconds(2);
+                } catch (Exception ignored) {}
             }
         }
     }
+
 
     @When("I click on the approve button")
     public void i_click_on_the_approve_button() throws Throwable {
