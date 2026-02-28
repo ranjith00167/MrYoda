@@ -542,7 +542,7 @@ public class CodItDose extends BaseSteps {
         System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
         for (int i = 0; i < 15; i++) {
-            BaseClass.waitInSeconds(3);
+            BaseClass.waitInSeconds(5);
 
             // Ensure we are on the list page
             boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
@@ -556,9 +556,9 @@ public class CodItDose extends BaseSteps {
                 } catch (Exception e) {
                     System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
                     driver.navigate().refresh();
-                    BaseClass.waitInSeconds(3);
+                    BaseClass.waitInSeconds(10);
                 }
-                BaseClass.waitInSeconds(3);
+                BaseClass.waitInSeconds(10);
             }
 
             // 1. Re-enter SIN and Search
@@ -571,7 +571,7 @@ public class CodItDose extends BaseSteps {
 
                 // Use JS click for search to be sure
                 js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                BaseClass.waitInSeconds(1);
+                BaseClass.waitInSeconds(10);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
                 continue;
@@ -620,7 +620,7 @@ public class CodItDose extends BaseSteps {
 
                 // Wait for approval processing (Crucial for multi-test)
                 System.out.println("Waiting for approval to complete...");
-                BaseClass.waitInSeconds(3);
+                BaseClass.waitInSeconds(10);
 
             } catch (Exception e) {
                 System.out.println("⚠️ Error processing iteration " + (i + 1) + ": " + e.getMessage());

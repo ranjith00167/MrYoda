@@ -98,7 +98,64 @@ public class BaseClass {
 
         System.out.println("🔥 Loaded Excel → Sheet: " + sheetName + ", Row: " + index);
     }
+    public static void waitForPageReady() {
+    new WebDriverWait(driver, Duration.ofSeconds(15)).until(
+        webDriver -> ((JavascriptExecutor) webDriver)
+            .executeScript("return document.readyState").equals("complete")
+    );
+}
+    public static void enterSinNumber(WebElement elementTemplate, String sinNo) {
 
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+    for (int attempt = 1; attempt <= 5; attempt++) {
+        try {
+            // 🔥 IMPORTANT: Re-fetch element reference every retry
+            WebElement input = wait.until(ExpectedConditions.refreshed(
+                    ExpectedConditions.visibilityOf(elementTemplate)
+            ));
+
+            wait.until(ExpectedConditions.elementToBeClickable(input));
+
+            js.executeScript("arguments[0].scrollIntoView({block:'center'});", input);
+
+            input.click();
+            input.clear();
+            input.sendKeys(sinNo);
+
+            wait.until(driver -> {
+                try {
+                    return sinNo.equals(input.getAttribute("value"));
+                } catch (Exception e) {
+                    return false;
+                }
+            });
+
+            System.out.println("✅ SIN No entered successfully.");
+            return;
+
+        } catch (Exception e) {
+            System.out.println("⚠ Retry SIN input attempt: " + attempt);
+            waitForDomStable();
+        }
+    }
+
+    throw new RuntimeException("❌ Failed to enter SIN after retries.");
+}
+
+public static void waitForDomStable() {
+    new WebDriverWait(driver, Duration.ofSeconds(10)).until(
+        webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete")
+    );
+}
+    public static void waitForAjaxComplete() {
+    new WebDriverWait(driver, Duration.ofSeconds(15)).until(
+        webDriver -> (Boolean) ((JavascriptExecutor) webDriver)
+            .executeScript("return window.jQuery != undefined && jQuery.active == 0")
+    );
+}
     public static List<String> getUiFormattedMemberNames(String memberNamesCell) {
         List<String> formattedNames = new ArrayList<>();
 
