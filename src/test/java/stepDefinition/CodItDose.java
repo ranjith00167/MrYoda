@@ -21,6 +21,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CodItDose extends BaseSteps {
 
@@ -30,7 +39,8 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter valid credentials")
-    public void i_enter_valid_credentials() {
+    public void i_enter_valid_credentials()  throws Throwable {
+        
         BaseClass.waitAndInput(LocatorsPage.usernameInput, ConfigReader.get("username_ITDose"), 3);
         BaseClass.waitAndInput(LocatorsPage.passwordInput, ConfigReader.get("password_ITDose"), 3);
         BaseClass.waitAndClick(LocatorsPage.loginButton, 3);
@@ -95,11 +105,11 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the visit number")
     public void i_click_on_the_visit_number() {
-        BaseClass.safeClick(LocatorsPage.searchValueInput);
+        BaseClass.waitAndClick(LocatorsPage.searchValueInput,10);
     }
 
     @When("I enter the visit number")
-    public void i_enter_the_visit_number() {
+    public void i_enter_the_visit_number()  throws Throwable{
         System.out.println("\n==========================================================");
         System.out.println("🔍 UI AUTOMATION: Retrieving Visit Number from RequestContext");
         System.out.println("==========================================================");
@@ -301,12 +311,12 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the collect button")
     public void i_click_on_the_collect_button() {
-        BaseClass.waitAndClick(LocatorsPage.collectButton, 10);
+        BaseClass.waitAndClick(LocatorsPage.collectButton,10);
     }
 
     @When("I click on the sample receive area")
     public void i_click_on_the_sample_receive_area() {
-        BaseClass.waitAndClick(LocatorsPage.sampleReceiveAreaLink, 10);
+        BaseClass.waitAndClick(LocatorsPage.sampleReceiveAreaLink,10);
     }
 
     @When("I extract the SIN NO from the UI")
@@ -426,12 +436,12 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the save button")
     public void i_click_on_the_save_button() {
-        BaseClass.waitAndClick(LocatorsPage.saveButton, 10  );
+        BaseClass.waitAndClick(LocatorsPage.saveButton,10);
     }
 
     @When("I click on the Department receive button")
     public void i_click_on_the_department_receive_button() {
-        BaseClass.waitAndClick(LocatorsPage.departmentReceiveLink, 10);
+        BaseClass.waitAndClick(LocatorsPage.departmentReceiveLink,10);
     }
 
     @When("I select the SIN NO in the dropdown")
@@ -509,7 +519,7 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I click on the sample processing button")
-    public void i_click_on_the_sample_processing_button() throws Throwable {
+    public void i_click_on_the_sample_processing_button() {
         BaseClass.waitAndClick(LocatorsPage.sampleProcessingLink,10);
     }
 
@@ -532,7 +542,7 @@ public class CodItDose extends BaseSteps {
         System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
         for (int i = 0; i < 15; i++) {
-            BaseClass.waitInSeconds(5);
+            BaseClass.waitInSeconds(3);
 
             // Ensure we are on the list page
             boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
@@ -546,9 +556,9 @@ public class CodItDose extends BaseSteps {
                 } catch (Exception e) {
                     System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
                     driver.navigate().refresh();
-                    BaseClass.waitInSeconds(5);
+                    BaseClass.waitInSeconds(3);
                 }
-                BaseClass.waitInSeconds(5);
+                BaseClass.waitInSeconds(3);
             }
 
             // 1. Re-enter SIN and Search
@@ -592,10 +602,20 @@ public class CodItDose extends BaseSteps {
 
                 BaseClass.enterValuesInResultTable();
 
-                // 5. Approve
+                // 5. Approve using robust click helper
                 System.out.println("Approving visit: " + visitId);
                 if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
-                    js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                    try {
+                        robustClick(LocatorsPage.approvedLabObsButton);
+                    } catch (Exception e) {
+                        System.out.println("⚠️ Approve click failed: " + e.getMessage());
+                        // attempt JS click as last resort
+                        try {
+                            js.executeScript("arguments[0].scrollIntoView({block:'center'});", LocatorsPage.approvedLabObsButton);
+                            js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                        } catch (Exception ignored) {
+                        }
+                    }
                 }
 
                 // Wait for approval processing (Crucial for multi-test)
@@ -623,7 +643,11 @@ public class CodItDose extends BaseSteps {
                 WebElement btn = driver.findElement(By.id("btnApprovedLabObs"));
                 if (btn.isDisplayed() && btn.isEnabled()) {
                     System.out.println("Clicking approve button (final check)...");
-                    BaseClass.waitAndClick(btn, 10);
+                    try {
+                        robustClick(btn);
+                    } catch (Exception e) {
+                        System.out.println("⚠️ Final approve click failed: " + e.getMessage());
+                    }
                 } else {
                     System.out.println("✅ No visible approve button (already handled by loop).");
                 }
@@ -633,6 +657,50 @@ public class CodItDose extends BaseSteps {
         } catch (Exception e) {
             System.out.println("ℹ️ Skipping final approve click as element is not interactable or missing.");
         }
+    }
+
+    // Helper: robust click with wait, scroll, JS fallback and screenshot on failure
+    private void robustClick(WebElement element) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Scroll into view first
+        try {
+            js.executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+        } catch (Exception ignore) {
+        }
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click();
+            return;
+        } catch (Exception e) {
+            System.out.println("   ⚠️ element.click() failed: " + e.getMessage());
+        }
+
+        // Try JS click
+        try {
+            js.executeScript("arguments[0].click();", element);
+            return;
+        } catch (Exception e) {
+            System.out.println("   ⚠️ JS click also failed: " + e.getMessage());
+        }
+
+        // As last resort, take screenshot and throw
+        try {
+            if (driver instanceof TakesScreenshot) {
+                File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                String ts = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
+                Path target = Path.of("target", "screenshots", "click_failure_" + ts + ".png");
+                Files.createDirectories(target.getParent());
+                Files.copy(src.toPath(), target);
+                System.out.println("   📸 Screenshot saved: " + target.toString());
+            }
+        } catch (Exception ex) {
+            System.out.println("   ⚠️ Failed to capture screenshot: " + ex.getMessage());
+        }
+
+        throw new RuntimeException("Failed to click element via normal or JS methods");
     }
 
 }
