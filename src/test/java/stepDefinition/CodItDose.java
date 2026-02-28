@@ -17,6 +17,7 @@ import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -569,8 +570,21 @@ public class CodItDose extends BaseSteps {
                 searchBox.clear();
                 searchBox.sendKeys(sinNo);
 
-                // Use JS click for search to be sure
-                js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
+                // Trigger search: try Enter key (reliable) then JS click as fallback
+                try {
+                    searchBox.sendKeys(Keys.ENTER);
+                } catch (Exception e) {
+                    // ignore
+                }
+
+                // Small pause then ensure click triggered
+                BaseClass.waitInSeconds(1);
+                try {
+                    js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
+                } catch (Exception e) {
+                    // ignore
+                }
+
                 BaseClass.waitInSeconds(10);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
@@ -578,17 +592,46 @@ public class CodItDose extends BaseSteps {
             }
 
             // 2. Find pending visit links - wait for table rows to appear (or a no-data marker)
-            By visitLinksBy = By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]");
+                    By[] visitCandidates = new By[] {
+                        By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData') ]"),
+                        By.xpath("//table[@id='tb_ItemList']//a[contains(@onclick,'PickRowData') ]"),
+                        By.xpath("//td[@id]//a[contains(@onclick,'PickRowData') ]"),
+                        By.xpath("//a[starts-with(@id,'lnk_') and contains(@onclick,'PickRowData') ]"),
+                        By.xpath("//table[@id='tb_ItemList']//img[contains(@src,'view.gif')]/ancestor::tr//a"),
+                        By.cssSelector("#tb_ItemList a"),
+                        By.cssSelector("table.htCore td[id] a"),
+                        By.xpath("//table[contains(@class,'dataTable')]//tr/td/a")
+                    };
+
             By noDataBy = By.cssSelector("td.dataTables_empty, .no-records, .no-data, div.no-data");
 
             List<WebElement> visitLinks = new ArrayList<>();
             try {
-                WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                shortWait.until(ExpectedConditions.or(
-                        ExpectedConditions.presenceOfAllElementsLocatedBy(visitLinksBy),
-                        ExpectedConditions.presenceOfElementLocated(noDataBy)));
+                long end = System.currentTimeMillis() + 10000;
+                boolean found = false;
+                while (System.currentTimeMillis() < end) {
+                    // check for explicit no-data marker first
+                    if (!driver.findElements(noDataBy).isEmpty()) {
+                        found = false;
+                        break;
+                    }
 
-                visitLinks = driver.findElements(visitLinksBy);
+                    for (By candidate : visitCandidates) {
+                        List<WebElement> els = driver.findElements(candidate);
+                        if (els != null && !els.isEmpty()) {
+                            visitLinks = els;
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found) break;
+                    Thread.sleep(500);
+                }
+
+                if (visitLinks.isEmpty()) {
+                    System.out.println("⚠️ Wait for visit rows timed out: no candidates or no-data found");
+                }
             } catch (Exception e) {
                 System.out.println("⚠️ Wait for visit rows timed out: " + e.getMessage());
             }
@@ -615,6 +658,26 @@ public class CodItDose extends BaseSteps {
                         System.out.println("   📝 Page source saved: " + srcHtml.toString());
                     } catch (Exception ex) {
                         System.out.println("   ⚠️ Failed saving page source: " + ex.getMessage());
+                    }
+
+                    // Save table/container outerHTML if present for deeper inspection
+                    try {
+                        WebElement tableContainer = null;
+                        if (driver.findElements(By.id("tb_ItemList")).size() > 0) {
+                            tableContainer = driver.findElement(By.id("tb_ItemList"));
+                        } else if (driver.findElements(By.cssSelector("table.htCore")).size() > 0) {
+                            tableContainer = driver.findElement(By.cssSelector("table.htCore"));
+                        }
+
+                        if (tableContainer != null) {
+                            String outer = tableContainer.getAttribute("outerHTML");
+                            String ts3 = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
+                            Path html = Path.of("target", "screenshots", "no_visits_" + sinNo + "_table_" + ts3 + ".html");
+                            Files.writeString(html, outer);
+                            System.out.println("   📝 Table HTML saved: " + html.toString());
+                        }
+                    } catch (Exception ex) {
+                        System.out.println("   ⚠️ Failed saving table HTML: " + ex.getMessage());
                     }
                 } catch (Exception ex) {
                     System.out.println("   ⚠️ Failed to capture debug snapshot: " + ex.getMessage());
