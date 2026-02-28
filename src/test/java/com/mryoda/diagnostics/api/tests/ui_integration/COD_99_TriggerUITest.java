@@ -1,13 +1,46 @@
 package com.mryoda.diagnostics.api.tests.ui_integration;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.TestNG;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class COD_99_TriggerUITest {
+
+    @BeforeClass
+    public void ensureVisitNumbersForUI() {
+        System.out.println("\n>>> SETUP: Ensure RequestContext has visit numbers for UI automation <<<");
+        List<String> visits = RequestContext.getCurrentVisitNumbers();
+        if (visits == null || visits.isEmpty()) {
+            Map<String, String> orderVisit = RequestContext.getOrderVisitMap();
+            if (orderVisit != null && !orderVisit.isEmpty()) {
+                List<String> derived = new ArrayList<>(new java.util.HashSet<>(orderVisit.values()));
+                RequestContext.setCurrentVisitNumbers(derived);
+                System.out.println("   ✅ Populated visit numbers from Order→Visit map: " + derived);
+                return;
+            }
+            String prop = System.getProperty("visitNumbers");
+            if (prop != null && !prop.trim().isEmpty()) {
+                List<String> fromProp = new ArrayList<>();
+                for (String s : prop.split(",")) {
+                    if (s != null && !s.trim().isEmpty())
+                        fromProp.add(s.trim());
+                }
+                if (!fromProp.isEmpty()) {
+                    RequestContext.setCurrentVisitNumbers(fromProp);
+                    System.out.println("   ✅ Populated visit numbers from system property: " + fromProp);
+                    return;
+                }
+            }
+            System.out.println("   ⚠️ No visit numbers found in RequestContext - UI trigger may fail.");
+        } else {
+            System.out.println("   ✅ Visit numbers already present: " + visits);
+        }
+    }
 
     @Test
     public void triggerUIAutomation() throws Throwable{

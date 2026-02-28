@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This XML file defines a TestNG test suite configuration.
+    - DOCTYPE: References the TestNG DTD for validation.
+    Use this file to organize and execute automated tests using TestNG.
+-->
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="New User COD Flow Modular Suite" verbose="2">
     <test name="New User Modular COD Flow Steps" preserve-order="true">

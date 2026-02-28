@@ -7,10 +7,47 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.*;
 
 public class COD_16_VisitStatusAPITest {
+
+    @BeforeClass
+    public void ensureVisitNumbersPresent() {
+        System.out.println("\n>>> SETUP: Ensuring visit numbers are present in RequestContext <<<");
+        List<String> visits = RequestContext.getCurrentVisitNumbers();
+        if (visits == null || visits.isEmpty()) {
+            // Try to populate from existing order→visit mapping
+            Map<String, String> orderVisit = RequestContext.getOrderVisitMap();
+            if (orderVisit != null && !orderVisit.isEmpty()) {
+                List<String> derived = new ArrayList<>(new java.util.HashSet<>(orderVisit.values()));
+                RequestContext.setCurrentVisitNumbers(derived);
+                System.out.println("   ✅ Populated visit numbers from Order→Visit map: " + derived);
+                return;
+            }
+
+            // Fallback: read comma-separated visit numbers from system property `visitNumbers`
+            String prop = System.getProperty("visitNumbers");
+            if (prop != null && !prop.trim().isEmpty()) {
+                List<String> fromProp = new ArrayList<>();
+                for (String s : prop.split(",")) {
+                    if (s != null && !s.trim().isEmpty())
+                        fromProp.add(s.trim());
+                }
+                if (!fromProp.isEmpty()) {
+                    RequestContext.setCurrentVisitNumbers(fromProp);
+                    System.out.println("   ✅ Populated visit numbers from system property: " + fromProp);
+                    return;
+                }
+            }
+
+            System.out.println("   ⚠️ No visit numbers found in RequestContext. Tests may fail unless visits are provided.");
+        } else {
+            System.out.println("   ✅ Visit numbers already present: " + visits);
+        }
+    }
+
 
     @Test
     public void testGetVisitStatus() {
