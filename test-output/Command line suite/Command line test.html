@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Command line test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sat Feb 28 13:37:34 IST 2026</td>
+<td>Started on:</td><td>Sat Feb 28 14:19:27 IST 2026</td>
 </tr>
-<tr><td>Total time:</td><td>174 seconds (174046 ms)</td>
+<tr><td>Total time:</td><td>35 seconds (35365 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -77,8 +77,15 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='testRunner.RunnerTest.runScenario()'><b>runScenario</b><br>Test class: testRunner.RunnerTest<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Process COD order sample through full lab workflow", "COD Flow Sample Lifecycle"</td>
-<td></td>
-<td>172</td>
+<td><div><pre>java.lang.RuntimeException: ? FATAL: Visit Number is null! API flow must run before UI flow to provide a valid Visit ID.
+	at stepDefinition.CodItDose.i_enter_the_visit_number(CodItDose.java:224)
+	at ?.I enter the visit number(classpath:Feature/01_COD_Flow.feature:16)
+</pre></div><a href='#' onClick='toggleBox("stack-trace26362041", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace26362041'><pre>java.lang.RuntimeException: ? FATAL: Visit Number is null! API flow must run before UI flow to provide a valid Visit ID.
+	at stepDefinition.CodItDose.i_enter_the_visit_number(CodItDose.java:224)
+	at ?.I enter the visit number(classpath:Feature/01_COD_Flow.feature:16)
+</pre></div></td>
+<td>33</td>
 <td>testRunner.RunnerTest@21ce3b22</td></tr>
 </table><p>
 </body>
