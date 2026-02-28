@@ -577,12 +577,49 @@ public class CodItDose extends BaseSteps {
                 continue;
             }
 
-            // 2. Find pending visit links
-            List<WebElement> visitLinks = driver.findElements(
-                    By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
+            // 2. Find pending visit links - wait for table rows to appear (or a no-data marker)
+            By visitLinksBy = By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]");
+            By noDataBy = By.cssSelector("td.dataTables_empty, .no-records, .no-data, div.no-data");
+
+            List<WebElement> visitLinks = new ArrayList<>();
+            try {
+                WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                shortWait.until(ExpectedConditions.or(
+                        ExpectedConditions.presenceOfAllElementsLocatedBy(visitLinksBy),
+                        ExpectedConditions.presenceOfElementLocated(noDataBy)));
+
+                visitLinks = driver.findElements(visitLinksBy);
+            } catch (Exception e) {
+                System.out.println("⚠️ Wait for visit rows timed out: " + e.getMessage());
+            }
 
             if (visitLinks.isEmpty()) {
                 System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Exiting loop.");
+
+                // Capture debug snapshot to help diagnose headless/DOM differences
+                try {
+                    if (driver instanceof TakesScreenshot) {
+                        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                        String ts = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
+                        Path target = Path.of("target", "screenshots", "no_visits_" + sinNo + "_" + ts + ".png");
+                        Files.createDirectories(target.getParent());
+                        Files.copy(src.toPath(), target);
+                        System.out.println("   📸 Snapshot saved: " + target.toString());
+                    }
+
+                    // Save page source
+                    try {
+                        String ts2 = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
+                        Path srcHtml = Path.of("target", "screenshots", "no_visits_" + sinNo + "_" + ts2 + ".html");
+                        Files.writeString(srcHtml, driver.getPageSource());
+                        System.out.println("   📝 Page source saved: " + srcHtml.toString());
+                    } catch (Exception ex) {
+                        System.out.println("   ⚠️ Failed saving page source: " + ex.getMessage());
+                    }
+                } catch (Exception ex) {
+                    System.out.println("   ⚠️ Failed to capture debug snapshot: " + ex.getMessage());
+                }
+
                 break;
             }
 
