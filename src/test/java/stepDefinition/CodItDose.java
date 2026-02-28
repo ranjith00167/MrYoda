@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -542,6 +544,8 @@ public class CodItDose extends BaseSteps {
 
         System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
+        Set<String> processedVisits = new HashSet<>();
+
         for (int i = 0; i < 15; i++) {
             BaseClass.waitInSeconds(5);
 
@@ -686,12 +690,28 @@ public class CodItDose extends BaseSteps {
                 break;
             }
 
-            System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
-            WebElement visit = visitLinks.get(0);
+            System.out.println("Found " + visitLinks.size() + " pending rows. Locating next unprocessed row...");
+
+            WebElement visit = null;
+            String visitId = null;
+            for (WebElement v : visitLinks) {
+                String t = v.getText() != null ? v.getText().trim() : "";
+                if (t.isEmpty()) continue;
+                if (!processedVisits.contains(t)) {
+                    visit = v;
+                    visitId = t;
+                    break;
+                }
+            }
+
+            if (visit == null) {
+                System.out.println("✅ No unprocessed rows found among visible entries. Exiting loop.");
+                break;
+            }
 
             try {
                 // 3. Open Visit
-                String visitId = visit.getText().trim();
+                System.out.println("Opening visit: " + visitId);
                 js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
                 js.executeScript("arguments[0].click();", visit);
 
@@ -703,19 +723,79 @@ public class CodItDose extends BaseSteps {
                 BaseClass.enterValuesInResultTable();
 
                 // 5. Approve using robust click helper
-                System.out.println("Approving visit: " + visitId);
+                System.out.println("Attempting approval for visit: " + visitId);
+                WebElement approveBtn = null;
                 if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
                     try {
-                        robustClick(LocatorsPage.approvedLabObsButton);
-                    } catch (Exception e) {
-                        System.out.println("⚠️ Approve click failed: " + e.getMessage());
-                        // attempt JS click as last resort
+                        approveBtn = driver.findElement(By.id("btnApprovedLabObs"));
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                boolean approvalAttempted = false;
+                if (approveBtn != null) {
+                    // Wait for approve button to become enabled (some flows enable it after values entered)
+                    long waitEnd = System.currentTimeMillis() + 8000;
+                    boolean enabled = false;
+                    while (System.currentTimeMillis() < waitEnd) {
                         try {
-                            js.executeScript("arguments[0].scrollIntoView({block:'center'});", LocatorsPage.approvedLabObsButton);
-                            js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                            if (approveBtn.isDisplayed() && approveBtn.isEnabled()) {
+                                enabled = true;
+                                break;
+                            }
+                        } catch (Exception e) {
+                            // stale or not found, refresh reference
+                            try {
+                                approveBtn = driver.findElement(By.id("btnApprovedLabObs"));
+                            } catch (Exception ex) {
+                            }
+                        }
+                        Thread.sleep(500);
+                    }
+
+                    if (!enabled) {
+                        System.out.println("⚠️ Approve button remained disabled for visit: " + visitId);
+                        // Capture diagnostics and mark visit processed to avoid infinite loop
+                        try {
+                            if (driver instanceof TakesScreenshot) {
+                                File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                                String ts = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
+                                Path target = Path.of("target", "screenshots", "approve_disabled_" + visitId + "_" + ts + ".png");
+                                Files.createDirectories(target.getParent());
+                                Files.copy(src.toPath(), target);
+                                System.out.println("   📸 Snapshot saved: " + target.toString());
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("   ⚠️ Failed to capture snapshot for disabled approve button: " + ex.getMessage());
+                        }
+
+                        processedVisits.add(visitId);
+                        // go to next iteration
+                        continue;
+                    }
+
+                    // Button enabled — try robust click
+                    try {
+                        robustClick(approveBtn);
+                        approvalAttempted = true;
+                    } catch (Exception e) {
+                        System.out.println("⚠️ Approve click failed via robustClick: " + e.getMessage());
+                        try {
+                            js.executeScript("arguments[0].scrollIntoView({block:'center'});", approveBtn);
+                            js.executeScript("arguments[0].click();", approveBtn);
+                            approvalAttempted = true;
                         } catch (Exception ignored) {
                         }
                     }
+                } else {
+                    System.out.println("✅ No approve button present for visit: " + visitId + " (skipping)");
+                }
+
+                // mark this visit as processed to avoid re-looping
+                processedVisits.add(visitId);
+
+                if (approvalAttempted) {
+                    System.out.println("Waiting for approval to complete...");
                 }
 
                 // Wait for approval processing (Crucial for multi-test)
