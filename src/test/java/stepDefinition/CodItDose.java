@@ -21,6 +21,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CodItDose extends BaseSteps {
 
@@ -593,10 +602,20 @@ public class CodItDose extends BaseSteps {
 
                 BaseClass.enterValuesInResultTable();
 
-                // 5. Approve
+                // 5. Approve using robust click helper
                 System.out.println("Approving visit: " + visitId);
                 if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
-                    js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                    try {
+                        robustClick(LocatorsPage.approvedLabObsButton);
+                    } catch (Exception e) {
+                        System.out.println("⚠️ Approve click failed: " + e.getMessage());
+                        // attempt JS click as last resort
+                        try {
+                            js.executeScript("arguments[0].scrollIntoView({block:'center'});", LocatorsPage.approvedLabObsButton);
+                            js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                        } catch (Exception ignored) {
+                        }
+                    }
                 }
 
                 // Wait for approval processing (Crucial for multi-test)
@@ -624,7 +643,11 @@ public class CodItDose extends BaseSteps {
                 WebElement btn = driver.findElement(By.id("btnApprovedLabObs"));
                 if (btn.isDisplayed() && btn.isEnabled()) {
                     System.out.println("Clicking approve button (final check)...");
-                    BaseClass.waitAndClick(btn,10);
+                    try {
+                        robustClick(btn);
+                    } catch (Exception e) {
+                        System.out.println("⚠️ Final approve click failed: " + e.getMessage());
+                    }
                 } else {
                     System.out.println("✅ No visible approve button (already handled by loop).");
                 }
@@ -634,6 +657,50 @@ public class CodItDose extends BaseSteps {
         } catch (Exception e) {
             System.out.println("ℹ️ Skipping final approve click as element is not interactable or missing.");
         }
+    }
+
+    // Helper: robust click with wait, scroll, JS fallback and screenshot on failure
+    private void robustClick(WebElement element) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Scroll into view first
+        try {
+            js.executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+        } catch (Exception ignore) {
+        }
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click();
+            return;
+        } catch (Exception e) {
+            System.out.println("   ⚠️ element.click() failed: " + e.getMessage());
+        }
+
+        // Try JS click
+        try {
+            js.executeScript("arguments[0].click();", element);
+            return;
+        } catch (Exception e) {
+            System.out.println("   ⚠️ JS click also failed: " + e.getMessage());
+        }
+
+        // As last resort, take screenshot and throw
+        try {
+            if (driver instanceof TakesScreenshot) {
+                File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                String ts = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
+                Path target = Path.of("target", "screenshots", "click_failure_" + ts + ".png");
+                Files.createDirectories(target.getParent());
+                Files.copy(src.toPath(), target);
+                System.out.println("   📸 Screenshot saved: " + target.toString());
+            }
+        } catch (Exception ex) {
+            System.out.println("   ⚠️ Failed to capture screenshot: " + ex.getMessage());
+        }
+
+        throw new RuntimeException("Failed to click element via normal or JS methods");
     }
 
 }
