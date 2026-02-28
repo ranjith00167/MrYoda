@@ -14,25 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CodItDose extends BaseSteps {
 
@@ -42,8 +30,7 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter valid credentials")
-    public void i_enter_valid_credentials()  throws Throwable {
-        
+    public void i_enter_valid_credentials() throws Throwable {
         BaseClass.waitAndInput(LocatorsPage.usernameInput, ConfigReader.get("username_ITDose"), 3);
         BaseClass.waitAndInput(LocatorsPage.passwordInput, ConfigReader.get("password_ITDose"), 3);
         BaseClass.waitAndClick(LocatorsPage.loginButton, 3);
@@ -108,11 +95,11 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the visit number")
     public void i_click_on_the_visit_number() {
-        BaseClass.waitAndClick(LocatorsPage.searchValueInput,10);
+        BaseClass.waitAndClick(LocatorsPage.searchValueInput, 10);
     }
 
     @When("I enter the visit number")
-    public void i_enter_the_visit_number()  throws Throwable{
+    public void i_enter_the_visit_number() throws Throwable {
         System.out.println("\n==========================================================");
         System.out.println("🔍 UI AUTOMATION: Retrieving Visit Number from RequestContext");
         System.out.println("==========================================================");
@@ -314,12 +301,12 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the collect button")
     public void i_click_on_the_collect_button() {
-        BaseClass.waitAndClick(LocatorsPage.collectButton,10);
+        BaseClass.waitAndClick(LocatorsPage.collectButton, 10);
     }
 
     @When("I click on the sample receive area")
     public void i_click_on_the_sample_receive_area() {
-        BaseClass.waitAndClick(LocatorsPage.sampleReceiveAreaLink,10);
+        BaseClass.waitAndClick(LocatorsPage.sampleReceiveAreaLink, 10);
     }
 
     @When("I extract the SIN NO from the UI")
@@ -439,12 +426,12 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the save button")
     public void i_click_on_the_save_button() {
-        BaseClass.waitAndClick(LocatorsPage.saveButton,10);
+        BaseClass.waitAndClick(LocatorsPage.saveButton, 10);
     }
 
     @When("I click on the Department receive button")
     public void i_click_on_the_department_receive_button() {
-        BaseClass.waitAndClick(LocatorsPage.departmentReceiveLink,10);
+        BaseClass.waitAndClick(LocatorsPage.departmentReceiveLink, 10);
     }
 
     @When("I select the SIN NO in the dropdown")
@@ -512,23 +499,23 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the sample receive checkbox")
     public void i_click_on_the_sample_receive_checkbox() {
-        BaseClass.waitAndClick(LocatorsPage.selectDepartmentCheckbox,10);
+        BaseClass.waitAndClick(LocatorsPage.selectDepartmentCheckbox, 10);
     }
 
     @When("I click on the receive button")
     public void i_click_on_the_receive_button() throws Throwable {
         Thread.sleep(5000);
-        BaseClass.waitAndClick(LocatorsPage.receiveButton,10);
+        BaseClass.waitAndClick(LocatorsPage.receiveButton, 10);
     }
 
     @When("I click on the sample processing button")
     public void i_click_on_the_sample_processing_button() {
-        BaseClass.waitAndClick(LocatorsPage.sampleProcessingLink,10);
+        BaseClass.waitAndClick(LocatorsPage.sampleProcessingLink, 10);
     }
 
     @When("I click on the result entry button")
     public void i_click_on_the_result_entry_button() {
-        BaseClass.waitAndClick(LocatorsPage.resultEntryLink,10);
+        BaseClass.waitAndClick(LocatorsPage.resultEntryLink, 10);
     }
 
     @When("I enter the value of the tests")
@@ -544,10 +531,8 @@ public class CodItDose extends BaseSteps {
 
         System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
-        Set<String> processedVisits = new HashSet<>();
-
         for (int i = 0; i < 15; i++) {
-            BaseClass.waitInSeconds(5);
+            BaseClass.waitInSeconds(3);
 
             // Ensure we are on the list page
             boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
@@ -561,9 +546,9 @@ public class CodItDose extends BaseSteps {
                 } catch (Exception e) {
                     System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
                     driver.navigate().refresh();
-                    BaseClass.waitInSeconds(10);
+                    BaseClass.waitInSeconds(3);
                 }
-                BaseClass.waitInSeconds(10);
+                BaseClass.waitInSeconds(3);
             }
 
             // 1. Re-enter SIN and Search
@@ -574,144 +559,29 @@ public class CodItDose extends BaseSteps {
                 searchBox.clear();
                 searchBox.sendKeys(sinNo);
 
-                // Trigger search: try Enter key (reliable) then JS click as fallback
-                try {
-                    searchBox.sendKeys(Keys.ENTER);
-                } catch (Exception e) {
-                    // ignore
-                }
-
-                // Small pause then ensure click triggered
+                // Use JS click for search to be sure
+                js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
                 BaseClass.waitInSeconds(1);
-                try {
-                    js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                } catch (Exception e) {
-                    // ignore
-                }
-
-                BaseClass.waitInSeconds(10);
             } catch (Exception e) {
                 System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
                 continue;
             }
 
-            // 2. Find pending visit links - wait for table rows to appear (or a no-data marker)
-                    By[] visitCandidates = new By[] {
-                        By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData') ]"),
-                        By.xpath("//table[@id='tb_ItemList']//a[contains(@onclick,'PickRowData') ]"),
-                        By.xpath("//td[@id]//a[contains(@onclick,'PickRowData') ]"),
-                        By.xpath("//a[starts-with(@id,'lnk_') and contains(@onclick,'PickRowData') ]"),
-                        By.xpath("//table[@id='tb_ItemList']//img[contains(@src,'view.gif')]/ancestor::tr//a"),
-                        By.cssSelector("#tb_ItemList a"),
-                        By.cssSelector("table.htCore td[id] a"),
-                        By.xpath("//table[contains(@class,'dataTable')]//tr/td/a")
-                    };
-
-            By noDataBy = By.cssSelector("td.dataTables_empty, .no-records, .no-data, div.no-data");
-
-            List<WebElement> visitLinks = new ArrayList<>();
-            try {
-                long end = System.currentTimeMillis() + 10000;
-                boolean found = false;
-                while (System.currentTimeMillis() < end) {
-                    // check for explicit no-data marker first
-                    if (!driver.findElements(noDataBy).isEmpty()) {
-                        found = false;
-                        break;
-                    }
-
-                    for (By candidate : visitCandidates) {
-                        List<WebElement> els = driver.findElements(candidate);
-                        if (els != null && !els.isEmpty()) {
-                            visitLinks = els;
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if (found) break;
-                    Thread.sleep(500);
-                }
-
-                if (visitLinks.isEmpty()) {
-                    System.out.println("⚠️ Wait for visit rows timed out: no candidates or no-data found");
-                }
-            } catch (Exception e) {
-                System.out.println("⚠️ Wait for visit rows timed out: " + e.getMessage());
-            }
+            // 2. Find pending visit links
+            List<WebElement> visitLinks = driver.findElements(
+                    By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
 
             if (visitLinks.isEmpty()) {
                 System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Exiting loop.");
-
-                // Capture debug snapshot to help diagnose headless/DOM differences
-                try {
-                    if (driver instanceof TakesScreenshot) {
-                        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                        String ts = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
-                        Path target = Path.of("target", "screenshots", "no_visits_" + sinNo + "_" + ts + ".png");
-                        Files.createDirectories(target.getParent());
-                        Files.copy(src.toPath(), target);
-                        System.out.println("   📸 Snapshot saved: " + target.toString());
-                    }
-
-                    // Save page source
-                    try {
-                        String ts2 = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
-                        Path srcHtml = Path.of("target", "screenshots", "no_visits_" + sinNo + "_" + ts2 + ".html");
-                        Files.writeString(srcHtml, driver.getPageSource());
-                        System.out.println("   📝 Page source saved: " + srcHtml.toString());
-                    } catch (Exception ex) {
-                        System.out.println("   ⚠️ Failed saving page source: " + ex.getMessage());
-                    }
-
-                    // Save table/container outerHTML if present for deeper inspection
-                    try {
-                        WebElement tableContainer = null;
-                        if (driver.findElements(By.id("tb_ItemList")).size() > 0) {
-                            tableContainer = driver.findElement(By.id("tb_ItemList"));
-                        } else if (driver.findElements(By.cssSelector("table.htCore")).size() > 0) {
-                            tableContainer = driver.findElement(By.cssSelector("table.htCore"));
-                        }
-
-                        if (tableContainer != null) {
-                            String outer = tableContainer.getAttribute("outerHTML");
-                            String ts3 = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
-                            Path html = Path.of("target", "screenshots", "no_visits_" + sinNo + "_table_" + ts3 + ".html");
-                            Files.writeString(html, outer);
-                            System.out.println("   📝 Table HTML saved: " + html.toString());
-                        }
-                    } catch (Exception ex) {
-                        System.out.println("   ⚠️ Failed saving table HTML: " + ex.getMessage());
-                    }
-                } catch (Exception ex) {
-                    System.out.println("   ⚠️ Failed to capture debug snapshot: " + ex.getMessage());
-                }
-
                 break;
             }
 
-            System.out.println("Found " + visitLinks.size() + " pending rows. Locating next unprocessed row...");
-
-            WebElement visit = null;
-            String visitId = null;
-            for (WebElement v : visitLinks) {
-                String t = v.getText() != null ? v.getText().trim() : "";
-                if (t.isEmpty()) continue;
-                if (!processedVisits.contains(t)) {
-                    visit = v;
-                    visitId = t;
-                    break;
-                }
-            }
-
-            if (visit == null) {
-                System.out.println("✅ No unprocessed rows found among visible entries. Exiting loop.");
-                break;
-            }
+            System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
+            WebElement visit = visitLinks.get(0);
 
             try {
                 // 3. Open Visit
-                System.out.println("Opening visit: " + visitId);
+                String visitId = visit.getText().trim();
                 js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
                 js.executeScript("arguments[0].click();", visit);
 
@@ -722,85 +592,15 @@ public class CodItDose extends BaseSteps {
 
                 BaseClass.enterValuesInResultTable();
 
-                // 5. Approve using robust click helper
-                System.out.println("Attempting approval for visit: " + visitId);
-                WebElement approveBtn = null;
+                // 5. Approve
+                System.out.println("Approving visit: " + visitId);
                 if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
-                    try {
-                        approveBtn = driver.findElement(By.id("btnApprovedLabObs"));
-                    } catch (Exception ignored) {
-                    }
-                }
-
-                boolean approvalAttempted = false;
-                if (approveBtn != null) {
-                    // Wait for approve button to become enabled (some flows enable it after values entered)
-                    long waitEnd = System.currentTimeMillis() + 8000;
-                    boolean enabled = false;
-                    while (System.currentTimeMillis() < waitEnd) {
-                        try {
-                            if (approveBtn.isDisplayed() && approveBtn.isEnabled()) {
-                                enabled = true;
-                                break;
-                            }
-                        } catch (Exception e) {
-                            // stale or not found, refresh reference
-                            try {
-                                approveBtn = driver.findElement(By.id("btnApprovedLabObs"));
-                            } catch (Exception ex) {
-                            }
-                        }
-                        Thread.sleep(500);
-                    }
-
-                    if (!enabled) {
-                        System.out.println("⚠️ Approve button remained disabled for visit: " + visitId);
-                        // Capture diagnostics and mark visit processed to avoid infinite loop
-                        try {
-                            if (driver instanceof TakesScreenshot) {
-                                File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                                String ts = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
-                                Path target = Path.of("target", "screenshots", "approve_disabled_" + visitId + "_" + ts + ".png");
-                                Files.createDirectories(target.getParent());
-                                Files.copy(src.toPath(), target);
-                                System.out.println("   📸 Snapshot saved: " + target.toString());
-                            }
-                        } catch (Exception ex) {
-                            System.out.println("   ⚠️ Failed to capture snapshot for disabled approve button: " + ex.getMessage());
-                        }
-
-                        processedVisits.add(visitId);
-                        // go to next iteration
-                        continue;
-                    }
-
-                    // Button enabled — try robust click
-                    try {
-                        robustClick(approveBtn);
-                        approvalAttempted = true;
-                    } catch (Exception e) {
-                        System.out.println("⚠️ Approve click failed via robustClick: " + e.getMessage());
-                        try {
-                            js.executeScript("arguments[0].scrollIntoView({block:'center'});", approveBtn);
-                            js.executeScript("arguments[0].click();", approveBtn);
-                            approvalAttempted = true;
-                        } catch (Exception ignored) {
-                        }
-                    }
-                } else {
-                    System.out.println("✅ No approve button present for visit: " + visitId + " (skipping)");
-                }
-
-                // mark this visit as processed to avoid re-looping
-                processedVisits.add(visitId);
-
-                if (approvalAttempted) {
-                    System.out.println("Waiting for approval to complete...");
+                    js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
                 }
 
                 // Wait for approval processing (Crucial for multi-test)
                 System.out.println("Waiting for approval to complete...");
-                BaseClass.waitInSeconds(10);
+                BaseClass.waitInSeconds(3);
 
             } catch (Exception e) {
                 System.out.println("⚠️ Error processing iteration " + (i + 1) + ": " + e.getMessage());
@@ -823,11 +623,7 @@ public class CodItDose extends BaseSteps {
                 WebElement btn = driver.findElement(By.id("btnApprovedLabObs"));
                 if (btn.isDisplayed() && btn.isEnabled()) {
                     System.out.println("Clicking approve button (final check)...");
-                    try {
-                        robustClick(btn);
-                    } catch (Exception e) {
-                        System.out.println("⚠️ Final approve click failed: " + e.getMessage());
-                    }
+                    BaseClass.waitAndClick(btn, 10);
                 } else {
                     System.out.println("✅ No visible approve button (already handled by loop).");
                 }
@@ -837,50 +633,6 @@ public class CodItDose extends BaseSteps {
         } catch (Exception e) {
             System.out.println("ℹ️ Skipping final approve click as element is not interactable or missing.");
         }
-    }
-
-    // Helper: robust click with wait, scroll, JS fallback and screenshot on failure
-    private void robustClick(WebElement element) throws IOException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        // Scroll into view first
-        try {
-            js.executeScript("arguments[0].scrollIntoView({block:'center'});", element);
-        } catch (Exception ignore) {
-        }
-
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            element.click();
-            return;
-        } catch (Exception e) {
-            System.out.println("   ⚠️ element.click() failed: " + e.getMessage());
-        }
-
-        // Try JS click
-        try {
-            js.executeScript("arguments[0].click();", element);
-            return;
-        } catch (Exception e) {
-            System.out.println("   ⚠️ JS click also failed: " + e.getMessage());
-        }
-
-        // As last resort, take screenshot and throw
-        try {
-            if (driver instanceof TakesScreenshot) {
-                File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                String ts = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS").format(new Date());
-                Path target = Path.of("target", "screenshots", "click_failure_" + ts + ".png");
-                Files.createDirectories(target.getParent());
-                Files.copy(src.toPath(), target);
-                System.out.println("   📸 Screenshot saved: " + target.toString());
-            }
-        } catch (Exception ex) {
-            System.out.println("   ⚠️ Failed to capture screenshot: " + ex.getMessage());
-        }
-
-        throw new RuntimeException("Failed to click element via normal or JS methods");
     }
 
 }

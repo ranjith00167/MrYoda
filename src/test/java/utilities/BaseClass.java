@@ -32,6 +32,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 
 import org.apache.commons.io.FileUtils;
@@ -1141,12 +1142,40 @@ public static void waitForDomStable() {
     }
 
     public String runProcessAndGetOutput(String exePath, String script, String arg) {
+        List<String> cmd = new ArrayList<>();
+        if (exePath != null && !exePath.trim().isEmpty()) cmd.add(exePath);
+        if (script != null && !script.trim().isEmpty()) cmd.add(script);
+        if (arg != null && !arg.trim().isEmpty()) cmd.add(arg);
+
         try {
-            Process process = new ProcessBuilder(exePath, script, arg).start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            return reader.readLine();
+            System.out.println("Starting external process: " + String.join(" ", cmd));
+            ProcessBuilder pb = new ProcessBuilder(cmd);
+            pb.redirectErrorStream(true);
+            Process process = pb.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
+            StringBuilder out = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                out.append(line).append(System.lineSeparator());
+            }
+
+            boolean finished = process.waitFor(30, TimeUnit.SECONDS);
+            int exit = finished ? process.exitValue() : -1;
+            System.out.println("External process finished: exitCode=" + exit + ", finished=" + finished);
+
+            if (!finished) {
+                process.destroyForcibly();
+                throw new RuntimeException("External process did not finish within timeout. Command: " + String.join(" ", cmd));
+            }
+
+            String output = out.toString().trim();
+            if (output.isEmpty()) {
+                throw new RuntimeException("External process produced no output. ExitCode=" + exit + ", Command: " + String.join(" ", cmd));
+            }
+            return output.split(System.lineSeparator())[0];
         } catch (Exception e) {
-            throw new RuntimeException("AutoIt upload failed: " + e.getMessage());
+            throw new RuntimeException("AutoIt upload failed: " + e.getMessage(), e);
         }
     }
 
