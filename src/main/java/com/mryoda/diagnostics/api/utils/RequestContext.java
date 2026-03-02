@@ -122,6 +122,8 @@ public class RequestContext {
 
     private static String visitNumber;
     private static String currentOrderId;
+    private static String currentOrderSampleNumber;  // e.g. "MY26AAA1888" — reference_code in transaction
+    private static String currentMembershipCustomerId; // membership system's customer_id (different from diagnostics userId)
     private static String currentPaymentId;
     private static String currentOrderTrackingId;
     private static String currentPhleboGuid;
@@ -197,6 +199,22 @@ public class RequestContext {
 
     public static String getCurrentOrderId() {
         return currentOrderId;
+    }
+
+    public static void setCurrentOrderSampleNumber(String v) {
+        currentOrderSampleNumber = v;
+    }
+
+    public static String getCurrentOrderSampleNumber() {
+        return currentOrderSampleNumber;
+    }
+
+    public static void setCurrentMembershipCustomerId(String v) {
+        currentMembershipCustomerId = v;
+    }
+
+    public static String getCurrentMembershipCustomerId() {
+        return currentMembershipCustomerId;
     }
 
     public static void setCurrentOrderIds(List<String> ids) {

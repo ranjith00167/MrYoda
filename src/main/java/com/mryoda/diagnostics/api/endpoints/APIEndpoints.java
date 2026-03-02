@@ -66,6 +66,13 @@ public class APIEndpoints {
     public static final String GET_REPORT_DETAILS = "/report/getReportDetailsByVisitNumber/{visit_Number}";
     public static final String UPDATE_ORDER = "/order/v2updateOrder";
 
+    // ========== CANCELLATION & REFUND ==========
+    public static final String APPROVE_CANCELLED_ORDER = "/order/approveCancelldOrder";
+    public static final String NEW_RETURNING_CASHBACK = "/order/v2NewReturningCashback";
+
+    // ========== TRANSACTION ==========
+    public static final String GET_TRANSACTION_BY_MOBILE = "/transaction/getTransactionByMobile/{mobile_number}";
+
     // ========== FAMILY MEMBER ==========
     public static final String GET_ALL_FAMILY_MEMBERS = "/familymembers/GetAllFamilyMembersByUser/{user_id}";
     public static final String ADD_FAMILY_MEMBER = "/familymembers/addFamilyMember";
