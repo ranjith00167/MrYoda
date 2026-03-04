@@ -55,4 +55,12 @@ public interface ConfigManager extends Config {
     @Key("password_ITDose")
     String adminPassword();
 
+    @Key("admin.main.identifier")
+    @DefaultValue("admin@yopmail.com")
+    String adminMainIdentifier();
+
+    @Key("admin.main.password")
+    @DefaultValue("admin")
+    String adminMainPassword();
+
 }

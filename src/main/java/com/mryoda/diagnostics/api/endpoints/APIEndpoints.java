@@ -68,7 +68,8 @@ public class APIEndpoints {
 
     // ========== CANCELLATION & REFUND ==========
     public static final String APPROVE_CANCELLED_ORDER = "/order/approveCancelldOrder";
-    public static final String NEW_RETURNING_CASHBACK = "/order/v2NewReturningCashback";
+    public static final String NEW_RETURNING_CASHBACK   = "/order/v2NewReturningCashback";   // legacy — kept for reference
+    public static final String ADMIN_RETURNING_CASHBACK = "/order/adminReturningCashback";
 
     // ========== TRANSACTION ==========
     public static final String GET_TRANSACTION_BY_MOBILE = "/transaction/getTransactionByMobile/{mobile_number}";

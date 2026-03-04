@@ -53,17 +53,19 @@ public class RewardHelper {
         System.out.println("🎁 Actual Rewards Gained: " + actualGain + " (Ceiled: " + roundedActualGain + ")");
         System.out.println("📊 Expected Rewards (5% of " + dueAmount + "): " + (dueAmount * 0.05) + " (Ceiled: " + expectedGainRounded + ")");
 
-        // Comparison logic: Since user mentioned 38.45 vs 39.0 was "PASSED" in previous run with delta < 1,
-        // we'll keep a slight tolerance or prioritize the rounded matching.
-        if (roundedActualGain == expectedGainRounded || Math.abs(actualGain - (dueAmount * 0.05)) < 1.0) {
-            System.out.println("✅ VALIDATION PASSED: Rewards Gain calculation is correct (within tolerance/rounded).");
-        } else {
-            System.out.println("❌ VALIDATION FAILED: Rewards Gain mismatch!");
-            System.out.println("   Expected: ~" + expectedGainRounded + ", Actual: " + roundedActualGain);
-            // We log but don't strictly fail if the difference is minor, 
-            // but for a test framework we should report it.
+        // Hard assertion: ceil(dueAmount × 5%) must equal ceiled actual gain (tolerance < 1)
+        boolean gainCorrect = (roundedActualGain == expectedGainRounded)
+                || Math.abs(actualGain - (dueAmount * 0.05)) < 1.0;
+        AssertionUtil.verifyTrue(gainCorrect,
+                "REWARDS GAIN FORMULA: ceil(" + dueAmount + " × 5%) = " + expectedGainRounded
+                        + " but actual ceiled gain = " + roundedActualGain
+                        + " (raw actual = " + actualGain + ")");
+
+        if (gainCorrect) {
+            System.out.println("✅ VALIDATION PASSED: Rewards Gain = " + actualGain
+                    + " matches ceil(" + dueAmount + " × 5%) = " + expectedGainRounded);
         }
-        
+
         RequestContext.setRewardsGain(actualGain);
     }
 }

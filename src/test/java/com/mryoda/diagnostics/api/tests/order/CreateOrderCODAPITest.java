@@ -55,6 +55,28 @@ public class CreateOrderCODAPITest extends BaseTest {
     }
 
     // -------------------------------
+    // HELPER: Log Soft Warnings to File
+    // -------------------------------
+    protected void logSoft(String message) {
+        System.out.println(message); // Keep console logging
+        try {
+            java.io.File logDir = new java.io.File("logs");
+            if (!logDir.exists()) {
+                logDir.mkdirs();
+            }
+            java.io.FileWriter fw = new java.io.FileWriter("logs/cod_failures.log", true);
+            java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
+            java.io.PrintWriter out = new java.io.PrintWriter(bw);
+            String timestamp = java.time.LocalDateTime.now()
+                    .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            out.println("[" + timestamp + "] [SOFT] " + message);
+            out.close();
+        } catch (java.io.IOException e) {
+            System.err.println("Failed to write to soft-warn log: " + e.getMessage());
+        }
+    }
+
+    // -------------------------------
     // HELPER: Check if User is Member
     // -------------------------------
     protected boolean isMember(String token, String userId) {
@@ -271,11 +293,24 @@ public class CreateOrderCODAPITest extends BaseTest {
                         // enforced.
                         // This happens when the same test user runs the suite more than once in
                         // staging.
-                        boolean isRedeemed = couponReason != null
-                                && couponReason.toLowerCase().contains("already redeemed");
-                        if (isRedeemed) {
+                        // Classify the reason as a known business rule (soft-fail) vs a real error (hard-fail).
+                        // Business-rule reasons mean the coupon is structurally valid but not applicable
+                        // for this particular order/user at this moment.  The test should continue
+                        // with 0 discount rather than aborting the entire flow.
+                        String reasonLower = couponReason == null ? "" : couponReason.toLowerCase();
+                        boolean isBusinessRule =
+                                reasonLower.contains("already redeemed") ||
+                                reasonLower.contains("minimum order") ||
+                                reasonLower.contains("minimum amount") ||
+                                reasonLower.contains("order amount") ||
+                                reasonLower.contains("coupon expired") ||
+                                reasonLower.contains("not applicable") ||
+                                reasonLower.contains("not eligible") ||
+                                reasonLower.contains("usage limit");
+
+                        if (isBusinessRule) {
                             System.out.println(
-                                    "   ⚠️ [WARN] Coupon already redeemed for this user — business rule enforced (1 use per user).");
+                                    "   ⚠️ [WARN] Coupon not applicable — business rule: \"" + couponReason + "\"");
                             System.out.println(
                                     "   ℹ️  Discount will be 0. Coupon GUID kept in context so COD_03 can re-attach it during slot update.");
                             // IMPORTANT: Do NOT disable coupon flow flags here.
@@ -2333,10 +2368,16 @@ public class CreateOrderCODAPITest extends BaseTest {
         System.out.println("      ADMIN LOGIN API (Main System)");
         System.out.println("==========================================================");
 
+        // Load admin credentials from config.properties (admin.main.identifier / admin.main.password)
+        String adminIdentifier = com.mryoda.diagnostics.api.config.ConfigLoader.getConfig().adminMainIdentifier();
+        String adminPass       = com.mryoda.diagnostics.api.config.ConfigLoader.getConfig().adminMainPassword();
+        System.out.println("   Using config admin identifier: " + adminIdentifier);
+
         // User provided credentials
         Map<String, Object> payload = new HashMap<>();
-        payload.put("user_name", "admin");
-        payload.put("password", "admin");
+        payload.put("identifier", adminIdentifier);  // API requires valid email/mobile as identifier
+        payload.put("user_name", "admin");   // legacy fallback key
+        payload.put("password", adminPass);
         payload.put("type", "login");
         payload.put("fcmToken",
                 "ec0gPKSrIUs443ILfDLHaM:APA91bG6Ax2ZisptMxd2dPgpfNTmdRRsaXmXYmT3TuOWleJsBgyf9TSpZ-NwcJdqa_TmjRb33gyfjAK69KNo8WiW_8V9_ov3PM6UsYHvJyBmiv-B6M5KAuQ");
@@ -2361,6 +2402,14 @@ public class CreateOrderCODAPITest extends BaseTest {
         } else {
             System.out.println("   ⚠️ Initial admin login returned " + response.getStatusCode() + ", attempting fallback payloads...");
             List<Map<String, Object>> fallbacks = new ArrayList<>();
+
+            // Try identifier with config admin email (API requires valid email/mobile)
+            Map<String, Object> p0 = new HashMap<>();
+            p0.put("identifier", adminIdentifier);
+            p0.put("password", adminPass);
+            p0.put("type", "login");
+            p0.put("fcmToken", payload.get("fcmToken"));
+            fallbacks.add(p0);
 
             // Try 'username' instead of 'user_name'
             Map<String, Object> p1 = new HashMap<>();
@@ -2652,6 +2701,24 @@ public class CreateOrderCODAPITest extends BaseTest {
                     RequestContext.setCurrentOrderId(entry.getKey());
                 }
 
+                // Store per-order NET amounts (after coupon split) so step18_B uses the actual
+                // cash paid per order as the rewards formula base.
+                // Derive total coupon from: gross consolidated total - net due amount from cart.
+                // This avoids relying on RequestContext.getCouponAmount() which may be 0 in multi-member flows.
+                double totalCouponForRewards = consolidatedAmount - remainingPayableFromCart;
+                if (totalCouponForRewards > 1.0 && consolidatedAmount > 0) {
+                    java.util.Map<String, Double> netOrderAmounts = new java.util.HashMap<>();
+                    for (java.util.Map.Entry<String, Double> e2 : orderTotals.entrySet()) {
+                        double couponShare = totalCouponForRewards * e2.getValue() / consolidatedAmount;
+                        netOrderAmounts.put(e2.getKey(), e2.getValue() - couponShare);
+                    }
+                    RequestContext.setOrderAmounts(netOrderAmounts);
+                    System.out.println("   Per-order NET amounts (coupon ₹" + totalCouponForRewards + " deducted proportionally): " + netOrderAmounts);
+                } else {
+                    RequestContext.setOrderAmounts(orderTotals);
+                    System.out.println("   Per-order amounts stored (no coupon): " + orderTotals);
+                }
+
                 double amountToApprove = remainingPayableFromCart > 0 ? remainingPayableFromCart : gatewayPayableAmount;
                 if (amountToApprove <= 0 && contextPayableAmount > 0) {
                     amountToApprove = contextPayableAmount;
@@ -2862,22 +2929,36 @@ public class CreateOrderCODAPITest extends BaseTest {
             if ("Success".equalsIgnoreCase(paymentStatus)) {
                 System.out.println("✅ VALIDATION PASSED: Payment Status is '" + paymentStatus + "'");
             } else {
-                System.out.println(
-                        "⚠️ VALIDATION WARNING: Payment Status is '" + paymentStatus + "'. Expected 'Success'.");
+                AssertionUtil.verifyTrue(false,
+                        "POST-APPROVAL PAYMENT STATUS: expected 'Success' but got '" + paymentStatus + "'");
             }
 
-            // Verify Amount
+            // Verify Amount — try multiple paths; post-approval response may rename the field
             Object paymentAmountObj = postPaymentResponse.jsonPath().get("data.payments.amount");
-            double paymentAmount = paymentAmountObj instanceof Number ? ((Number) paymentAmountObj).doubleValue() : -1;
-            System.out.println("   Payment Amount on Record: " + paymentAmount);
-            RequestContext.setCurrentDueAmount(paymentAmount);
+            if (paymentAmountObj == null) {
+                paymentAmountObj = postPaymentResponse.jsonPath().get("data.payments.net_payable");
+            }
+            if (paymentAmountObj == null) {
+                paymentAmountObj = postPaymentResponse.jsonPath().get("data.payments.total_amount");
+            }
+            // Fall back to recordedTotal (pre-approval amount, already validated) if field absent after approval
+            double paymentAmount = (paymentAmountObj instanceof Number)
+                    ? ((Number) paymentAmountObj).doubleValue()
+                    : recordedTotal;
+            System.out.println("   Payment Amount on Record: " + paymentAmount
+                    + (paymentAmountObj == null ? " (field absent post-approval — using pre-approval recordedTotal)" : ""));
+            // Always store a valid due amount; recordedTotal is the ground-truth pre-approval value
+            RequestContext.setCurrentDueAmount(paymentAmount > 0 ? paymentAmount : recordedTotal);
 
-            if (Math.abs(paymentAmount - recordedTotal) < 1.0) {
+            if (paymentAmountObj == null) {
+                System.out.println("   ℹ️ POST-APPROVAL AMOUNT: field not returned by GetPaymentById after approval — using pre-approval total ₹" + recordedTotal + " as dueAmount.");
+            } else if (Math.abs(paymentAmount - recordedTotal) < 1.0) {
                 System.out.println("✅ VALIDATION PASSED: Payment Amount on record (₹" + paymentAmount
                         + ") matches expected sum (₹" + recordedTotal + ").");
             } else {
-                System.out.println("⚠️ VALIDATION WARNING: Payment Amount mismatch! Recorded: ₹" + paymentAmount
-                        + ", Expected Sum: ₹" + recordedTotal);
+                AssertionUtil.verifyTrue(false,
+                        "POST-APPROVAL PAYMENT AMOUNT: expected \u20b9" + recordedTotal
+                                + " (within \u20b91 tolerance) but payment record shows \u20b9" + paymentAmount);
             }
         }
     }

@@ -1444,6 +1444,30 @@ public class RequestContext {
         return currentDueAmount.get() != null ? currentDueAmount.get() : 0.0;
     }
 
+    // Per-order amounts — populated during callApprovePaymentAPI from payment breakdown.
+    // Key = orderId (guid), Value = sum of item final_prices for that order.
+    // Used by step18_B to obtain the exact per-member due amount regardless of
+    // whether members have the same or different order totals.
+    private static final ThreadLocal<Map<String, Double>> orderAmounts =
+            ThreadLocal.withInitial(java.util.HashMap::new);
+
+    public static void setOrderAmounts(Map<String, Double> amounts) {
+        orderAmounts.get().clear();
+        if (amounts != null) {
+            orderAmounts.get().putAll(amounts);
+        }
+    }
+
+    public static Map<String, Double> getOrderAmounts() {
+        return orderAmounts.get();
+    }
+
+    public static double getOrderAmount(String orderId) {
+        if (orderId == null) return 0.0;
+        Double v = orderAmounts.get().get(orderId);
+        return v != null ? v : 0.0;
+    }
+
     // ============================================================
     // PACKAGE COMPONENTS STORAGE
     // ============================================================

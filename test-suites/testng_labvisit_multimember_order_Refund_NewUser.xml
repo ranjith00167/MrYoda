@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ============================================================
+  Suite  : New User COD — Multi-Member | Cancel FAMILY MEMBER Order
+  Purpose: New user registers + one added family member place a
+           combined lab order (2 sub-orders).
+           FAMILY MEMBER's order (index 1) is cancelled.
+           Primary new-user order continues.
+           No rewards steps — new users have none.
+  ============================================================
+-->
+<suite name="New User COD Multi-Member - Cancel Family Member Order Suite" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="New User Multi-Member COD - Cancel Family Member Order + Refund" preserve-order="true">
+        <parameter name="userType"   value="new_user"/>
+        <parameter name="flowType"   value="refund"/>
+        <parameter name="orderType"  value="lab"/>
+        <!-- orderIndex=1 targets the family member's sub-order for cancellation -->
+        <parameter name="orderIndex" value="1"/>
+
+        <classes>
+
+            <!-- ── User Registration ──────────────────────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods>
+                    <include name="testUserRegistration_CreateNewUser"/>
+                </methods>
+            </class>
+
+            <!-- ── Login ──────────────────────────────────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP_NewlyRegisteredUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- ── Tests & Packages ───────────────────────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+
+            <!-- ── Multi-Member Cart: Add Family Member + add items for both ── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.AddFamilyMemberTest">
+                <methods><include name="testAddFamilyMemberAndAddToCart"/></methods>
+            </class>
+
+            <!-- ── COD Flow ───────────────────────────────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddLabSlotTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+
+            <!-- ── Approve Payment ────────────────────────────────────────── -->
+            <!-- No rewards steps — new users have no rewards -->
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
+
+            <!-- ── Switch active order to FAMILY MEMBER (index 1) ──────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.SwitchOrderContextTest">
+                <methods><include name="switchActiveOrder"/></methods>
+            </class>
+
+            <!-- ── Cancel FAMILY MEMBER's order + verify before/after ─────── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_19_OrderCancellationTest">
+                <methods>
+                    <include name="step19_A_VerifyOrderBeforeCancellation"/>
+                    <include name="step19_B_CancelOrder"/>
+                    <include name="step19_C_VerifyOrderAfterCancellation"/>
+                </methods>
+            </class>
+
+            <!-- ── Post-Cancellation Refund Validation ────────────────────── -->
+            <!-- step20_F excluded — new users have no rewards to reverse -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_20_CancellationRefundTest">
+                <methods>
+
+                    <include name="step20_B_FinalUpdateOrderCancelled"/>
+
+                    <include name="step20_D_VerifyCancelledOrderDetails"/>
+                    <include name="step20_E_VerifyPaymentById"/>
+                    <include name="step20_G_VerifyTransactionByMobile"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+</suite>

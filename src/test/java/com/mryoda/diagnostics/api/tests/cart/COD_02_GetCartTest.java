@@ -2,6 +2,7 @@ package com.mryoda.diagnostics.api.tests.cart;
 
 import com.mryoda.diagnostics.api.tests.order.CreateOrderCODAPITest;
 
+import com.mryoda.diagnostics.api.utils.AssertionUtil;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -93,12 +94,12 @@ public class COD_02_GetCartTest extends CreateOrderCODAPITest {
                             // Validate Rewards Percentage
                             Object expRewards = expectedData.get("rewards_percentage");
                             Object actRewards = matchedItem.get("rewards_percentage");
-                            if (String.valueOf(expRewards).equals(String.valueOf(actRewards))) {
-                                System.out.println("      ✅ Rewards Percentage Matched: " + actRewards);
-                            } else {
-                                System.out.println("      ❌ Rewards Percentage Mismatch! Expected: " + expRewards
-                                        + ", Found: " + actRewards);
-                            }
+                            AssertionUtil.verifyEquals(
+                                    String.valueOf(actRewards),
+                                    String.valueOf(expRewards),
+                                    "Cart item rewards_percentage mismatch for '" + testName
+                                            + "': expected " + expRewards + " but got " + actRewards);
+                            System.out.println("      ✅ Rewards Percentage Matched: " + actRewards);
 
                             // Validate B2B Price
                             Object expB2B = expectedData.get("b2b_price");
@@ -107,12 +108,11 @@ public class COD_02_GetCartTest extends CreateOrderCODAPITest {
                             double expB2BVal = (expB2B instanceof Number) ? ((Number) expB2B).doubleValue() : 0.0;
                             double actB2BVal = (actB2B instanceof Number) ? ((Number) actB2B).doubleValue() : 0.0;
 
-                            if (Math.abs(expB2BVal - actB2BVal) < 0.01) {
-                                System.out.println("      ✅ B2B Price Matched: " + actB2B);
-                            } else {
-                                System.out.println(
-                                        "      ❌ B2B Price Mismatch! Expected: " + expB2B + ", Found: " + actB2B);
-                            }
+                            AssertionUtil.verifyTrue(
+                                    Math.abs(expB2BVal - actB2BVal) < 0.01,
+                                    "Cart item b2b_price mismatch for '" + testName
+                                            + "': expected " + expB2B + " but got " + actB2B + " (delta must be < 0.01)");
+                            System.out.println("      ✅ B2B Price Matched: " + actB2B);
 
                             // Validate Disease (Note: API might return 'diseases' or 'disease')
                             Object expDisease = expectedData.get("diseases");

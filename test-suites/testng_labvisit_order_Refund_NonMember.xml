@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Member COD Two Scenario Suite" verbose="2">
+<suite name="Non-Member COD Refund Suite" verbose="2">
 
     <listeners>
         <listener class-name="utilities.TestNGExtentReportListener"/>
     </listeners>
 
     <!-- ===================================================== -->
-    <!-- SCENARIO 1 — FULL FLOW (NO ORDER CANCELLATION)       -->
+    <!-- NON-MEMBER — Place Order → Cancel → Refund Validation -->
+    <!-- Rewards are NOT applicable for non-members             -->
     <!-- ===================================================== -->
 
-    <test name="Member COD Full Flow - No Cancel" preserve-order="true">
-        <parameter name="userType" value="member"/>
-        <parameter name="flowType" value="full"/>
+    <test name="Non-Member COD - Cancel and Refund Flow" preserve-order="true">
+        <parameter name="userType" value="non_member"/>
+        <parameter name="flowType" value="refund"/>
         <parameter name="orderType" value="lab"/>
 
         <classes>
 
             <!-- Login -->
             <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
-                <methods><include name="testLoginWithOTP"/></methods>
+                <methods><include name="testLoginWithOTP_NonMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
 
             <!-- Tests & Packages -->
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
-                <methods><include name="testGetLocations_ForMember"/></methods>
+                <methods><include name="testGetLocations_ForNonMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
-                <methods><include name="testGetBrands_ForMember"/></methods>
+                <methods><include name="testGetBrands_ForNonMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
-                <methods><include name="testGlobalSearch_ForMember"/></methods>
+                <methods><include name="testGlobalSearch_ForNonMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
             <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
-                <methods><include name="testAddToCart_ForMember"/></methods>
+                <methods><include name="testAddToCart_ForNonMember"/></methods>
             </class>
 
             <!-- COD Flow -->
@@ -45,42 +46,23 @@
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
 
-            <!-- Rewards Before Payment -->
-            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
-                <methods>
-                    <include name="step18_A_VerifyInitialRewards"/>
-                </methods>
-            </class>
-
-            <!-- Approve Payment -->
+            <!-- Approve Payment (Admin approves the COD) -->
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
 
-            <!-- Rewards After Payment -->
-            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
-                <methods>
-                    <include name="step18_B_VerifyRewardsGain"/>
-                    <include name="step18_C_VerifyFinalRewardsBalance"/>
-                </methods>
-            </class>
-
-            <!-- Cancel Order -->
-
             <!-- Post-Cancellation Refund Flow -->
+            <!-- NOTE: step20_F (rewards verification) is excluded — non-members have no rewards -->
             <class name="com.mryoda.diagnostics.api.tests.order.COD_20_CancellationRefundTest">
                 <methods>
-                    <include name="step20_A_ProcessCashback"/>
+
                     <include name="step20_B_FinalUpdateOrderCancelled"/>
 
                     <include name="step20_D_VerifyCancelledOrderDetails"/>
                     <include name="step20_E_VerifyPaymentById"/>
-                    <include name="step20_F_VerifyRewardsByMobile"/>
                     <include name="step20_G_VerifyTransactionByMobile"/>
                 </methods>
             </class>
 
         </classes>
     </test>
-
-
 
 </suite>
