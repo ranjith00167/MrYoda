@@ -50,5 +50,19 @@
         <!-- Primary New User order cancelled, Family Member order continues  -->
         <suite-file path="testng_labvisit_multimember_order_Refund_NewUser_MemberCancel.xml" />
         <suite-file path="testng_labvisit_multimember_order_Refund_NewUser_Coupon_MemberCancel.xml" />
+        <!-- ── Rewards Used Flows ───────────────────────────────────────── -->
+        <!-- rewards_used = floor(cartTotal / 2), capped at member balance  -->
+        <!-- Single Member — full order flow (no cancel)                    -->
+        <suite-file path="testng_labvisit_member_rewards_used.xml" />
+        <suite-file path="testng_labvisit_member_rewards_used_coupon.xml" />
+        <!-- Multi-Member — full order flow (no cancel)                     -->
+        <suite-file path="testng_labvisit_multimember_rewards_used.xml" />
+        <suite-file path="testng_labvisit_multimember_rewards_used_coupon.xml" />
+        <!-- Single Member — cancellation flow                              -->
+        <suite-file path="testng_labvisit_member_rewards_used_cancel.xml" />
+        <suite-file path="testng_labvisit_member_rewards_used_coupon_cancel.xml" />
+        <!-- Multi-Member — cancellation flow (family member order cancelled) -->
+        <suite-file path="testng_labvisit_multimember_rewards_used_cancel.xml" />
+        <suite-file path="testng_labvisit_multimember_rewards_used_coupon_cancel.xml" />
     </suite-files>
 </suite>

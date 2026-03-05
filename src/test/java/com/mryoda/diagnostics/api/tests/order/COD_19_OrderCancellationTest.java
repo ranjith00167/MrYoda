@@ -42,6 +42,10 @@ public class COD_19_OrderCancellationTest {
         }
 
         System.out.println("✅ Current Order Status: " + orderStatus);
+        // NOTE: Rewards validation for the cancelled order is handled in step20_A.
+        // The authoritative rewards_gain for this order is the 'remaining_rewards'
+        // returned by adminReturningCashback (backend uses Math.ceil on paid_amount × rate).
+        // Pre-computing here is fragile due to rounding — step20_A captures the actual value.
         // Usually it should be 'samples_collected' or 'paid' at this point in the
         // modular flow
     }
@@ -72,6 +76,17 @@ public class COD_19_OrderCancellationTest {
         System.out.println("Response Message: " + msg);
         AssertionUtil.verifyEquals(msg, "Order updated successfully", "Success message should match");
 
+        // Track cancelled order + visit so COD_99 can exclude it from UI automation
+        RequestContext.addCancelledOrderId(orderId);
+        // Directly capture the visit number for this cancelled order at cancellation time
+        String cancelledVisit = RequestContext.getVisitForOrder(orderId);
+        if (cancelledVisit == null) {
+            // Fallback: use current visit number in context (SwitchOrderContextTest may have set it)
+            cancelledVisit = RequestContext.getVisitNumber();
+        }
+        if (cancelledVisit != null) {
+            RequestContext.addCancelledVisitNumber(cancelledVisit);
+        }
         System.out.println("✅ Order Status Updated to 'Cancelled' successfully.");
     }
 

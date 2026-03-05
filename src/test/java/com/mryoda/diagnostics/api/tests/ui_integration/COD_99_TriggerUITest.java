@@ -6,8 +6,10 @@ import org.testng.TestNG;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class COD_99_TriggerUITest {
 
@@ -61,6 +63,36 @@ public class COD_99_TriggerUITest {
 
         if (visits == null || visits.isEmpty()) {
             throw new RuntimeException("❌ No Visit Numbers found in RequestContext for UI Automation!");
+        }
+
+        // Filter out visit numbers belonging to cancelled orders
+        // Primary filter: directly stored cancelled visit numbers (most reliable)
+        Set<String> cancelledVisits = RequestContext.getCancelledVisitNumbers();
+        // Secondary filter: resolve via orderVisitMap for any order IDs not yet mapped to a visit
+        Set<String> cancelledOrders = RequestContext.getCancelledOrderIds();
+        if (cancelledOrders != null && !cancelledOrders.isEmpty()) {
+            Map<String, String> ovm = RequestContext.getOrderVisitMap();
+            if (ovm != null) {
+                for (String cancelledOrderId : cancelledOrders) {
+                    String v = ovm.get(cancelledOrderId);
+                    if (v != null) {
+                        if (cancelledVisits == null) cancelledVisits = new java.util.HashSet<>();
+                        cancelledVisits.add(v);
+                    }
+                }
+            }
+        }
+        if (cancelledVisits != null && !cancelledVisits.isEmpty()) {
+            visits = new ArrayList<>(visits); // make mutable copy
+            for (String cv : cancelledVisits) {
+                if (visits.remove(cv)) {
+                    System.out.println("   ⚠️ Excluded CANCELLED visit from UI trigger: " + cv);
+                }
+            }
+            if (visits.isEmpty()) {
+                System.out.println("   ℹ️ All visits were cancelled — skipping UI automation entirely.");
+                return;
+            }
         }
 
         System.out.println("📊 Found " + visits.size() + " visits to process in IT Dose.");

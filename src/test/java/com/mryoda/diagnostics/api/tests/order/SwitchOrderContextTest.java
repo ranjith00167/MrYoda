@@ -49,6 +49,13 @@ public class SwitchOrderContextTest {
 
         RequestContext.setCurrentOrderId(targetOrderId);
 
+        // Also switch the active visit number to match the target order (used by COD_19 cancellation)
+        String targetVisit = RequestContext.getVisitForOrder(targetOrderId);
+        if (targetVisit != null) {
+            RequestContext.setVisitNumber(targetVisit);
+            System.out.println("   Switched visit number  : " + targetVisit);
+        }
+
         System.out.println("   Previous active order : " + previousOrderId + " (index 0 = primary member)");
         System.out.println("   Switched to order     : " + targetOrderId + " (index " + orderIndex + ")");
         System.out.println("   Available orders      : " + orderIds);

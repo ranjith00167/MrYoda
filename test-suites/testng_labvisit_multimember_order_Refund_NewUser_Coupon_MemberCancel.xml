@@ -97,6 +97,10 @@
                     <include name="step20_G_VerifyTransactionByMobile"/>
                 </methods>
             </class>
+  <!-- ── Full Flow ──────────────────────────────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
 
         </classes>
     </test>

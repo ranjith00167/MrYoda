@@ -66,6 +66,21 @@ public class COD_16_VisitStatusAPITest {
             Assert.fail("❌ No Visit Numbers found in RequestContext!");
         }
 
+        // Filter out cancelled visits — cancelled orders should not be validated in COD_16
+        java.util.Set<String> cancelledVisits16 = RequestContext.getCancelledVisitNumbers();
+        if (cancelledVisits16 != null && !cancelledVisits16.isEmpty()) {
+            visits = new java.util.ArrayList<>(visits);
+            for (String cv : cancelledVisits16) {
+                if (visits.remove(cv)) {
+                    System.out.println("   ⚠️ Skipping CANCELLED visit in COD_16: " + cv);
+                }
+            }
+        }
+        if (visits.isEmpty()) {
+            System.out.println("   ℹ️ All visits were cancelled — skipping COD_16 visit status validation.");
+            return;
+        }
+
         System.out.println("📊 Found " + visits.size() + " visits to validate.");
 
         for (String visitNumber : visits) {

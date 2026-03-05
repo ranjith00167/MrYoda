@@ -1,9 +1,11 @@
 package com.mryoda.diagnostics.api.utils;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 public class RequestContext {
 
@@ -49,6 +51,10 @@ public class RequestContext {
             orderVisitMap.clear();
         if (visitSinMap != null)
             visitSinMap.clear();
+        if (cancelledOrderIds != null)
+            cancelledOrderIds.clear();
+        if (cancelledVisitNumbers != null)
+            cancelledVisitNumbers.clear();
 
         currentTotalPrice = 0;
         currentSampleType = null;
@@ -68,6 +74,7 @@ public class RequestContext {
         memberCouponFlowEnabled = false;
         nonMemberCouponFlowEnabled = false;
         newUserCouponFlowEnabled = false;
+        cancelledOrderRewardsGain.remove();
 
         System.out.println("[SUCCESS] RequestContext State Successfully Cleared.");
     }
@@ -136,6 +143,8 @@ public class RequestContext {
     private static List<String> currentVisitNumbers = new ArrayList<>();
     private static Map<String, String> orderVisitMap = new HashMap<>();
     private static Map<String, String> visitSinMap = new HashMap<>();
+    private static Set<String> cancelledOrderIds = new HashSet<>();
+    private static Set<String> cancelledVisitNumbers = new HashSet<>();
     private static int currentTotalPrice;
     private static String currentSampleType;
 
@@ -180,6 +189,28 @@ public class RequestContext {
 
     public static Map<String, String> getOrderVisitMap() {
         return orderVisitMap;
+    }
+
+    public static void addCancelledOrderId(String orderId) {
+        if (orderId != null && !orderId.isEmpty()) {
+            cancelledOrderIds.add(orderId);
+            System.out.println(">>> MARKED ORDER AS CANCELLED (excluded from UI trigger): " + orderId);
+        }
+    }
+
+    public static Set<String> getCancelledOrderIds() {
+        return cancelledOrderIds;
+    }
+
+    public static void addCancelledVisitNumber(String visitNo) {
+        if (visitNo != null && !visitNo.isEmpty()) {
+            cancelledVisitNumbers.add(visitNo);
+            System.out.println(">>> MARKED VISIT AS CANCELLED (excluded from UI trigger): " + visitNo);
+        }
+    }
+
+    public static Set<String> getCancelledVisitNumbers() {
+        return cancelledVisitNumbers;
     }
 
     public static void setSinNumberForVisit(String visitNo, String sinNo) {
@@ -1410,6 +1441,9 @@ public class RequestContext {
     private static final ThreadLocal<Double> initialTotalRewards = new ThreadLocal<>();
     private static final ThreadLocal<Double> finalTotalRewards = new ThreadLocal<>();
     private static final ThreadLocal<Double> rewardsGain = new ThreadLocal<>();
+    private static final ThreadLocal<Double> rewardsBasisPaidAmount = new ThreadLocal<>();
+    private static final ThreadLocal<Double> cancelledOrderRewardsGain = new ThreadLocal<>();
+    private static final ThreadLocal<Double> rewardsUsed = new ThreadLocal<>();
     private static final ThreadLocal<Double> currentDueAmount = new ThreadLocal<>();
 
     public static void setInitialTotalRewards(double v) {
@@ -1434,6 +1468,36 @@ public class RequestContext {
 
     public static double getRewardsGain() {
         return rewardsGain.get() != null ? rewardsGain.get() : 0.0;
+    }
+
+    public static void setRewardsBasisPaidAmount(double v) {
+        rewardsBasisPaidAmount.set(v);
+    }
+
+    public static double getRewardsBasisPaidAmount() {
+        return rewardsBasisPaidAmount.get() != null ? rewardsBasisPaidAmount.get() : 0.0;
+    }
+
+    public static void setCancelledOrderRewardsGain(double v) {
+        cancelledOrderRewardsGain.set(v);
+    }
+
+    /**
+     * Returns the rewards_gain for the specific cancelled order (read from getOrderById
+     * in step19_A). Falls back to the primary rewardsGain if not set (single-member flows
+     * where primary == cancelled order).
+     */
+    public static double getCancelledOrderRewardsGain() {
+        Double v = cancelledOrderRewardsGain.get();
+        return v != null ? v : getRewardsGain();
+    }
+
+    public static void setRewardsUsed(double v) {
+        rewardsUsed.set(v);
+    }
+
+    public static double getRewardsUsed() {
+        return rewardsUsed.get() != null ? rewardsUsed.get() : 0.0;
     }
 
     public static void setCurrentDueAmount(double v) {

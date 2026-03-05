@@ -2916,6 +2916,25 @@ public class CreateOrderCODAPITest extends BaseTest {
             double actualRewardsGain = rewardsGainObj instanceof Number ? ((Number) rewardsGainObj).doubleValue()
                     : Double.parseDouble(rewardsGainObj.toString());
             RequestContext.setRewardsGain(actualRewardsGain);
+            // Store the paid_amount of this (primary) order as the basis for rate calculation.
+            // Rewards are applicable to paid_amount only; rate = rewardsGain / basisPaidAmount.
+            // Used in step20_A to compute expected rewards for any sub-order: expected = orderedByCash * rate.
+            Object basisPaidObj = response.jsonPath().get("data[0].paid_amount");
+            if (basisPaidObj == null) basisPaidObj = response.jsonPath().get("data.0.paid_amount");
+            if (basisPaidObj == null) basisPaidObj = response.jsonPath().get("data.paid_amount");
+            if (basisPaidObj != null) {
+                try {
+                    double basisPaid = basisPaidObj instanceof Number
+                            ? ((Number) basisPaidObj).doubleValue()
+                            : Double.parseDouble(basisPaidObj.toString());
+                    if (basisPaid > 0) {
+                        RequestContext.setRewardsBasisPaidAmount(basisPaid);
+                        System.out.println("   ✅ Stored rewards basis paid_amount: " + basisPaid
+                                + " (rate = " + actualRewardsGain + " / " + basisPaid
+                                + " = " + String.format("%.4f", actualRewardsGain / basisPaid) + ")");
+                    }
+                } catch (NumberFormatException ignored) {}
+            }
         }
 
         // 7. POST-APPROVAL VALIDATION (Verify Status Change)

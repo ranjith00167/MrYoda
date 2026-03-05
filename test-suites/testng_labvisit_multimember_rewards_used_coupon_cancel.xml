@@ -3,58 +3,50 @@
 
 <!--
   ============================================================
-  Suite  : Non-Member COD — Multi-Member + Coupon | Cancel PRIMARY NON-MEMBER Order
-  Purpose: Non-member + one added family member place a combined
-           lab order with coupon applied (2 sub-orders).
-           PRIMARY NON-MEMBER's order (index 0) is cancelled.
-           Family member order continues.
-           No rewards steps — non-members have none.
+  Suite  : Member COD — Multi-Member | Rewards Used + Coupon | Cancel
+  Purpose: Primary member + family member place combined order with
+           both rewards_used AND coupon applied.
+           Family member's sub-order is then cancelled (orderIndex=1).
+           Validates: partial cancellation, refund, rewards rollback,
+                      coupon interaction on shared cart.
   ============================================================
 -->
-<suite name="Non-Member COD Multi-Member Coupon - Cancel Primary Non-Member Order Suite" verbose="2">
+<suite name="Member COD - Multi-Member Rewards Used + Coupon Cancellation" verbose="2">
 
     <listeners>
         <listener class-name="utilities.TestNGExtentReportListener"/>
     </listeners>
 
-    <test name="Non-Member Multi-Member COD Coupon - Cancel Primary Non-Member Order + Refund" preserve-order="true">
-        <parameter name="userType"   value="non_member"/>
-        <parameter name="flowType"   value="refund"/>
-        <parameter name="orderType"  value="lab"/>
-        <!-- orderIndex=0 = primary non-member (default) — no switch needed -->
-        <parameter name="orderIndex" value="0"/>
+    <test name="Multi-Member COD - Lab Visit with Rewards + Coupon + Cancel" preserve-order="true">
+        <parameter name="userType"    value="member"/>
+        <parameter name="flowType"    value="refund"/>
+        <parameter name="orderType"   value="lab"/>
+        <parameter name="applyCoupon" value="true"/>
+        <parameter name="orderIndex"  value="1"/>
 
         <classes>
 
             <!-- ── Login ──────────────────────────────────────────────────── -->
             <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
-                <methods><include name="testLoginWithOTP_NonMember"/></methods>
+                <methods><include name="testLoginWithOTP"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
 
             <!-- ── Tests & Packages ───────────────────────────────────────── -->
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
-                <methods><include name="testGetLocations_ForNonMember"/></methods>
+                <methods><include name="testGetLocations_ForMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
-                <methods><include name="testGetBrands_ForNonMember"/></methods>
+                <methods><include name="testGetBrands_ForMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
-                <methods><include name="testGlobalSearch_ForNonMember"/></methods>
+                <methods><include name="testGlobalSearch_ForMember"/></methods>
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
 
-            <!-- ── Multi-Member Cart: Add Family Member + add items for both ── -->
-            <class name="com.mryoda.diagnostics.api.tests.order.AddFamilyMemberTest">
-                <methods><include name="testAddFamilyMemberAndAddToCart"/></methods>
-            </class>
-
-            <!-- ── Coupon: Discover (nonPrime) + Apply to multi-member cart ── -->
-            <class name="com.mryoda.diagnostics.api.tests.coupons.CouponMultiMemberTest">
-                <methods>
-                    <include name="step01_DiscoverCoupon"/>
-                    <include name="step02_ApplyCouponToMultiMemberCart"/>
-                </methods>
+            <!-- ── Multi-Member AddToCart with rewards_used + coupon ─────── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.AddFamilyMemberWithRewardsTest">
+                <methods><include name="testAddFamilyMemberAndAddToCartWithRewards"/></methods>
             </class>
 
             <!-- ── COD Flow ───────────────────────────────────────────────── -->
@@ -63,13 +55,30 @@
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
 
+            <!-- ── Rewards Before Payment ─────────────────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_A_VerifyInitialRewards"/>
+                </methods>
+            </class>
+
             <!-- ── Approve Payment ────────────────────────────────────────── -->
-            <!-- No rewards steps — non-members have no rewards -->
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
 
-            <!-- ── No order switch — currentOrderId is already index 0 ──────── -->
+            <!-- ── Rewards After Payment ──────────────────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
+                <methods>
+                    <include name="step18_B_VerifyRewardsGain"/>
+                    <include name="step18_C_VerifyFinalRewardsBalance"/>
+                </methods>
+            </class>
 
-            <!-- ── Cancel PRIMARY NON-MEMBER's order + verify before/after ─── -->
+            <!-- ── Switch to Family Member Sub-Order (orderIndex=1) ───────── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.SwitchOrderContextTest">
+                <methods><include name="switchActiveOrder"/></methods>
+            </class>
+
+            <!-- ── Cancellation ───────────────────────────────────────────── -->
             <class name="com.mryoda.diagnostics.api.tests.order.COD_19_OrderCancellationTest">
                 <methods>
                     <include name="step19_A_VerifyOrderBeforeCancellation"/>
@@ -78,15 +87,14 @@
                 </methods>
             </class>
 
-            <!-- ── Post-Cancellation Refund Validation ────────────────────── -->
-            <!-- step20_F excluded — non-members have no rewards to reverse -->
+            <!-- ── Refund & Rewards Rollback ──────────────────────────────── -->
             <class name="com.mryoda.diagnostics.api.tests.order.COD_20_CancellationRefundTest">
                 <methods>
-
+                    <include name="step20_A_ProcessCashback"/>
                     <include name="step20_B_FinalUpdateOrderCancelled"/>
-
                     <include name="step20_D_VerifyCancelledOrderDetails"/>
                     <include name="step20_E_VerifyPaymentById"/>
+                    <include name="step20_F_VerifyRewardsByMobile"/>
                     <include name="step20_G_VerifyTransactionByMobile"/>
                 </methods>
             </class>
@@ -99,3 +107,4 @@
     </test>
 
 </suite>
+

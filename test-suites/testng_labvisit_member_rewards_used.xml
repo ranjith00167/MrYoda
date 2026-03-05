@@ -3,31 +3,25 @@
 
 <!--
   ============================================================
-  Suite  : Member COD — Multi-Member | Cancel PRIMARY MEMBER Order
-  Purpose: Primary member + one added family member place a combined
-           lab order (2 sub-orders created).
-           After payment, the PRIMARY MEMBER's order (index 0) is
-           cancelled — this is the default currentOrderId so no
-           context switch is required before COD-19.
-           Full refund + reward reversal validation runs for the
-           primary member's cancelled order via COD-20.
-           The FAMILY MEMBER's order (index 1) is unaffected.
+  Suite  : Member COD — Single Member | Rewards Used (No Coupon)
+  Purpose: Primary member places a lab order and redeems
+           half of their rewards balance via rewards_used in addToCart.
+           Cash payable = cart_total - rewards_used.
+           Validates: rewards balance deducted, rewards_gain on payment,
+           final balance = initial - rewards_used + rewards_gain.
   ============================================================
 -->
-<suite name="Member COD Multi-Member - Cancel Primary Member Order Suite" verbose="2">
+<suite name="Member COD - Rewards Used Full Flow" verbose="2">
 
     <listeners>
         <listener class-name="utilities.TestNGExtentReportListener"/>
     </listeners>
 
-    <test name="Multi-Member COD - Cancel Primary Member Order + Refund" preserve-order="true">
+    <test name="Member COD - Lab Visit with Rewards Used" preserve-order="true">
         <parameter name="userType"   value="member"/>
-        <parameter name="flowType"   value="refund"/>
+        <parameter name="flowType"   value="full"/>
         <parameter name="orderType"  value="lab"/>
-        <!-- orderIndex=0 targets the primary member's sub-order — this is already
-             the default set by RequestContext.setCurrentOrderIds, so no switch is
-             needed; kept here for clarity and to mirror the family-cancel suite -->
-        <parameter name="orderIndex" value="0"/>
+        <parameter name="applyCoupon" value="false"/>
 
         <classes>
 
@@ -49,9 +43,9 @@
             </class>
             <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
 
-            <!-- ── Multi-Member Cart: Add Family Member + add items for both ── -->
-            <class name="com.mryoda.diagnostics.api.tests.order.AddFamilyMemberTest">
-                <methods><include name="testAddFamilyMemberAndAddToCart"/></methods>
+            <!-- ── AddToCart with rewards_used (half balance) ─────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_WithRewardsUsed"/></methods>
             </class>
 
             <!-- ── COD Flow ───────────────────────────────────────────────── -->
@@ -60,7 +54,7 @@
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
 
-            <!-- ── Rewards Before Payment ─────────────────────────────────── -->
+            <!-- ── Rewards Before Payment (records initial balance) ────────── -->
             <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
                 <methods>
                     <include name="step18_A_VerifyInitialRewards"/>
@@ -78,37 +72,7 @@
                 </methods>
             </class>
 
-            <!-- ── No order switch needed — currentOrderId is already index 0 ─ -->
-            <!-- (primary member's order is the default after setCurrentOrderIds) -->
-
-            <!-- ── Cancel PRIMARY MEMBER's order + verify before/after ──────── -->
-            <!-- step19_A verifies order is in expected state before cancelling  -->
-            <!-- step19_B cancels the order                                      -->
-            <!-- step19_C confirms order_status == Cancelled in response         -->
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_19_OrderCancellationTest">
-                <methods>
-                    <include name="step19_A_VerifyOrderBeforeCancellation"/>
-                    <include name="step19_B_CancelOrder"/>
-                    <include name="step19_C_VerifyOrderAfterCancellation"/>
-                </methods>
-            </class>
-
-            <!-- ── Post-Cancellation Refund + Reward Reversal Validation ──── -->
-            <!-- Validates the PRIMARY MEMBER's cancelled order                 -->
-            <!-- step20_F: rewards earned at placement are reversed             -->
-            <!-- step20_G: verifies both Success + Cancelled transaction records -->
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_20_CancellationRefundTest">
-                <methods>
-                    <include name="step20_A_ProcessCashback"/>
-                    <include name="step20_B_FinalUpdateOrderCancelled"/>
-
-                    <include name="step20_D_VerifyCancelledOrderDetails"/>
-                    <include name="step20_E_VerifyPaymentById"/>
-                    <include name="step20_F_VerifyRewardsByMobile"/>
-                    <include name="step20_G_VerifyTransactionByMobile"/>
-                </methods>
-            </class>
-  <!-- ── Full Flow ──────────────────────────────────────────────── -->
+            <!-- ── Full Flow ──────────────────────────────────────────────── -->
             <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>

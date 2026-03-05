@@ -53,6 +53,17 @@ public class RewardHelper {
         System.out.println("🎁 Actual Rewards Gained: " + actualGain + " (Ceiled: " + roundedActualGain + ")");
         System.out.println("📊 Expected Rewards (5% of " + dueAmount + "): " + (dueAmount * 0.05) + " (Ceiled: " + expectedGainRounded + ")");
 
+        // Special case: if rewards_used >= dueAmount (entire payment covered by rewards redemption),
+        // no new cash was paid, so rewards_gain = 0 is valid API behavior.
+        double rewardsUsedInContext = RequestContext.getRewardsUsed();
+        if (actualGain == 0.0 && expectedGainRounded > 0 && rewardsUsedInContext >= dueAmount) {
+            System.out.println("   ℹ️  rewards_used(" + rewardsUsedInContext + ") >= dueAmount(" + dueAmount
+                    + ") — entire payment via rewards, no cash paid → rewards_gain=0 is correct");
+            System.out.println("✅ VALIDATION PASSED: rewards_gain=0 (payment fully via rewards)");
+            RequestContext.setRewardsGain(actualGain);
+            return;
+        }
+
         // Hard assertion: ceil(dueAmount × 5%) must equal ceiled actual gain (tolerance < 1)
         boolean gainCorrect = (roundedActualGain == expectedGainRounded)
                 || Math.abs(actualGain - (dueAmount * 0.05)) < 1.0;

@@ -723,6 +723,102 @@ public class AddToCartAPITest extends BaseTest {
         }
     }
 
+    /**
+     * Add to Cart with rewards_used = floor(cart_total / 2).
+     * Strategy:
+     *   1. Fetch current rewards balance.
+     *   2. Add to cart once (no rewards_used) to discover total.
+     *   3. Compute rewards_used = min(floor(total/2), current_rewards_balance).
+     *   4. Re-send addToCart with rewards_used field.
+     * The backend will reduce the payable cash amount by rewards_used.
+     */
+    @Parameters({ "orderType", "applyCoupon" })
+    @Test(priority = 7, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForMember")
+    public void testAddToCart_WithRewardsUsed(@Optional("lab") String orderType, @Optional("false") String applyCoupon) {
+        System.out.println("\n--- AddToCart With Rewards Used (orderType=" + orderType + ", applyCoupon=" + applyCoupon + ") ---");
+        System.setProperty("orderType", orderType);
+        configureCouponFlow("MEMBER", applyCoupon);
+
+        String token  = RequestContext.getMemberToken();
+        String userId = RequestContext.getMemberUserId();
+        String mobile = RequestContext.getMobile();
+
+        // 1. Fetch current rewards balance
+        double initialRewards = com.mryoda.diagnostics.api.utils.RewardHelper.callGetRewardsByMobileAPI(mobile);
+        RequestContext.setInitialTotalRewards(initialRewards);
+        System.out.println("   Current rewards balance: " + initialRewards);
+
+        Map<String, Object> payload = buildCartPayloadWithAllTests(userId, "Diagnostics", DEFAULT_LOCATION);
+        if (payload == null) return;
+        attachCouponAndLocation(payload, applyCoupon, "prime", "MEMBER");
+
+        // 2. First addToCart call — get cart ID, then fetch cart total via getCartById
+        Response firstResp = callAddToCartAPI(token, payload);
+        double cartTotal = 0;
+        if (firstResp != null && (firstResp.getStatusCode() == 200 || firstResp.getStatusCode() == 201)) {
+            // addToCart V2 returns only {"id":"..."} — call getCartById to get totalPrice
+            String cartEndpoint = com.mryoda.diagnostics.api.endpoints.APIEndpoints.DIAGNOSTICS_BASE_URL
+                    + com.mryoda.diagnostics.api.endpoints.APIEndpoints.GET_CART_BY_ID
+                              .replace("{user_id}", userId);
+            Response cartResp = new com.mryoda.diagnostics.api.builders.RequestBuilder()
+                    .setEndpoint(cartEndpoint)
+                    .addHeader("Authorization", token)
+                    .get();
+            if (cartResp != null && (cartResp.getStatusCode() == 200 || cartResp.getStatusCode() == 201)) {
+                Object totalObj = cartResp.jsonPath().get("data.totalPrice");
+                if (totalObj == null) totalObj = cartResp.jsonPath().get("data.total_price");
+                if (totalObj == null) totalObj = cartResp.jsonPath().get("data.payable_amount");
+                if (totalObj != null) {
+                    cartTotal = totalObj instanceof Number ? ((Number) totalObj).doubleValue()
+                            : Double.parseDouble(totalObj.toString());
+                }
+                System.out.println("   getCartById → totalPrice: " + cartTotal);
+            }
+        }
+
+        // 3. Compute rewards_used = min(floor(cartTotal/2), initialRewards)
+        double rewardsUsed;
+        if (cartTotal > 0) {
+            rewardsUsed = Math.min(Math.floor(cartTotal / 2.0), initialRewards);
+        } else {
+            // Last resort: use half the cart total as floor(pre-discount/2)
+            // This shouldn't happen if getCartById succeeds
+            rewardsUsed = Math.min(500.0, initialRewards);
+            System.out.println("   ⚠️  cartTotal not available from getCartById — using safe fallback: " + rewardsUsed);
+        }
+        System.out.println("   cartTotal=" + cartTotal + ", initialRewards=" + initialRewards
+                + " → rewards_used=" + rewardsUsed);
+
+        // 4. Re-send addToCart with rewards_used field
+        payload.put("rewards_used", rewardsUsed);
+        System.out.println("   Re-sending addToCart with rewards_used=" + rewardsUsed);
+        Response response = callAddToCartAPI(token, payload);
+        validateAddToCartResponse(response, "MEMBER", payload);
+
+        // 5. Read actual rewards_used stored in cart after second addToCart and sync to context
+        //    The API may cap/round the value — always store what the API actually used
+        double actualRewardsUsed = rewardsUsed; // fallback to computed value
+        if (response != null && (response.getStatusCode() == 200 || response.getStatusCode() == 201)) {
+            String cartEndpoint2 = com.mryoda.diagnostics.api.endpoints.APIEndpoints.DIAGNOSTICS_BASE_URL
+                    + com.mryoda.diagnostics.api.endpoints.APIEndpoints.GET_CART_BY_ID
+                              .replace("{user_id}", userId);
+            Response cartResp2 = new com.mryoda.diagnostics.api.builders.RequestBuilder()
+                    .setEndpoint(cartEndpoint2)
+                    .addHeader("Authorization", token)
+                    .get();
+            if (cartResp2 != null && (cartResp2.getStatusCode() == 200 || cartResp2.getStatusCode() == 201)) {
+                Object ruObj = cartResp2.jsonPath().get("data.rewards_used");
+                if (ruObj == null) ruObj = cartResp2.jsonPath().get("data.rewardsUsed");
+                if (ruObj != null) {
+                    actualRewardsUsed = ruObj instanceof Number ? ((Number) ruObj).doubleValue()
+                            : Double.parseDouble(ruObj.toString());
+                    System.out.println("   Actual rewards_used from cart API: " + actualRewardsUsed);
+                }
+            }
+        }
+        RequestContext.setRewardsUsed(actualRewardsUsed);
+    }
+
     @Parameters({ "orderType", "applyCoupon" })
     @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNonMember")
     public void testAddToCart_ForNonMember(@Optional("home") String orderType, @Optional("false") String applyCoupon) {
@@ -759,3 +855,4 @@ public class AddToCartAPITest extends BaseTest {
         }
     }
 }
+

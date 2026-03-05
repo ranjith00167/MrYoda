@@ -37,11 +37,13 @@ public class COD_01_LoginTest extends CreateOrderCODAPITest {
         RequestContext.setCurrentPaymentId(null);
 
         // Clear ScenarioContext variables to avoid using previous flow's data
+        // (ScenarioContext lives in the Playwright project — use reflection to avoid compile error)
         try {
-            utilities.ScenarioContext.extractedSinNo = null;
-            utilities.ScenarioContext.extractedEmrId = null;
-            utilities.ScenarioContext.extractedFirstName = null;
-            utilities.ScenarioContext.orderId = null; // Clear Order ID (used as fallback for Visit ID)
+            Class<?> sc = Class.forName("utilities.ScenarioContext");
+            sc.getField("extractedSinNo").set(null, null);
+            sc.getField("extractedEmrId").set(null, null);
+            sc.getField("extractedFirstName").set(null, null);
+            sc.getField("orderId").set(null, null);
             System.out.println("   ✅ ScenarioContext Cleared.");
         } catch (Throwable t) {
             System.out.println("   ⚠️ Could not clear ScenarioContext: " + t.getMessage());
