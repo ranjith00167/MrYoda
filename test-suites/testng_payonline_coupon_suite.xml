@@ -31,6 +31,23 @@
         <classes>
             <!-- Cucumber scenario runner: Login → Test Selection → Coupon → Payment → API Verify -->
             <class name="testRunner.PayOnlineSuiteRunner"/>
+              <!-- ── PHASE 2 : Cross-API Validation ──────────────────────── -->
+            <!-- Validates: order status, price consistency, product names  -->
+            <!-- visit number presence, item-level price breakdown          -->
+            <class name="com.mryoda.diagnostics.api.tests.order.PayOnlineCrossApiValidationTest"/>
+
+            <!-- ── PHASE 3 : IT Dose UI Automation ─────────────────────── -->
+            <!-- Triggers: RunnerTest.class which enters the visit number   -->
+            <!-- in IT Dose lab system to simulate sample processing        -->
+            <!-- NOTE: Visit numbers are extracted from getOrderById above  -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+
+            <!-- ── PHASE 4 : Post-Processing API Validations ───────────── -->
+            <!-- Visit status from lab system (after IT Dose entry)         -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <!-- Report generation and PDF verification                     -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+
         </classes>
     </test>
 

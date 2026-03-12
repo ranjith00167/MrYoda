@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAY ONLINE — MEMBER REWARD FLOW SUITE
+     ══════════════════════════════════════════════════════════════════════════
+     Focus: Reward redemption (50% cap), UI deduction validation, API verification
+     Minimal: Single-member reward only (no coupon)
+     
+     SCENARIO:
+     @hybridLabOrderMemberReward  — Single member with reward redemption & validation
+
+     LOGIC:
+     1. Member logs in (10% membership discount applies automatically)
+     2. Selects tests and proceeds to checkout
+     3. Final Amount = Base - 10% Membership Discount
+     4. Member enters reward value with 50% cap: min(ExcelValue, 50% of final amount)
+     5. Payment Amount = Final Amount - Reward Used
+     6. API validates reward was applied correctly in order
+
+     Run:  mvn test -DsuiteXmlFile=test-suites/testng_payonline_memberReward_suite.xml
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Pay Online Member Reward Flow Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1 : Single Member — Lab Visit — Reward — Pay Online         -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Single Member - Reward Redemption - Pay Online" preserve-order="true">
+        <parameter name="userType"  value="member"/>
+        <parameter name="orderType" value="lab"/>
+        <parameter name="rewardFlow" value="single-member-reward"/>
+        <parameter name="cucumber.filter.tags" value="@hybridLabOrderMemberReward"/>
+
+        <classes>
+            <!-- Cucumber scenario runner: Login → Test Selection → Reward → Payment → API Verify -->
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+            
+            <!-- ── PHASE 2 : Cross-API Validation ──────────────────────── -->
+            <!-- Validates: order status, price consistency, product names  -->
+            <!-- visit number presence, item-level price breakdown          -->
+            <class name="com.mryoda.diagnostics.api.tests.order.PayOnlineCrossApiValidationTest"/>
+
+            <!-- ── PHASE 3 : IT Dose UI Automation ─────────────────────── -->
+            <!-- Triggers: RunnerTest.class which enters the visit number   -->
+            <!-- in IT Dose lab system to simulate sample processing        -->
+            <!-- NOTE: Visit numbers are extracted from getOrderById above  -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+
+            <!-- ── PHASE 4 : Post-Processing API Validations ───────────── -->
+            <!-- Visit status from lab system (after IT Dose entry)         -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            
+            <!-- Report generation and PDF verification                     -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+
+</suite>

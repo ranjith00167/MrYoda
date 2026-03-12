@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAY ONLINE — NON-MEMBER COUPON FLOW SUITE
+     ══════════════════════════════════════════════════════════════════════════
+     Focus: Non-member coupon application, UI deduction validation, 
+            and API verification (no membership discount)
+     
+     SCENARIO:
+     @hybridLabOrderNonMemberCoupon  — Single non-member with coupon selection & validation
+
+     Run:  mvn test "-Dsurefire.suiteXmlFiles=test-suites/testng_payonline_nonMember_coupon_suite.xml"
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Pay Online Non-Member Coupon Flow Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1 : Single Non-Member — Lab Visit — Coupon — Pay Online     -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Single Non-Member - Coupon Validation - Pay Online" preserve-order="true">
+        <parameter name="userType"  value="non-member"/>
+        <parameter name="orderType" value="lab"/>
+        <parameter name="couponFlow" value="single-non-member"/>
+        <parameter name="cucumber.filter.tags" value="@hybridLabOrderNonMemberCoupon"/>
+
+        <classes>
+            <!-- Cucumber scenario runner: Login → Test Selection → Coupon → Payment → API Verify -->
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+            
+            <!-- ── PHASE 2 : Cross-API Validation ──────────────────────── -->
+            <!-- Validates: order status, price consistency, product names  -->
+            <!-- visit number presence, item-level price breakdown          -->
+            <!-- NOTE: No membership discount validation for non-member     -->
+            <class name="com.mryoda.diagnostics.api.tests.order.PayOnlineCrossApiValidationTest"/>
+
+            <!-- ── PHASE 3 : IT Dose UI Automation ─────────────────────── -->
+            <!-- Triggers: RunnerTest.class which enters the visit number   -->
+            <!-- in IT Dose lab system to simulate sample processing        -->
+            <!-- NOTE: Visit numbers are extracted from getOrderById above  -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+
+            <!-- ── PHASE 4 : Post-Processing API Validations ───────────── -->
+            <!-- Visit status from lab system (after IT Dose entry)         -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            
+            <!-- Report generation and PDF verification                     -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+
+        </classes>
+    </test>
+
+</suite>

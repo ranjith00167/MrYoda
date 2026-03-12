@@ -7,6 +7,7 @@ import utilities.BaseClass;
 import utilities.ConfigReader;
 import pageObjects.Locators;
 import org.openqa.selenium.NoSuchElementException;
+import com.mryoda.diagnostics.api.utils.RequestContext;
 
 
 public class LoginPageSteps extends BaseSteps {
@@ -64,6 +65,11 @@ public class LoginPageSteps extends BaseSteps {
     @Given("load the excel data for single member and lab visit")
     public void load_the_excel_data_for_single_member_and_lab_visit() {
         
+        // Reset TestSession for fresh scenario execution
+        TestSession.rewardUsed = 0.0;
+        TestSession.membershipDiscount = 0.0;
+        RequestContext.setCouponAmount(0.0);
+        
     	BaseClass.loadExcelData("Diagnostics", "6");
     }
     @Given("load the excel data for single member and home collection")
@@ -82,6 +88,12 @@ public class LoginPageSteps extends BaseSteps {
  
     @Given("load the excel data for single non member and lab visit")
     public void load_the_excel_data_for_single_non_member_and_lab_visit() {
+       
+    	BaseClass.loadExcelData("Diagnostics", "2");
+
+    }
+    @Given("load the excel data for single non member and lab visit with coupon")
+    public void load_the_excel_data_for_single_non_member_and_lab_visit_with_coupon() {
        
     	BaseClass.loadExcelData("Diagnostics", "2");
 
@@ -118,6 +130,11 @@ public class LoginPageSteps extends BaseSteps {
     	BaseClass.loadExcelData("Diagnostics", "4");
 
     }
+    @Given("load the excel data for multi member and lab visit without memership with coupon")
+    public void load_the_excel_data_for_multi_member_and_lab_visit_without_memership_with_coupon() {
+    	BaseClass.loadExcelData("Diagnostics", "4");
+
+    }
     @Given("load the excel data for multi member and home collection with memership and with cash payment")
     public void load_the_excel_data_for_multi_member_and_home_collection_with_memership_and_with_cash_payment() {
        
@@ -133,6 +150,24 @@ public class LoginPageSteps extends BaseSteps {
     @Given("load the excel data for single member and lab visit for a new user")
     public void load_the_excel_data_for_single_member_and_lab_visit_for_a_new_user() {
     	BaseClass.loadExcelData("Diagnostics", "11");
+
+    }
+    
+    @Given("load the excel data for single member and lab visit with coupon")
+    public void load_the_excel_data_for_single_member_and_lab_visit_with_coupon() {
+        // Reset TestSession for fresh scenario execution
+        TestSession.rewardUsed = 0.0;
+        TestSession.membershipDiscount = 0.0;
+        RequestContext.setCouponAmount(0.0);
+        
+        // Uses same data row as base single member lab visit (row "6")
+        // Coupon will be applied during checkout flow
+    	BaseClass.loadExcelData("Diagnostics", "6");
+    }
+    
+    @Given("load the excel data for multi member and lab visit with coupon")
+    public void load_the_excel_data_for_multi_member_and_lab_visit_with_coupon() {
+    	BaseClass.loadExcelData("Diagnostics", "7");
 
     }
     @When("create an account with random mobile number")

@@ -7,6 +7,8 @@ public class TestSession {
     public static double uiAmountCheckout = 0.0;
     public static double expectedUIAmount = 0.0;
     public static double razorpayAmount = 0.0;
+    public static double membershipDiscount = 0.0;
+    public static double rewardUsed = 0.0;
     public static String previouslySelectedSlot = null;
 //    public static String previousSlotBeforeReschedule = null;
     public static String currentRescheduledSlot = null;

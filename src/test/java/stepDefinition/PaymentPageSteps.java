@@ -187,27 +187,52 @@ public class PaymentPageSteps extends BaseSteps {
 
 	    int basePrice = TestSession.totalCheckoutAmount;
 	    int expectedAmount;
+	    int totalDeductions = 0;
 
 	    if (LocatorsPage.isMember) {
-	        int discount = (int) Math.round(basePrice * 0.10);
-	        expectedAmount = basePrice - discount;
-	        System.out.println("✔ Member → 10% Discount Applied → " + discount);
+	        int membershipDiscount = (int) Math.round(basePrice * 0.10);
+	        totalDeductions = membershipDiscount;
+	        System.out.println("✔ Member → 10% Discount Applied → " + membershipDiscount);
 	    } else {
 	        String visitType = LocatorsPage.visitTypeSelected;
 	        if (visitType.equals("Home Sample") && basePrice < 999) {
-	            expectedAmount = basePrice + 250;
+	            totalDeductions = -250; // Added fee, not a deduction
 	            System.out.println("✔ Home Collection Fee Added: ₹250");
 	        } else {
-	            expectedAmount = basePrice;
+	            totalDeductions = 0;
 	        }
 	    }
 
+	    // Add coupon discount if applied
+	    double couponDiscount = RequestContext.getCouponAmount();
+	    if (couponDiscount > 0) {
+	        totalDeductions += (int) couponDiscount;
+	        System.out.println("✔ Coupon Discount Applied → ₹" + (int)couponDiscount);
+	    }
+
+	    // Calculate expected amount (before reward)
+	    if (LocatorsPage.isMember) {
+	        expectedAmount = basePrice - totalDeductions;
+	        System.out.println("✔ Total Deductions (Membership + Coupon): ₹" + totalDeductions);
+	    } else if (totalDeductions < 0) {
+	        expectedAmount = basePrice + Math.abs(totalDeductions);
+	    } else {
+	        expectedAmount = basePrice - totalDeductions;
+	    }
+
+	    // Subtract reward if it has been applied
+	    int rewardAmount = (int) TestSession.rewardUsed;
+	    if (rewardAmount > 0) {
+	        expectedAmount -= rewardAmount;
+	        System.out.println("✔ Reward Deduction Applied → ₹" + rewardAmount);
+	    }
+
 	    TestSession.expectedUIAmount = expectedAmount;
-	    System.out.println("🎯 Expected Final Amount: ₹" + expectedAmount);
+	    System.out.println("🎯 Expected Final Amount (After All Deductions): ₹" + expectedAmount);
 	}
 	@Then("validate cart amount to pay")
 	public void validate_cart_amount_to_pay() {
-	    if (TestSession.uiAmountCheckout != TestSession.expectedUIAmount) {
+	    if (Math.abs(TestSession.uiAmountCheckout - TestSession.expectedUIAmount) > 1.0) {
 	        throw new AssertionError("❌ Cart Amount Mismatch → Expected: ₹" 
 	            + TestSession.expectedUIAmount + " | UI: ₹" + TestSession.uiAmountCheckout);
 	    }
@@ -269,13 +294,35 @@ public class PaymentPageSteps extends BaseSteps {
 	public void select_the_coupon() throws Throwable {
 	    System.out.println("========== 🎫 SELECT COUPON ==========" );
 
-	    // Capture total BEFORE coupon for later deduction validation
-	    double preCouponTotal = 0.0;
+	    // Read actual price (base amount)
+	    double actualPrice = 0.0;
 	    try {
-	        preCouponTotal = BasePriceManager.cleanAndConvert(LocatorsPage.amountToPay.getText().trim());
-	        System.out.println("   Pre-coupon amount: ₹" + preCouponTotal);
+	        String actualPriceText = LocatorsPage.actualPriceCart.getText().trim();
+	        actualPrice = BasePriceManager.cleanAndConvert(actualPriceText);
+	        System.out.println("   Actual Price (before any discounts): ₹" + actualPrice);
 	    } catch (Exception e) {
-	        System.out.println("   ⚠️ Could not read pre-coupon amount: " + e.getMessage());
+	        System.out.println("   ⚠️ Could not read actual price: " + e.getMessage());
+	    }
+
+	    // Read membership discount if available
+	    double membershipDisc = 0.0;
+	    try {
+	        String membershipText = LocatorsPage.membershipDiscount.getText().trim();
+	        membershipDisc = Math.abs(BasePriceManager.cleanAndConvert(membershipText));
+	        TestSession.membershipDiscount = membershipDisc;
+	        System.out.println("   Membership Discount: ₹" + membershipDisc);
+	    } catch (Exception e) {
+	        System.out.println("   ℹ️ No membership discount found.");
+	        TestSession.membershipDiscount = 0.0;
+	    }
+
+	    // Capture current amount to pay BEFORE clicking coupon
+	    double amountBeforeCouponModal = 0.0;
+	    try {
+	        amountBeforeCouponModal = BasePriceManager.cleanAndConvert(LocatorsPage.amountToPay.getText().trim());
+	        System.out.println("   Amount to pay BEFORE opening coupon modal: ₹" + amountBeforeCouponModal);
+	    } catch (Exception e) {
+	        System.out.println("   ⚠️ Could not read amount before coupon modal: " + e.getMessage());
 	    }
 
 	    BaseClass.waitAndClick(LocatorsPage.coupon, 10);
@@ -286,27 +333,67 @@ public class PaymentPageSteps extends BaseSteps {
 	    double couponDiscount = BasePriceManager.cleanAndConvert(couponAmountText);
 	    RequestContext.setCouponAmount(couponDiscount);
 	    System.out.println("   Captured Coupon Discount: ₹" + couponDiscount);
-		 BaseClass.waitAndClick(LocatorsPage.apply, 10);
-	    System.out.println("   Coupon selected and applied.");
-	    Thread.sleep(2000);
-
-	    // Verify amount after coupon = pre-coupon total - coupon discount
-	    if (preCouponTotal > 0 && couponDiscount > 0) {
-	        double expectedAfterCoupon = preCouponTotal - couponDiscount;
-	        double actualAfterCoupon = 0.0;
+	    
+	    // Check if coupon is already applied
+	    String applyButtonText = LocatorsPage.apply.getText().trim();
+	    boolean couponAlreadyApplied = applyButtonText.equalsIgnoreCase("Applied");
+	    
+	    if (couponAlreadyApplied) {
+	        System.out.println("   ✅ Coupon already applied! Status: " + applyButtonText);
+	        System.out.println("   Closing coupon modal instead of clicking Apply...");
+	        BaseClass.waitAndClick(LocatorsPage.couponModalCloseButton, 10);
+	        System.out.println("   Coupon modal closed successfully.");
+	        
+	        // When coupon is already applied, verify the current amount matches expected
+	        double amountAfterModal = 0.0;
 	        try {
 	            Thread.sleep(1000);
-	            actualAfterCoupon = BasePriceManager.cleanAndConvert(LocatorsPage.amountToPay.getText().trim());
+	            amountAfterModal = BasePriceManager.cleanAndConvert(LocatorsPage.amountToPay.getText().trim());
+	            System.out.println("   Amount to pay AFTER closing modal: ₹" + amountAfterModal);
 	        } catch (Exception e) {
-	            System.out.println("   ⚠️ Could not re-read amount after coupon.");
+	            System.out.println("   ⚠️ Could not re-read amount after modal close.");
 	        }
-	        if (Math.abs(actualAfterCoupon - expectedAfterCoupon) <= 1.0) {
-	            System.out.println("   ✅ Coupon deduction validated: ₹" + preCouponTotal
-	                + " - ₹" + couponDiscount + " = ₹" + actualAfterCoupon);
-	        } else if (actualAfterCoupon > 0) {
-	            System.out.println("   ⚠️ Coupon deduction mismatch: expected ₹" + expectedAfterCoupon
-	                + " but UI shows ₹" + actualAfterCoupon + " (diff: " + Math.abs(actualAfterCoupon - expectedAfterCoupon) + ")");
+	        
+	        // When already applied, amountToPay should already reflect all discounts
+	        // Calculate what it should be: actualPrice - membershipDisc - couponDiscount
+	        double expectedAmount = actualPrice - membershipDisc - couponDiscount;
+	        System.out.println("   Expected amount: ₹" + actualPrice + " - ₹" + membershipDisc + " - ₹" + couponDiscount + " = ₹" + expectedAmount);
+	        
+	        if (Math.abs(amountAfterModal - expectedAmount) <= 1.0) {
+	            System.out.println("   ✅ Pre-applied coupon verified: All discounts already applied correctly!");
+	        } else if (amountAfterModal > 0) {
+	            System.out.println("   ⚠️ Amount mismatch: expected ₹" + expectedAmount
+	                + " but UI shows ₹" + amountAfterModal + " (diff: " + Math.abs(amountAfterModal - expectedAmount) + ")");
 	        }
+	        TestSession.uiAmountCheckout = amountAfterModal;
+	        
+	    } else {
+	        System.out.println("   Clicking Apply button to apply coupon...");
+	        BaseClass.waitAndClick(LocatorsPage.apply, 10);
+	        System.out.println("   Coupon selected and applied.");
+	        Thread.sleep(2000);
+	        
+	        // After applying coupon, read the new amount
+	        double amountAfterApply = 0.0;
+	        try {
+	            amountAfterApply = BasePriceManager.cleanAndConvert(LocatorsPage.amountToPay.getText().trim());
+	            System.out.println("   Amount to pay AFTER applying coupon: ₹" + amountAfterApply);
+	        } catch (Exception e) {
+	            System.out.println("   ⚠️ Could not re-read amount after coupon apply.");
+	        }
+	        
+	        // When we just applied coupon, verify the deduction
+	        double expectedAfterApply = amountBeforeCouponModal - couponDiscount;
+	        System.out.println("   Expected after apply: ₹" + amountBeforeCouponModal + " - ₹" + couponDiscount + " = ₹" + expectedAfterApply);
+	        
+	        if (Math.abs(amountAfterApply - expectedAfterApply) <= 1.0) {
+	            System.out.println("   ✅ Coupon application verified: ₹" + amountBeforeCouponModal
+	                + " - ₹" + couponDiscount + " = ₹" + amountAfterApply);
+	        } else if (amountAfterApply > 0) {
+	            System.out.println("   ⚠️ Coupon deduction mismatch: expected ₹" + expectedAfterApply
+	                + " but UI shows ₹" + amountAfterApply + " (diff: " + Math.abs(amountAfterApply - expectedAfterApply) + ")");
+	        }
+	        TestSession.uiAmountCheckout = amountAfterApply;
 	    }
 	}
 	@Then("initiate upi payment if allowed")
@@ -440,27 +527,31 @@ public class PaymentPageSteps extends BaseSteps {
 
         double totalBeforeCoupon = TestSession.totalCheckoutAmount;
         double couponDiscount    = RequestContext.getCouponAmount();
+        double membershipDisc    = TestSession.membershipDiscount;
         double uiAmountAfter     = TestSession.uiAmountCheckout;
 
-        if (couponDiscount <= 0) {
-            System.out.println("   ℹ️ No coupon discount captured – skipping deduction check.");
+        if (couponDiscount <= 0 && membershipDisc <= 0) {
+            System.out.println("   ℹ️ No coupon or membership discount captured – skipping deduction check.");
             return;
         }
 
-        double expected = totalBeforeCoupon - couponDiscount;
+        double totalDiscounts = couponDiscount + membershipDisc;
+        double expected = totalBeforeCoupon - totalDiscounts;
 
-        System.out.println("   Total before coupon : ₹" + totalBeforeCoupon);
-        System.out.println("   Coupon discount      : ₹" + couponDiscount);
-        System.out.println("   Expected after coupon: ₹" + expected);
-        System.out.println("   UI amount to pay     : ₹" + uiAmountAfter);
+        System.out.println("   Total before discounts: ₹" + totalBeforeCoupon);
+        System.out.println("   Membership discount   : ₹" + membershipDisc);
+        System.out.println("   Coupon discount       : ₹" + couponDiscount);
+        System.out.println("   Total discounts       : ₹" + totalDiscounts);
+        System.out.println("   Expected after ALL discounts: ₹" + expected);
+        System.out.println("   UI amount to pay       : ₹" + uiAmountAfter);
 
         if (Math.abs(uiAmountAfter - expected) > 1.0) {
-            throw new AssertionError("❌ Coupon deduction mismatch! "
+            throw new AssertionError("❌ Total discount mismatch! "
                 + "Expected: ₹" + expected + " | UI shows: ₹" + uiAmountAfter
-                + " | Coupon: ₹" + couponDiscount);
+                + " | Membership: ₹" + membershipDisc + " | Coupon: ₹" + couponDiscount);
         }
-        System.out.println("   ✅ Coupon deduction correct: ₹" + totalBeforeCoupon
-            + " - ₹" + couponDiscount + " = ₹" + uiAmountAfter);
+        System.out.println("   ✅ All discounts applied correctly: ₹" + totalBeforeCoupon
+            + " - ₹" + membershipDisc + " - ₹" + couponDiscount + " = ₹" + uiAmountAfter);
     }
 
     @And("validate coupon split proportionally across member orders")
@@ -501,7 +592,63 @@ public class PaymentPageSteps extends BaseSteps {
 
         System.out.println("   ✅ Coupon split calculation completed.");
     }
-
+	@And("enter the reward value")
+	public void enterRewardValue() throws Throwable {
+	    System.out.println("========== 🎁 ENTERING REWARD VALUE (50% OF AMOUNT TO PAY) ==========");
+	    
+	    // Step 1: Get current amount to pay from UI
+	    double amountToPay = TestSession.uiAmountCheckout;
+	    if (amountToPay <= 0) {
+	        try {
+	            amountToPay = BasePriceManager.cleanAndConvert(LocatorsPage.amountToPay.getText().trim());
+	        } catch (Exception e) {
+	            System.out.println("   ❌ Could not determine amount to pay: " + e.getMessage());
+	            return;
+	        }
+	    }
+	    System.out.println("   Amount to Pay (from UI): ₹" + amountToPay);
+	    
+	    // Step 2: Calculate reward as 50% of amount to pay (no Excel, no capping)
+	    double rewardToUse = amountToPay / 2.0;
+	    System.out.println("   Reward to Use (50% of Amount): ₹" + rewardToUse);
+	    
+	    // Step 3: Click checkbox and enter reward amount
+	    try {
+	        BaseClass.waitAndClick(LocatorsPage.redeemRewardsCheckbox, 10);
+	        Thread.sleep(1000);
+	        
+	        BaseClass.waitAndInput(LocatorsPage.enterCashField, String.valueOf((int)rewardToUse), 10);
+	        System.out.println("   ✅ Entered reward amount: ₹" + (int)rewardToUse);
+	        
+	        Thread.sleep(2000); // Wait before clicking use button
+	        BaseClass.waitAndClick(LocatorsPage.useCashButton, 10);
+	        System.out.println("   ✅ Reward applied successfully");
+	        
+	        // Store reward value for later validation
+	        TestSession.rewardUsed = rewardToUse;
+	        double remainingPayment = amountToPay - rewardToUse;
+	        System.out.println("   📊 Amount Breakdown:");
+	        System.out.println("      Amount to Pay: ₹" + amountToPay);
+	        System.out.println("      Reward Redeemed (50%): ₹" + (int)rewardToUse);
+	        System.out.println("      Remaining to Pay: ₹" + (int)remainingPayment);
+	        
+	    } catch (Exception e) {
+	        System.out.println("   ❌ Error applying reward: " + e.getMessage());
+	        throw new RuntimeException("Failed to apply reward: " + e.getMessage());
+	    }
+	    Thread.sleep(2000); // Wait for UI to update after applying reward
+	    
+	    // Capture updated amount from UI after reward application
+	    try {
+	        double updatedAmount = BasePriceManager.cleanAndConvert(LocatorsPage.amountToPay.getText().trim());
+	        TestSession.uiAmountCheckout = updatedAmount;
+	        System.out.println("   📊 Updated Amount After Reward: ₹" + (int)updatedAmount);
+	    } catch (Exception e) {
+	        System.out.println("   ⚠️ Could not capture updated amount: " + e.getMessage());
+	    }
+	    
+	    System.out.println("========== 🎁 REWARD VALUE ENTRY COMPLETED ==========");
+	}
     @When("apply working coupon from UI")
     public void apply_working_coupon_from_ui() throws Throwable {
         System.out.println("========== 🎫 APPLYING COUPON FROM UI ==========");

@@ -149,7 +149,16 @@ public WebElement investigationTextArea;
     public WebElement slot_proceed;
     @FindBy(xpath = "(//div[@data-value='upi'])[1]")
     public WebElement paymentUpiOption;
+//input[@id="redeem-rewards"]
+    @FindBy(xpath = "//input[@id='redeem-rewards']")
+    public WebElement redeemRewardsCheckbox;
+    //input[@placeholder='Enter Cash']
+    //button[text()='Use']
 
+    @FindBy(xpath = "//input[@placeholder='Enter Cash']")
+    public WebElement enterCashField;
+    @FindBy(xpath = "//button[text()='Use']")
+    public WebElement useCashButton;
     @FindBy(xpath = "//div[@data-value='card']")
     public WebElement paymentCardOption;
     @FindBy(xpath = "//input[@placeholder='example@okhdfcbank']")
@@ -190,6 +199,8 @@ public WebElement investigationTextArea;
     public WebElement actualPriceCart;
     @FindBy(xpath = "//p[normalize-space()='MRP']/following-sibling::p[1]")
     public WebElement MRP;
+    @FindBy(xpath = "//p[normalize-space()='Membership Discount']/following-sibling::p[1]")
+    public WebElement membershipDiscount;
     //
     @FindBy(xpath = "//button[text()='Pay in Cash']")
     public WebElement payInCashButton;
@@ -313,8 +324,12 @@ public WebElement investigationTextArea;
 
     @FindBy(xpath = "//span[@class='text-primaryText font-medium']")
     public WebElement coupon;
-    @FindBy(xpath = "//button[text()='Apply']")
+    @FindBy(xpath = "//button[text()='Apply' or text()='Applied']")
     public WebElement apply;
+    @FindBy(xpath = "//button[normalize-space()='Applied']")
+    public WebElement appliedCoupon;
+    @FindBy(xpath = "//div[contains(@class,'top-3 right-3')]//button | //button[ancestor::div[contains(@class,'top-3 right-3')]]")
+    public WebElement couponModalCloseButton;
     //span[@class="text-bold"]
     @FindBy(xpath = "//span[@class='text-bold']")
     public WebElement couponAmount;

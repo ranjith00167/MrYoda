@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ADD-MEMBER COUPON FLOW SUITE
+  Runs the hybrid Pay Online add-member coupon scenario from TC_11.
+
+  Run:
+    mvn test -DsuiteXmlFile=test-suites/testng_addmember_coupon-suite.xml
+-->
+<suite name="Add Member Coupon Flow Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="Member Add-Member Lab Visit Coupon - Pay Online" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <parameter name="orderType" value="lab"/>
+        <parameter name="couponFlow" value="multi-member"/>
+        <parameter name="cucumber.filter.tags" value="@hybridLabOrderMemberCoupon"/>
+
+        <classes>
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+        </classes>
+    </test>
+
+</suite>

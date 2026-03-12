@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAY ONLINE — MULTI-MEMBER REWARD + COUPON FLOW SUITE
+     ══════════════════════════════════════════════════════════════════════════
+     Focus: Coupon + Reward (50% cap), dual deduction validation, proportional split, API verification
+     Multi-Member: Multiple members with both coupon and reward
+     
+     SCENARIO:
+     @hybridMultiMemberRewardCoupon — Multi-member with coupon + reward validation
+
+     LOGIC:
+     1. Multi-member login (10% membership discount applies to each member)
+     2. Selects tests across multiple members and proceeds to checkout
+     3. Applies coupon at checkout
+     4. Final Amount = Base - 10% Membership Discount (per member) - Coupon Discount (proportional split)
+     5. Members enter reward value with 50% cap: min(50% of final amount)
+     6. Payment Amount = Final Amount - Reward Used
+     7. API validates all deductions: membership (per member), coupon (proportional), reward
+
+     AMOUNT FLOW EXAMPLE (2 members):
+     - Member 1 Base: ₹1500, Member 2 Base: ₹1000 = Total ₹2500
+     - Total Membership (10%): -₹250 = ₹2250
+     - Coupon Discount (proportional split): -₹200 = ₹2050
+     - Reward (50% of ₹2050): -₹1025 = ₹1025 (Razorpay)
+
+     Run:  mvn test -DsuiteXmlFile=test-suites/testng_payonline_multiMember_rewardCoupon_suite.xml
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Pay Online Multi-Member Reward + Coupon Flow Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1 : Multi-Member — Lab Visit — Coupon + Reward — Pay Online  -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Multi-Member - Coupon + Reward Validation - Pay Online" preserve-order="true">
+        <parameter name="userType"  value="multi-member"/>
+        <parameter name="orderType" value="lab"/>
+        <parameter name="multiMemberRewardCouponFlow" value="multi-member-reward-coupon"/>
+        <parameter name="cucumber.filter.tags" value="@hybridMultiMemberRewardCoupon"/>
+
+        <classes>
+            <!-- Cucumber scenario runner: Login → Test Selection → Coupon → Reward → Payment → API Verify -->
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+            
+            <!-- ── PHASE 2 : Cross-API Validation ──────────────────────── -->
+            <!-- Validates: order status, price consistency, product names  -->
+            <!-- visit number presence, item-level price breakdown          -->
+            <!-- Coupon proportional split validation across members        -->
+            <class name="com.mryoda.diagnostics.api.tests.order.PayOnlineCrossApiValidationTest"/>
+
+            <!-- ── PHASE 3 : IT Dose UI Automation ─────────────────────── -->
+            <!-- Triggers: RunnerTest.class which enters the visit numbers  -->
+            <!-- in IT Dose lab system to simulate sample processing        -->
+            <!-- NOTE: Visit numbers are extracted from getOrderById above  -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+
+            <!-- ── PHASE 4 : Post-Processing API Validations ───────────── -->
+            <!-- Visit status from lab system (after IT Dose entry)         -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            
+            <!-- Report generation and PDF verification                     -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+
+</suite>

@@ -286,7 +286,14 @@ public class CatalogClient {
                 return testPricing;
             }
             
-            List<Map<String, Object>> tests = testsResponse.jsonPath().getList("data");
+            List<Map<String, Object>> tests = extractEntityList(
+                testsResponse,
+                "data",
+                "data.tests",
+                "tests",
+                "data.results",
+                "results"
+            );
             
             if (tests != null) {
                 for (Map<String, Object> test : tests) {
@@ -296,9 +303,11 @@ public class CatalogClient {
                     if (testName == null) testName = (String) test.get("name");
                     if (testName == null) testName = (String) test.get("testName");
                     
-                    // Add test if we found a name (price is 0 - API doesn't provide it)
+                    double price = extractPriceFromEntity(test);
+
+                    // Add test if we found a name
                     if (testName != null) {
-                        testPricing.put(testName, 0.0);
+                        testPricing.put(testName, price);
                     }
                 }
             }
@@ -363,10 +372,14 @@ public class CatalogClient {
                 return packagePricing;
             }
             
-            List<Map<String, Object>> packages = packagesResponse.jsonPath().getList("data");
-            if (packages == null) {
-                packages = packagesResponse.jsonPath().getList("data.packages");
-            }
+            List<Map<String, Object>> packages = extractEntityList(
+                packagesResponse,
+                "data",
+                "data.packages",
+                "packages",
+                "data.results",
+                "results"
+            );
             
             if (packages != null) {
                 for (Map<String, Object> pkg : packages) {
@@ -374,10 +387,13 @@ public class CatalogClient {
                     
                     String packageName = (String) pkg.get("name");
                     if (packageName == null) packageName = (String) pkg.get("packageName");
+                    if (packageName == null) packageName = (String) pkg.get("package_name");
+
+                    double price = extractPriceFromEntity(pkg);
                     
-                    // Add package (price is 0 - API doesn't provide it)
+                    // Add package if we found a name
                     if (packageName != null) {
-                        packagePricing.put(packageName, 0.0);
+                        packagePricing.put(packageName, price);
                     }
                 }
             }
@@ -419,5 +435,149 @@ public class CatalogClient {
             // Graceful fallback
         }
         return new HashMap<>();
+    }
+
+    private List<Map<String, Object>> extractEntityList(Response response, String... paths) {
+        List<Map<String, Object>> entities = new ArrayList<>();
+        if (response == null || paths == null) {
+            return entities;
+        }
+
+        for (String path : paths) {
+            Object raw = response.jsonPath().get(path);
+            List<Map<String, Object>> mapped = toMapList(raw);
+            if (!mapped.isEmpty()) {
+                return mapped;
+            }
+        }
+
+        return entities;
+    }
+
+    private List<Map<String, Object>> toMapList(Object raw) {
+        List<Map<String, Object>> mapped = new ArrayList<>();
+        if (raw instanceof List) {
+            List<?> list = (List<?>) raw;
+            for (Object item : list) {
+                if (item instanceof Map) {
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> casted = (Map<String, Object>) item;
+                    mapped.add(casted);
+                }
+            }
+        } else if (raw instanceof Map) {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> casted = (Map<String, Object>) raw;
+            mapped.add(casted);
+        }
+        return mapped;
+    }
+
+    private Double tryParseDouble(Object rawValue) {
+        if (rawValue == null) {
+            return null;
+        }
+        if (rawValue instanceof Number) {
+            return ((Number) rawValue).doubleValue();
+        }
+
+        String value = rawValue.toString().trim();
+        if (value.isEmpty()) {
+            return null;
+        }
+
+        value = value.replace(",", "").replaceAll("[^0-9.\\-]", "");
+        if (value.isEmpty() || "-".equals(value) || ".".equals(value)) {
+            return null;
+        }
+
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
+    }
+
+    private Double readNumericField(Map<?, ?> source, String key) {
+        if (source == null || !source.containsKey(key)) {
+            return null;
+        }
+
+        Object raw = source.get(key);
+        Double direct = tryParseDouble(raw);
+        if (direct != null) {
+            return direct;
+        }
+
+        if (raw instanceof Map) {
+            Map<?, ?> nested = (Map<?, ?>) raw;
+            String[] nestedKeys = { "price", "amount", "value", "selling_price", "actual_price", "mrp" };
+            for (String nestedKey : nestedKeys) {
+                Double nestedValue = readNumericField(nested, nestedKey);
+                if (nestedValue != null) {
+                    return nestedValue;
+                }
+            }
+        }
+
+        if (raw instanceof List) {
+            List<?> list = (List<?>) raw;
+            for (Object item : list) {
+                Double listValue = tryParseDouble(item);
+                if (listValue != null) {
+                    return listValue;
+                }
+                if (item instanceof Map) {
+                    Map<?, ?> nestedItem = (Map<?, ?>) item;
+                    Double nestedListValue = readNumericField(nestedItem, "price");
+                    if (nestedListValue == null) {
+                        nestedListValue = readNumericField(nestedItem, "amount");
+                    }
+                    if (nestedListValue != null) {
+                        return nestedListValue;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private double extractPriceFromEntity(Map<String, Object> entity) {
+        if (entity == null || entity.isEmpty()) {
+            return 0.0;
+        }
+
+        String[] directKeys = {
+            "price", "selling_price", "sellingPrice", "actual_price", "actualPrice",
+            "offer_price", "offerPrice", "final_price", "finalPrice", "discounted_price",
+            "amount", "total", "mrp", "package_price", "packagePrice", "test_price", "testPrice"
+        };
+
+        for (String key : directKeys) {
+            Double value = readNumericField(entity, key);
+            if (value != null) {
+                return value;
+            }
+        }
+
+        String[] nestedKeys = {
+            "pricing", "prices", "price_info", "priceInfo", "details",
+            "member_price", "memberPrice", "non_member_price", "nonMemberPrice"
+        };
+
+        for (String nestedKey : nestedKeys) {
+            Object nestedObj = entity.get(nestedKey);
+            if (nestedObj instanceof Map) {
+                @SuppressWarnings("unchecked")
+                Map<String, Object> nestedMap = (Map<String, Object>) nestedObj;
+                double nestedPrice = extractPriceFromEntity(nestedMap);
+                if (nestedPrice > 0) {
+                    return nestedPrice;
+                }
+            }
+        }
+
+        return 0.0;
     }
 }

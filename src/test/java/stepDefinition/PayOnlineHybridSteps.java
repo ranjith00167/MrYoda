@@ -1040,6 +1040,25 @@ public class PayOnlineHybridSteps extends BaseSteps {
                 String finalPrice = orderResponse.jsonPath().getString("data[0].final_price");
                 System.out.println("💰 Total: ₹" + totalPrice + " | Paid: ₹" + paidAmount + " | Final: ₹" + finalPrice);
 
+                // ── Coupon & Discount Details ──────────────────────────────────────────
+                String couponCode = orderResponse.jsonPath().getString("data[0].coupon_code");
+                String couponGuid = orderResponse.jsonPath().getString("data[0].coupon_guid");
+                String couponDiscountAmount = orderResponse.jsonPath().getString("data[0].coupon_discount_amount");
+                String membershipDiscount = orderResponse.jsonPath().getString("data[0].membership_discount");
+                
+                System.out.println("\n🎫 COUPON & DISCOUNT VALIDATION:");
+                System.out.println("   Coupon Code       : " + (couponCode != null ? couponCode : "None"));
+                System.out.println("   Coupon GUID       : " + (couponGuid != null ? couponGuid : "None"));
+                System.out.println("   Coupon Discount   : ₹" + (couponDiscountAmount != null ? couponDiscountAmount : "0"));
+                System.out.println("   Membership Discount: ₹" + (membershipDiscount != null ? membershipDiscount : "0"));
+
+                // Store coupon details in context for cross-validation
+                if (couponCode != null && !couponCode.isEmpty() && !"null".equals(couponCode)) {
+                    System.out.println("   ✅ Coupon applied in order: " + couponCode);
+                } else {
+                    System.out.println("   ℹ️ No coupon applied in this order");
+                }
+
                 // Extract test names and pricing from order_items
                 // Note: data is an array, so use data[0].order_items to get the items list directly
                 try {

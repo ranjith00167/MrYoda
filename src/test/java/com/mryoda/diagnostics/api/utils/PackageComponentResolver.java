@@ -222,7 +222,10 @@ public class PackageComponentResolver {
                 testPricing.putAll(pagePricing);
                 
                 // Check if there are more pages (safe numeric extraction)
-                Object totalObj = res.jsonPath().get("data.total");
+                Object totalObj = res.jsonPath().get("total");
+                if (!(totalObj instanceof Number)) {
+                    totalObj = res.jsonPath().get("data.total");
+                }
                 int total = (totalObj instanceof Number) ? ((Number) totalObj).intValue() : 0;
                 if (total > 0 && testPricing.size() >= total) break;
             }
@@ -251,7 +254,10 @@ public class PackageComponentResolver {
                 packagePricing.putAll(pagePricing);
                 
                 // Check if there are more pages (safe numeric extraction)
-                Object totalObj = res.jsonPath().get("data.total");
+                Object totalObj = res.jsonPath().get("total");
+                if (!(totalObj instanceof Number)) {
+                    totalObj = res.jsonPath().get("data.total");
+                }
                 int total = (totalObj instanceof Number) ? ((Number) totalObj).intValue() : 0;
                 if (total > 0 && packagePricing.size() >= total) break;
             }

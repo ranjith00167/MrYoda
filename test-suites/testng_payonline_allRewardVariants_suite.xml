@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MrYoda Comprehensive Reward Scenarios Suite" verbose="2" thread-count="1">
+  <!-- ══════════════════════════════════════════════════════════════════════════════
+       COMPREHENSIVE REWARD SCENARIOS TEST SUITE
+       ══════════════════════════════════════════════════════════════════════════════
+       
+       This comprehensive suite validates all reward redemption flows:
+       
+       SCENARIOS COVERED:
+       1. @hybridLabOrderMemberReward - Single Member + Reward Only
+       2. @hybridLabOrderMemberRewardCoupon - Single Member + Reward + Coupon
+       3. @hybridMultiMemberReward - Multi-Member + Reward Only (NEW)
+       4. @hybridMultiMemberRewardCoupon - Multi-Member + Reward + Coupon
+       
+       REWARD CALCULATION LOGIC:
+       • Reward = 50% of final amount to pay (after membership discount)
+       • Dynamic calculation based on actual base amount
+       • Capped at 50% - user cannot enter more than half
+       • Member gets remaining amount paid via Razorpay payment
+       
+       AMOUNT FLOW FOR EACH VARIANT:
+       
+       ┌─ SINGLE MEMBER + REWARD (₹2000 base):
+       │  Base: ₹2000
+       │  → Membership Discount (-10%): ₹200
+       │  → Amount to Pay: ₹1800
+       │  → Reward (50%): ₹900
+       │  → Razorpay: ₹900
+       │
+       ├─ SINGLE MEMBER + REWARD + COUPON (₹2000 base, ₹500 coupon):
+       │  Base: ₹2000
+       │  → Membership Discount (-10%): ₹200
+       │  → Coupon Discount: -₹500
+       │  → Amount to Pay: ₹1300
+       │  → Reward (50%): ₹650
+       │  → Razorpay: ₹650
+       │
+       ├─ MULTI-MEMBER + REWARD (₹1000 × 2, 10% each):
+       │  Member 1: ₹1000 → Discount: ₹900
+       │  Member 2: ₹1000 → Discount: ₹900
+       │  Total to Pay: ₹1800
+       │  → Reward (50%): ₹900
+       │  → Razorpay: ₹900
+       │
+       └─ MULTI-MEMBER + REWARD + COUPON (₹1000 × 2, coupon split):
+          Member 1: ₹1000 → Discount: ₹900
+          Member 2: ₹1000 → Discount: ₹900
+          Coupon (split): -₹250 (each member -₹125)
+          Total to Pay: ₹1550
+          → Reward (50%): ₹775
+          → Razorpay: ₹775
+       
+       VALIDATION PHASES PER SCENARIO:
+       ✓ Phase 1: Cucumber BDD Execution (UI automation)
+       ✓ Phase 2: Cross-API Pricing Validation
+       ✓ Phase 3: Razorpay Payment Completion
+       ✓ Phase 4: Post-Payment Order Verification
+       
+       ══════════════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SCENARIO 1: SINGLE MEMBER + REWARD ONLY
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <test name="Scenario_1_SingleMember_RewardOnly">
+    <parameter name="featureFile" value="src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature"/>
+    <parameter name="tagFilter" value="@hybridLabOrderMemberReward"/>
+    <parameter name="scenario" value="SINGLE_MEMBER_REWARD_ONLY"/>
+    <parameter name="description" value="Single member places order with reward only (no coupon)"/>
+    <classes>
+      <class name="testRunner.PayOnlineSuiteRunner"/>
+    </classes>
+  </test>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SCENARIO 2: SINGLE MEMBER + REWARD + COUPON
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <test name="Scenario_2_SingleMember_Reward_Coupon">
+    <parameter name="featureFile" value="src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature"/>
+    <parameter name="tagFilter" value="@hybridLabOrderMemberRewardCoupon"/>
+    <parameter name="scenario" value="SINGLE_MEMBER_REWARD_COUPON"/>
+    <parameter name="description" value="Single member places order with reward and coupon"/>
+    <classes>
+      <class name="testRunner.PayOnlineSuiteRunner"/>
+    </classes>
+  </test>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SCENARIO 3: MULTI-MEMBER + REWARD ONLY (NEW)
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <test name="Scenario_3_MultiMember_RewardOnly">
+    <parameter name="featureFile" value="src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature"/>
+    <parameter name="tagFilter" value="@hybridMultiMemberReward"/>
+    <parameter name="scenario" value="MULTI_MEMBER_REWARD_ONLY"/>
+    <parameter name="description" value="Multiple members place order with reward only (no coupon)"/>
+    <classes>
+      <class name="testRunner.PayOnlineSuiteRunner"/>
+    </classes>
+  </test>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SCENARIO 4: MULTI-MEMBER + REWARD + COUPON
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <test name="Scenario_4_MultiMember_Reward_Coupon">
+    <parameter name="featureFile" value="src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature"/>
+    <parameter name="tagFilter" value="@hybridMultiMemberRewardCoupon"/>
+    <parameter name="scenario" value="MULTI_MEMBER_REWARD_COUPON"/>
+    <parameter name="description" value="Multiple members place order with reward and coupon (proportional split)"/>
+    <classes>
+      <class name="testRunner.PayOnlineSuiteRunner"/>
+    </classes>
+  </test>
+
+</suite>

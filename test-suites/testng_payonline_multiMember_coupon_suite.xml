@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAY ONLINE — MULTI-MEMBER COUPON FLOW SUITE
+     ══════════════════════════════════════════════════════════════════════════
+     Focus: Multi-member coupon application, proportional split validation,
+            and API verification across multiple orders
+     
+     SCENARIO:
+     @hybridMultiMemberCoupon  — Multi-member with coupon selection, proportional split & validation
+
+     Run:  mvn test "-Dsurefire.suiteXmlFiles=test-suites/testng_payonline_multiMember_coupon_suite.xml"
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Pay Online Multi-Member Coupon Flow Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1 : Multi-Member — Lab Visit — Coupon — Pay Online          -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Multi-Member - Coupon Validation with Proportional Split - Pay Online" preserve-order="true">
+        <parameter name="userType"  value="member"/>
+        <parameter name="orderType" value="lab"/>
+        <parameter name="couponFlow" value="multi-member"/>
+        <parameter name="cucumber.filter.tags" value="@hybridMultiMemberCoupon"/>
+
+        <classes>
+            <!-- Cucumber scenario runner: Login → Multi-Member Selection → Test Selection → Coupon → Payment → API Verify -->
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+            
+            <!-- ── PHASE 2 : Cross-API Validation ──────────────────────── -->
+            <!-- Validates: order status, price consistency, product names  -->
+            <!-- visit number presence, item-level price breakdown          -->
+            <!-- NEW: Coupon split validation across multiple orders        -->
+            <class name="com.mryoda.diagnostics.api.tests.order.PayOnlineCrossApiValidationTest"/>
+
+            <!-- ── PHASE 3 : IT Dose UI Automation ─────────────────────── -->
+            <!-- Triggers: RunnerTest.class which enters the visit number   -->
+            <!-- in IT Dose lab system to simulate sample processing        -->
+            <!-- NOTE: Visit numbers are extracted from getOrderById above  -->
+            <!-- MULTI-MEMBER: Processes visit numbers for each member     -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+
+            <!-- ── PHASE 4 : Post-Processing API Validations ───────────── -->
+            <!-- Visit status from lab system (after IT Dose entry)         -->
+            <!-- MULTI-MEMBER: Validates status for each member's order    -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            
+            <!-- Report generation and PDF verification                     -->
+            <!-- MULTI-MEMBER: PDF validation for each member's test       -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+
+        </classes>
+    </test>
+
+</suite>

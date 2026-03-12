@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MrYoda Multi-Member Reward Only Payment Suite" verbose="2" thread-count="1">
+  <!-- ══════════════════════════════════════════════════════════════════════════════
+       MULTI-MEMBER REWARD ONLY PAYMENT TEST SUITE
+       ══════════════════════════════════════════════════════════════════════════════
+       
+       SCENARIO: Multi-member places lab order with REWARD ONLY (no coupon)
+       
+       FLOW:
+       1. Login as multi-member user
+       2. Select tests and capture prices
+       3. Navigate to checkout with multiple members
+       4. Enter reward value (50% of final amount)
+       5. Complete payment via Razorpay (in-browser)
+       6. Verify order via getOrderById API
+       
+       AMOUNT CALCULATION EXAMPLE (2 Members):
+       ├─ Member 1 Base: ₹1000
+       ├─  → With 10% membership discount: ₹900
+       ├─ Member 2 Base: ₹1000
+       ├─  → With 10% membership discount: ₹900
+       ├─ Total (both members): ₹1800
+       ├─ Reward (50% of ₹1800): ₹900
+       └─ Final Razorpay Amount: ₹900
+       
+       VALIDATION PHASES:
+       ✓ Phase 1: Cucumber BDD Flow (UI automation end-to-end)
+       ✓ Phase 2: Cross-API Validation (GET_ALL_TESTS, GET_ALL_PACKAGES, GLOBAL_SEARCH)
+       ✓ Phase 3: UI Payment Trigger (Razorpay payment completion)
+       ✓ Phase 4: Post-Payment API Verification (getOrderById status confirmation)
+       
+       KEY VALIDATIONS:
+       • Membership discount (10%) auto-applied
+       • Reward calculation: 50% of final amount (after membership discount)
+       • Multi-member order structure captured correctly
+       • Razorpay amount matches final calculated amount
+       • API order status confirmed as CONFIRMED
+       
+       ══════════════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ─────────────────────────────────────────────────────────────────────────────
+       PHASE 1: Cucumber BDD Execution
+       Test selected by tag filter: @hybridMultiMemberReward
+       ───────────────────────────────────────────────────────────────────────────── -->
+  <test name="Phase_1_CucumberBDD_MultiMemberReward">
+    <parameter name="featureFile" value="src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature"/>
+    <parameter name="tagFilter" value="@hybridMultiMemberReward"/>
+    <classes>
+      <class name="testRunner.PayOnlineSuiteRunner"/>
+    </classes>
+  </test>
+
+</suite>
