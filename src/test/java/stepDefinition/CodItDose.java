@@ -376,6 +376,7 @@ public class CodItDose extends BaseSteps {
 
     @When("I enter the SIN NO in the input box")
     public void i_enter_the_sin_no_in_the_input_box() {
+                        BaseClass.waitInSeconds(3);
         String sinNo = ScenarioContext.extractedSinNo;
         if (sinNo == null || sinNo.isEmpty()) {
             throw new RuntimeException(
@@ -395,6 +396,7 @@ public class CodItDose extends BaseSteps {
 
                 // Try different interaction speeds
                 if (i % 2 == 0) {
+                    BaseClass.waitInSeconds(3);
                     input.sendKeys(sinNo);
                 } else {
                     // JS Fallback
