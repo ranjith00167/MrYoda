@@ -160,7 +160,7 @@ public class GetAddressByUserIdAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 1️⃣ EXISTING MEMBER → Get Address By User ID
     // ---------------------------------------------------------
-    @Test(priority = 14, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddressAPITest.testAddAddress_ForNonMember")
+    @Test(priority = 14, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.AddressAPITest.testAddAddress_ForNonMember")
     public void testGetAddressByUserId_ForNonMember() {
 
         System.out.println("\n==========================================================");
@@ -177,7 +177,7 @@ public class GetAddressByUserIdAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 2️⃣ MEMBER → Get Address By User ID
     // ---------------------------------------------------------
-    @Test(priority = 14, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddressAPITest.testAddAddress_ForMember")
+    @Test(priority = 14, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.AddressAPITest.testAddAddress_ForMember")
     public void testGetAddressByUserId_ForMember() {
 
         System.out.println("\n==========================================================");
@@ -194,7 +194,7 @@ public class GetAddressByUserIdAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 3️⃣ NEW USER → Get Address By User ID
     // ---------------------------------------------------------
-    @Test(priority = 15, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddressAPITest.testAddAddress_ForNewUser")
+    @Test(priority = 15, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.AddressAPITest.testAddAddress_ForNewUser")
     public void testGetAddressByUserId_ForNewUser() {
 
         System.out.println("\n==========================================================");

@@ -59,6 +59,14 @@
         <scope>test</scope>
     </dependency>
 
+    <!-- Override transitive commons-io:2.7 (from cucumber-reporting) to 2.11.0+
+         required by Selenium 4 HttpClient (UnsynchronizedByteArrayOutputStream.builder) -->
+    <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.15.1</version>
+    </dependency>
+
     <!-- JUnit -->
     <dependency>
         <groupId>junit</groupId>
@@ -118,12 +126,7 @@
     <artifactId>json</artifactId>
     <version>20231013</version>
 </dependency>
-<!-- PDF Parser -->
-<dependency>
-    <groupId>org.apache.pdfbox</groupId>
-    <artifactId>pdfbox</artifactId>
-    <version>2.0.29</version>
-</dependency>
+
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>json-schema-validator</artifactId>
@@ -221,7 +224,6 @@
       <artifactId>javafaker</artifactId>
       <version>1.0.2</version>
     </dependency>
-    
     <!-- Lombok for Reducing Boilerplate Code -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -288,7 +290,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.1.2</version>
+        <version>3.2.5</version>
         <configuration>
            <!-- Support for both TestNG Suite XML and Cucumber Runners -->
             <testFailureIgnore>true</testFailureIgnore>
@@ -296,10 +298,9 @@
                 <browser>${browser}</browser>
                 <headless>${headless}</headless>
             </systemPropertyVariables>
-            <includes>
-                 <include>**/RunnerTest.java</include>
-                 <include>**/*Test.java</include>
-             </includes>
+            <!-- NOTE: <includes> intentionally omitted here.
+                 Surefire 3.1.2 NPEs when <includes> + suiteXmlFiles are both present.
+                 Includes are applied via the 'default-runner' profile when no suite XML is used. -->
         </configuration>
       </plugin>
       
@@ -316,6 +317,35 @@
   </build>
 
   <profiles>
+    <!-- ═══════════════════════════════════════════════════════════════════
+         DEFAULT RUNNER  — plain 'mvn test' without a suite XML file
+         Activates when neither -DsuiteXmlFile nor -Dsurefire.suiteXmlFiles
+         is passed on the command line.
+         ═══════════════════════════════════════════════════════════════════ -->
+    <profile>
+        <id>default-runner</id>
+        <activation>
+            <property>
+                <name>!suiteXmlFile</name>
+            </property>
+        </activation>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <includes>
+                            <include>**/RunnerTest.java</include>
+                            <include>**/PayOnlineSuiteRunner.java</include>
+                            <include>**/*Test.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+
     <profile>
         <id>testng-suite</id>
         <activation>
@@ -355,7 +385,7 @@
                         <dependency>
                             <groupId>org.apache.maven.surefire</groupId>
                             <artifactId>surefire-junit47</artifactId>
-                            <version>3.1.2</version>
+                            <version>3.2.5</version>
                         </dependency>
                     </dependencies>
                 </plugin>

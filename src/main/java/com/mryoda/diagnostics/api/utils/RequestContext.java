@@ -75,6 +75,7 @@ public class RequestContext {
         nonMemberCouponFlowEnabled = false;
         newUserCouponFlowEnabled = false;
         cancelledOrderRewardsGain.remove();
+        visitsProcessedByUI = false;
 
         System.out.println("[SUCCESS] RequestContext State Successfully Cleared.");
     }
@@ -145,6 +146,7 @@ public class RequestContext {
     private static Map<String, String> visitSinMap = new HashMap<>();
     private static Set<String> cancelledOrderIds = new HashSet<>();
     private static Set<String> cancelledVisitNumbers = new HashSet<>();
+    private static volatile boolean visitsProcessedByUI = false;
     private static int currentTotalPrice;
     private static String currentSampleType;
 
@@ -161,9 +163,11 @@ public class RequestContext {
     }
 
     public static void setCurrentVisitNumbers(List<String> visits) {
-        currentVisitNumbers = visits;
-        if (visits != null && !visits.isEmpty()) {
-            visitNumber = visits.get(0);
+        // Always store a mutable copy to prevent UnsupportedOperationException
+        // when callers pass Collections.singletonList() or other immutable lists.
+        currentVisitNumbers = (visits != null) ? new ArrayList<>(visits) : new ArrayList<>();
+        if (!currentVisitNumbers.isEmpty()) {
+            visitNumber = currentVisitNumbers.get(0);
         }
     }
 
@@ -515,7 +519,19 @@ public class RequestContext {
     }
 
     public static Map<String, Map<String, Object>> getAllStoredTests() {
-        return storedTests;
+        Map<String, Map<String, Object>> result = new HashMap<>();
+        for (Map.Entry<String, Map<String, Object>> entry : storedTests.entrySet()) {
+            String name = entry.getKey();
+            Map<String, Object> details = new HashMap<>(entry.getValue()); // Return a copy
+            
+            // Logic to handle packages that might have been stored as 'test' type
+            String type = (details.get("type") != null) ? details.get("type").toString().toLowerCase() : "test";
+            if (type.equals("test") && (name.contains("Panel") || name.contains("Profile") || name.contains("Package"))) {
+                details.put("type", "package");
+            }
+            result.put(name, details);
+        }
+        return result;
     }
 
     // ============================================================
@@ -733,7 +749,19 @@ public class RequestContext {
     }
 
     public static Map<String, Map<String, Object>> getAllTests() {
-        return selectedTests;
+        Map<String, Map<String, Object>> result = new HashMap<>();
+        for (Map.Entry<String, Map<String, Object>> entry : selectedTests.entrySet()) {
+            String name = entry.getKey();
+            Map<String, Object> details = new HashMap<>(entry.getValue());
+            
+            // Auto-detect packages by name patterns
+            String type = (details.get("type") != null) ? details.get("type").toString().toLowerCase() : "test";
+            if (type.equals("test") && (name.contains("Panel") || name.contains("Profile") || name.contains("Package"))) {
+                details.put("type", "package");
+            }
+            result.put(name, details);
+        }
+        return result;
     }
 
     public static void clearAllTests() {
@@ -1611,5 +1639,23 @@ public class RequestContext {
 
     public static List<String> getMemberIds() {
         return memberIds;
+    }
+
+    public static void addMemberId(String id) {
+        if (memberIds == null) {
+            memberIds = new ArrayList<>();
+        }
+        memberIds.add(id);
+    }
+
+    // ── Per-visit processing flag ────────────────────────────────────────────
+    // Set to true by COD_99 after it has processed every visit inline.
+    // COD_16 / COD_17 in the XML suite check this flag and skip if already done.
+    public static void setVisitsProcessedByUI(boolean value) {
+        visitsProcessedByUI = value;
+    }
+
+    public static boolean isVisitsProcessedByUI() {
+        return visitsProcessedByUI;
     }
 }

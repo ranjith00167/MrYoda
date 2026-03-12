@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAY ONLINE HYBRID SUITE
+     ══════════════════════════════════════════════════════════════════════════
+     PHASE 1 — UI Automation   : Login → Test selection → Cart → Checkout
+     PHASE 2 — API Automation  : Initiate Razorpay payment → Verify → Assert
+
+     Run via Maven:
+       mvn test -DsuiteXmlFile=test-suites/testng_payonline_hybrid_suite.xml
+
+     Run a single tag only:
+       mvn test -DsuiteXmlFile=test-suites/testng_payonline_hybrid_suite.xml
+                -Dcucumber.filter.tags="@hybridLabOrderMember"
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Pay Online Hybrid Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1 : Single Member — Lab Visit — Pay Online                    -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Member Lab Visit - Pay Online (Hybrid)" preserve-order="true">
+        <parameter name="cucumber.filter.tags" value="@hybridLabOrderMember"/>
+        <classes>
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 2 : Single Member — Home Sample — Pay Online                  -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Member Home Sample - Pay Online (Hybrid)" preserve-order="true">
+        <parameter name="cucumber.filter.tags" value="@hybridHomeOrderMember"/>
+        <classes>
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 3 : Single Non-Member — Lab Visit — Pay Online                -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Non-Member Lab Visit - Pay Online (Hybrid)" preserve-order="true">
+        <parameter name="cucumber.filter.tags" value="@hybridLabOrderNonMember"/>
+        <classes>
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 4 : Single Non-Member — Home Sample — Pay Online              -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Non-Member Home Sample - Pay Online (Hybrid)" preserve-order="true">
+        <parameter name="cucumber.filter.tags" value="@hybridHomeOrderNonMember"/>
+        <classes>
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+        </classes>
+    </test>
+
+</suite>

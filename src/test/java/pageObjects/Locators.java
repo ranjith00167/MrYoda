@@ -124,9 +124,10 @@ public WebElement investigationTextArea;
     // h4[@class="text-textHeading md:text-lg text-base font-bold w-full trunk-2"]
     @FindBy(xpath = "//input[@placeholder='Search Test Here']")
     public WebElement searchTestField;
-    @FindBy(xpath = "//button[text()='Add to cart']")
+    @FindBy(xpath = "//button[normalize-space()='Add to cart' or normalize-space()='Add To Cart']")
     public WebElement addToCartButton;
-    @FindBy(xpath = "//img[@alt='Cart']")
+    // Parent div is the clickable container (img[@alt='Cart'] is the icon inside it)
+    @FindBy(xpath = "//div[contains(@class,'cursor-pointer')][.//img[@alt='Cart']]")
     public WebElement cart_logo;
     @FindBy(xpath = "//button[text()='Checkout']")
     public WebElement checkoutButton;
@@ -134,7 +135,7 @@ public WebElement investigationTextArea;
     public WebElement members_tab;
     @FindBy(xpath = "//div[contains(@class,'overflow-y-auto')]//button[normalize-space()='Proceed']")
     public WebElement proceed_cart;
-    @FindBy(xpath = "//div[contains(@class,'custom-select')]//span[@title]")
+    @FindBy(xpath = "//div[contains(@class,'custom-select')]//span[@title] | //span[@title and (ancestor::div[contains(@class,'select')] or ancestor::div[contains(@class,'location')])]")
     public WebElement locationText;
     @FindBy(xpath = "//input[@placeholder='Search Lab Locations...']")
     public WebElement searchLabLocationField;
@@ -310,6 +311,14 @@ public WebElement investigationTextArea;
     public WebElement pay_in_cash_button;
     public static By goToOrdersButtons = By.xpath("//div[contains(text(),'Go to Orders')]");
 
+    @FindBy(xpath = "//span[@class='text-primaryText font-medium']")
+    public WebElement coupon;
+    @FindBy(xpath = "//button[text()='Apply']")
+    public WebElement apply;
+    //span[@class="text-bold"]
+    @FindBy(xpath = "//span[@class='text-bold']")
+    public WebElement couponAmount;
+
     @FindBy(xpath = "//button[text()='Reschedule Order'][1]")
     public WebElement rescheduleOrderButton;
     @FindBy(xpath = "//input[@id='otp']")
@@ -340,7 +349,7 @@ public WebElement investigationTextArea;
     public WebElement firstNameInputProfilePage;
     @FindBy(xpath = "//input[@placeholder='Enter last name']")
     public WebElement lastnameInputProfilePage;
-    @FindBy(xpath = "//input[@placeholder='Select date']")
+    @FindBy(xpath = "//input[@name='dateOfBirth']")
     public WebElement DOBProfilePage;
     @FindBy(xpath = "//input[@placeholder='Enter middle name']")
     public WebElement middleNameInputProfilePage;

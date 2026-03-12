@@ -199,21 +199,21 @@ public class SlotAndCartUpdateAPITest extends BaseTest {
         }
     }
 
-    @Test(priority = 18, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddressAPITest.testAddAddress_ForNonMember")
+    @Test(priority = 18, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.AddressAPITest.testAddAddress_ForNonMember")
     public void testSlotAndCartUpdate_ForNonMember() {
         findAndStoreSlot("NON_MEMBER", RequestContext.getNonMemberToken(), RequestContext.getNonMemberAddressId());
         updateCartWithSlot("NON_MEMBER", RequestContext.getNonMemberToken(), RequestContext.getNonMemberUserId(),
                 RequestContext.getNonMemberSlotId());
     }
 
-    @Test(priority = 18, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddressAPITest.testAddAddress_ForMember")
+    @Test(priority = 18, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.AddressAPITest.testAddAddress_ForMember")
     public void testSlotAndCartUpdate_ForMember() {
         findAndStoreSlot("MEMBER", RequestContext.getMemberToken(), RequestContext.getMemberAddressId());
         updateCartWithSlot("MEMBER", RequestContext.getMemberToken(), RequestContext.getMemberUserId(),
                 RequestContext.getMemberSlotId());
     }
 
-    @Test(priority = 18, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddressAPITest.testAddAddress_ForNewUser")
+    @Test(priority = 18, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.AddressAPITest.testAddAddress_ForNewUser")
     public void testSlotAndCartUpdate_ForNewUser() {
         findAndStoreSlot("NEW_USER", RequestContext.getNewUserToken(), RequestContext.getNewUserAddressId());
         updateCartWithSlot("NEW_USER", RequestContext.getNewUserToken(), RequestContext.getNewUserUserId(),

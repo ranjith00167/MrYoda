@@ -14,6 +14,38 @@ public class ScenarioContext {
     public static String accessionId;
     public static String labsquireOrderNumber;
     public static List<Map<String, String>> bulkTestData = new ArrayList<>();
+
+    // ── API Handoff : UI → API bridge for Pay Online Hybrid flow ────────────
+    /** Bearer token extracted from browser localStorage after UI login. */
+    public static String authToken;
+    /** Logged-in user id (from Excel test data). */
+    public static String apiUserId;
+    /** Cart id captured from checkout / test data. */
+    public static String apiCartId;
+    /** Selected address id from checkout. */
+    public static String apiAddressId;
+    /** Selected slot id from checkout. */
+    public static String apiSlotId;
+    /** Lab location id (null for home-collection). */
+    public static String apiLabLocationId;
+    /** Order type: "home_collection" or "lab_visit". */
+    public static String orderType;
+    /** Visit date resolved from slot picker (yyyy-MM-dd). */
+    public static String visitDate;
+    /** Visit time resolved from slot picker (HH:mm). */
+    public static String visitTime;
+    /** Final amount to pay captured from checkout UI (in rupees). */
+    public static int totalAmountForPayment;
+    /** Razorpay order id returned by initiatePayment API. */
+    public static String razorpayOrderId;
+    /** Razorpay payment id (mock in automation). */
+    public static String razorpayPaymentId;
+    /** Internal order id returned by initiatePayment or order API. */
+    public static String createdOrderId;
+    /** Payment status confirmed by verifyPayment API. */
+    public static String paymentStatus;
+    /** Coupon discount amount applied to the cart. */
+    public static double couponAmount;
     public static int executionCounter = 0;
     public static boolean isBulkMode = false;
     public static String extractedEmrId;

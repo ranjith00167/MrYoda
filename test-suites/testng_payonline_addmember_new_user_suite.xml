@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     MULTI-MEMBER NEW USER — PAY ONLINE SUITE
+     ══════════════════════════════════════════════════════════════════════════
+     Covers multi-member checkout (profile owner + family member) for a
+     NEW USER (random mobile registration) for both lab visit and home
+     collection.
+
+     PHASE 1 (UI)  : Register (random mobile) → Test Selection → Cart
+                     → Multi-Member Checkout → Pay Online
+                     (TC_03_AddMember.feature)
+     PHASE 2 (API) : Cross-API validations (order, price — rewards skipped)
+     PHASE 3 (UI)  : IT Dose UI automation (enter visit number in lab system)
+     PHASE 4 (API) : Visit status check + Report generation
+
+     Run:  mvn test "-DsuiteXmlFile=test-suites/testng_payonline_addmember_new_user_suite.xml"
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Multi-Member New User Pay Online Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1 : Multi-Member New User — Lab Visit — Pay Online             -->
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <test name="Multi-Member New User Lab Visit - Pay Online" preserve-order="true">
+        <parameter name="userType"              value="new_user"/>
+        <parameter name="orderType"             value="lab"/>
+        <parameter name="cucumber.filter.tags"  value="@add_member_multi_lab_order_new_user"/>
+
+        <classes>
+            <!-- ── PHASE 1 : UI Registration + Payment (Cucumber Runner) ── -->
+            <class name="testRunner.AddMemberSuiteRunner"/>
+
+            <!-- ── PHASE 2 : Cross-API Validation (rewards skipped) ──────── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.PayOnlineCrossApiValidationTest"/>
+
+            <!-- ── PHASE 3 : IT Dose UI Automation ──────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+
+            <!-- ── PHASE 4 : Post-Processing API Validations ─────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 2 : Multi-Member New User — Home Collection — Pay Online       -->
+    <!-- ═════════════════════════════════════════════════════════════════════ -->
+    <test name="Multi-Member New User Home Collection - Pay Online" preserve-order="true">
+        <parameter name="userType"              value="new_user"/>
+        <parameter name="orderType"             value="home"/>
+        <parameter name="cucumber.filter.tags"  value="@add_member_multi_home_order_new_user"/>
+
+        <classes>
+            <!-- ── PHASE 1 : UI Registration + Payment (Cucumber Runner) ── -->
+            <class name="testRunner.AddMemberSuiteRunner"/>
+
+            <!-- ── PHASE 2 : Cross-API Validation (rewards skipped) ──────── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.PayOnlineCrossApiValidationTest"/>
+
+            <!-- ── PHASE 3 : IT Dose UI Automation ──────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+
+            <!-- ── PHASE 4 : Post-Processing API Validations ─────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+        </classes>
+    </test>
+
+</suite>

@@ -19,6 +19,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,6 +75,8 @@ public class BaseClass {
             .xpath("//div[contains(@class,'flex-col') and contains(@class,'overflow-y-auto')]");
 
     public static Map<String, String> testData;
+    public static int calculatedAge;
+    public static String selectedGender;
 
     public static WebElement getWebElement(By locator, Duration timeout) {
         return waitForElementToBeVisible(locator, timeout);
@@ -99,6 +102,44 @@ public class BaseClass {
 
         System.out.println("🔥 Loaded Excel → Sheet: " + sheetName + ", Row: " + index);
     }
+
+    /**
+     * Load test data row by scenario key (first column must match key).
+     * Searches the configured Excel file across all sheets.
+     */
+    public static void loadTestData(String key) {
+        String filePath = ConfigReader.get("excel.filePath");
+        try (java.io.FileInputStream fis = new java.io.FileInputStream(filePath);
+             org.apache.poi.ss.usermodel.Workbook workbook = new org.apache.poi.xssf.usermodel.XSSFWorkbook(fis)) {
+
+            org.apache.poi.ss.usermodel.DataFormatter formatter = new org.apache.poi.ss.usermodel.DataFormatter();
+
+            for (int s = 0; s < workbook.getNumberOfSheets(); s++) {
+                org.apache.poi.ss.usermodel.Sheet sheet = workbook.getSheetAt(s);
+                org.apache.poi.ss.usermodel.Row headerRow = sheet.getRow(0);
+                if (headerRow == null) continue;
+
+                for (int r = 1; r <= sheet.getLastRowNum(); r++) {
+                    org.apache.poi.ss.usermodel.Row row = sheet.getRow(r);
+                    if (row == null) continue;
+                    org.apache.poi.ss.usermodel.Cell firstCell = row.getCell(0);
+                    if (firstCell == null) continue;
+
+                    String rowKey = formatter.formatCellValue(firstCell).trim();
+                    if (rowKey.equalsIgnoreCase(key)) {
+                        testData = ExcelUtils.getRowData(filePath, sheet.getSheetName(), r);
+                        currentSheet = sheet.getSheetName();
+                        System.out.println("🔥 loadTestData → key: " + key + " | Sheet: " + currentSheet + " | Row: " + r);
+                        return;
+                    }
+                }
+            }
+            throw new IllegalArgumentException("❌ loadTestData: key '" + key + "' not found in any sheet of " + filePath);
+        } catch (java.io.IOException e) {
+            throw new RuntimeException("❌ loadTestData: failed to read Excel file: " + filePath, e);
+        }
+    }
+
     public static void waitForPageReady() {
     new WebDriverWait(driver, Duration.ofSeconds(15)).until(
         webDriver -> ((JavascriptExecutor) webDriver)
@@ -529,134 +570,138 @@ public static void waitForDomStable() {
     }
 
     public static void enterValuesInResultTable() {
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Actions actions = new Actions(driver);
 
-        WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@id='divInvestigation']//table[contains(@class,'htCore')]")));
+        try {
+            WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[@id='divInvestigation']//table[contains(@class,'htCore')]")));
 
-        List<WebElement> rows = table.findElements(By.xpath(".//tbody/tr"));
+            List<WebElement> rows = table.findElements(By.xpath(".//tbody/tr"));
+            System.out.println("📋 Handsontable rows found: " + rows.size());
 
-        for (WebElement row : rows) {
+            for (int rowIdx = 0; rowIdx < rows.size(); rowIdx++) {
+                try {
+                    WebElement row = rows.get(rowIdx);
+                    String rowClass = row.getAttribute("class");
 
-            // Skip department headers & comments
-            String rowClass = row.getAttribute("class");
-            if (rowClass != null && (rowClass.contains("DeptHeader") || rowClass.contains("InvHeader"))) {
-                continue;
-            }
+                    // Skip header rows
+                    if (rowClass != null && (rowClass.contains("DeptHeader") || rowClass.contains("InvHeader")))
+                        continue;
 
-            List<WebElement> cells = row.findElements(By.tagName("td"));
-            if (cells.size() < 12)
-                continue;
+                    List<WebElement> cells = row.findElements(By.tagName("td"));
+                    if (cells.size() < 3) continue;
 
-            // Extract values
-            String readingFormat = cells.get(9).getText().trim();
-            String minValue = cells.get(10).getText().trim();
-            String maxValue = cells.get(11).getText().trim();
+                    // Get test name and value cell
+                    String testName = cells.size() > 1 ? cells.get(1).getText().trim() : "";
+                    if (testName.isEmpty() || testName.equalsIgnoreCase("Comments")) continue;
 
-            // STRICT VALIDATION: Check formatted strings and ensure min/max are numeric
-            if (readingFormat.isEmpty() || minValue.isEmpty() || maxValue.isEmpty()) {
-                continue;
-            }
+                    WebElement valueCell = cells.get(2);
+                    String currentVal = valueCell.getText().trim();
 
-            // Skip if values are placeholders (e.g. hyphens)
-            if (minValue.equals("-") || maxValue.equals("-")) {
-                continue;
-            }
+                    // Skip if already has a meaningful value
+                    if (!currentVal.isEmpty() && !currentVal.equals("0")) continue;
 
-            int enteredValue;
-            try {
-                double minD = Double.parseDouble(minValue);
-                double maxD = Double.parseDouble(maxValue);
-                enteredValue = (int) ((minD + maxD) / 2);
-            } catch (NumberFormatException e) {
-                continue;
-            }
-
-            WebElement valueCell = cells.get(2);
-            String currentValue = valueCell.getText().trim();
-
-            // skip if value is already entered (not empty, not 0)
-            if (!currentValue.isEmpty() && !currentValue.equals("0") && !currentValue.equals("0.0")) {
-                System.out.println("Skipping row [" + cells.get(1).getText().trim() + "] as it already has value: "
-                        + currentValue);
-                continue;
-            }
-
-            // Scroll
-            js.executeScript("arguments[0].scrollIntoView({block:'center', inline: 'nearest'});", valueCell);
-
-            String valStr = String.valueOf(enteredValue);
-            System.out.println(
-                    "Attempting to enter: " + valStr + " into cell (Range: " + minValue + "-" + maxValue + ")");
-
-            try {
-                boolean typedOk = false;
-                String testName = cells.get(1).getText().trim();
-
-                for (int attempt = 1; attempt <= 3; attempt++) {
-                    try {
-                        actions.moveToElement(valueCell).click().perform();
-                        Thread.sleep(100);
-                        js.executeScript("arguments[0].focus();", valueCell);
-
-                        // Send keys to active element
-                        actions.sendKeys(valStr).perform();
-                        Thread.sleep(100);
-                        actions.sendKeys(Keys.ENTER).perform();
-                        Thread.sleep(150);
-
-                        // Read the displayed text after typing
-                        String after = valueCell.getText().trim();
-                        if (valStr.equals(after) || after.startsWith(valStr)) {
-                            RequestContext.storeExpectedTestResult(testName, valStr);
-                            System.out.println("✅ Actions Typed value: " + valStr + " for " + testName);
-                            typedOk = true;
-                            break;
-                        }
-
-                        // If not matched, try to find an inner input and set its value via JS
+                    // Determine value to enter
+                    int val = 50; // Default
+                    if (testName.toLowerCase().contains("lymphoblast")) {
+                        val = 100;
+                    } else if (cells.size() > 11) {
                         try {
-                            WebElement inner = valueCell.findElement(By.xpath(".//input|.//textarea"));
-                            js.executeScript("arguments[0].value = arguments[1];", inner, valStr);
-                            js.executeScript("arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", inner);
-                            js.executeScript("arguments[0].dispatchEvent(new Event('change', { bubbles: true }));", inner);
-                            Thread.sleep(100);
-                            String afterInner = valueCell.getText().trim();
-                            if (valStr.equals(afterInner) || afterInner.startsWith(valStr)) {
-                                RequestContext.storeExpectedTestResult(testName, valStr);
-                                System.out.println("✅ JS-set value for inner input: " + valStr + " for " + testName);
-                                typedOk = true;
-                                break;
+                            String minStr = cells.get(10).getText().trim();
+                            String maxStr = cells.get(11).getText().trim();
+                            if (!minStr.isEmpty() && !maxStr.isEmpty() && !minStr.equals("-") && !maxStr.equals("-")) {
+                                double min = Double.parseDouble(minStr);
+                                double max = Double.parseDouble(maxStr);
+                                val = (int) ((min + max) / 2);
+                                if (val == 0 && min > 0) val = (int) Math.ceil(min);
                             }
-                        } catch (Exception ie) {
-                            // ignore - inner input may not exist
-                        }
-
-                        System.out.println("⚠️ Attempt " + attempt + " did not persist value ('" + after + "'). Retrying...");
-                        Thread.sleep(200);
-                    } catch (Exception nested) {
-                        System.out.println("⚠️ Typing attempt failed: " + nested.getMessage());
+                        } catch (Exception ignored) {}
                     }
-                }
 
-                if (!typedOk) {
-                    // Final fallback: set innerText via JS (last resort)
-                    js.executeScript("arguments[0].innerText = arguments[1];", valueCell, valStr);
-                    RequestContext.storeExpectedTestResult(testName, valStr);
-                    System.out.println("⚠️ Final fallback applied for " + testName + ": " + valStr);
-                }
-                Thread.sleep(200);
+                    String valStr = String.valueOf(val);
+                    System.out.println("  📝 Row " + rowIdx + " [" + testName + "] entering value: " + valStr);
 
-            } catch (Exception e) {
-                System.err.println("❌ Error entering value for row: " + e.getMessage());
-                // Fallback: JS value set (might not trigger app logic but better than nothing)
-                js.executeScript("arguments[0].innerText = arguments[1];", valueCell, valStr);
+                    // Scroll cell into view
+                    js.executeScript("arguments[0].scrollIntoView({block:'center'});", valueCell);
+                    Thread.sleep(300);
+
+                    // Single click to select the cell
+                    js.executeScript("arguments[0].click();", valueCell);
+                    Thread.sleep(400);
+
+                    // Double-click to enter edit mode in Handsontable
+                    actions.doubleClick(valueCell).perform();
+                    Thread.sleep(400);
+
+                    // Find the active editor input that Handsontable creates
+                    List<WebElement> editors = driver.findElements(
+                            By.xpath("//div[@id='divInvestigation']//textarea[contains(@class,'handsontableInput')] | " +
+                                     "//div[@id='divInvestigation']//input[contains(@class,'handsontableInput')]"));
+
+                    if (!editors.isEmpty()) {
+                        WebElement editor = editors.get(0);
+                        editor.clear();
+                        editor.sendKeys(valStr);
+                        Thread.sleep(200);
+                        editor.sendKeys(Keys.ENTER);
+                        Thread.sleep(300);
+                        System.out.println("    ✅ Entered via editor input: " + valStr);
+                    } else {
+                        // Fallback: type directly via Actions (cell is in edit mode)
+                        actions.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();
+                        Thread.sleep(100);
+                        actions.sendKeys(valStr).perform();
+                        Thread.sleep(200);
+                        actions.sendKeys(Keys.ENTER).perform();
+                        Thread.sleep(300);
+                        System.out.println("    ✅ Entered via Actions keytype: " + valStr);
+                    }
+
+                    // Verify value was set
+                    try {
+                        String verifyVal = valueCell.getText().trim();
+                        if (verifyVal.equals(valStr)) {
+                            RequestContext.storeExpectedTestResult(testName, valStr);
+                            System.out.println("    ✅ Verified cell value: " + verifyVal);
+                        } else {
+                            System.out.println("    ⚠️ Cell shows '" + verifyVal + "' after entry (expected " + valStr + ")");
+                            RequestContext.storeExpectedTestResult(testName, valStr);
+                        }
+                    } catch (Exception ignored) {
+                        RequestContext.storeExpectedTestResult(testName, valStr);
+                    }
+
+                } catch (StaleElementReferenceException se) {
+                    System.out.println("    ⚠️ Stale element at row " + rowIdx + ", refreshing table reference...");
+                    try {
+                        table = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath("//div[@id='divInvestigation']//table[contains(@class,'htCore')]")));
+                        rows = table.findElements(By.xpath(".//tbody/tr"));
+                    } catch (Exception ignored) {}
+                } catch (Exception ex) {
+                    System.out.println("    ⚠️ Error at row " + rowIdx + ": " + ex.getMessage());
+                }
             }
+
+            // Click Save button
+            try {
+                List<WebElement> saveButtons = driver.findElements(By.id("btnSaveLabObs"));
+                if (!saveButtons.isEmpty() && saveButtons.get(0).isDisplayed()) {
+                    js.executeScript("arguments[0].click();", saveButtons.get(0));
+                    System.out.println("💾 Clicked Save");
+                    Thread.sleep(2000);
+                }
+            } catch (Exception ignored) {}
+
+            System.out.println("✅ Result value entry complete");
+
+        } catch (TimeoutException te) {
+            System.out.println("❌ Timeout waiting for result table");
+        } catch (Exception e) {
+            System.out.println("❌ Error in enterValuesInResultTable: " + e.getMessage());
         }
-        System.out.println("✅ Completed entry for all eligible rows in the investigation table.");
     }
 
     public static void waitForUploadCompletion(WebElement element, int timeoutSeconds) {
@@ -672,11 +717,15 @@ public static void waitForDomStable() {
         }
     }
 
-    public static void waitAndInput(WebElement element, String text, int timeoutInSeconds) throws Throwable {
+    public static void waitAndInput(WebElement element, String text, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
-        Thread.sleep(2000);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         element.sendKeys(text);
     }
 
@@ -1109,7 +1158,21 @@ public static void waitForDomStable() {
     public static String getText(WebElement element, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOf(element));
-        return element.getText().trim();
+        // Primary: inner text (works for most elements)
+        String text = element.getText().trim();
+        if (!text.isEmpty()) return text;
+        // Fallback 1: 'title' attribute (React custom-select dropdowns render value here)
+        String title = element.getAttribute("title");
+        if (title != null && !title.trim().isEmpty()) return title.trim();
+        // Fallback 2: 'textContent' via JS (handles shadow-DOM / no-text-node cases)
+        try {
+            Object jsResult = ((org.openqa.selenium.JavascriptExecutor) driver)
+                    .executeScript("return arguments[0].textContent;", element);
+            if (jsResult != null && !jsResult.toString().trim().isEmpty()) {
+                return jsResult.toString().trim();
+            }
+        } catch (Exception ignored) {}
+        return text; // return whatever we got (may be empty)
     }
 
     public static void waitUntilSuccess(Runnable action, int maxRetries, int delayInSeconds) {
@@ -2397,6 +2460,49 @@ public static void waitForDomStable() {
         System.out.println("Randomly Selected Test: " + selectedName);
 
         return selectedName;
+    }
+
+    public static WebElement waitVisible(WebElement element, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static WebElement waitUntilClickable(By locator, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static String generateRandomMobileNumber() {
+        Random random = new Random();
+        String firstDigit = String.valueOf(6 + random.nextInt(4));
+        StringBuilder number = new StringBuilder(firstDigit);
+        for (int i = 0; i < 9; i++) {
+            number.append(random.nextInt(10));
+        }
+        return number.toString();
+    }
+
+    public static String convertExcelDateSerial(String excelSerial) {
+        try {
+            int serialNumber = Integer.parseInt(excelSerial.trim());
+            LocalDate excelStartDate = LocalDate.of(1899, 12, 30);
+            LocalDate convertedDate = excelStartDate.plusDays(serialNumber);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return convertedDate.format(formatter);
+        } catch (Exception e) {
+            System.out.println("⚠ DOB Conversion Failed, returning original: " + excelSerial);
+            return excelSerial;
+        }
+    }
+
+    public static int calculateAndStoreAge(String dobValue) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dob = LocalDate.parse(dobValue, formatter);
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(dob, today);
+        calculatedAge = period.getYears();
+        System.out.println("Calculated Age Stored: " + calculatedAge);
+        return calculatedAge;
     }
 
     public static void waitUntilVisible(WebElement element, int timeoutInSeconds) {

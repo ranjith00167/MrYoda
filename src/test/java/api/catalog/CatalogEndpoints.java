@@ -7,4 +7,5 @@ public class CatalogEndpoints {
     public static final String GET_FETAL_MEDICINE_TESTS = "/tests/getFetalMedicineTests";
     public static final String GET_ALL_PACKAGES = "/tests/getAllPackages";
     public static final String GET_SAMPLE_TYPE = "/tests/getSampleType";
+    public static final String GET_BRAND = "/tests/getBrand";
 }

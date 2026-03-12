@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PAY ONLINE — COUPON FLOW SUITE (MINIMAL)
+     ══════════════════════════════════════════════════════════════════════════
+     Focus: Coupon application, UI deduction validation, and API verification
+     Minimal: Single-member coupon only (avoids complex multi-member UI)
+     
+     SCENARIO:
+     @hybridLabOrderMemberCoupon  — Single member with coupon selection & validation
+
+     Run:  mvn test -DsuiteXmlFile=test-suites/testng_payonline_coupon_suite.xml
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Pay Online Coupon Flow Suite - Minimal" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1 : Single Member — Lab Visit — Coupon — Pay Online         -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Single Member - Coupon Validation - Pay Online" preserve-order="true">
+        <parameter name="userType"  value="member"/>
+        <parameter name="orderType" value="lab"/>
+        <parameter name="couponFlow" value="single-member"/>
+        <parameter name="cucumber.filter.tags" value="@hybridLabOrderMemberCoupon"/>
+
+        <classes>
+            <!-- Cucumber scenario runner: Login → Test Selection → Coupon → Payment → API Verify -->
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+        </classes>
+    </test>
+
+</suite>

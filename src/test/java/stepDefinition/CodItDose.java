@@ -240,7 +240,7 @@ public class CodItDose extends BaseSteps {
     public void i_select_the_sample_type() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
         Random random = new Random();
 
         // Get ALL dropdowns in the sample table
@@ -521,7 +521,7 @@ public class CodItDose extends BaseSteps {
     @When("I enter the value of the tests")
     public void i_enter_the_value_of_the_tests() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
         String sinNo = ScenarioContext.extractedSinNo;
 
         if (sinNo == null || sinNo.isEmpty()) {
@@ -591,6 +591,9 @@ public class CodItDose extends BaseSteps {
                         ExpectedConditions.visibilityOfElementLocated(By.id("btnApprovedLabObs"))));
 
                 BaseClass.enterValuesInResultTable();
+
+                // Wait to ensure save completes before approving
+                BaseClass.waitInSeconds(2);
 
                 // 5. Approve
                 System.out.println("Approving visit: " + visitId);

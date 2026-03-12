@@ -39,13 +39,37 @@ public class DriverFactory {
 
     Map<String, Object> prefs = new HashMap<>();
     Map<String, Object> profile = new HashMap<>();
-    Map<String, Object> contentSettings = new HashMap<>();
 
-    contentSettings.put("geolocation", 1);
-    profile.put("managed_default_content_settings", contentSettings);
+    // ─── default_content_setting_values ───────────────────────────────────
+    // 1 = Allow, 2 = Block, 3 = Ask
+    Map<String, Object> defaultContentSettings = new HashMap<>();
+    defaultContentSettings.put("geolocation",        1);  // ✅ Allow location
+    defaultContentSettings.put("media_stream_mic",   1);  // ✅ Allow microphone
+    defaultContentSettings.put("media_stream_camera",2);  // 🚫 Block camera (not needed)
+    defaultContentSettings.put("notifications",      2);  // 🚫 Block notification popup
+    profile.put("default_content_setting_values", defaultContentSettings);
+
+    // ─── managed_default_content_settings (policy-level override) ─────────
+    Map<String, Object> managedContentSettings = new HashMap<>();
+    managedContentSettings.put("geolocation",      1);   // ✅ Allow location
+    managedContentSettings.put("media_stream_mic", 1);   // ✅ Allow microphone
+    profile.put("managed_default_content_settings", managedContentSettings);
+
     prefs.put("profile", profile);
 
     chromeOptions.setExperimentalOption("prefs", prefs);
+
+    // ─── Chrome flags ───────────────────────────────────────────────────────
+    // Bypass OS-level mic permission dialog (uses fake device — no popup)
+    chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+    chromeOptions.addArguments("--use-fake-device-for-media-stream");
+    // Ensure geolocation API is available on staging origin
+    chromeOptions.addArguments("--unsafely-treat-insecure-origin-as-secure=https://staging-mryoda.yodaprojects.com");
+    // Suppress notification permission popup
+    chromeOptions.addArguments("--disable-notifications");
+    // Don't show "Chrome is being controlled by automated software" bar
+    chromeOptions.addArguments("--disable-infobars");
+    chromeOptions.addArguments("--disable-popup-blocking");
 
     if (isHeadless) {
         chromeOptions.addArguments("--headless=new");

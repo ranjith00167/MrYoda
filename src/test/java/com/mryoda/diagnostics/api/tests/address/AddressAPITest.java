@@ -183,7 +183,7 @@ public class AddressAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 1️⃣ EXISTING MEMBER → Add Address
     // ---------------------------------------------------------
-    @Test(priority = 11, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddToCartAPITest.testAddToCart_ForNonMember")
+    @Test(priority = 11, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest.testAddToCart_ForNonMember")
     public void testAddAddress_ForNonMember() {
 
         System.out.println("\n==========================================================");
@@ -215,7 +215,7 @@ public class AddressAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 2️⃣ MEMBER → Add Address
     // ---------------------------------------------------------
-    @Test(priority = 11, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddToCartAPITest.testAddToCart_ForMember")
+    @Test(priority = 11, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest.testAddToCart_ForMember")
     public void testAddAddress_ForMember() {
 
         System.out.println("\n==========================================================");
@@ -247,7 +247,7 @@ public class AddressAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 3️⃣ NEW USER → Add Address
     // ---------------------------------------------------------
-    @Test(priority = 12, dependsOnMethods = "com.mryoda.diagnostics.api.tests.AddToCartAPITest.testAddToCart_ForNewUser")
+    @Test(priority = 12, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest.testAddToCart_ForNewUser")
     public void testAddAddress_ForNewUser() {
 
         System.out.println("\n==========================================================");

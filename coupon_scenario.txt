@@ -1,0 +1,62 @@
+
+
+  @hybridMultiMemberCoupon
+  Scenario: Multi-member places a lab visit order with proportional coupon split via UI and verifies via API
+    # ── UI : Login ──────────────────────────────────────────────────────────────
+    Given load the excel data for multi member and lab visit
+    When the user enters otp
+    And click on the submit button
+    Then the location should be auto-detected on the dashboard
+    And login via API and refresh auth token
+    And capture initial rewards balance for member
+    # ── API : Pricing Data Retrieval (before UI selection) ─────────────────────
+    Then the location ID is available from RequestContext
+    And a valid authentication token is available
+    When API call is made to GET_ALL_TESTS endpoint
+    Then GET_ALL_TESTS should return complete test list
+    And all tests should have pricing information
+    And pricing should be parsed correctly from multiple field names
+    And log test pricing summary - total tests retrieved
+    # ── UI : Test Selection ─────────────────────────────────────────────────────
+    And click the Best Seller View All button
+    And load test names from Excel
+    And select tests and capture individual prices
+    Then All tests should complete successfully
+    # ── UI : Cart & Checkout ────────────────────────────────────────────────────
+    When click on the cart icon
+    And set the visit type from UI for lab visit
+    Then validate checkout summary header values
+    And select the member for multi member scenario
+    And select the location
+    And select the slot
+    And apply working coupon from UI
+    And validate coupon split proportionally across member orders
+    # ── API : Cross-API Pricing Consistency Validation ──────────────────────────
+    When fetch all package prices from GET_ALL_PACKAGES API
+    Then pricing from all three APIs should be consistent
+    # ── UI : Checkout Validation ────────────────────────────────────────────────
+    And validate the actual price against the checkout price
+    When the user extract the member names from the page
+    When the user extracts the member names from the excel sheet
+    Then the member names on the page should match the excel
+    And validate final amount to pay
+    Then capture amount to pay
+    Then calculate expected final amount
+    # ── API : Price Calculation Validation ──────────────────────────────────────
+    Then calculate expected total from API prices
+    Then checkout total should match API calculated total
+    Then validate cart amount to pay
+    # ── UI : Payment via Razorpay ───────────────────────────────────────────────
+    When click pay online button
+    Then extract razorpay amount
+    Then validate razorpay amount against expected amount
+    Then validate Razorpay payment options based on amount
+    Then initiate upi payment if allowed
+    # ── API : Verify Order via getOrderById with Coupon Split ────────────────────
+    And capture all order ids from browser after payment for multi member
+    Then fetch order by id via API and verify coupon split across orders
+    # ── UI : Confirm order on screen ────────────────────────────────────────────
+    And click the go to orders button
+    And click the view button in orders page
+    # ── RESPONSE CAPTURE FOR VALIDATION ANALYSIS ───────────────────────────────
+    Then generate API response capture report for validation analysis

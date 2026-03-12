@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     NON-MEMBER — PAY ONLINE HYBRID SUITE
+     ══════════════════════════════════════════════════════════════════════════
+     PHASE 1 (UI)  : Login → Test Selection → Cart → Checkout → Pay Online
+                     (Cucumber runner — TC_11_PayOnline_HybridFlow.feature)
+     PHASE 2 (API) : getOrderById verification + Cross-API validations
+     PHASE 3 (UI)  : IT Dose UI automation (enter visit number in lab system)
+     PHASE 4 (API) : Visit status check + Report generation
+
+     Run:  mvn test -DsuiteXmlFile=test-suites/testng_payonline_non_member_suite.xml
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Non-Member Pay Online Hybrid Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1 : Non-Member — Lab Visit — Pay Online (Hybrid)              -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Non-Member Lab Visit - Pay Online Hybrid" preserve-order="true">
+        <parameter name="userType"  value="non_member"/>
+        <parameter name="orderType" value="lab"/>
+        <parameter name="cucumber.filter.tags" value="@hybridLabOrderNonMember"/>
+
+        <classes>
+
+            <!-- ── PHASE 1+2 : UI + Payment API (Cucumber Runner) ─────── -->
+            <!-- Runs UI flow, captures order ID → then verify via getOrderById -->
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+
+            <!-- ── PHASE 2 : Cross-API Validation ──────────────────────── -->
+            <!-- Validates: order status, price consistency, product names  -->
+            <!-- visit number presence, item-level price breakdown          -->
+            <class name="com.mryoda.diagnostics.api.tests.order.PayOnlineCrossApiValidationTest"/>
+
+            <!-- ── PHASE 3 : IT Dose UI Automation ─────────────────────── -->
+            <!-- Triggers: RunnerTest.class which enters the visit number   -->
+            <!-- in IT Dose lab system to simulate sample processing        -->
+            <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>
+
+            <!-- ── PHASE 4 : Post-Processing API Validations ───────────── -->
+            <!-- Visit status from lab system (after IT Dose entry)         -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest"/>
+            <!-- Report generation and PDF verification                     -->
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest"/>
+
+        </classes>
+    </test>
+
+
+</suite>

@@ -1386,7 +1386,7 @@ public class GetCartByIdAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 1️⃣ EXISTING MEMBER → Get Cart By ID
     // ---------------------------------------------------------
-    @Test(priority = 10, dependsOnMethods = "com.mryoda.diagnostics.api.tests.SlotAndCartUpdateAPITest.testSlotAndCartUpdate_ForNonMember")
+    @Test(priority = 10, dependsOnMethods = "com.mryoda.diagnostics.api.tests.slot.SlotAndCartUpdateAPITest.testSlotAndCartUpdate_ForNonMember")
     public void testGetCartById_ForNonMember() {
 
         System.out.println("\n==========================================================");
@@ -1404,7 +1404,7 @@ public class GetCartByIdAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 2️⃣ MEMBER → Get Cart By ID
     // ---------------------------------------------------------
-    @Test(priority = 10, dependsOnMethods = "com.mryoda.diagnostics.api.tests.SlotAndCartUpdateAPITest.testSlotAndCartUpdate_ForMember")
+    @Test(priority = 10, dependsOnMethods = "com.mryoda.diagnostics.api.tests.slot.SlotAndCartUpdateAPITest.testSlotAndCartUpdate_ForMember")
     public void testGetCartById_ForMember() {
 
         System.out.println("\n==========================================================");
@@ -1422,7 +1422,7 @@ public class GetCartByIdAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 3️⃣ NEW USER → Get Cart By ID
     // ---------------------------------------------------------
-    @Test(priority = 11, dependsOnMethods = "com.mryoda.diagnostics.api.tests.SlotAndCartUpdateAPITest.testSlotAndCartUpdate_ForNewUser")
+    @Test(priority = 11, dependsOnMethods = "com.mryoda.diagnostics.api.tests.slot.SlotAndCartUpdateAPITest.testSlotAndCartUpdate_ForNewUser")
     public void testGetCartById_ForNewUser() {
 
         System.out.println("\n==========================================================");

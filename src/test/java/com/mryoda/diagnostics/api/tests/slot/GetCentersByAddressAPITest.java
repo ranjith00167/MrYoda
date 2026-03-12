@@ -47,7 +47,7 @@ public class GetCentersByAddressAPITest extends BaseTest {
         System.out.println("   ✅ Centers fetched successfully!");
     }
 
-    @Test(priority = 1, dependsOnMethods = "com.mryoda.diagnostics.api.tests.GetAddressByUserIdAPITest.testGetAddressByUserId_ForNonMember")
+    @Test(priority = 1, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.GetAddressByUserIdAPITest.testGetAddressByUserId_ForNonMember")
     public void testGetCentersByAddress_ForNonMember() {
         System.out.println("\n==========================================================");
         System.out.println("      GET CENTERS BY ADDRESS - EXISTING MEMBER");
@@ -67,7 +67,7 @@ public class GetCentersByAddressAPITest extends BaseTest {
         validateResponse(response);
     }
 
-    @Test(priority = 2, dependsOnMethods = "com.mryoda.diagnostics.api.tests.GetAddressByUserIdAPITest.testGetAddressByUserId_ForMember")
+    @Test(priority = 2, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.GetAddressByUserIdAPITest.testGetAddressByUserId_ForMember")
     public void testGetCentersByAddress_ForMember() {
         System.out.println("\n==========================================================");
         System.out.println("         GET CENTERS BY ADDRESS - MEMBER");
@@ -85,7 +85,7 @@ public class GetCentersByAddressAPITest extends BaseTest {
         validateResponse(response);
     }
 
-    @Test(priority = 3, dependsOnMethods = "com.mryoda.diagnostics.api.tests.GetAddressByUserIdAPITest.testGetAddressByUserId_ForNewUser")
+    @Test(priority = 3, dependsOnMethods = "com.mryoda.diagnostics.api.tests.address.GetAddressByUserIdAPITest.testGetAddressByUserId_ForNewUser")
     public void testGetCentersByAddress_ForNewUser() {
         System.out.println("\n==========================================================");
         System.out.println("        GET CENTERS BY ADDRESS - NEW USER");

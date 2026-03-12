@@ -4,6 +4,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.TestNG;
 import com.mryoda.diagnostics.api.utils.RequestContext;
+import com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest;
+import com.mryoda.diagnostics.api.tests.order.COD_17_ReportGenerationTest;
+import com.mryoda.diagnostics.api.config.ConfigLoader;
+import io.restassured.RestAssured;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -95,30 +99,80 @@ public class COD_99_TriggerUITest {
             }
         }
 
-        System.out.println("📊 Found " + visits.size() + " visits to process in IT Dose.");
+        System.out.println("📊 Found " + visits.size() + " visits to process (UI → COD_16 → COD_17 per visit).");
 
-        for (String visit : visits) {
+        // Keep a full copy — restored after the loop so downstream context is correct.
+        List<String> allVisits = new ArrayList<>(visits);
 
-            System.out.println("\n🚀 RUNNING UI AUTOMATION FOR VISIT: " + visit);
+        for (String visit : allVisits) {
+
+            System.out.println("\n" + "=".repeat(60));
+            System.out.println("🚀 PROCESSING VISIT: " + visit);
+            System.out.println("=".repeat(60));
+
+            // ── Step A: Scope RequestContext to this single visit ─────────────
+            // Use a mutable list so setVisitNumber()'s internal add() won't throw
+            // UnsupportedOperationException on the second+ iterations of the loop.
+            List<String> singleVisitList = new ArrayList<>();
+            singleVisitList.add(visit);
+            RequestContext.setCurrentVisitNumbers(singleVisitList);
             RequestContext.setVisitNumber(visit);
+
+            // ── Step B: Run @ITDose UI automation (Cucumber runner) ──────────
+            // CRITICAL: Set the tag filter to @ITDose so the inner runner picks up the
+            // correct scenario from 01_COD_Flow.feature.
+            String originalTags = System.getProperty("cucumber.filter.tags");
+            System.setProperty("cucumber.filter.tags", "@ITDose");
 
             TestNG testng = new TestNG();
             testng.setTestClasses(new Class[] { testRunner.RunnerTest.class });
-
             long start = System.currentTimeMillis();
             testng.run();
             long end = System.currentTimeMillis();
 
-            System.out.println("   -> Visit " + visit + " Execution Time: " + (end - start) + "ms");
+            if (originalTags != null) {
+                System.setProperty("cucumber.filter.tags", originalTags);
+            } else {
+                System.clearProperty("cucumber.filter.tags");
+            }
+
+            System.out.println("   -> Visit " + visit + " UI Execution Time: " + (end - start) + "ms");
 
             if (testng.hasFailure()) {
                 System.out.println("   ❌ UI Automation FAILED for visit: " + visit);
                 throw new RuntimeException("UI Automation failed for visit: " + visit);
-            } else {
-                System.out.println("   ✅ UI Automation PASSED for visit: " + visit);
+            }
+            System.out.println("   ✅ UI Automation PASSED for visit: " + visit);
+
+            // ── Step C: COD_16 — Visit Status check for this visit ───────────
+            System.out.println("\n   📡 [COD_16] Visit Status check for visit: " + visit);
+            try {
+                RestAssured.baseURI = ConfigLoader.getConfig().baseUrl();
+                new COD_16_VisitStatusAPITest().testGetVisitStatus();
+                System.out.println("   ✅ COD_16 passed for visit: " + visit);
+            } catch (Throwable ex) {
+                System.out.println("   ❌ COD_16 FAILED for visit " + visit + ": " + ex.getMessage());
+                throw new RuntimeException("COD_16 failed for visit " + visit, ex);
+            }
+
+            // ── Step D: COD_17 — Report Generation check for this visit ─────
+            System.out.println("\n   📄 [COD_17] Report Generation check for visit: " + visit);
+            try {
+                new COD_17_ReportGenerationTest().testGetReportAndVerifyPDF();
+                System.out.println("   ✅ COD_17 passed for visit: " + visit);
+            } catch (Throwable ex) {
+                System.out.println("   ❌ COD_17 FAILED for visit " + visit + ": " + ex.getMessage());
+                throw new RuntimeException("COD_17 failed for visit " + visit, ex);
             }
         }
 
-        System.out.println("\n✅ ALL UI AUTOMATION SESSIONS COMPLETED SUCCESSFULLY!");
-        Thread.sleep(8000);    }
+        // Restore the full visit list and mark all visits as processed.
+        // COD_16 and COD_17 declared in the XML suite after COD_99 will see this flag
+        // and skip execution (avoids double processing).
+        RequestContext.setCurrentVisitNumbers(allVisits);
+        RequestContext.setVisitsProcessedByUI(true);
+
+        System.out.println("\n✅ ALL VISITS PROCESSED (UI → COD_16 → COD_17) FOR EACH VISIT SUCCESSFULLY!");
+        Thread.sleep(8000);
+    }
 }

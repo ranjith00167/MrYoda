@@ -22,6 +22,12 @@ public class COD_17_ReportGenerationTest extends BaseTest {
     public void testGetReportAndVerifyPDF() {
         LoggerUtil.info(">>> STEP 17: GET REPORT DETAILS & PDF TEXT EXTRACTION <<<");
 
+        // Skip if COD_99 has already executed COD_17 per-visit inline
+        if (RequestContext.isVisitsProcessedByUI()) {
+            LoggerUtil.info("   ⏩ Skipping COD_17 — all visits already validated per-visit inside COD_99 loop.");
+            return;
+        }
+
         java.util.List<String> visits = RequestContext.getCurrentVisitNumbers();
         if (visits == null || visits.isEmpty()) {
             String singleVisit = RequestContext.getVisitNumber();
@@ -68,7 +74,7 @@ public class COD_17_ReportGenerationTest extends BaseTest {
             LoggerUtil.info("=".repeat(120));
 
             // Polling Configuration
-            int maxRetries = 40;       // up to 40 × 15s = 10 minutes per visit
+            int maxRetries = 10;       // up to 10 × 15s = 150 seconds per visit
             int delayMs    = 15000;
             Response response        = null;
             Map<String, Object> data = null;
