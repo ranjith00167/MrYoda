@@ -730,7 +730,7 @@ public class CodItDose extends BaseSteps {
         }
     }
 
-}    /**
+    /**
      * Logs UI automation warnings to the centralized log for visibility.
      */
     protected void logUIWarning(String stepName, String warningType, String warningMessage) {
@@ -754,9 +754,8 @@ public class CodItDose extends BaseSteps {
         } catch (java.io.IOException e) {
             System.err.println("ERROR writing to failure log: " + e.getMessage());
         }
-        } catch (java.io.IOException e) {
-            System.err.println("Failed to write COD failure log: " + e.getMessage());
-        }
     }
+
+}
 
 }
