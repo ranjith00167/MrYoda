@@ -1,0 +1,463 @@
+source_type,source_path,feature,scenario,tags,status,notes
+Cucumber,src/test/resources/Feature/01_COD_Flow.feature,COD Flow Sample Lifecycle,Process COD order sample through full lab workflow,@ITDose,Implemented,
+Cucumber,src/test/resources/Feature/TC_01_Login.feature,Place lab orders and pay online,Place a home sample visit for a single  non member and complete online payment  in most popular packages,@singleHomeOrderWithoutMembership @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_01_Login.feature,Place lab orders and pay online,Place a home sample visit for a single member and complete online payment  in most popular packages,@singleHomeOrderMembership @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_01_Login.feature,Place lab orders and pay online,Place a lab visit for a single member and complete online payment  in most popular packages,@singleLabOrderMembershipp @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_01_Login.feature,Place lab orders and pay online,Place a lab visit for a single non member and complete online payment  in most popular packages,@singleLabOrderWithoutMembership @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_02_EndToFlowWithValidation.feature,Place lab orders and pay online,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Member),@endtoend_multi_lab_order_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_03_AddMember.feature,Place lab orders and pay online,Place a home visit for a family member with a new user and complete online payment in most popular packages(New User),@add_member_multi_home_order_new_user,Implemented,
+Cucumber,src/test/resources/Feature/TC_03_AddMember.feature,Place lab orders and pay online,Place a home visit for a family member with the profile owner and complete online payment in most popular packages(Member),@add_member_multi_home_order_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_03_AddMember.feature,Place lab orders and pay online,Place a home visit for a family member with the profile owner and complete online payment in most popular packages(without Member),@add_member_multi_home_order_without_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_03_AddMember.feature,Place lab orders and pay online,Place a lab visit for a family member with a new user and complete online payment in most popular packages(New User),@add_member_multi_lab_order_new_user,Implemented,
+Cucumber,src/test/resources/Feature/TC_03_AddMember.feature,Place lab orders and pay online,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Member),@add_member_multi_lab_order_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_03_AddMember.feature,Place lab orders and pay online,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Without Member),@add_member_multi_lab_order_without_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Complete online paymentWithMembership,@payment,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Extract total amount for multi member scenario,@multi_member_totalWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Identify membership type,@membershipWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Location Auto-Detect on Dashboard,@location_detectWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Select tests and capture individual prices,@select_testsWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Select the member for multi member scenario,@multi_memberWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,User logs into the application,@enrollmentWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Validate actual amount with add member page total amount,@final_amountWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Validate checkout summary header values with individual prices,@checkout_headerWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,Validating the visit type,@cartWithMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_04_EndToEndScenarios_Member.feature,Place lab orders and pay online for multiple scenarios of members and tests,View the order after paymentWithMembership,@order_view,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Add a new family member with all fields including optional fields,@Positive,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Add family members with different relations,@Positive,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Add multiple family members with unique names,@Positive,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Attempt to add member with invalid email format,@Negative,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Attempt to add member without mandatory fields,@Negative,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Cancel adding a new member,@Positive,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Search for added member using search functionality,@Positive,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Successfully add a new family member with all mandatory fields,@Smoke @Positive,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Validate date of birth field with boundary values,@Boundary,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Validate mobile number field with invalid data,@Negative,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,Verify added member appears in the member list,@Positive,Implemented,
+Cucumber,src/test/resources/Feature/TC_05_FamilyAndFriends.feature,Add Family and Friends Member,View all family members using See All link,@Positive,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_DNADecoder.feature,Place DNA Decoders  orders and pay online,Place a home sample visit for a single  non member and complete online payment  in most popular packages,@singleHomeOrderWithoutMembership @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_DNADecoder.feature,Place DNA Decoders  orders and pay online,Place a home sample visit for a single member and complete online payment  in most popular packages,@singleHomeOrderMembership @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_DNADecoder.feature,Place DNA Decoders  orders and pay online,Place a home visit for a family member with the profile owner and complete online payment in most popular packages(Member),@add_member_multi_home_order_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_DNADecoder.feature,Place DNA Decoders  orders and pay online,Place a home visit for a family member with the profile owner and complete online payment in most popular packages(without Member),@add_member_multi_home_order_without_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_DNADecoder.feature,Place DNA Decoders  orders and pay online,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Member),@add_member_multi_lab_order_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_DNADecoder.feature,Place DNA Decoders  orders and pay online,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Without Member),@add_member_multi_lab_order_without_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_DNADecoder.feature,Place DNA Decoders  orders and pay online,Place a lab visit for a single member and complete online payment  in DNA Decoder page,@singleLabOrderMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_DNADecoder.feature,Place DNA Decoders  orders and pay online,Place a lab visit for a single non member and complete online payment  in most popular packages,@singleLabOrderWithoutMembership @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Complete online payment,@paymentWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Extract total amount for multi member scenario,@multi_member_totalWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Identify membership type,@membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Location Auto-Detect on Dashboard,@location_detectWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Select tests and capture individual prices,@select_testsWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Select the member for multi member scenario,@multi_memberWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,User logs into the application,@enrollmentWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Validate actual amount with add member page total amount,@final_amountWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Validate checkout summary header values with individual prices,@checkout_headerWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,Validating the visit type,@cartWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_06_EndToEndScenarios_NonMember.feature,Place lab orders and pay online for multiple scenarios of non member and tests,View the order after payment,@order_viewWithoutMembership,Implemented,
+Cucumber,src/test/resources/Feature/TC_07_PayInCash.feature,Place a home sample visit for a single member and pay in cash,Place a home sample visit for a single  non member and complete cash payment  in most popular packages,@payincash,Implemented,
+Cucumber,src/test/resources/Feature/TC_07_PayInCash.feature,Place a home sample visit for a single member and pay in cash,Place a home sample visit for a single member and complete cash payment  in most popular packages,@payincash,Implemented,
+Cucumber,src/test/resources/Feature/TC_07_PayInCash.feature,Place a home sample visit for a single member and pay in cash,Place a home visit for a family member with the profile owner and complete cash payment in most popular packages(Member),@payincashNew,Implemented,
+Cucumber,src/test/resources/Feature/TC_07_PayInCash.feature,Place a home sample visit for a single member and pay in cash,Place a home visit for a family member with the profile owner and complete cash payment in most popular packages(without Member),@payincashNew,Implemented,
+Cucumber,src/test/resources/Feature/TC_08_Reschedule.feature,Place lab orders for a single member and pay online with reschedule order flow,Place a home sample visit for a single  non member and complete cash payment with reschedule order flow(Non Member),@payincashRescheduleNonMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_08_Reschedule.feature,Place lab orders for a single member and pay online with reschedule order flow,Place a home sample visit for a single  non member and complete online payment  with reschedule order flow,@rescheduleHomeOrderNonMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_08_Reschedule.feature,Place lab orders for a single member and pay online with reschedule order flow,Place a home sample visit for a single member and complete cash payment  with reschedule order flow(Member),@payincashRescheduleMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_08_Reschedule.feature,Place lab orders for a single member and pay online with reschedule order flow,Place a home sample visit for a single member and complete online payment with reschedule order flow(Member),@rescheduleHomeOrder,Implemented,
+Cucumber,src/test/resources/Feature/TC_08_Reschedule.feature,Place lab orders for a single member and pay online with reschedule order flow,Place a home visit for a family member with the profile owner and complete cash payment with reschedule order flow(Member),@payincashRescheduleMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_08_Reschedule.feature,Place lab orders for a single member and pay online with reschedule order flow,Place a home visit for a family member with the profile owner and complete cash payment with reschedule order flow(Non Member),@payincashRescheduleNonMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_08_Reschedule.feature,Place lab orders for a single member and pay online with reschedule order flow,Place a lab visit for a single non member and complete online payment with reschedule order flow,@rescheduleLabOrderNonMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_08_Reschedule.feature,Place lab orders for a single member and pay online with reschedule order flow,Place lab orders for a single member and pay online with reschedule order flow(Member),@RescehduleLabOrder,Implemented,
+Cucumber,src/test/resources/Feature/TC_09_CancelOrder.feature,Place lab orders and pay online with cancel order flow(Member),Place a home sample visit for a single  non member and complete online payment  with cancel order flow(Non Member),@rescheduleHomeOrderNonMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_09_CancelOrder.feature,Place lab orders and pay online with cancel order flow(Member),Place a home sample visit for a single member and complete online payment with cancel order flow,@cancelHomeOrder,Implemented,
+Cucumber,src/test/resources/Feature/TC_09_CancelOrder.feature,Place lab orders and pay online with cancel order flow(Member),Place a lab visit for a single member and complete online payment  in most popular packages,@CancelLabOrder,Implemented,
+Cucumber,src/test/resources/Feature/TC_09_CancelOrder.feature,Place lab orders and pay online with cancel order flow(Member),Place a lab visit for a single non member and complete online payment with cancel order flow(Non Member),@cancelLabOrderNonMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_10_UserRegistration.feature,New User registration,Place a lab visit for a single member and complete online payment  in most popular packages,@NewUserRegistrationNew,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Multi-member (non-member) places a lab visit order with proportional coupon split via UI and verifies via API,@hybridMultiMemberNonMemberCoupon,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Multi-member places a lab visit order with proportional coupon split via UI and verifies via API,@hybridMultiMemberCoupon,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Multi-member places a lab visit order with reward and coupon via UI and verifies via getOrderById API,@hybridMultiMemberRewardCoupon,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Multi-member places a lab visit order with reward only via UI and verifies via getOrderById API,@hybridMultiMemberReward,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",New user places a lab visit order via UI and verifies via getOrderById API,@hybridLabOrderNewUser,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Member),@add_member_multi_lab_order_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Single member places a lab visit order via UI and verifies via getOrderById API,@hybridLabOrderMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Single member places a lab visit order via UI and verifies via getOrderById API with coupon,@hybridLabOrderMemberCoupon,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Single member places a lab visit order with reward and coupon via UI and verifies via getOrderById API,@hybridLabOrderMemberRewardCoupon,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Single non-member places a lab visit order via UI and verifies via getOrderById API,@hybridLabOrderNonMember,Implemented,
+Cucumber,src/test/resources/Feature/TC_11_PayOnline_HybridFlow.feature,"Place lab orders and complete payment via UI, then verify via getOrderById API",Single non-member places a lab visit order via UI with coupon and verifies via getOrderById API,@hybridLabOrderNonMemberCoupon,Implemented,
+Cucumber,src/test/resources/Feature/TC_12_AddAddress.feature,User Address Management in Profile Page,Place a lab visit for a single member and complete online payment in most popular packages,@NewUserRegistration @registration_with_address,Implemented,
+Cucumber,src/test/resources/Feature/TC_13_GlobalSearch.feature,Place lab orders and pay online from global search,Place a home sample visit for a single  non member and complete online payment  in most popular packages,@singleHomeOrderWithoutMembership @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_13_GlobalSearch.feature,Place lab orders and pay online from global search,Place a home sample visit for a single member and complete online payment  in most popular packages,@singleHomeOrderMembershipp @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_13_GlobalSearch.feature,Place lab orders and pay online from global search,Place a home visit for a family member with the profile owner and complete online payment in most popular packages(Member),@add_member_multi_home_order_membershipp,Implemented,
+Cucumber,src/test/resources/Feature/TC_13_GlobalSearch.feature,Place lab orders and pay online from global search,Place a home visit for a family member with the profile owner and complete online payment in most popular packages(without Member),@add_member_multi_home_order_without_membershipp,Implemented,
+Cucumber,src/test/resources/Feature/TC_13_GlobalSearch.feature,Place lab orders and pay online from global search,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Member),@add_member_multi_lab_order_membershipp,Implemented,
+Cucumber,src/test/resources/Feature/TC_13_GlobalSearch.feature,Place lab orders and pay online from global search,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Without Member),@add_member_multi_lab_order_without_membershipp,Implemented,
+Cucumber,src/test/resources/Feature/TC_13_GlobalSearch.feature,Place lab orders and pay online from global search,Place a lab visit for a single member and complete online payment  in most popular packages,@singleLabOrderMembership @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_13_GlobalSearch.feature,Place lab orders and pay online from global search,Place a lab visit for a single non member and complete online payment  in most popular packages,@singleLabOrderWithoutMembershipp @completeLoginFlow,Implemented,
+Cucumber,src/test/resources/Feature/TC_14_SmartChoices.feature,Place lab orders and pay online in smart choice filter for single and multiple members for member and non member scenarios,Place a home visit for a family member with the profile owner and complete online payment in most popular packages(Member),@add_member_multi_home_order_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_14_SmartChoices.feature,Place lab orders and pay online in smart choice filter for single and multiple members for member and non member scenarios,Place a home visit for a family member with the profile owner and complete online payment in most popular packages(without Member),@add_member_multi_home_order_without_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_14_SmartChoices.feature,Place lab orders and pay online in smart choice filter for single and multiple members for member and non member scenarios,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Member),@global_search_multi_lab_order_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_14_SmartChoices.feature,Place lab orders and pay online in smart choice filter for single and multiple members for member and non member scenarios,Place a lab visit for a family member with the profile owner and complete online payment in most popular packages(Without Member),@add_member_multi_lab_order_without_membership,Implemented,
+Cucumber,src/test/resources/Feature/TC_15_DNADecoderPanelsAtGlance.feature,Booking a DNA decoder Lab visit test with membership,(unnamed scenario),,Implemented,
+JavaTest,src/test/java/com/mryoda/diagnostics/api/base/BaseTest.java,for,for,,Implemented,Test class/runner
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/address/AddressAPITest.java,AddressAPITest,testAddAddress_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/address/AddressAPITest.java,AddressAPITest,testAddAddress_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/address/AddressAPITest.java,AddressAPITest,testAddAddress_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/address/GetAddressByUserIdAPITest.java,GetAddressByUserIdAPITest,testGetAddressByUserId_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/address/GetAddressByUserIdAPITest.java,GetAddressByUserIdAPITest,testGetAddressByUserId_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/address/GetAddressByUserIdAPITest.java,GetAddressByUserIdAPITest,testGetAddressByUserId_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/COD_01_LoginTest.java,COD_01_LoginTest,step01_LoginAndSetup,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/COD_06_PhlebotomistLoginTest.java,COD_06_PhlebotomistLoginTest,step06_PhlebotomistLogin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/LoginAPITest.java,LoginAPITest,testLoginWithOTP,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/LoginAPITest.java,LoginAPITest,testLoginWithOTP_NewlyRegisteredUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/LoginAPITest.java,LoginAPITest,testLoginWithOTP_NonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_01_MemberLogin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_02_NonMemberLogin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_03_NewUserRegistrationAndLogin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_04_InvalidOtpRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_06_PhlebotomistLogin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_07_MissingMobileRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_08_EmptyOtpRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_09_ValidTokenAllowsAccess,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/Section1_AuthenticationTest.java,Section1_AuthenticationTest,AUTH_10_InvalidTokenBlocksAccess,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/auth/UserCreateAPITest.java,UserCreateAPITest,testUserRegistration_CreateNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java,AddToCartAPITest,testAddToCart_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java,AddToCartAPITest,testAddToCart_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java,AddToCartAPITest,testAddToCart_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java,AddToCartAPITest,testAddToCart_WithRewardsUsed,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/COD_02_GetCartTest.java,COD_02_GetCartTest,step02_VerifyCartAndPrice,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/GetCartByIdAPITest.java,GetCartByIdAPITest,testGetCartById_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/GetCartByIdAPITest.java,GetCartByIdAPITest,testGetCartById_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/GetCartByIdAPITest.java,GetCartByIdAPITest,testGetCartById_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/Section5_CartOperationsTest.java,Section5_CartOperationsTest,CRT_01_AddToCart_HomeCollection,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/Section5_CartOperationsTest.java,Section5_CartOperationsTest,CRT_02_AddToCart_LabVisit,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/Section5_CartOperationsTest.java,Section5_CartOperationsTest,CRT_03_GetCart_VerifyCouponMath,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/Section5_CartOperationsTest.java,Section5_CartOperationsTest,CRT_04_GetCart_EmptyCart,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/Section5_CartOperationsTest.java,Section5_CartOperationsTest,CRT_05_AddToCart_DiscountCap,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/cart/Section5_CartOperationsTest.java,Section5_CartOperationsTest,CRT_06_CartUpdatedAfterSlotBooking,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_003_ExpiredCouponsNotListed,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_004_FutureCouponsNotListed,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_005_ActiveCouponShouldBeValid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_006_ExpiredCouponRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_007_InactiveCouponRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_008_InvalidCouponRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_009_OrderGteMin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_010_OrderLtMin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_011_ExactMinBoundary,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_012_ApplyValidCouponSuccessfully,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_013_ApplyExpiredCoupon,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_014_PrimeCouponByNonPrimeUserRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_015_NonPrimeCouponByPrimeUserRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_016_PreventDuplicateCouponApplication,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_017_ValidateRemainingPayableAfterCoupon,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_018_ValidateCouponAndAdminCashSplit,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_019_CouponPersistsInCart,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_020_RemoveCouponFromCart,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_021_VerifyTotalPriceSubtraction,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_022_CouponExpiresBeforeOrderPlacement,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_023_RedeemWithinAllowedLimit,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_024_ExceedMaxCouponLimit,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_025_ApplyCouponForMultipleFamilyMembers,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_026_MembershipCapPerMemberRespected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_027_CouponValueEqualsOrderTotal,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_028_CouponValueGreaterThanOrderTotal,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_029_OneBelowMinRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_030_LastRedemptionAllowed,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_031_RedemptionAfterMaxRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_032_UnauthorizedCouponAttemptRejected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_033_ManipulatedDiscountIgnored,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java,CouponComprehensiveTest,TC_CPN_034_MissingAuthTokenUnauthorized,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponMultiMemberTest.java,CouponMultiMemberTest,step01_DiscoverCoupon,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponMultiMemberTest.java,CouponMultiMemberTest,step02_ApplyCouponToMultiMemberCart,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java,CouponValidationTest,testGetAllCoupons_EmptyUserType,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java,CouponValidationTest,testGetAllCoupons_InvalidUserType,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java,CouponValidationTest,testGetAllCoupons_NonPrime,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java,CouponValidationTest,testGetAllCoupons_Prime,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/DetailedCouponAdminApprovalTest.java,DetailedCouponAdminApprovalTest,step01_DiscoverCoupon,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/DetailedCouponAdminApprovalTest.java,DetailedCouponAdminApprovalTest,step02_AddToCartWithCoupon,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/DetailedCouponAdminApprovalTest.java,DetailedCouponAdminApprovalTest,step03_AddressAndSlot,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/DetailedCouponAdminApprovalTest.java,DetailedCouponAdminApprovalTest,step04_VerifyPaymentAndCreateOrder,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/DetailedCouponAdminApprovalTest.java,DetailedCouponAdminApprovalTest,step05_AdminCheck,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/DetailedCouponAdminApprovalTest.java,DetailedCouponAdminApprovalTest,step06_AdminApproval,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step01_MemberLogin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step02_SetupLocationAndBrand,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step03_GlobalSearch,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step04_DiscoverCoupon,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step05_AddToCartWithCoupon,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step06_VerifyCart,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step07_AddAddressAndSlot,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step08_ConfirmOrder,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step09_AdminLoginAndCheck,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/coupons/MemberCouponAdminFlowTest.java,MemberCouponAdminFlowTest,step10_AdminApprovePayment,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_InvalidDateFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_InvalidGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_InvalidMobileFormat_TooShort,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_MissingAllRequiredFields,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_MissingFirstName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_MissingLastName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_MissingUserId,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/AddFamilyMemberTest.java,AddFamilyMemberTest,test_AddFamilyMember_ValidData_AllFieldsValidated,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/DeleteFamilyMemberTest.java,DeleteFamilyMemberTest,test_DeleteFamilyMember_AlreadyDeleted,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/DeleteFamilyMemberTest.java,DeleteFamilyMemberTest,test_DeleteFamilyMember_EmptyGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/DeleteFamilyMemberTest.java,DeleteFamilyMemberTest,test_DeleteFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/DeleteFamilyMemberTest.java,DeleteFamilyMemberTest,test_DeleteFamilyMember_InvalidGuidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/DeleteFamilyMemberTest.java,DeleteFamilyMemberTest,test_DeleteFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/DeleteFamilyMemberTest.java,DeleteFamilyMemberTest,test_DeleteFamilyMember_NonExistentGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/DeleteFamilyMemberTest.java,DeleteFamilyMemberTest,test_DeleteFamilyMember_ValidId_VerifyDeletion,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg01_Add_MissingAll,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg02_Add_MissingUserId,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg03_Add_MissingFirstName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg04_Add_MissingLastName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg05_Add_InvalidMobile,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg06_Add_InvalidGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg07_Add_InvalidDateFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg08_Add_NoAuth,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg09_Add_InvalidAuth,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg09a_Add_FutureDOB,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg09b_Add_VeryLongName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg10_Get_NonExistent,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg11_Get_InvalidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg12_Get_EmptyGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg13_Get_NoAuth,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg14_Get_InvalidAuth,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg14a_Get_SpecialChars,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg15_Update_MissingGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg16_Update_NonExistent,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg17_Update_InvalidGuidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg18_Update_InvalidMobile,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg19_Update_InvalidGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg20_Update_NoAuth,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg21_Update_InvalidAuth,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg21a_Update_EmptyPayload,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg22_Delete_NonExistent,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg23_Delete_InvalidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg24_Delete_EmptyGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg25_Delete_NoAuth,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg26_Delete_InvalidAuth,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg27_Delete_DoubleDelete,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,neg28_Delete_SQLInjection,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,test01_AddFamilyMember_Positive,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,test02_GetFamilyMember_FieldValidations,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,test03_UpdateFamilyMember_Flow,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,test04_Get_VerifyPersistence,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java,now,test05_Delete_VerifyDeletion,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest01_00_Add_MissingAll_Request,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest01_01_Add_MissingAll_Validate,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest02_AddFamilyMember_MissingUserId,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest03_AddFamilyMember_MissingFirstName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest04_AddFamilyMember_MissingLastName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest05_AddFamilyMember_InvalidMobileFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest06_AddFamilyMember_InvalidGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest07_AddFamilyMember_InvalidDateFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest08_AddFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest09_AddFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest09a_AddFamilyMember_FutureDOB,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest09b_AddFamilyMember_VeryLongName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest10_GetFamilyMember_NonExistentGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest11_GetFamilyMember_InvalidGuidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest12_GetFamilyMember_EmptyGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest13_GetFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest14_GetFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest14a_GetFamilyMember_SpecialCharsinGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest15_UpdateFamilyMember_MissingGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest16_UpdateFamilyMember_NonExistentGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest17_UpdateFamilyMember_InvalidGuidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest18_UpdateFamilyMember_InvalidMobileFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest19_UpdateFamilyMember_InvalidGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest20_UpdateFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest21_UpdateFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest21a_UpdateFamilyMember_EmptyPayload,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest22_DeleteFamilyMember_NonExistentGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest23_DeleteFamilyMember_InvalidGuidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest24_DeleteFamilyMember_EmptyGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest25_DeleteFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest26_DeleteFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest27_DeleteFamilyMember_DoubleDelete,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,negativeTest28_DeleteFamilyMember_SQLInjection,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step00_RegisterNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step00b_RegisterUserProfile,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_00_PerformAddRequest,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_01_ValidateAddStatus,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_02_ValidateAddGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_03_ValidateAddFirstName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_04_ValidateAddLastName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_05_ValidateAddMobile,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_06_ValidateAddGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_07_ValidateAddDob,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step01_08_ValidateAddRelation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_00_PerformGetRequest,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_01_ValidateGetStatus,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_02_ValidateGetFirstName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_03_ValidateGetLastName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_04_ValidateGetMobile,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_05_ValidateGetGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_06_ValidateGetDob,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_07_ValidateGetRelation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step02_08_ValidateGetGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step03_00_PerformUpdateRequest,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step03_01_ValidateUpdateStatus,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step04_00_PerformGetVerifyUpdate,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step04_01_ValidateVerifyUpdateStatus,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step04_02_ValidateVerifyUpdateFirstName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step05_00_PerformDeleteRequest,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step05_01_ValidateDeleteStatus,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step05_02_ValidateDeleteMessage,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberFlowTest.java,FamilyMemberFlowTest,step06_DeleteUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_AddFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_AddFamilyMember_InvalidDateFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_AddFamilyMember_InvalidGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_AddFamilyMember_InvalidMobileFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_AddFamilyMember_MissingFirstName,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_AddFamilyMember_MissingRequiredFields,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_AddFamilyMember_MissingUserId,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_AddFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_DeleteFamilyMember_InvalidGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_DeleteFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_GetFamilyMember_InvalidGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_GetFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_UpdateFamilyMember_MissingGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberNegativeTest.java,FamilyMemberNegativeTest,test_UpdateFamilyMember_NonExistentGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/GetFamilyMemberTest.java,GetFamilyMemberTest,test_GetFamilyMember_EmptyGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/GetFamilyMemberTest.java,GetFamilyMemberTest,test_GetFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/GetFamilyMemberTest.java,GetFamilyMemberTest,test_GetFamilyMember_InvalidGuidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/GetFamilyMemberTest.java,GetFamilyMemberTest,test_GetFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/GetFamilyMemberTest.java,GetFamilyMemberTest,test_GetFamilyMember_NonExistentGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/GetFamilyMemberTest.java,GetFamilyMemberTest,test_GetFamilyMember_ValidId_AllFieldsValidated,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/UpdateFamilyMemberTest.java,UpdateFamilyMemberTest,test_UpdateFamilyMember_InvalidAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/UpdateFamilyMemberTest.java,UpdateFamilyMemberTest,test_UpdateFamilyMember_InvalidGender,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/UpdateFamilyMemberTest.java,UpdateFamilyMemberTest,test_UpdateFamilyMember_InvalidGuidFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/UpdateFamilyMemberTest.java,UpdateFamilyMemberTest,test_UpdateFamilyMember_InvalidMobileFormat,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/UpdateFamilyMemberTest.java,UpdateFamilyMemberTest,test_UpdateFamilyMember_MissingGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/UpdateFamilyMemberTest.java,UpdateFamilyMemberTest,test_UpdateFamilyMember_NoAuthToken,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/UpdateFamilyMemberTest.java,UpdateFamilyMemberTest,test_UpdateFamilyMember_NonExistentGuid,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/family/UpdateFamilyMemberTest.java,UpdateFamilyMemberTest,test_UpdateFamilyMember_ValidData_AllFieldsValidated,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/AddFamilyMemberTest.java,AddFamilyMemberTest,testAddFamilyMemberAndAddToCart,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/AddFamilyMemberWithRewardsTest.java,AddFamilyMemberWithRewardsTest,testAddFamilyMemberAndAddToCartWithRewards,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_05_CrossApiValidationTest.java,COD_05_CrossApiValidationTest,step05_CrossApiValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_07_AssignOrderTest.java,COD_07_AssignOrderTest,step07_AssignOrder,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_08_VerifyStatusAssignedTest.java,COD_08_VerifyStatusAssignedTest,step08_VerifyStatusAssigned,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_09_UpdateOrderTrackingTest.java,COD_09_UpdateOrderTrackingTest,step09_UpdateOrderTracking,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_10_FinalVerificationTest.java,COD_10_FinalVerificationTest,step10_FinalVerification,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_11_AdminVerifyOtpTest.java,COD_11_AdminVerifyOtpTest,step11_AdminVerifyOtp,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_13_UpdateStatusSamplesCollectedTest.java,COD_13_UpdateStatusSamplesCollectedTest,step13_UpdateStatusSamplesCollected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_14_VerifySamplesCollectedStatusTest.java,COD_14_VerifySamplesCollectedStatusTest,step14_VerifySamplesCollectedStatus,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_16_VisitStatusAPITest.java,COD_16_VisitStatusAPITest,testGetVisitStatus,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_17_ReportGenerationTest.java,COD_17_ReportGenerationTest,testGetReportAndVerifyPDF,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_19_OrderCancellationTest.java,COD_19_OrderCancellationTest,step19_A_VerifyOrderBeforeCancellation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_19_OrderCancellationTest.java,COD_19_OrderCancellationTest,step19_B_CancelOrder,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_19_OrderCancellationTest.java,COD_19_OrderCancellationTest,step19_C_VerifyOrderAfterCancellation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_20_CancellationRefundTest.java,so,step20_A_ProcessCashback,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_20_CancellationRefundTest.java,so,step20_B_FinalUpdateOrderCancelled,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_20_CancellationRefundTest.java,so,step20_C_ApproveCancelledOrder,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_20_CancellationRefundTest.java,so,step20_D_VerifyCancelledOrderDetails,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_20_CancellationRefundTest.java,so,step20_E_VerifyPaymentById,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_20_CancellationRefundTest.java,so,step20_F_VerifyRewardsByMobile,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/COD_20_CancellationRefundTest.java,so,step20_G_VerifyTransactionByMobile,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderAPITest.java,CreateOrderAPITest,testCreateOrder_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderAPITest.java,CreateOrderAPITest,testCreateOrder_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderAPITest.java,CreateOrderAPITest,testCreateOrder_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java,CreateOrderCODAPITest,testCOD_Flow_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java,CreateOrderCODAPITest,testCOD_Flow_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java,CreateOrderCODAPITest,testCOD_Flow_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step01_LoginAndSetup,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step02_VerifyCartAndPrice,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step03_AddAddressAndSlot,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step04_VerifyPaymentPreCheck,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step05_CrossApiValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step06_PhlebotomistLogin,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step07_AssignOrder,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step08_VerifyStatusAssigned,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step09_UpdateOrderTracking,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step10_FinalVerification,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step11_AdminVerifyOtp,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step12_GetSampleType,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step13_UpdateStatusSamplesCollected,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step14_VerifySamplesCollectedStatus,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step16_VerifyPackageContents,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,step17_ProcessResultEntryCheck,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,testCOD_Flow_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,testCOD_Flow_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/DetailedCODFlowTest.java,DetailedCODFlowTest,testCOD_Flow_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/HomeSampleCollectionFlowTest.java,HomeSampleCollectionFlowTest,step02b_AddFamilyMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_01_OrderStatusValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_02_PriceValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_03_ProductNameValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_04_VisitNumberValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_05_OrderItemsPriceConsistency,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_06_RewardsValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_07_PaymentDetailsValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_08_FinalRewardBalanceCheck,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_09_MultiMemberValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/PayOnlineCrossApiValidationTest.java,PayOnlineCrossApiValidationTest,stepCrossApi_10_CatalogPriceValidation,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/ReportValidationTest.java,ReportValidationTest,validateReportsFromAPI,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_01_AddAddress_Member,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_02_GetDeliveryCenters,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_03_GetAvailableSlots,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_04_CreateCODOrder_Member,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_05_CreateCODOrder_NonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_06_CreatePrepaidOrder_Member,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_07_GetOrderById_VerifyFields,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_08_CreateOrder_MissingCartId,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_09_CreateOrder_InvalidPaymentMode,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/Section4_OrderCreationTest.java,Section4_OrderCreationTest,ORD_10_CreateOrder_PastDateSlot,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/order/SwitchOrderContextTest.java,SwitchOrderContextTest,switchActiveOrder,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/payment/COD_04_VerifyPaymentPreCheckTest.java,COD_04_VerifyPaymentPreCheckTest,step04_VerifyPaymentPreCheck,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/payment/COD_15_ApprovePaymentTest.java,COD_15_ApprovePaymentTest,step15_ApprovePayment,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/rewards/COD_18_RewardValidationTest.java,COD_18_RewardValidationTest,step18_A_VerifyInitialRewards,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/rewards/COD_18_RewardValidationTest.java,COD_18_RewardValidationTest,step18_B_VerifyRewardsGain,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/rewards/COD_18_RewardValidationTest.java,COD_18_RewardValidationTest,step18_C_VerifyFinalRewardsBalance,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/slot/COD_03_AddAddressAndSlotTest.java,COD_03_AddAddressAndSlotTest,step03_AddAddressAndSlot,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/slot/COD_03_AddLabSlotTest.java,COD_03_AddLabSlotTest,step03_AddLabSlot,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/slot/GetCentersByAddressAPITest.java,GetCentersByAddressAPITest,testGetCentersByAddress_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/slot/GetCentersByAddressAPITest.java,GetCentersByAddressAPITest,testGetCentersByAddress_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/slot/GetCentersByAddressAPITest.java,GetCentersByAddressAPITest,testGetCentersByAddress_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/slot/SlotAndCartUpdateAPITest.java,SlotAndCartUpdateAPITest,testSlotAndCartUpdate_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/slot/SlotAndCartUpdateAPITest.java,SlotAndCartUpdateAPITest,testSlotAndCartUpdate_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/slot/SlotAndCartUpdateAPITest.java,SlotAndCartUpdateAPITest,testSlotAndCartUpdate_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/BrandAPITest.java,BrandAPITest,testGetBrands_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/BrandAPITest.java,BrandAPITest,testGetBrands_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/BrandAPITest.java,BrandAPITest,testGetBrands_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/COD_12_GetSampleTypeTest.java,COD_12_GetSampleTypeTest,step12_GetSampleType,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java,CatalogVerificationAPITest,verifyDiagnosticsCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java,CatalogVerificationAPITest,verifyDnaDecoderCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java,CatalogVerificationAPITest,verifyFetalMedicineCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java,CatalogVerificationAPITest,verifyPackagesCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java,CatalogVerificationAPITest,verifyPgxCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/GlobalSearchAPITest.java,GlobalSearchAPITest,testGlobalSearch_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/GlobalSearchAPITest.java,GlobalSearchAPITest,testGlobalSearch_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/GlobalSearchAPITest.java,GlobalSearchAPITest,testGlobalSearch_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/LocationAPITest.java,LocationAPITest,testGetLocations_ForMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/LocationAPITest.java,LocationAPITest,testGetLocations_ForNewUser,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/LocationAPITest.java,LocationAPITest,testGetLocations_ForNonMember,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_01_GetLabLocations,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_02_DiagnosticsCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_03_DnaDecoderCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_04_PgxCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_05_FetalMedicineCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_06_PackagesCatalog,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_07_GetBrandsList,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_08_InvalidLocationId,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/Section2_LocationAndCatalogTest.java,Section2_LocationAndCatalogTest,CAT_09_EmptyCatalogResult,,Implemented,@Test method
+JavaTest,src/test/java/com/mryoda/diagnostics/api/tests/ui_integration/COD_99_TriggerUITest.java,COD_99_TriggerUITest,triggerUIAutomation,,Implemented,@Test method
+JavaTest,src/test/java/hooks/Hooks.java,Hooks,Hooks,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/APIGlobalSearchPricingSteps.java,APIGlobalSearchPricingSteps,APIGlobalSearchPricingSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/AddMemberPageSteps.java,AddMemberPageSteps,AddMemberPageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/BaseSteps.java,BaseSteps,BaseSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/CartPageSteps.java,CartPageSteps,CartPageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/CheckoutPageSteps.java,CheckoutPageSteps,CheckoutPageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/CodItDose.java,CodItDose,CodItDose,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/CucumberHooks.java,CucumberHooks,CucumberHooks,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/DNADecoder.java,DNADecoder,DNADecoder,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/DiagnosticsPageSteps.java,DiagnosticsPageSteps,DiagnosticsPageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/FamilyAndFriendsPage.java,FamilyAndFriendsPage,FamilyAndFriendsPage,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/HomePageSteps.java,HomePageSteps,HomePageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/LoginPageSteps.java,LoginPageSteps,LoginPageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/MyOrdersPageSteps.java,MyOrdersPageSteps,MyOrdersPageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/PayOnlineHybridSteps.java,PayOnlineHybridSteps,PayOnlineHybridSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/PaymentPageSteps.java,PaymentPageSteps,PaymentPageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/ProfilePage.java,ProfilePage,ProfilePage,,Implemented,Test class/runner
+JavaTest,src/test/java/stepDefinition/UserAddressPageSteps.java,UserAddressPageSteps,UserAddressPageSteps,,Implemented,Test class/runner
+JavaTest,src/test/java/testRunner/AddMemberSuiteRunner.java,AddMemberSuiteRunner,AddMemberSuiteRunner,,Implemented,Test class/runner
+JavaTest,src/test/java/testRunner/NewUserRegistrationSuiteRunner.java,NewUserRegistrationSuiteRunner,NewUserRegistrationSuiteRunner,,Implemented,Test class/runner
+JavaTest,src/test/java/testRunner/PayOnlineSuiteRunner.java,PayOnlineSuiteRunner,PayOnlineSuiteRunner,,Implemented,Test class/runner
+JavaTest,src/test/java/testRunner/RunnerTest.java,RunnerTest,RunnerTest,,Implemented,Test class/runner
+JavaTest,src/test/java/utilities/ExtentReportListener.java,ExtentReportListener,ExtentReportListener,,Implemented,Test class/runner
+JavaTest,src/test/java/utilities/ScenarioContext.java,ScenarioContext,ScenarioContext,,Implemented,Test class/runner

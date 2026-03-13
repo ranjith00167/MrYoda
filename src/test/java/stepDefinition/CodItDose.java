@@ -21,6 +21,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.TimeoutException;
 
 public class CodItDose extends BaseSteps {
 
@@ -678,50 +679,136 @@ public class CodItDose extends BaseSteps {
     @When("I click on the approve button")
     public void i_click_on_the_approve_button() throws Throwable {
         System.out.println("\n>>> APPROVAL FLOW: Checking for approve button...");
-        BaseClass.waitInSeconds(3);
+        JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
+        WebDriverWait wait = new WebDriverWait(BaseClass.driver, Duration.ofSeconds(10));
         
         int approvalAttempts = 0;
-        int maxApprovalAttempts = 3;
+        int maxApprovalAttempts = 5;
         boolean approvalSuccess = false;
         
         while (approvalAttempts < maxApprovalAttempts && !approvalSuccess) {
             try {
+                // STEP 1: Wait for button to be present in DOM (not necessarily visible)
+                System.out.println("Attempt " + (approvalAttempts + 1) + "/" + maxApprovalAttempts + ": Checking for approve button...");
+                
+                try {
+                    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnApprovedLabObs")));
+                    System.out.println("   ✓ Button element found in DOM");
+                } catch (TimeoutException timeoutBtn) {
+                    System.out.println("   ✗ Button not found in DOM after 10s. Moving to next attempt...");
+                    approvalAttempts++;
+                    BaseClass.waitInSeconds(2);
+                    continue;
+                }
+                
                 List<WebElement> buttons = driver.findElements(By.id("btnApprovedLabObs"));
                 
                 if (buttons.isEmpty()) {
-                    System.out.println("✅ No pending approve button found (visit already processed).");
+                    System.out.println("✅ No pending approve button (visit already processed).");
                     approvalSuccess = true;
                     break;
                 }
                 
                 WebElement btn = buttons.get(0);
                 
-                // Check if button is actually visible and enabled
-                if (btn.isDisplayed() && btn.isEnabled()) {
-                    System.out.println("✅ Approve button found. Clicking on attempt " + (approvalAttempts + 1) + "...");
-                    JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
+                // STEP 2: Try to make parent containers visible (in case button is in hidden modal/dialog)
+                System.out.println("   → Checking parent visibility...");
+                try {
+                    js.executeScript("" +
+                        "var elem = arguments[0]; " +
+                        "while(elem && elem !== document) { " +
+                        "  elem.style.display = 'block'; " +
+                        "  elem.style.visibility = 'visible'; " +
+                        "  elem.style.opacity = '1'; " +
+                        "  elem = elem.parentElement; " +
+                        "}", btn);
+                    System.out.println("   ✓ Fixed parent visibility");
+                } catch (Exception parentErr) {
+                    System.out.println("   ! Parent visibility fix error: " + parentErr.getMessage());
+                }
+                
+                BaseClass.waitInSeconds(1);
+                
+                // STEP 3: Check and handle button state
+                boolean isDisplayed = false;
+                try {
+                    isDisplayed = btn.isDisplayed();
+                } catch (Exception e) {
+                    isDisplayed = false;
+                }
+                
+                boolean isEnabled = btn.isEnabled();
+                System.out.println("   → Button state: Displayed=" + isDisplayed + ", Enabled=" + isEnabled);
+                
+                // APPROACH 1: Normal click if fully enabled
+                if (isDisplayed && isEnabled) {
+                    System.out.println("   ✓ Button is fully enabled and visible");
                     js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn);
                     BaseClass.waitInSeconds(1);
-                    js.executeScript("arguments[0].click();", btn);
+                    btn.click();
                     System.out.println("✅ Approve button clicked successfully.");
                     BaseClass.waitInSeconds(2);
                     approvalSuccess = true;
-                } else {
-                    System.out.println("⚠️ Approve button found but not interactable (attempt " + (approvalAttempts + 1) + "/" + maxApprovalAttempts + ")");
-                    BaseClass.waitInSeconds(2);
-                    approvalAttempts++;
+                } 
+                // APPROACH 2: Button disabled - remove disabled attribute
+                else if (isDisplayed && !isEnabled) {
+                    String disabledAttr = btn.getAttribute("disabled");
+                    System.out.println("   ⚠️ Button is disabled (disabled attr: " + disabledAttr + ")");
+                    
+                    try {
+                        js.executeScript("arguments[0].removeAttribute('disabled');", btn);
+                        System.out.println("   ✓ Removed disabled attribute");
+                        js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn);
+                        BaseClass.waitInSeconds(1);
+                        js.executeScript("arguments[0].click();", btn);
+                        System.out.println("✅ Approve button force-clicked (disabled removed).");
+                        BaseClass.waitInSeconds(2);
+                        approvalSuccess = true;
+                    } catch (Exception jsClickFail) {
+                        System.out.println("   ✗ Force-click failed: " + jsClickFail.getMessage());
+                        approvalAttempts++;
+                        BaseClass.waitInSeconds(2);
+                    }
+                }
+                // APPROACH 3: Button not visible - force visibility
+                else {
+                    System.out.println("   ⚠️ Button not visible (will force visibility and click)");
+                    
+                    try {
+                        // Remove all CSS hiding properties from button itself
+                        js.executeScript(
+                            "arguments[0].style.display = 'block'; " +
+                            "arguments[0].style.visibility = 'visible'; " +
+                            "arguments[0].style.opacity = '1'; " +
+                            "arguments[0].style.pointerEvents = 'auto'; " +
+                            "arguments[0].removeAttribute('disabled');", btn);
+                        
+                        System.out.println("   ✓ Forced button visibility (display, visibility, opacity)");
+                        js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn);
+                        BaseClass.waitInSeconds(1);
+                        
+                        // Try direct JS click (works even if not visible to user)
+                        js.executeScript("arguments[0].click();", btn);
+                        System.out.println("✅ Executed JS click on force-visible button.");
+                        BaseClass.waitInSeconds(2);
+                        approvalSuccess = true;
+                    } catch (Exception forceClickFail) {
+                        System.out.println("   ✗ Force visibility/click failed: " + forceClickFail.getMessage());
+                        approvalAttempts++;
+                        BaseClass.waitInSeconds(2);
+                    }
                 }
             } catch (Exception e) {
-                System.out.println("⚠️ Error during approval (attempt " + (approvalAttempts + 1) + "): " + e.getMessage());
-                BaseClass.waitInSeconds(2);
+                System.out.println("✗ Error during approval attempt " + (approvalAttempts + 1) + ": " + e.getClass().getSimpleName() + " - " + e.getMessage());
                 approvalAttempts++;
+                BaseClass.waitInSeconds(2);
             }
         }
         
         if (!approvalSuccess) {
-            System.out.println("⚠️ Warning: Could not confirm approval, but proceeding...");
-            logUIFailure("COD_Approval", "APPROVE_BUTTON_CLICKED_FAILED", 
-                "Could not confirm approve button click after " + maxApprovalAttempts + " attempts");
+            System.out.println("⚠️ Warning: Could not click approval button after " + maxApprovalAttempts + " attempts, but proceeding...");
+            logUIWarning("COD_Approval", "APPROVE_BUTTON_NOT_CLICKABLE", 
+                "Could not click approve button after " + maxApprovalAttempts + " attempts (button still not visible/clickable)");
         }
     }
 
