@@ -569,7 +569,18 @@ public class CodItDose extends BaseSteps {
 
                     // Use JS click for search to be sure
                     js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                    BaseClass.waitInSeconds(2);
+                    
+                    // Wait for search results to load - critical!
+                    System.out.println("⏳ Waiting for search results to load...");
+                    BaseClass.waitInSeconds(3);
+                    
+                    // Additional wait for table to be populated
+                    try {
+                        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
+                                By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]")));
+                    } catch (Exception ignored) {
+                        System.out.println("⚠️ Table not immediately populated, continuing anyway...");
+                    }
                 } catch (Exception e) {
                     String searchFailMsg = "Search failed for SIN " + sinNo + ": " + e.getClass().getSimpleName();
                     System.out.println("⚠️ " + searchFailMsg + ". Retrying...");
@@ -583,8 +594,18 @@ public class CodItDose extends BaseSteps {
                         By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
 
                 if (visitLinks.isEmpty()) {
-                    System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Total visits completed: " + processedVisits);
-                    break;
+                    if (i < 2) {
+                        // First couple iterations, maybe page not ready
+                        System.out.println("⚠️ No visit links found on iteration " + (i + 1) + ". Waiting and retrying...");
+                        logUIWarning("Test Entry", "NO_VISIT_LINKS_FOUND", "Search returned no results for SIN " + sinNo + " on iteration " + (i + 1));
+                        BaseClass.waitInSeconds(3);
+                        consecutiveFailures++;
+                        continue;
+                    } else {
+                        // After retries, confirm all visits processed
+                        System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Total visits completed: " + processedVisits);
+                        break;
+                    }
                 }
 
                 System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
