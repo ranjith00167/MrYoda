@@ -65,5 +65,39 @@
         <!-- Multi-Member — cancellation flow (family member order cancelled) -->
         <suite-file path="testng_labvisit_multimember_rewards_used_cancel.xml" />
         <suite-file path="testng_labvisit_multimember_rewards_used_coupon_cancel.xml" />
+        
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- ── PayOnline Payment Flow Suites (All Scenarios) ──────── -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        
+        <!-- Core PayOnline Flows: Member, Non-Member, New User -->
+        <suite-file path="testng_payonline_member_suite.xml" />
+        <suite-file path="testng_payonline_non_member_suite.xml" />
+        <suite-file path="testng_payonline_new_user_suite.xml" />
+        
+        <!-- PayOnline Coupon Scenarios -->
+        <suite-file path="testng_payonline_coupon_suite.xml" />
+        <suite-file path="testng_payonline_nonMember_coupon_suite.xml" />
+        <suite-file path="testng_payonline_multiMember_coupon_suite.xml" />
+        <suite-file path="testng_payonline_multiMemberNonMember_coupon_suite.xml" />
+        
+        <!-- PayOnline Hybrid Flow Suite (Main Integration Suite) -->
+        <suite-file path="testng_payonline_hybrid_suite.xml" />
+        
+        <!-- PayOnline Reward Scenarios: Single Member -->
+        <suite-file path="testng_payonline_memberReward_suite.xml" />
+        <suite-file path="testng_payonline_memberRewardCoupon_suite.xml" />
+        
+        <!-- PayOnline Reward Scenarios: Multi-Member -->
+        <suite-file path="testng_payonline_multiMember_reward_suite.xml" />
+        <suite-file path="testng_payonline_multiMember_rewardCoupon_suite.xml" />
+        
+        <!-- PayOnline Comprehensive Reward Variants (All Reward Scenarios) -->
+        <suite-file path="testng_payonline_allRewardVariants_suite.xml" />
+        
+        <!-- PayOnline Add Member Scenarios -->
+        <suite-file path="testng_payonline_addmember_member_suite.xml" />
+        <suite-file path="testng_payonline_addmember_new_user_suite.xml" />
+        <suite-file path="testng_payonline_addmember_non_member_suite.xml" />
     </suite-files>
 </suite>

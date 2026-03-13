@@ -376,7 +376,6 @@ public class CodItDose extends BaseSteps {
 
     @When("I enter the SIN NO in the input box")
     public void i_enter_the_sin_no_in_the_input_box() {
-                        BaseClass.waitInSeconds(3);
         String sinNo = ScenarioContext.extractedSinNo;
         if (sinNo == null || sinNo.isEmpty()) {
             throw new RuntimeException(
@@ -399,8 +398,8 @@ public class CodItDose extends BaseSteps {
                     BaseClass.waitInSeconds(3);
                     input.sendKeys(sinNo);
                 } else {
-                    // JS Fallback
-                    org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
+                    // JS Fallback - Use BaseClass.driver to avoid proxy casting issues
+                    JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
                     js.executeScript("arguments[0].value = arguments[1];", input, sinNo);
                     js.executeScript("arguments[0].dispatchEvent(new Event('change'));", input);
                 }
@@ -472,8 +471,8 @@ public class CodItDose extends BaseSteps {
                 if (i % 2 == 0) {
                     input.sendKeys(sinNo);
                 } else {
-                    // JS Fallback
-                    org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
+                    // JS Fallback - Use BaseClass.driver to avoid proxy casting issues
+                    JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
                     js.executeScript("arguments[0].value = arguments[1];", input, sinNo);
                     js.executeScript("arguments[0].dispatchEvent(new Event('change'));", input);
                 }
@@ -533,110 +532,230 @@ public class CodItDose extends BaseSteps {
 
         System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
-        for (int i = 0; i < 15; i++) {
-            BaseClass.waitInSeconds(3);
+        int processedVisits = 0;
+        int maxIterations = 15;
+        int consecutiveFailures = 0;
+        int maxConsecutiveFailures = 3;
 
-            // Ensure we are on the list page
-            boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
-                    driver.findElements(By.id("btnApprovedLabObs")).size() > 0;
-
-            if (isDetailsPage) {
-                System.out.println("Iteration " + (i + 1) + ": On details page, navigating back to list...");
-                try {
-                    // Try clicking the sidebar link using JS to bypass visibility/menu issues
-                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
-                } catch (Exception e) {
-                    System.out.println("⚠️ Sidebar click failed, trying search page URL or refresh...");
-                    driver.navigate().refresh();
-                    BaseClass.waitInSeconds(3);
-                }
-                BaseClass.waitInSeconds(3);
-            }
-
-            // 1. Re-enter SIN and Search
-            System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
+        for (int i = 0; i < maxIterations && consecutiveFailures < maxConsecutiveFailures; i++) {
             try {
-                WebElement searchBox = LocatorsPage.sinNo_searchBox;
-                BaseClass.waitForVisibility(searchBox, 10);
-                searchBox.clear();
-                searchBox.sendKeys(sinNo);
-
-                // Use JS click for search to be sure
-                js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                BaseClass.waitInSeconds(1);
-            } catch (Exception e) {
-                System.out.println("⚠️ Search failed: " + e.getMessage() + ". Retrying...");
-                continue;
-            }
-
-            // 2. Find pending visit links
-            List<WebElement> visitLinks = driver.findElements(
-                    By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
-
-            if (visitLinks.isEmpty()) {
-                System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Exiting loop.");
-                break;
-            }
-
-            System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
-            WebElement visit = visitLinks.get(0);
-
-            try {
-                // 3. Open Visit
-                String visitId = visit.getText().trim();
-                js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
-                js.executeScript("arguments[0].click();", visit);
-
-                // 4. Fill Values
-                wait.until(ExpectedConditions.or(
-                        ExpectedConditions.visibilityOfElementLocated(By.id("divInvestigation")),
-                        ExpectedConditions.visibilityOfElementLocated(By.id("btnApprovedLabObs"))));
-
-                BaseClass.enterValuesInResultTable();
-
-                // Wait to ensure save completes before approving
                 BaseClass.waitInSeconds(2);
 
-                // 5. Approve
-                System.out.println("Approving visit: " + visitId);
-                if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
-                    js.executeScript("arguments[0].click();", LocatorsPage.approvedLabObsButton);
+                // Ensure we are on the list page
+                boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
+                        driver.findElements(By.id("btnApprovedLabObs")).size() > 0;
+
+                if (isDetailsPage) {
+                    System.out.println("Iteration " + (i + 1) + ": On details page, navigating back to list...");
+                    try {
+                        // Try clicking the sidebar link using JS to bypass visibility/menu issues
+                        js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+                        BaseClass.waitInSeconds(2);
+                    } catch (Exception e) {
+                        System.out.println("⚠️ Sidebar navigation failed, trying refresh...");
+                        driver.navigate().refresh();
+                        BaseClass.waitInSeconds(3);
+                    }
                 }
 
-                // Wait for approval processing (Crucial for multi-test)
-                System.out.println("Waiting for approval to complete...");
-                BaseClass.waitInSeconds(3);
+                // 1. Re-enter SIN and Search
+                System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
+                try {
+                    WebElement searchBox = LocatorsPage.sinNo_searchBox;
+                    BaseClass.waitForVisibility(searchBox, 10);
+                    searchBox.clear();
+                    searchBox.sendKeys(sinNo);
+                    BaseClass.waitInSeconds(1);
+
+                    // Use JS click for search to be sure
+                    js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
+                    BaseClass.waitInSeconds(2);
+                } catch (Exception e) {
+                    String searchFailMsg = "Search failed for SIN " + sinNo + ": " + e.getClass().getSimpleName();
+                    System.out.println("⚠️ " + searchFailMsg + ". Retrying...");
+                    logUIWarning("Test Entry", "SIN_SEARCH_ERROR", searchFailMsg);
+                    consecutiveFailures++;
+                    continue;
+                }
+
+                // 2. Find pending visit links
+                List<WebElement> visitLinks = driver.findElements(
+                        By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
+
+                if (visitLinks.isEmpty()) {
+                    System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Total visits completed: " + processedVisits);
+                    break;
+                }
+
+                System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
+                WebElement visit = visitLinks.get(0);
+                String visitId = visit.getText().trim();
+
+                try {
+                    // 3. Open Visit
+                    js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
+                    BaseClass.waitInSeconds(1);
+                    js.executeScript("arguments[0].click();", visit);
+
+                    // Wait for page to load with proper condition
+                    wait.until(ExpectedConditions.or(
+                            ExpectedConditions.presenceOfElementLocated(By.id("divInvestigation")),
+                            ExpectedConditions.presenceOfElementLocated(By.id("btnApprovedLabObs"))));
+
+                    BaseClass.waitInSeconds(2);
+
+                    // 4. Fill Values
+                    System.out.println("📝 Entering test values for visit: " + visitId);
+                    BaseClass.enterValuesInResultTable();
+
+                    // Wait to ensure values are registered
+                    BaseClass.waitInSeconds(2);
+
+                    // 5. Approve
+                    System.out.println("✅ Approving visit: " + visitId);
+                    List<WebElement> approveButtons = driver.findElements(By.id("btnApprovedLabObs"));
+                    
+                    if (!approveButtons.isEmpty() && approveButtons.get(0).isDisplayed()) {
+                        js.executeScript("arguments[0].click();", approveButtons.get(0));
+                        System.out.println("✅ Approval clicked for visit: " + visitId);
+                        BaseClass.waitInSeconds(3);
+                    }
+
+                    processedVisits++;
+                    consecutiveFailures = 0; // Reset on success
+
+                } catch (Exception e) {
+                    System.out.println("⚠️ Error processing visit " + visitId + ": " + e.getMessage());
+                    consecutiveFailures++;
+                    logUIFailure("COD_EntryValues", "VISIT_PROCESSING_FAILURE", 
+                        "Error processing visit " + visitId + ": " + e.getClass().getSimpleName());
+                    
+                    // Try to force back to list for next attempt
+                    try {
+                        js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+                        BaseClass.waitInSeconds(2);
+                    } catch (Exception ignored) {
+                    }
+                }
 
             } catch (Exception e) {
-                System.out.println("⚠️ Error processing iteration " + (i + 1) + ": " + e.getMessage());
-                // Try to force back to list for next attempt
-                try {
-                    js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
-                } catch (Exception ignored) {
-                }
+                System.out.println("⚠️ Iteration " + (i + 1) + " failed: " + e.getMessage());
+                consecutiveFailures++;
+                logUIFailure("COD_EntryValues", "ITERATION_FAILURE", 
+                    "Iteration " + (i + 1) + " failed: " + e.getClass().getSimpleName());
             }
+        }
+
+        System.out.println("\n>>> RESULT ENTRY SUMMARY: Processed " + processedVisits + " visits");
+        if (processedVisits == 0) {
+            logUIFailure("COD_EntryValues", "NO_VISITS_PROCESSED", 
+                "Failed to process any visits. SIN: " + sinNo);
+            throw new RuntimeException("❌ FAILED: No visits were processed. Check SIN No extraction and search functionality.");
         }
     }
 
     @When("I click on the approve button")
     public void i_click_on_the_approve_button() throws Throwable {
-        // This step is now handled inside the loop for multi-department orders.
-        // We only perform a final check if there's an active button visible on screen.
+        System.out.println("\n>>> APPROVAL FLOW: Checking for approve button...");
         BaseClass.waitInSeconds(3);
-        try {
-            if (driver.findElements(By.id("btnApprovedLabObs")).size() > 0) {
-                WebElement btn = driver.findElement(By.id("btnApprovedLabObs"));
-                if (btn.isDisplayed() && btn.isEnabled()) {
-                    System.out.println("Clicking approve button (final check)...");
-                    BaseClass.waitAndClick(btn, 10);
-                } else {
-                    System.out.println("✅ No visible approve button (already handled by loop).");
+        
+        int approvalAttempts = 0;
+        int maxApprovalAttempts = 3;
+        boolean approvalSuccess = false;
+        
+        while (approvalAttempts < maxApprovalAttempts && !approvalSuccess) {
+            try {
+                List<WebElement> buttons = driver.findElements(By.id("btnApprovedLabObs"));
+                
+                if (buttons.isEmpty()) {
+                    System.out.println("✅ No pending approve button found (visit already processed).");
+                    approvalSuccess = true;
+                    break;
                 }
-            } else {
-                System.out.println("✅ No pending approve button found.");
+                
+                WebElement btn = buttons.get(0);
+                
+                // Check if button is actually visible and enabled
+                if (btn.isDisplayed() && btn.isEnabled()) {
+                    System.out.println("✅ Approve button found. Clicking on attempt " + (approvalAttempts + 1) + "...");
+                    JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
+                    js.executeScript("arguments[0].scrollIntoView({block:'center'});", btn);
+                    BaseClass.waitInSeconds(1);
+                    js.executeScript("arguments[0].click();", btn);
+                    System.out.println("✅ Approve button clicked successfully.");
+                    BaseClass.waitInSeconds(2);
+                    approvalSuccess = true;
+                } else {
+                    System.out.println("⚠️ Approve button found but not interactable (attempt " + (approvalAttempts + 1) + "/" + maxApprovalAttempts + ")");
+                    BaseClass.waitInSeconds(2);
+                    approvalAttempts++;
+                }
+            } catch (Exception e) {
+                System.out.println("⚠️ Error during approval (attempt " + (approvalAttempts + 1) + "): " + e.getMessage());
+                BaseClass.waitInSeconds(2);
+                approvalAttempts++;
             }
-        } catch (Exception e) {
-            System.out.println("ℹ️ Skipping final approve click as element is not interactable or missing.");
+        }
+        
+        if (!approvalSuccess) {
+            System.out.println("⚠️ Warning: Could not confirm approval, but proceeding...");
+            logUIFailure("COD_Approval", "APPROVE_BUTTON_CLICKED_FAILED", 
+                "Could not confirm approve button click after " + maxApprovalAttempts + " attempts");
+        }
+    }
+
+    /**
+     * Logs UI automation failures to the centralized failure log.
+     */
+    protected void logUIFailure(String stepName, String failureType, String errorMessage) {
+        String failureLogFile = "logs/Automation_Failures.log";
+        try {
+            String timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date());
+            StringBuilder logEntry = new StringBuilder();
+            logEntry.append("[").append(timestamp).append("] ");
+            logEntry.append("❌ AUTOMATION FAILURE | ");
+            logEntry.append("COMPONENT: ").append(stepName).append(" | ");
+            logEntry.append("ISSUE: ").append(failureType).append(" | ");
+            logEntry.append("MESSAGE: ").append(errorMessage);
+            logEntry.append("\n");
+            
+            // Write to centralized failure log
+            try (java.io.FileWriter fw = new java.io.FileWriter(failureLogFile, true)) {
+                fw.write(logEntry.toString());
+            }
+            
+            System.err.println(logEntry.toString().trim());
+        } catch (java.io.IOException e) {
+            System.err.println("ERROR writing to failure log: " + e.getMessage());
+        }
+    }
+
+}    /**
+     * Logs UI automation warnings to the centralized log for visibility.
+     */
+    protected void logUIWarning(String stepName, String warningType, String warningMessage) {
+        String failureLogFile = "logs/Automation_Failures.log";
+        try {
+            String timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date());
+            StringBuilder logEntry = new StringBuilder();
+            logEntry.append("[").append(timestamp).append("] ");
+            logEntry.append("⚠️ AUTOMATION WARNING | ");
+            logEntry.append("COMPONENT: ").append(stepName).append(" | ");
+            logEntry.append("ISSUE: ").append(warningType).append(" | ");
+            logEntry.append("MESSAGE: ").append(warningMessage);
+            logEntry.append("\n");
+            
+            // Write to centralized failure log
+            try (java.io.FileWriter fw = new java.io.FileWriter(failureLogFile, true)) {
+                fw.write(logEntry.toString());
+            }
+            
+            System.err.println(logEntry.toString().trim());
+        } catch (java.io.IOException e) {
+            System.err.println("ERROR writing to failure log: " + e.getMessage());
+        }
+        } catch (java.io.IOException e) {
+            System.err.println("Failed to write COD failure log: " + e.getMessage());
         }
     }
 

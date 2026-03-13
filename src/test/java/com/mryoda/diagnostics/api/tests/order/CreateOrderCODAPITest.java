@@ -2638,7 +2638,13 @@ public class CreateOrderCODAPITest extends BaseTest {
         System.out.println("   Extracted Payment ID: " + paymentId);
 
         if (paymentId == null) {
-            AssertionUtil.verifyNotNull(paymentId, "Payment ID must be present for approval");
+            System.out.println("\n🚨 CRITICAL ERROR: Payment ID extraction failed!");
+            System.out.println("   Order Response Status: " + orderResponse.getStatusCode());
+            System.out.println("   Order Response Body: " + orderResponse.getBody().asString());
+            System.out.println("   Order ID: " + orderId);
+            System.out.println("   Checked paths: data[0].payment_id and data.payment_id");
+            
+            AssertionUtil.verifyNotNull(paymentId, "Payment ID must be present for approval. Check order details extraction and response structure.");
             return;
         }
 
@@ -2790,23 +2796,43 @@ public class CreateOrderCODAPITest extends BaseTest {
         // 4. Build Payload
 
         // Check for Admin Token, perform login if missing
-        if (RequestContext.getAdminToken() == null) {
-            System.out.println("   Admin Token missing. Initiating Admin Login...");
+        if (RequestContext.getAdminToken() == null || RequestContext.getAdminToken().isEmpty()) {
+            System.out.println("   Admin Token missing or empty. Initiating Admin Login...");
             callMainAdminLoginAPI();
         }
 
         String adminToken = RequestContext.getAdminToken();
         String adminGuid = RequestContext.getAdminGuid();
 
-        if (adminGuid == null) {
+        System.out.println("   Admin Token Present: " + (adminToken != null && !adminToken.isEmpty()));
+        System.out.println("   Admin Guid: " + (adminGuid != null ? adminGuid : "NULL - Using Default"));
+        
+        if (adminGuid == null || adminGuid.isEmpty()) {
             System.out.println("⚠️ Warning: Admin GUID missing in RequestContext. Using default.");
             adminGuid = "d9b1879a-b364-42f9-990c-44a9da47b293";
+        }
+        
+        if (adminToken == null || adminToken.isEmpty()) {
+            System.out.println("⚠️ Warning: Admin Token is empty. Will use user token as fallback.");
         }
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("payment_id", paymentId);
         payload.put("approved_user_name", adminGuid);
         payload.put("payment_details", paymentDetailsList);
+
+        // Validation before API call
+        if (paymentDetailsList.isEmpty()) {
+            System.out.println("\n🚨 CRITICAL: Payment details list is EMPTY!");
+            System.out.println("   Cannot proceed with approval without payment details.");
+            AssertionUtil.verifyFalse(paymentDetailsList.isEmpty(), "Payment details must not be empty");
+        }
+        
+        System.out.println("   Payment Details: " + paymentDetailsList.size() + " item(s)");
+        for (int i = 0; i < paymentDetailsList.size(); i++) {
+            Map<String, Object> detail = paymentDetailsList.get(i);
+            System.out.println("     [" + i + "] Type: " + detail.get("type") + " | Amount: ₹" + detail.get("amount"));
+        }
 
         String endpoint = APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.APPROVE_PAYMENT;
         System.out.println("Request Payload: " + payload);
@@ -2828,9 +2854,67 @@ public class CreateOrderCODAPITest extends BaseTest {
         System.out.println("Response Status: " + response.getStatusCode());
         System.out.println("Response Body: " + response.getBody().asString());
 
-        // 5. Validate Response Status
-        AssertionUtil.verifyTrue(response.getStatusCode() == 200 || response.getStatusCode() == 201,
-                "Approve Payment HTTP Status should be 200/201");
+        // 5. Validate Response Status with Better Error Handling
+        if (response.getStatusCode() != 200 && response.getStatusCode() != 201) {
+            System.out.println("\n🚨 APPROVE PAYMENT FAILED");
+            System.out.println("   Expected Status: 200/201");
+            System.out.println("   Actual Status: " + response.getStatusCode());
+            System.out.println("   Payment ID: " + paymentId);
+            System.out.println("   Admin Token Valid: " + (adminToken != null && !adminToken.isEmpty()));
+            System.out.println("   Admin Guid: " + adminGuid);
+            System.out.println("   Payable Amount: ₹" + calculatedTotal);
+            
+            String responseBody = response.getBody().asString();
+            try {
+                Object errorObj = response.jsonPath().get("error");
+                Object messageObj = response.jsonPath().get("message");
+                System.out.println("   API Error: " + (errorObj != null ? errorObj : messageObj));
+            } catch (Exception e) {
+                System.out.println("   Response Body: " + responseBody);
+            }
+            
+            // Check if it's an admin auth issue
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                String authMsg = "Authentication Error (HTTP " + response.getStatusCode() + ") - Attempting fresh admin login";
+                System.out.println("\n⚠️ " + authMsg);
+                logWarningToCommonLog("Payment Approval", "AUTH_ERROR_" + response.getStatusCode(), authMsg);
+                
+                RequestContext.setAdminToken(null);
+                RequestContext.setAdminGuid(null);
+                callMainAdminLoginAPI();
+                
+                // Retry with fresh admin token
+                String freshAdminToken = RequestContext.getAdminToken();
+                String freshAdminGuid = RequestContext.getAdminGuid();
+                
+                System.out.println("   Retrying approval with fresh admin token...");
+                builder = new RequestBuilder()
+                        .setEndpoint(endpoint)
+                        .setRequestBody(payload);
+                
+                if (freshAdminToken != null && !freshAdminToken.isEmpty()) {
+                    builder.addHeader("Authorization", "Bearer " + freshAdminToken);
+                } else {
+                    builder.addHeader("Authorization", "Bearer " + token);
+                }
+                
+                response = builder.post();
+                System.out.println("   Retry Response Status: " + response.getStatusCode());
+                logWarningToCommonLog("Payment Approval", "RETRY_AFTER_AUTH", "Retried payment approval after fresh login. New status: " + response.getStatusCode());
+            }
+            
+            AssertionUtil.verifyTrue(response.getStatusCode() == 200 || response.getStatusCode() == 201,
+                    "Approve Payment HTTP Status should be 200/201 (Got " + response.getStatusCode() + ")");
+            
+            // Log failure even after retry
+            if (response.getStatusCode() != 200 && response.getStatusCode() != 201) {
+                String failureDetails = "Payment ID: " + paymentId + " | Status: " + response.getStatusCode() + 
+                                      " | Admin Token Valid: " + (adminToken != null && !adminToken.isEmpty()) +
+                                      " | Payable Amount: ₹" + calculatedTotal;
+                logFailureToCommonLog("COD_15_ApprovePayment", "PAYMENT_APPROVAL_FAILED",
+                        "Approve Payment API returned non-200/201 status", failureDetails);
+            }
+        }
 
         boolean success = response.jsonPath().getBoolean("success");
         AssertionUtil.verifyTrue(success, "Approve Payment success flag should be true");
@@ -3124,5 +3208,61 @@ public class CreateOrderCODAPITest extends BaseTest {
         }
 
         return null;
+    }
+
+    /**
+     * Logs API failures/warnings to a centralized failure log file.
+     * Used when payment approval or any API call fails.
+     */
+    protected void logFailureToCommonLog(String component, String issueType, String errorMessage, String details) {
+        String failureLogFile = "logs/Automation_Failures.log";
+        try {
+            String timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date());
+            StringBuilder logEntry = new StringBuilder();
+            logEntry.append("[").append(timestamp).append("] ");
+            logEntry.append("❌ AUTOMATION FAILURE | ");
+            logEntry.append("COMPONENT: ").append(component).append(" | ");
+            logEntry.append("ISSUE: ").append(issueType).append(" | ");
+            logEntry.append("MESSAGE: ").append(errorMessage).append(" | ");
+            logEntry.append("DETAILS: ").append(details);
+            logEntry.append("\n");
+            
+            // Write to centralized failure log
+            try (java.io.FileWriter fw = new java.io.FileWriter(failureLogFile, true)) {
+                fw.write(logEntry.toString());
+            }
+            
+            // Also log to console
+            System.err.println(logEntry.toString().trim());
+        } catch (java.io.IOException e) {
+            System.err.println("ERROR writing to failure log: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Logs API warnings to a centralized log for visibility.
+     */
+    protected void logWarningToCommonLog(String component, String warningType, String warningMessage) {
+        String failureLogFile = "logs/Automation_Failures.log";
+        try {
+            String timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date());
+            StringBuilder logEntry = new StringBuilder();
+            logEntry.append("[").append(timestamp).append("] ");
+            logEntry.append("⚠️ AUTOMATION WARNING | ");
+            logEntry.append("COMPONENT: ").append(component).append(" | ");
+            logEntry.append("ISSUE: ").append(warningType).append(" | ");
+            logEntry.append("MESSAGE: ").append(warningMessage);
+            logEntry.append("\n");
+            
+            // Write to centralized failure log
+            try (java.io.FileWriter fw = new java.io.FileWriter(failureLogFile, true)) {
+                fw.write(logEntry.toString());
+            }
+            
+            // Also log to console
+            System.err.println(logEntry.toString().trim());
+        } catch (java.io.IOException e) {
+            System.err.println("ERROR writing to failure log: " + e.getMessage());
+        }
     }
 }
