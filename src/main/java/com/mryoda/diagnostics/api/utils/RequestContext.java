@@ -253,7 +253,7 @@ public class RequestContext {
     }
 
     public static void setCurrentOrderIds(List<String> ids) {
-        currentOrderIds = ids;
+        currentOrderIds = (ids != null) ? new ArrayList<>(ids) : new ArrayList<>();
         if (ids != null && !ids.isEmpty()) {
             currentOrderId = ids.get(0); // Fallback for single ID getters
         }
@@ -280,7 +280,7 @@ public class RequestContext {
     }
 
     public static void setCurrentOrderTrackingIds(List<String> ids) {
-        currentOrderTrackingIds = ids;
+        currentOrderTrackingIds = (ids != null) ? new ArrayList<>(ids) : new ArrayList<>();
         if (ids != null && !ids.isEmpty()) {
             currentOrderTrackingId = ids.get(0); // Fallback for single ID getters
         }
@@ -814,7 +814,7 @@ public class RequestContext {
     }
 
     public static void setMemberCartItems(List<Map<String, Object>> items) {
-        memberCartItems = items;
+        memberCartItems = (items != null) ? new ArrayList<>(items) : new ArrayList<>();
     }
 
     // Cart setters for NON-MEMBER (Mobile: 8220220227)
@@ -839,7 +839,7 @@ public class RequestContext {
     }
 
     public static void setNonMemberCartItems(List<Map<String, Object>> items) {
-        existingMemberCartItems = items;
+        existingMemberCartItems = (items != null) ? new ArrayList<>(items) : new ArrayList<>();
     }
 
     // Cart setters for Existing Member (Deprecated - use NON_MEMBER)
@@ -895,7 +895,7 @@ public class RequestContext {
     }
 
     public static void setNewUserCartItems(List<Map<String, Object>> items) {
-        newUserCartItems = items;
+        newUserCartItems = (items != null) ? new ArrayList<>(items) : new ArrayList<>();
     }
 
     // Cart getters for Member
@@ -1082,7 +1082,7 @@ public class RequestContext {
     }
 
     public static void setMemberAddresses(List<Map<String, Object>> addresses) {
-        memberAddresses = addresses;
+        memberAddresses = (addresses != null) ? new ArrayList<>(addresses) : new ArrayList<>();
     }
 
     // Address setters for NON-MEMBER (Mobile: 8220220227)
@@ -1091,7 +1091,7 @@ public class RequestContext {
     }
 
     public static void setNonMemberAddresses(List<Map<String, Object>> addresses) {
-        existingMemberAddresses = addresses;
+        existingMemberAddresses = (addresses != null) ? new ArrayList<>(addresses) : new ArrayList<>();
     }
 
     // Address setters for Existing Member (Deprecated - use NON_MEMBER)
@@ -1111,7 +1111,7 @@ public class RequestContext {
     }
 
     public static void setNewUserAddresses(List<Map<String, Object>> addresses) {
-        newUserAddresses = addresses;
+        newUserAddresses = (addresses != null) ? new ArrayList<>(addresses) : new ArrayList<>();
     }
 
     // Address getters for Member
@@ -1634,7 +1634,7 @@ public class RequestContext {
     private static List<String> memberIds;
 
     public static void setMemberIds(List<String> ids) {
-        memberIds = ids;
+        memberIds = (ids != null) ? new ArrayList<>(ids) : new ArrayList<>();
     }
 
     public static List<String> getMemberIds() {

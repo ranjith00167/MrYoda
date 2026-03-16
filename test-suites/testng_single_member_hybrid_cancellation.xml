@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SINGLE MEMBER CANCELLATION FLOW — COMPLETE END-TO-END
+     ══════════════════════════════════════════════════════════════════════════
+     
+     PHASE 1 (UI HYBRID)    : Login → Test Selection → Cart → Payment
+                              (Feature: TC_11_PayOnline_HybridFlow.feature)
+                              Output: Order ID → Stored in RequestContext
+     
+     PHASE 2 (API VERIFY)   : Extract admin GUID from admin login
+                              Call cancellation APIs
+                              Verify order status changes to "Cancelled"
+                              (Test: SingleMemberCancellationFlowTest)
+     
+     Execution Flow:
+       1. Feature file runs UI automation to create order
+       2. Order ID is captured and stored in RequestContext
+       3. Cancellation flow test retrieves order ID from context
+       4. Admin login to get admin_approval_by GUID
+       5. Call approveCancelldOrder API with admin GUID
+       6. Verify all downstream APIs (order, payment, transaction)
+     
+     Run: mvn test -DsuiteXmlFile=test-suites/testng_single_member_hybrid_cancellation.xml
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="Single Member Cancellation Flow - Complete End-to-End" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PHASE 1 : UI HYBRID ORDER CREATION                                 -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Phase 1 - Single Member Order Creation (UI Hybrid)" preserve-order="true">
+        <parameter name="userType"  value="member"/>
+        <parameter name="orderType" value="lab"/>
+        <parameter name="cucumber.filter.tags" value="@hybridLabOrderMember"/>
+
+        <classes>
+            <!-- 
+                 Runs: Login → Test Selection → Cart → Checkout
+                       → Click Pay Online → Razorpay Payment
+                       → Capture Order ID → API Verification
+                 
+                 Output: Order ID stored in RequestContext.getCurrentOrderId()
+                 This order ID is used by Phase 2 for cancellation
+            -->
+            <class name="testRunner.PayOnlineSuiteRunner"/>
+        </classes>
+    </test>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PHASE 2 : API-BASED CANCELLATION FLOW                              -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <test name="Phase 2 - Cancellation Flow (API Only)" preserve-order="true">
+
+        <classes>
+            <!-- 
+                 Executes Cancellation Flow:
+                 
+                 Step 1: Member Login
+                 Step 2: Admin Login (Extract admin_approval_by GUID)
+                 Step 3: Get Order ID from RequestContext (created in Phase 1)
+                 Step 4: Call v2NewReturningCashback API
+                 Step 5: Call approveCancelldOrder API
+                    Payload: {
+                      "order_id": "<from Phase 1>",
+                      "remarks": "test",
+                      "admin_approval_by": "<admin GUID from step 2>",
+                      "status": "Approve"
+                    }
+                 Step 6: Verify getOrderById → status = "Cancelled"
+                 Step 7: Verify getPaymentById → payment details
+                 Step 8: Verify getTransactionByMobile → transactions
+                 Step 9: Summary Report
+            -->
+            <class name="com.mryoda.diagnostics.api.tests.order.SingleMemberCancellationFlowTest">
+                <methods>
+                    <include name="step01_MemberLogin"/>
+                    <include name="step02_AdminLogin"/>
+                    <include name="step03_CreateOrder"/>
+                    <include name="step04_GetCashbackInfo"/>
+                    <include name="step05_ApproveCancellation"/>
+                    <include name="step06_VerifyOrderCancelledStatus"/>
+                    <include name="step07_VerifyPaymentDetails"/>
+                    <include name="step08_VerifyTransactionDetails"/>
+                    <include name="step09_CancellationFlowSummary"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

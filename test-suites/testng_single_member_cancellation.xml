@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    ============================================================
+    SINGLE MEMBER CANCELLATION FLOW TEST SUITE
+    ============================================================
+    
+    Scenarios Covered:
+      1. Member Login
+      2. Admin Login (get admin_approval_by)
+      3. Order Creation
+      4. v2NewReturningCashback API
+      5. Approve Cancelled Order
+      6. Verify Order Status (getOrderById)
+      7. Verify Payment Details (getPaymentById)
+      8. Verify Transaction Details (getTransactionByMobile)
+      
+    Execution Notes:
+      - No UI Automation after order placement
+      - No Report Generation triggered
+      - Focus: Pure API validation with comprehensive checks
+    ============================================================
+-->
+
+<suite name="Single Member Cancellation Flow Test Suite" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ============================================================ -->
+    <!-- SINGLE MEMBER CANCELLATION FLOW -->
+    <!-- ============================================================ -->
+    <test name="Single Member Cancellation Flow" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.order.SingleMemberCancellationFlowTest">
+                <methods>
+                    <!-- Step 1: Member Login -->
+                    <include name="step01_MemberLogin"/>
+                    
+                    <!-- Step 2: Admin Login -->
+                    <include name="step02_AdminLogin"/>
+                    
+                    <!-- Step 3: Create Order -->
+                    <include name="step03_CreateOrder"/>
+                    
+                    <!-- Step 4: Get Cashback Information -->
+                    <include name="step04_GetCashbackInfo"/>
+                    
+                    <!-- Step 5: Approve Cancellation -->
+                    <include name="step05_ApproveCancellation"/>
+                    
+                    <!-- Step 6: Verify Order Cancelled Status -->
+                    <include name="step06_VerifyOrderCancelledStatus"/>
+                    
+                    <!-- Step 7: Verify Payment Details -->
+                    <include name="step07_VerifyPaymentDetails"/>
+                    
+                    <!-- Step 8: Verify Transaction Details -->
+                    <include name="step08_VerifyTransactionDetails"/>
+                    
+                    <!-- Step 9: Cancellation Flow Summary -->
+                    <include name="step09_CancellationFlowSummary"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

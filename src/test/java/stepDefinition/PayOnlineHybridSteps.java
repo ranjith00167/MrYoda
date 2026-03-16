@@ -398,7 +398,12 @@ public class PayOnlineHybridSteps extends BaseSteps {
         // 2. Comprehensive Storage Search
         if (extractedId == null || extractedId.isBlank() || extractedId.length() < 10) {
             org.openqa.selenium.support.ui.WebDriverWait wait = new org.openqa.selenium.support.ui.WebDriverWait(BaseClass.driver, java.time.Duration.ofSeconds(10));
-            wait.until(org.openqa.selenium.support.ui.ExpectedConditions.urlContains("order-success"));
+            try {
+                wait.until(org.openqa.selenium.support.ui.ExpectedConditions.urlContains("order-success"));
+            } catch (Exception e) {
+                System.out.println("⚠️ order-success URL not reached before storage scan. Current URL: " + BaseClass.driver.getCurrentUrl());
+                System.out.println("   Proceeding with browser-storage and API fallbacks.");
+            }
             System.out.println("Current URL: " + BaseClass.driver.getCurrentUrl());
 
             System.out.println("🔍 Scanning Local & Session Storage...");

@@ -14,7 +14,7 @@ import com.mryoda.diagnostics.api.utils.LoggerUtil;
 public class BaseTest {
     protected static final String DEFAULT_LOCATION = ConfigLoader.getConfig().defaultLocationName();
 
-    @org.testng.annotations.BeforeTest(alwaysRun = true)
+    @org.testng.annotations.BeforeSuite(alwaysRun = true)
     public void beforeTestFlowSetup() {
         System.out.println("\n#########################################################");
         System.out.println("  STARTING NEW XML TEST FLOW - RESETTING CONTEXT");
