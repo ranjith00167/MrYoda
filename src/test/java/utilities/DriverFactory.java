@@ -1,18 +1,9 @@
 package utilities;
 
 import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import org.openqa.selenium.chrome.ChromeOptions;
-
-import org.openqa.selenium.edge.EdgeDriver;
-
-import org.openqa.selenium.edge.EdgeOptions;
-
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.PageLoadStrategy;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -30,120 +21,80 @@ public class DriverFactory {
 
             boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
-            switch (browserName.toLowerCase()) {
+            if (browserName.equalsIgnoreCase("chrome")) {
 
-                case "chrome":
-    WebDriverManager.chromedriver().setup();
+                WebDriverManager.chromedriver().setup();
 
-    ChromeOptions chromeOptions = new ChromeOptions();
+                ChromeOptions options = new ChromeOptions();
 
-    Map<String, Object> prefs = new HashMap<>();
-    Map<String, Object> profile = new HashMap<>();
+                // ✅ Preferences
+                Map<String, Object> prefs = new HashMap<>();
+                Map<String, Object> profile = new HashMap<>();
 
-    // ─── default_content_setting_values ───────────────────────────────────
-    // 1 = Allow, 2 = Block, 3 = Ask
-    Map<String, Object> defaultContentSettings = new HashMap<>();
-    defaultContentSettings.put("geolocation",        1);  // ✅ Allow location
-    defaultContentSettings.put("media_stream_mic",   1);  // ✅ Allow microphone
-    defaultContentSettings.put("media_stream_camera",2);  // 🚫 Block camera (not needed)
-    defaultContentSettings.put("notifications",      2);  // 🚫 Block notification popup
-    profile.put("default_content_setting_values", defaultContentSettings);
+                Map<String, Object> defaultContentSettings = new HashMap<>();
+                defaultContentSettings.put("geolocation", 1);
+                defaultContentSettings.put("media_stream_mic", 1);
+                defaultContentSettings.put("notifications", 2);
 
-    // ─── managed_default_content_settings (policy-level override) ─────────
-    Map<String, Object> managedContentSettings = new HashMap<>();
-    managedContentSettings.put("geolocation",      1);   // ✅ Allow location
-    managedContentSettings.put("media_stream_mic", 1);   // ✅ Allow microphone
-    profile.put("managed_default_content_settings", managedContentSettings);
+                profile.put("default_content_setting_values", defaultContentSettings);
+                prefs.put("profile", profile);
 
-    prefs.put("profile", profile);
+                options.setExperimentalOption("prefs", prefs);
 
-    chromeOptions.setExperimentalOption("prefs", prefs);
+                // ✅ Core stability flags
+                options.addArguments("--disable-notifications");
+                options.addArguments("--disable-popup-blocking");
+                options.addArguments("--disable-infobars");
 
-    // ─── Chrome flags ───────────────────────────────────────────────────────
-    // Bypass OS-level mic permission dialog (uses fake device — no popup)
-    chromeOptions.addArguments("--use-fake-ui-for-media-stream");
-    chromeOptions.addArguments("--use-fake-device-for-media-stream");
-    // Ensure geolocation API is available on staging origin
-    chromeOptions.addArguments("--unsafely-treat-insecure-origin-as-secure=https://staging-mryoda.yodaprojects.com");
-    // Suppress notification permission popup
-    chromeOptions.addArguments("--disable-notifications");
-    // Don't show "Chrome is being controlled by automated software" bar
-    chromeOptions.addArguments("--disable-infobars");
-    chromeOptions.addArguments("--disable-popup-blocking");
+                // 🔥 CRITICAL for headless stability
+                options.addArguments("--disable-renderer-backgrounding");
+                options.addArguments("--disable-background-timer-throttling");
+                options.addArguments("--disable-backgrounding-occluded-windows");
 
-    if (isHeadless) {
-        chromeOptions.addArguments("--headless=new");
-        chromeOptions.addArguments("--window-size=1920,1080");
-        chromeOptions.addArguments("--start-maximized");
-        chromeOptions.addArguments("--disable-gpu");
-        chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--disable-dev-shm-usage");
-        chromeOptions.addArguments("--remote-allow-origins=*");
-    }
+                // ✅ Media permissions
+                options.addArguments("--use-fake-ui-for-media-stream");
+                options.addArguments("--use-fake-device-for-media-stream");
 
-    driver.set(new ChromeDriver(chromeOptions));
-    break;
+                // ✅ Page load strategy (faster + stable)
+                options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
-                case "firefox":
+                if (isHeadless) {
 
-                    WebDriverManager.firefoxdriver().setup();
+                    options.addArguments("--headless=new");
+                    options.addArguments("--window-size=1920,1080");
 
-                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    options.addArguments("--disable-gpu");
+                    options.addArguments("--no-sandbox");
+                    options.addArguments("--disable-dev-shm-usage");
 
-                    if (isHeadless) {
+                }
 
-                        firefoxOptions.addArguments("--headless");
+                WebDriver webDriver = new ChromeDriver(options);
 
-                    }
+                // ✅ Only maximize in headed mode
+                if (!isHeadless) {
+                    webDriver.manage().window().maximize();
+                }
 
-                    driver.set(new FirefoxDriver(firefoxOptions));
+                // ❌ Remove implicit wait (use explicit waits only)
+                webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
 
-                    break;
-
-                case "edge":
-
-                    WebDriverManager.edgedriver().setup();
-
-                    EdgeOptions edgeOptions = new EdgeOptions();
-
-                    if (isHeadless) {
-
-                        edgeOptions.addArguments("headless");
-
-                        edgeOptions.addArguments("window-size=1920,1080");
-
-                    }
-
-                    driver.set(new EdgeDriver(edgeOptions));
-
-                    break;
-
-                default:
-
-                    throw new IllegalArgumentException("Unsupported browser: " + browserName);
-
+                driver.set(webDriver);
             }
 
-            driver.get().manage().window().maximize();
-
-            driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
+            else {
+                throw new IllegalArgumentException("Unsupported browser: " + browserName);
+            }
         }
 
         return driver.get();
-
     }
 
     public static void quitDriver() {
 
         if (driver.get() != null) {
-
             driver.get().quit();
-
             driver.remove();
-
         }
-
     }
-
 }

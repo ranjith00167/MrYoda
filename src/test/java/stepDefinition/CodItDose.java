@@ -521,161 +521,136 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I enter the value of the tests")
-    public void i_enter_the_value_of_the_tests() throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
-        String sinNo = ScenarioContext.extractedSinNo;
+public void i_enter_the_value_of_the_tests() throws Throwable {
 
-        if (sinNo == null || sinNo.isEmpty()) {
-            System.out.println("⚠️ No SIN NO found in Context, using Visit Number as fallback...");
-            sinNo = RequestContext.getVisitNumber();
-        }
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+    JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
+    String sinNo = ScenarioContext.extractedSinNo;
 
-        int processedVisits = 0;
-        int maxIterations = 15;
-        int consecutiveFailures = 0;
-        int maxConsecutiveFailures = 3;
+    if (sinNo == null || sinNo.isEmpty()) {
+        sinNo = RequestContext.getVisitNumber();
+    }
 
-        for (int i = 0; i < maxIterations && consecutiveFailures < maxConsecutiveFailures; i++) {
-            try {
-                BaseClass.waitInSeconds(2);
+    System.out.println(">>> UI: Starting Multi-Visit Result Entry for SIN: " + sinNo);
 
-                // Ensure we are on the list page
-                boolean isDetailsPage = driver.findElements(By.id("divInvestigation")).size() > 0 ||
-                        driver.findElements(By.id("btnApprovedLabObs")).size() > 0;
+    By visitLinksLocator = By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]");
 
-                if (isDetailsPage) {
-                    System.out.println("Iteration " + (i + 1) + ": On details page, navigating back to list...");
-                    try {
-                        // Try clicking the sidebar link using JS to bypass visibility/menu issues
-                        js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
-                        BaseClass.waitInSeconds(2);
-                    } catch (Exception e) {
-                        System.out.println("⚠️ Sidebar navigation failed, trying refresh...");
-                        driver.navigate().refresh();
-                        BaseClass.waitInSeconds(3);
-                    }
-                }
+    int processedVisits = 0;
+    int maxIterations = 15;
 
-                // 1. Re-enter SIN and Search
-                System.out.println("Iteration " + (i + 1) + ": Re-searching for SIN: " + sinNo);
-                try {
-                    WebElement searchBox = LocatorsPage.sinNo_searchBox;
-                    BaseClass.waitForVisibility(searchBox, 10);
-                    searchBox.clear();
-                    searchBox.sendKeys(sinNo);
-                    BaseClass.waitInSeconds(1);
+    for (int i = 0; i < maxIterations; i++) {
 
-                    // Use JS click for search to be sure
-                    js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
-                    
-                    // Wait for search results to load - critical!
-                    System.out.println("⏳ Waiting for search results to load...");
-                    BaseClass.waitInSeconds(3);
-                    
-                    // Additional wait for table to be populated
-                    try {
-                        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-                                By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]")));
-                    } catch (Exception ignored) {
-                        System.out.println("⚠️ Table not immediately populated, continuing anyway...");
-                    }
-                } catch (Exception e) {
-                    String searchFailMsg = "Search failed for SIN " + sinNo + ": " + e.getClass().getSimpleName();
-                    System.out.println("⚠️ " + searchFailMsg + ". Retrying...");
-                    logUIWarning("Test Entry", "SIN_SEARCH_ERROR", searchFailMsg);
-                    consecutiveFailures++;
-                    continue;
-                }
+        System.out.println("\n🔄 Iteration " + (i + 1));
 
-                // 2. Find pending visit links
-                List<WebElement> visitLinks = driver.findElements(
-                        By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
-
-                if (visitLinks.isEmpty()) {
-                    if (i < 2) {
-                        // First couple iterations, maybe page not ready
-                        System.out.println("⚠️ No visit links found on iteration " + (i + 1) + ". Waiting and retrying...");
-                        logUIWarning("Test Entry", "NO_VISIT_LINKS_FOUND", "Search returned no results for SIN " + sinNo + " on iteration " + (i + 1));
-                        BaseClass.waitInSeconds(3);
-                        consecutiveFailures++;
-                        continue;
-                    } else {
-                        // After retries, confirm all visits processed
-                        System.out.println("✅ All pending visits for SIN: " + sinNo + " processed. Total visits completed: " + processedVisits);
-                        break;
-                    }
-                }
-
-                System.out.println("Found " + visitLinks.size() + " pending rows. Opening first...");
-                WebElement visit = visitLinks.get(0);
-                String visitId = visit.getText().trim();
-
-                try {
-                    // 3. Open Visit
-                    js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
-                    BaseClass.waitInSeconds(1);
-                    js.executeScript("arguments[0].click();", visit);
-
-                    // Wait for page to load with proper condition
-                    wait.until(ExpectedConditions.or(
-                            ExpectedConditions.presenceOfElementLocated(By.id("divInvestigation")),
-                            ExpectedConditions.presenceOfElementLocated(By.id("btnApprovedLabObs"))));
-
-                    BaseClass.waitInSeconds(2);
-
-                    // 4. Fill Values
-                    System.out.println("📝 Entering test values for visit: " + visitId);
-                    BaseClass.enterValuesInResultTable();
-
-                    // Wait to ensure values are registered
-                    BaseClass.waitInSeconds(2);
-
-                    // 5. Approve
-                    System.out.println("✅ Approving visit: " + visitId);
-                    List<WebElement> approveButtons = driver.findElements(By.id("btnApprovedLabObs"));
-                    
-                    if (!approveButtons.isEmpty() && approveButtons.get(0).isDisplayed()) {
-                        js.executeScript("arguments[0].click();", approveButtons.get(0));
-                        System.out.println("✅ Approval clicked for visit: " + visitId);
-                        BaseClass.waitInSeconds(3);
-                    }
-
-                    processedVisits++;
-                    consecutiveFailures = 0; // Reset on success
-
-                } catch (Exception e) {
-                    System.out.println("⚠️ Error processing visit " + visitId + ": " + e.getMessage());
-                    consecutiveFailures++;
-                    logUIFailure("COD_EntryValues", "VISIT_PROCESSING_FAILURE", 
-                        "Error processing visit " + visitId + ": " + e.getClass().getSimpleName());
-                    
-                    // Try to force back to list for next attempt
-                    try {
-                        js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
-                        BaseClass.waitInSeconds(2);
-                    } catch (Exception ignored) {
-                    }
-                }
-
-            } catch (Exception e) {
-                System.out.println("⚠️ Iteration " + (i + 1) + " failed: " + e.getMessage());
-                consecutiveFailures++;
-                logUIFailure("COD_EntryValues", "ITERATION_FAILURE", 
-                    "Iteration " + (i + 1) + " failed: " + e.getClass().getSimpleName());
+        try {
+            // ✅ Always ensure we are on list page
+            if (driver.findElements(By.id("divInvestigation")).size() > 0) {
+                System.out.println("↩ Navigating back to list...");
+                js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+                wait.until(ExpectedConditions.presenceOfElementLocated(LocatorsPage.sinNo_searchBox));
             }
-        }
 
-        System.out.println("\n>>> RESULT ENTRY SUMMARY: Processed " + processedVisits + " visits");
-        if (processedVisits == 0) {
-            logUIFailure("COD_EntryValues", "NO_VISITS_PROCESSED", 
-                "Failed to process any visits. SIN: " + sinNo);
-            throw new RuntimeException("❌ FAILED: No visits were processed. Check SIN No extraction and search functionality.");
+            // ✅ Enter SIN
+            WebElement searchBox = wait.until(ExpectedConditions.visibilityOf(LocatorsPage.sinNo_searchBox));
+            searchBox.clear();
+            searchBox.sendKeys(sinNo);
+
+            // ✅ Click search
+            js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
+
+            // ✅ Wait for loader to disappear (IMPORTANT)
+            try {
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loading, .spinner")));
+            } catch (Exception ignored) {}
+
+            // ✅ Wait for actual DATA (not just DOM)
+            boolean dataLoaded = false;
+
+            for (int retry = 0; retry < 5; retry++) {
+                List<WebElement> links = driver.findElements(visitLinksLocator);
+
+                if (!links.isEmpty()) {
+                    dataLoaded = true;
+                    break;
+                }
+
+                System.out.println("⏳ Waiting for data... retry " + (retry + 1));
+                BaseClass.waitInSeconds(2);
+            }
+
+            if (!dataLoaded) {
+                System.out.println("⚠️ No visit links found, retrying...");
+                continue;
+            }
+
+            // ✅ Fetch links
+            List<WebElement> visitLinks = driver.findElements(visitLinksLocator);
+
+            if (visitLinks.isEmpty()) {
+                System.out.println("✅ No more pending visits.");
+                break;
+            }
+
+            WebElement visit = visitLinks.get(0);
+            String visitId = visit.getText().trim();
+
+            System.out.println("➡ Opening visit: " + visitId);
+
+            // ✅ Scroll + JS click (HEADLESS SAFE)
+            js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
+            BaseClass.waitInSeconds(1);
+            js.executeScript("arguments[0].click();", visit);
+
+            // ✅ Wait for details page
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.presenceOfElementLocated(By.id("divInvestigation")),
+                    ExpectedConditions.presenceOfElementLocated(By.id("btnApprovedLabObs"))
+            ));
+
+            // ✅ Enter values
+            System.out.println("📝 Entering values...");
+            BaseClass.enterValuesInResultTable();
+
+            BaseClass.waitInSeconds(2);
+
+            // ✅ Approve
+            List<WebElement> approveButtons = driver.findElements(By.id("btnApprovedLabObs"));
+
+            if (!approveButtons.isEmpty()) {
+                WebElement approveBtn = approveButtons.get(0);
+
+                js.executeScript("arguments[0].scrollIntoView({block:'center'});", approveBtn);
+                BaseClass.waitInSeconds(1);
+
+                js.executeScript("arguments[0].click();", approveBtn);
+                System.out.println("✅ Approved visit: " + visitId);
+
+                BaseClass.waitInSeconds(2);
+            }
+
+            processedVisits++;
+
+        } catch (Exception e) {
+            System.out.println("❌ Error in iteration " + (i + 1) + ": " + e.getMessage());
+
+            logUIFailure("ResultEntry", "ITERATION_ERROR",
+                    "Iteration failed: " + e.getClass().getSimpleName());
+
+            // Try recovery
+            try {
+                js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+                BaseClass.waitInSeconds(2);
+            } catch (Exception ignored) {}
         }
     }
 
+    System.out.println("\n>>> RESULT ENTRY SUMMARY: " + processedVisits + " visits processed");
+
+    if (processedVisits == 0) {
+        throw new RuntimeException("❌ No visits processed — check data loading / SIN issue");
+    }
+}
     @When("I click on the approve button")
     public void i_click_on_the_approve_button() throws Throwable {
         System.out.println("\n>>> APPROVAL FLOW: Checking for approve button...");
