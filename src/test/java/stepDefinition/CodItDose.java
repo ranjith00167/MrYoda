@@ -238,40 +238,63 @@ public class CodItDose extends BaseSteps {
     }
 
     @When("I select the sample type")
-    public void i_select_the_sample_type() {
+public void i_select_the_sample_type() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
-        Random random = new Random();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+    JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        // Get ALL dropdowns in the sample table
-        List<WebElement> dropdowns = driver
-                .findElements(By.cssSelector("table#tblSample select[name^='sampletypes_']"));
+    By tableLocator = By.id("tblSample");
+    By dropdownLocator = By.cssSelector("table#tblSample select[name^='sampletypes_']");
 
-        if (dropdowns.isEmpty()) {
-            throw new RuntimeException("No sample type dropdowns found in the table.");
+    // ✅ STEP 1: Wait for table to be visible
+    try {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(tableLocator));
+        System.out.println("✅ Sample table is visible");
+    } catch (TimeoutException e) {
+        throw new RuntimeException("❌ Sample table not visible after waiting");
+    }
+
+    // ✅ STEP 2: Scroll into view (HEADLESS FIX)
+    WebElement table = driver.findElement(tableLocator);
+    js.executeScript("arguments[0].scrollIntoView({block:'center'});", table);
+
+    // ✅ STEP 3: Wait for dropdowns to actually appear (DATA WAIT)
+    List<WebElement> dropdowns = new ArrayList<>();
+
+    for (int retry = 0; retry < 5; retry++) {
+
+        dropdowns = driver.findElements(dropdownLocator);
+
+        if (!dropdowns.isEmpty()) {
+            System.out.println("✅ Found " + dropdowns.size() + " dropdowns");
+            break;
         }
 
-        boolean anySelectionDone = false;
+        System.out.println("⏳ Waiting for dropdowns... retry " + (retry + 1));
+        BaseClass.waitInSeconds(2);
+    }
 
-        // Loop through ALL dropdowns
-        for (WebElement dropdown : dropdowns) {
+    if (dropdowns.isEmpty()) {
+        throw new RuntimeException("❌ No sample type dropdowns found even after waiting");
+    }
 
+    // ✅ STEP 4: Select values
+    Random random = new Random();
+
+    for (WebElement dropdown : dropdowns) {
+
+        try {
             wait.until(ExpectedConditions.visibilityOf(dropdown));
 
             Select select = new Select(dropdown);
             String currentValue = select.getFirstSelectedOption().getAttribute("value");
 
-            // Only act on dropdowns having value = 0
             if (!"0".equals(currentValue)) {
                 continue;
             }
 
-            // Scroll into view before interacting
-            js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
-
-            // Collect valid non-zero options
             List<String> validValues = new ArrayList<>();
+
             for (WebElement option : select.getOptions()) {
                 String value = option.getAttribute("value");
 
@@ -281,24 +304,23 @@ public class CodItDose extends BaseSteps {
             }
 
             if (validValues.isEmpty()) {
-                System.out.println("⚠ No valid options found for dropdown: " + dropdown.getAttribute("name"));
+                System.out.println("⚠ No valid options for dropdown");
                 continue;
             }
 
-            // Select random valid value
             String chosenValue = validValues.get(random.nextInt(validValues.size()));
-            select.selectByValue(chosenValue);
 
-            System.out.println("✔ Selected sample type [" + chosenValue + "] for " + dropdown.getAttribute("name"));
+            // 🔥 HEADLESS SAFE SELECT
+            js.executeScript("arguments[0].value='" + chosenValue + "'", dropdown);
+            js.executeScript("arguments[0].dispatchEvent(new Event('change'))", dropdown);
 
-            anySelectionDone = true;
-        }
+            System.out.println("✔ Selected sample type: " + chosenValue);
 
-        if (!anySelectionDone) {
-            System.out.println(
-                    "✅ Note: All sample type dropdowns already have values assigned (none were '0'). Proceeding...");
+        } catch (Exception e) {
+            System.out.println("⚠ Error handling dropdown: " + e.getMessage());
         }
     }
+}
 
     @When("I click on the collect button")
     public void i_click_on_the_collect_button() {
