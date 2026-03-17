@@ -520,7 +520,7 @@ public class CodItDose extends BaseSteps {
         BaseClass.waitAndClick(LocatorsPage.resultEntryLink, 10);
     }
 
-    @When("I enter the value of the tests")
+  @When("I enter the value of the tests")
 public void i_enter_the_value_of_the_tests() throws Throwable {
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -544,27 +544,33 @@ public void i_enter_the_value_of_the_tests() throws Throwable {
         System.out.println("\n🔄 Iteration " + (i + 1));
 
         try {
-            // ✅ Always ensure we are on list page
+
+            // ✅ Ensure we are on list page
             if (driver.findElements(By.id("divInvestigation")).size() > 0) {
                 System.out.println("↩ Navigating back to list...");
                 js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
-                wait.until(ExpectedConditions.presenceOfElementLocated(LocatorsPage.sinNo_searchBox));
+
+                // ✅ FIXED (WebElement → visibilityOf)
+                wait.until(ExpectedConditions.visibilityOf(LocatorsPage.sinNo_searchBox));
             }
 
             // ✅ Enter SIN
-            WebElement searchBox = wait.until(ExpectedConditions.visibilityOf(LocatorsPage.sinNo_searchBox));
+            WebElement searchBox = wait.until(
+                    ExpectedConditions.visibilityOf(LocatorsPage.sinNo_searchBox));
+
             searchBox.clear();
             searchBox.sendKeys(sinNo);
 
-            // ✅ Click search
+            // ✅ Click search (JS for headless)
             js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
 
-            // ✅ Wait for loader to disappear (IMPORTANT)
+            // ✅ Wait for loader disappear (if exists)
             try {
-                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loading, .spinner")));
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                        By.cssSelector(".loading, .spinner")));
             } catch (Exception ignored) {}
 
-            // ✅ Wait for actual DATA (not just DOM)
+            // ✅ WAIT FOR ACTUAL DATA (NOT DOM)
             boolean dataLoaded = false;
 
             for (int retry = 0; retry < 5; retry++) {
@@ -584,7 +590,6 @@ public void i_enter_the_value_of_the_tests() throws Throwable {
                 continue;
             }
 
-            // ✅ Fetch links
             List<WebElement> visitLinks = driver.findElements(visitLinksLocator);
 
             if (visitLinks.isEmpty()) {
@@ -597,7 +602,6 @@ public void i_enter_the_value_of_the_tests() throws Throwable {
 
             System.out.println("➡ Opening visit: " + visitId);
 
-            // ✅ Scroll + JS click (HEADLESS SAFE)
             js.executeScript("arguments[0].scrollIntoView({block:'center'});", visit);
             BaseClass.waitInSeconds(1);
             js.executeScript("arguments[0].click();", visit);
@@ -637,7 +641,6 @@ public void i_enter_the_value_of_the_tests() throws Throwable {
             logUIFailure("ResultEntry", "ITERATION_ERROR",
                     "Iteration failed: " + e.getClass().getSimpleName());
 
-            // Try recovery
             try {
                 js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
                 BaseClass.waitInSeconds(2);
@@ -648,7 +651,7 @@ public void i_enter_the_value_of_the_tests() throws Throwable {
     System.out.println("\n>>> RESULT ENTRY SUMMARY: " + processedVisits + " visits processed");
 
     if (processedVisits == 0) {
-        throw new RuntimeException("❌ No visits processed — check data loading / SIN issue");
+        throw new RuntimeException("❌ No visits processed — check SIN / data load");
     }
 }
     @When("I click on the approve button")
