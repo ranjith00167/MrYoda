@@ -241,7 +241,7 @@ public class CodItDose extends BaseSteps {
     public void i_select_the_sample_type() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         Random random = new Random();
 
         // Get ALL dropdowns in the sample table
