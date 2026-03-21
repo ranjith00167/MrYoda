@@ -1289,25 +1289,25 @@ public class UserAddressPageSteps extends BaseSteps {
 
     @Then("validate address name field shows placeholder text")
     public void validate_address_name_placeholder() {
-        String placeholder = LocatorsPage.receiverNameInput.getAttribute("placeholder");
+        String placeholder = LocatorsPage.receiverNameInput.getDomAttribute("placeholder");
         System.out.println("✅ Address name placeholder: " + placeholder);
     }
 
     @And("validate address line field shows placeholder text")
     public void validate_address_line_placeholder() {
-        String placeholder = LocatorsPage.addressLine1Input.getAttribute("placeholder");
+        String placeholder = LocatorsPage.addressLine1Input.getDomAttribute("placeholder");
         System.out.println("✅ Address line placeholder: " + placeholder);
     }
 
     @And("validate city field shows placeholder text")
     public void validate_city_placeholder() {
-        String placeholder = LocatorsPage.cityInput.getAttribute("placeholder");
+        String placeholder = LocatorsPage.cityInput.getDomAttribute("placeholder");
         System.out.println("✅ City placeholder: " + placeholder);
     }
 
     @And("validate pin code field shows placeholder example")
     public void validate_pin_code_placeholder() {
-        String placeholder = LocatorsPage.pinCodeInput.getAttribute("placeholder");
+        String placeholder = LocatorsPage.pinCodeInput.getDomAttribute("placeholder");
         System.out.println("✅ Pin code placeholder: " + placeholder);
     }
 

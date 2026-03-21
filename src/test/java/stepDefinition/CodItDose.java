@@ -229,7 +229,23 @@ public class CodItDose extends BaseSteps {
 
     @And("I click on the view icon")
     public void i_click_on_the_view_icon() {
+        String originalWindow = driver.getWindowHandle();
         BaseClass.waitAndClick(LocatorsPage.viewIcon, 10);
+
+        // The view icon opens the IT Dose page in a NEW window — switch to it
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.numberOfWindowsToBe(2));
+            for (String handle : driver.getWindowHandles()) {
+                if (!handle.equals(originalWindow)) {
+                    driver.switchTo().window(handle);
+                    System.out.println("✔ Switched to IT Dose window: " + driver.getCurrentUrl());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("ℹ️ No new window opened after view icon click — staying on current window.");
+        }
     }
 
     @When("I click on the select checkbox")
@@ -240,65 +256,119 @@ public class CodItDose extends BaseSteps {
     @When("I select the sample type")
     public void i_select_the_sample_type() {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        Random random = new Random();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
 
-        // Get ALL dropdowns in the sample table
-        List<WebElement> dropdowns = driver
-                .findElements(By.cssSelector("table#tblSample select[name^='sampletypes_']"));
+    // Wait for the tblSample table to appear (page may load after window switch)
+    try {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#tblSample")));
+        System.out.println("✔ tblSample is present in DOM.");
+    } catch (Exception e) {
+        throw new AssertionError("❌ tblSample not found in DOM after 10s. Current URL: " + driver.getCurrentUrl());
+    }
 
-        if (dropdowns.isEmpty()) {
-            throw new RuntimeException("No sample type dropdowns found in the table.");
+    // Get all dropdowns inside the table
+    List<WebElement> dropdowns = driver.findElements(
+            By.cssSelector("#tblSample select[name^='sampletypes_']")
+    );
+
+    if (dropdowns.isEmpty()) {
+        throw new AssertionError("❌ No sample type dropdowns found in #tblSample.");
+    }
+
+    System.out.println("✔ Found " + dropdowns.size() + " dropdowns");
+
+    // Loop through all dropdowns
+    for (WebElement dropdown : dropdowns) {
+
+        wait.until(ExpectedConditions.visibilityOf(dropdown));
+
+        String dropdownName = dropdown.getAttribute("name");
+
+        // Scroll into view
+        js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
+
+        // Validate visible & enabled
+        if (!dropdown.isDisplayed()) {
+            throw new AssertionError("❌ Dropdown not visible: " + dropdownName);
         }
 
-        boolean anySelectionDone = false;
+        if (!dropdown.isEnabled()) {
+            throw new AssertionError("❌ Dropdown not enabled: " + dropdownName);
+        }
 
-        // Loop through ALL dropdowns
-        for (WebElement dropdown : dropdowns) {
+        Select select = new Select(dropdown);
 
-            wait.until(ExpectedConditions.visibilityOf(dropdown));
+        // Get current selected value
+        String selectedValue = select.getFirstSelectedOption().getAttribute("value");
 
-            Select select = new Select(dropdown);
-            String currentValue = select.getFirstSelectedOption().getAttribute("value");
+        // ===============================
+        // CASE 1: Already selected
+        // ===============================
+        if (!"0".equals(selectedValue)) {
 
-            // Only act on dropdowns having value = 0
-            if (!"0".equals(currentValue)) {
-                continue;
+            if (selectedValue == null || selectedValue.isBlank()) {
+                throw new AssertionError("❌ Invalid selected value in " + dropdownName);
             }
 
-            // Scroll into view before interacting
-            js.executeScript("arguments[0].scrollIntoView({block:'center'});", dropdown);
+            System.out.println("✔ Already selected: " + dropdownName + " → " + selectedValue);
+        }
 
-            // Collect valid non-zero options
-            List<String> validValues = new ArrayList<>();
-            for (WebElement option : select.getOptions()) {
+        // ===============================
+        // CASE 2: Value is 0 → Need to select
+        // ===============================
+        else {
+
+            List<WebElement> options = select.getOptions();
+
+            if (options.size() <= 1) {
+                throw new AssertionError("❌ No valid options available for " + dropdownName);
+            }
+
+            System.out.println("✔ Valid options found for " + dropdownName);
+
+            boolean selected = false;
+
+            for (WebElement option : options) {
+
                 String value = option.getAttribute("value");
 
                 if (value != null && !value.isBlank() && !"0".equals(value)) {
-                    validValues.add(value);
+
+                    select.selectByValue(value);
+
+                    // VERIFY selection
+                    String afterSelection = select.getFirstSelectedOption().getAttribute("value");
+
+                    if (!value.equals(afterSelection)) {
+                        throw new AssertionError("❌ Selection failed for " + dropdownName +
+                                " Expected: " + value + " but got: " + afterSelection);
+                    }
+
+                    System.out.println("✔ Selected and verified: " + dropdownName + " → " + value);
+
+                    selected = true;
+                    break;
                 }
             }
 
-            if (validValues.isEmpty()) {
-                System.out.println("⚠ No valid options found for dropdown: " + dropdown.getAttribute("name"));
-                continue;
+            if (!selected) {
+                throw new AssertionError("❌ Could not select any valid option for " + dropdownName);
             }
-
-            // Select random valid value
-            String chosenValue = validValues.get(random.nextInt(validValues.size()));
-            select.selectByValue(chosenValue);
-
-            System.out.println("✔ Selected sample type [" + chosenValue + "] for " + dropdown.getAttribute("name"));
-
-            anySelectionDone = true;
         }
 
-        if (!anySelectionDone) {
-            System.out.println(
-                    "✅ Note: All sample type dropdowns already have values assigned (none were '0'). Proceeding...");
+        // ===============================
+        // EXTRA VALIDATION: Ensure options are not empty
+        // ===============================
+        List<WebElement> allOptions = select.getOptions();
+
+        if (allOptions.isEmpty()) {
+            throw new AssertionError("❌ Dropdown has no options: " + dropdownName);
         }
     }
+
+    System.out.println("✅ All sample type dropdowns validated successfully.");
+}
 
     @When("I click on the collect button")
     public void i_click_on_the_collect_button() {

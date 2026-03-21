@@ -28,8 +28,8 @@ public class CartPageSteps extends BaseSteps {
         Thread.sleep(3000); // 👈 Wait for UI to update selection
         System.out.println("========== 🧭 DETECTING VISIT TYPE FROM UI ==========");
 
-        String labClass = LocatorsPage.labVisitButton.getAttribute("class");
-        String homeClass = LocatorsPage.HomeSampleButton.getAttribute("class");
+        String labClass = LocatorsPage.labVisitButton.getDomAttribute("class");
+        String homeClass = LocatorsPage.HomeSampleButton.getDomAttribute("class");
 
         String selectedType = "";
 
@@ -112,8 +112,8 @@ public class CartPageSteps extends BaseSteps {
 
         System.out.println("========== 🧭 DETECTING VISIT TYPE FROM UI ==========");
 
-        String labClass = LocatorsPage.labVisitButton.getAttribute("class");
-        String homeClass = LocatorsPage.HomeSampleButton.getAttribute("class");
+        String labClass = LocatorsPage.labVisitButton.getDomAttribute("class");
+        String homeClass = LocatorsPage.HomeSampleButton.getDomAttribute("class");
 
         String selectedType = "";
 
@@ -222,8 +222,8 @@ public class CartPageSteps extends BaseSteps {
 
         System.out.println("========== 🧭 DETECTING VISIT TYPE FROM UI ==========");
 
-        String labClass = LocatorsPage.labVisitButton.getAttribute("class");
-        String homeClass = LocatorsPage.HomeSampleButton.getAttribute("class");
+        String labClass = LocatorsPage.labVisitButton.getDomAttribute("class");
+        String homeClass = LocatorsPage.HomeSampleButton.getDomAttribute("class");
 
         String selectedType = "";
 

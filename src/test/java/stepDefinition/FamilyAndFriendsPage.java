@@ -60,7 +60,7 @@ BaseClass.waitAndInput(LocatorsPage.mobileNumber_Input, "9876543210", 10);
 	    BaseClass.waitAndClick(LocatorsPage.male_GenderImage, 10);
 
 	    // Capture gender from the clicked icon
-	    BaseClass.selectedGender = LocatorsPage.male_GenderImage.getAttribute("alt").trim();
+	    BaseClass.selectedGender = LocatorsPage.male_GenderImage.getDomAttribute("alt").trim();
 
 	    System.out.println("Selected Gender from Attribute: " + BaseClass.selectedGender);
 	}

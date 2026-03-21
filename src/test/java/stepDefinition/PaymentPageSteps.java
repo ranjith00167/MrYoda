@@ -118,7 +118,7 @@ public class PaymentPageSteps extends BaseSteps {
 
 
 	    //=================== STEP 5: Extract Razorpay Price ====================
-	    String razorpayVal = LocatorsPage.razorpayAmountLabel.getAttribute("data-value");
+	    String razorpayVal = LocatorsPage.razorpayAmountLabel.getDomAttribute("data-value");
 	    int razorpayAmount = Integer.parseInt(razorpayVal.replaceAll("[^0-9]", ""));
 	    System.out.println("Razorpay → Amount to Pay: ₹" + razorpayAmount);
 
@@ -249,7 +249,7 @@ public class PaymentPageSteps extends BaseSteps {
 	    Thread.sleep(2000);
 	    BaseClass.switchToRazorpayFrame();
 
-	    String razorPayVal = LocatorsPage.razorpayAmountLabel.getAttribute("data-value");
+	    String razorPayVal = LocatorsPage.razorpayAmountLabel.getDomAttribute("data-value");
 	    TestSession.razorpayAmount = Integer.parseInt(razorPayVal.replaceAll("[^0-9]",""));
 
 	    System.out.println("💳 Razorpay Amount: ₹" + TestSession.razorpayAmount);

@@ -80,7 +80,7 @@ public class ProfilePage extends BaseSteps {
 	    );
 
 	    // Verify it actually stuck — if React still overrode it, log a warning
-	    String actualValue = dobField.getAttribute("value");
+	    String actualValue = dobField.getDomProperty("value");
 	    if (!isoDate.equals(actualValue)) {
 	        System.out.println("⚠️ React overrode DOB value after set (" + actualValue + "). Retrying with blur...");
 	        js.executeScript(
@@ -92,7 +92,7 @@ public class ProfilePage extends BaseSteps {
 	            dobField, isoDate
 	        );
 	    }
-	    System.out.println("📅 DOB field value after set: " + dobField.getAttribute("value"));
+	    System.out.println("📅 DOB field value after set: " + dobField.getDomProperty("value"));
 
 	    // calculateAndStoreAge expects dd/MM/yyyy — convert from ISO
 	    java.time.LocalDate parsedDate = java.time.LocalDate.parse(isoDate);
