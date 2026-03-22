@@ -67,7 +67,7 @@ public class BrandAPITest extends BaseTest {
                 .post();
     }
 
-    @Test(priority = 6, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest.testGetLocations_ForMember")
+    @Test(priority = 6, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest.testGetLocations_ForMember", description = "QA Automation: Verify Get Brands For Member")
     public void testGetBrands_ForMember() {
         System.out.println("\n╔══════════════════════════════════════════════════════════╗");
         System.out.println("║          GET ALL BRANDS API — MEMBER                     ║");
@@ -77,7 +77,7 @@ public class BrandAPITest extends BaseTest {
         validateAndStoreBrands(response);
     }
 
-    @Test(priority = 6, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest.testGetLocations_ForNonMember")
+    @Test(priority = 6, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest.testGetLocations_ForNonMember", description = "QA Automation: Verify Get Brands For Non Member")
     public void testGetBrands_ForNonMember() {
         System.out.println("\n╔══════════════════════════════════════════════════════════╗");
         System.out.println("║       GET ALL BRANDS API — EXISTING MEMBER               ║");
@@ -87,7 +87,7 @@ public class BrandAPITest extends BaseTest {
         validateAndStoreBrands(response);
     }
 
-    @Test(priority = 6, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest.testGetLocations_ForNewUser")
+    @Test(priority = 6, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest.testGetLocations_ForNewUser", description = "QA Automation: Verify Get Brands For New User")
     public void testGetBrands_ForNewUser() {
         System.out.println("\n╔══════════════════════════════════════════════════════════╗");
         System.out.println("║         GET ALL BRANDS API — NEW USER                    ║");

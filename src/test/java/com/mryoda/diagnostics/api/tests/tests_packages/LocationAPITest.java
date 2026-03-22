@@ -99,7 +99,7 @@ public class LocationAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 1️⃣ MEMBER → Location API
     // ---------------------------------------------------------
-    @Test(priority = 5, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.LoginAPITest.testLoginWithOTP")
+    @Test(priority = 5, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.LoginAPITest.testLoginWithOTP", description = "QA Automation: Verify Get Locations For Member")
     public void testGetLocations_ForMember() {
 
         System.out.println("\n===== LOCATION API — MEMBER =====");
@@ -113,7 +113,7 @@ public class LocationAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 2️⃣ NON-MEMBER (Mobile: 8220220227) → Location API
     // ---------------------------------------------------------
-    @Test(priority = 5, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.LoginAPITest.testLoginWithOTP_NonMember")
+    @Test(priority = 5, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.LoginAPITest.testLoginWithOTP_NonMember", description = "QA Automation: Verify Get Locations For Non Member")
     public void testGetLocations_ForNonMember() {
 
         System.out.println("\n===== LOCATION API — NON-MEMBER (8220220227 - NOT a paid member) =====");
@@ -127,7 +127,7 @@ public class LocationAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 3️⃣ NEW USER → Location API
     // ---------------------------------------------------------
-    @Test(priority = 6, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.LoginAPITest.testLoginWithOTP_NewlyRegisteredUser")
+    @Test(priority = 6, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.LoginAPITest.testLoginWithOTP_NewlyRegisteredUser", description = "QA Automation: Verify Get Locations For New User")
     public void testGetLocations_ForNewUser() {
 
         System.out.println("\n===== LOCATION API — NEW USER =====");

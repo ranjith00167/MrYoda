@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class COD_07_AssignOrderTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Assign Order")
     public void step07_AssignOrder() {
         System.out.println("\n>>> STEP 7: ASSIGN ORDER (MULTI-ORDER SUPPORT) <<<");
         java.util.List<String> orderIds = RequestContext.getCurrentOrderIds();

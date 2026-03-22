@@ -56,7 +56,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // ==========================================
     // STEP 1: Member Login
     // ==========================================
-    @Test(priority = 1, description = "Step 1: Member Login")
+    @Test(priority = 1, description = "🔄 CANCELLATION FLOW: Member Login Authentication - Verify member can authenticate for order cancellation process")
     public void step01_MemberLogin() {
         System.out.println("\n==========================================================");
         System.out.println("      STEP 1: MEMBER LOGIN");
@@ -83,7 +83,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // ==========================================
     // STEP 2: Admin Login
     // ==========================================
-    @Test(priority = 2, dependsOnMethods = "step01_MemberLogin", description = "Step 2: Admin Login")
+    @Test(priority = 2, dependsOnMethods = "step01_MemberLogin", description = "🔄 CANCELLATION FLOW: Admin Login Authentication - Verify admin can authenticate to approve order cancellations and access administrative functions")
     public void step02_AdminLogin() {
         System.out.println("\n==========================================================");
         System.out.println("      STEP 2: ADMIN LOGIN");
@@ -130,7 +130,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // STEP 3: Get Order ID (From Hybrid Phase 1 or Create New)
     // ==========================================
     @Test(priority = 3, dependsOnMethods = "step02_AdminLogin", 
-           description = "Step 3: Get/Create Order for Cancellation")
+           description = "🔄 CANCELLATION FLOW: Create/Retrieve Order for Cancellation - Verify system can create new order or retrieve existing order for cancellation testing with proper order lifecycle management")
     public void step03_CreateOrder() {
         System.out.println("\n==========================================================");
         System.out.println("      STEP 3: GET/CREATE ORDER");
@@ -213,7 +213,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // STEP 4: Call v2NewReturningCashback API
     // ==========================================
     @Test(priority = 4, dependsOnMethods = "step03_CreateOrder",
-           description = "Step 4: Get Cashback Information")
+           description = "🔄 CANCELLATION FLOW: Retrieve Cashback Information - Verify system can calculate and retrieve applicable cashback amounts for cancelled orders based on membership and payment conditions")
     public void step04_GetCashbackInfo() {
         System.out.println("\n==========================================================");
         System.out.println("      STEP 4: V2 NEW RETURNING CASHBACK");
@@ -339,7 +339,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // STEP 5: Approve Cancellation
     // ==========================================
     @Test(priority = 5, dependsOnMethods = "step04_GetCashbackInfo",
-           description = "Step 5: Approve Cancelled Order")
+           description = "🔄 CANCELLATION FLOW: Approve Order Cancellation - Verify admin can successfully approve order cancellation requests with proper authorization and validation checks")
     public void step05_ApproveCancellation() {
         System.out.println("\n==========================================================");
         System.out.println("      STEP 5: APPROVE CANCELLED ORDER");
@@ -399,7 +399,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // STEP 6: Verify Order Status via getOrderById
     // ==========================================
     @Test(priority = 6, dependsOnMethods = "step05_ApproveCancellation",
-           description = "Step 6: Verify Order Cancelled Status")
+           description = "🔄 CANCELLATION FLOW: Verify Order Cancelled Status - Ensure order status is properly updated to 'cancelled' across all system components and database records")
     public void step06_VerifyOrderCancelledStatus() {
         System.out.println("\n==========================================================");
         System.out.println("      STEP 6: VERIFY ORDER CANCELLED STATUS");
@@ -614,7 +614,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // STEP 7: Verify Payment Details
     // ==========================================
     @Test(priority = 7, dependsOnMethods = "step06_VerifyOrderCancelledStatus",
-           description = "Step 7: Verify Payment Information")
+           description = "🔄 CANCELLATION FLOW: Verify Payment Refund Details - Confirm payment status is updated to 'refunded' and refund amounts are calculated correctly based on cancellation policies")
     public void step07_VerifyPaymentDetails() {
         System.out.println("\n==========================================================");
         System.out.println("      STEP 7: VERIFY PAYMENT DETAILS");
@@ -824,7 +824,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // STEP 8: Verify Transaction via getTransactionByMobile
     // ==========================================
     @Test(priority = 8, dependsOnMethods = "step07_VerifyPaymentDetails",
-           description = "Step 8: Verify Transaction Information")
+           description = "🔄 CANCELLATION FLOW: Verify Transaction Records - Ensure transaction history is properly updated with cancellation details and refund transactions are recorded accurately")
     public void step08_VerifyTransactionDetails() {
         System.out.println("\n==========================================================");
         System.out.println("      STEP 8: VERIFY TRANSACTION DETAILS");
@@ -1050,7 +1050,7 @@ public class SingleMemberCancellationFlowTest extends BaseTest {
     // STEP 9: Final Cancellation Flow Summary
     // ==========================================
     @Test(priority = 9, dependsOnMethods = "step08_VerifyTransactionDetails",
-           description = "Step 9: Cancellation Flow Summary")
+           description = "🔄 CANCELLATION FLOW: Generate Cancellation Summary Report - Compile comprehensive summary of cancellation flow including order details, refund amounts, and system status validations")
     public void step09_CancellationFlowSummary() {
         System.out.println("\n==========================================================");
         System.out.println("      CANCELLATION FLOW SUMMARY");

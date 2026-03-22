@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class COD_15_ApprovePaymentTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Approve Payment")
     public void step15_ApprovePayment() {
         System.out.println("\n>>> STEP 15: APPROVE PAYMENT <<<");
         String token = RequestContext.getToken();

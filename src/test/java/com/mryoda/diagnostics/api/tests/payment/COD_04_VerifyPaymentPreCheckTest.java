@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class COD_04_VerifyPaymentPreCheckTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Payment Pre Check")
     public void step04_VerifyPaymentPreCheck() {
         System.out.println("\n>>> STEP 4: VERIFY PAYMENT (PRE-CHECK) <<<");
         String token = RequestContext.getToken();

@@ -41,17 +41,17 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
     // -------------------------------------------------------------------------
     // DISABLE INHERITED MONOLITHIC TESTS
     // -------------------------------------------------------------------------
-    @Test(enabled = false)
+    @Test(enabled = false, description = "QA Automation: Verify COD Flow For New User")
     @Override
     public void testCOD_Flow_ForNewUser() {
     }
 
-    @Test(enabled = false)
+    @Test(enabled = false, description = "QA Automation: Verify COD Flow For Member")
     @Override
     public void testCOD_Flow_ForMember() {
     }
 
-    @Test(enabled = false)
+    @Test(enabled = false, description = "QA Automation: Verify COD Flow For Non Member")
     @Override
     public void testCOD_Flow_ForNonMember() {
     }
@@ -60,7 +60,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
     // DETAILED FLOW TESTS
     // -------------------------------------------------------------------------
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "QA Automation: Verify Login And Setup")
     public void step01_LoginAndSetup() {
         System.out.println("\n>>> STEP 1: DETAILED FLOW - LOGIN & SETUP <<<");
 
@@ -163,7 +163,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         System.out.println("✅ Setup Complete for User: " + userId);
     }
 
-    @Test(priority = 2, dependsOnMethods = "step01_LoginAndSetup")
+    @Test(priority = 2, dependsOnMethods = "step01_LoginAndSetup", description = "QA Automation: Verify Cart And Price")
     public void step02_VerifyCartAndPrice() {
         String flowOrderType = (addressGuid != null) ? "home" : "lab";
         Response response = callGetCartAPI(token, userId, flowOrderType);
@@ -185,7 +185,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         }
     }
 
-    @Test(priority = 3, dependsOnMethods = "step02_VerifyCartAndPrice")
+    @Test(priority = 3, dependsOnMethods = "step02_VerifyCartAndPrice", description = "QA Automation: Verify Add Address And Slot")
     public void step03_AddAddressAndSlot() {
         System.out.println("\n>>> STEP 3: ADD ADDRESS & SLOT <<<");
 
@@ -202,7 +202,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         System.out.println("✅ Address & Slot Configured.");
     }
 
-    @Test(priority = 4, dependsOnMethods = "step03_AddAddressAndSlot")
+    @Test(priority = 4, dependsOnMethods = "step03_AddAddressAndSlot", description = "QA Automation: Verify Payment Pre Check")
     public void step04_VerifyPaymentPreCheck() {
         System.out.println("\n>>> STEP 4: VERIFY PAYMENT (PRE-CHECK) <<<");
 
@@ -222,7 +222,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         orderId = result.get("orderId");
     }
 
-    @Test(priority = 5, dependsOnMethods = "step04_VerifyPaymentPreCheck")
+    @Test(priority = 5, dependsOnMethods = "step04_VerifyPaymentPreCheck", description = "QA Automation: Verify Cross Api Validation")
     public void step05_CrossApiValidation() {
         System.out.println("\n>>> STEP 5: CROSS-API VALIDATION <<<");
 
@@ -247,14 +247,14 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
                 addressId, slotGuid, expectedProductNames);
     }
 
-    @Test(priority = 6, dependsOnMethods = "step01_LoginAndSetup") // Independent of payment flow strictly speaking
+    @Test(priority = 6, dependsOnMethods = "step01_LoginAndSetup", description = "QA Automation: Verify Phlebotomist Login") // Independent of payment flow strictly speaking
     public void step06_PhlebotomistLogin() {
         System.out.println("\n>>> STEP 6: PHLEBOTOMIST LOGIN <<<");
         phlebotomistGuid = callPhlebotomistLoginAPI();
         Assert.assertNotNull(phlebotomistGuid, "Phlebotomist GUID required for assignment");
     }
 
-    @Test(priority = 7, dependsOnMethods = { "step04_VerifyPaymentPreCheck", "step06_PhlebotomistLogin" })
+    @Test(priority = 7, dependsOnMethods = { "step04_VerifyPaymentPreCheck", "step06_PhlebotomistLogin" }, description = "QA Automation: Verify Assign Order")
     public void step07_AssignOrder() {
         System.out.println("\n>>> STEP 7: ASSIGN ORDER <<<");
         orderTrackingId = callAssignOrderAPI(orderId, phlebotomistGuid, totalPrice, paymentId, addressGuid, userId,
@@ -262,20 +262,20 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         Assert.assertNotNull(orderTrackingId, "Order Tracking ID must be returned");
     }
 
-    @Test(priority = 8, dependsOnMethods = "step07_AssignOrder")
+    @Test(priority = 8, dependsOnMethods = "step07_AssignOrder", description = "QA Automation: Verify Status Assigned")
     public void step08_VerifyStatusAssigned() {
         System.out.println("\n>>> STEP 8: VERIFY STATUS (ASSIGNED) <<<");
         callGetOrderTrackingStatusAPI(orderTrackingId, "Phlebotomist assigned");
     }
 
-    @Test(priority = 9, dependsOnMethods = "step08_VerifyStatusAssigned")
+    @Test(priority = 9, dependsOnMethods = "step08_VerifyStatusAssigned", description = "QA Automation: Verify Admin Verify Otp")
     public void step11_AdminVerifyOtp() {
         System.out.println("\n>>> STEP 09 (Reordered): ADMIN VERIFY OTP <<<");
         callAdminVerifyOtpAPI(orderTrackingId, orderId);
         System.out.println("✅ Detailed COD Flow Step 11 Completed.");
     }
 
-    @Test(priority = 10, dependsOnMethods = "step11_AdminVerifyOtp")
+    @Test(priority = 10, dependsOnMethods = "step11_AdminVerifyOtp", description = "QA Automation: Verify Update Order Tracking")
     public void step09_UpdateOrderTracking() {
         System.out.println("\n>>> STEP 10 (Reordered): UPDATE ORDER TRACKING (START/INPROGRESS) <<<");
         String lat = addressDetails.get("lat");
@@ -291,7 +291,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         callUpdateOrderTrackingAPI(orderTrackingId, orderId, lat, lng, name);
     }
 
-    @Test(priority = 11, dependsOnMethods = "step09_UpdateOrderTracking")
+    @Test(priority = 11, dependsOnMethods = "step09_UpdateOrderTracking", description = "QA Automation: Verify Final Verification")
     public void step10_FinalVerification() {
         System.out.println("\n>>> STEP 11 (Reordered): FINAL VERIFICATION (Status & Phlebo) <<<");
 
@@ -304,7 +304,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         System.out.println("✅ Detailed COD Flow Step 10 Completed.");
     }
 
-    @Test(priority = 12, dependsOnMethods = "step10_FinalVerification")
+    @Test(priority = 12, dependsOnMethods = "step10_FinalVerification", description = "QA Automation: Verify Get Sample Type")
     public void step12_GetSampleType() {
         System.out.println("\n>>> STEP 12: GET SAMPLE TYPE <<<");
         sampleType = callGetSampleTypeAPI(token);
@@ -312,7 +312,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         System.out.println("✅ Sample Type Retrieved: " + sampleType);
     }
 
-    @Test(priority = 13, dependsOnMethods = "step12_GetSampleType")
+    @Test(priority = 13, dependsOnMethods = "step12_GetSampleType", description = "QA Automation: Verify Update Status Samples Collected")
     public void step13_UpdateStatusSamplesCollected() {
         System.out.println("\n>>> STEP 13: UPDATE STATUS (SAMPLES COLLECTED) <<<");
         if (sampleType != null) {
@@ -322,7 +322,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         }
     }
 
-    @Test(priority = 14, dependsOnMethods = "step13_UpdateStatusSamplesCollected")
+    @Test(priority = 14, dependsOnMethods = "step13_UpdateStatusSamplesCollected", description = "QA Automation: Verify Samples Collected Status")
     public void step14_VerifySamplesCollectedStatus() {
         System.out.println("\n>>> STEP 14: VERIFY STATUS (SAMPLES COLLECTED) IN ORDER DETAILS <<<");
 
@@ -367,7 +367,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         }
     }
 
-    @Test(priority = 16, dependsOnMethods = "step14_VerifySamplesCollectedStatus")
+    @Test(priority = 16, dependsOnMethods = "step14_VerifySamplesCollectedStatus", description = "QA Automation: Verify Package Contents")
     public void step16_VerifyPackageContents() {
         System.out.println("\n>>> STEP 16: VERIFY PACKAGE CONTENTS (Dynamic Validation) <<<");
 
@@ -451,7 +451,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
         }
     }
 
-    @Test(priority = 17, dependsOnMethods = "step16_VerifyPackageContents")
+    @Test(priority = 17, dependsOnMethods = "step16_VerifyPackageContents", description = "QA Automation: Verify Process Result Entry Check")
     public void step17_ProcessResultEntryCheck() {
         // Placeholder for strict UI validation if needed here,
         // but actual UI test logic is usually in separate classes.

@@ -41,7 +41,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // =========================================================
     // AUTH-01 : Member (Prime) OTP Login — POSITIVE
     // =========================================================
-    @Test(priority = 1, description = "AUTH-01: Member (Prime) logs in with valid mobile + OTP")
+    @Test(priority = 1, description = "🔐 AUTHENTICATION: Member (Prime) OTP Login - Verify paid member can successfully authenticate with valid mobile number and OTP to access premium membership benefits and services")
     public void AUTH_01_MemberLogin() {
         System.out.println("\n>>> AUTH-01: MEMBER (PRIME) LOGIN <<<");
         RequestContext.setCurrentFlowName("member_flow");
@@ -81,7 +81,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // =========================================================
     // AUTH-02 : Non-Member OTP Login — POSITIVE
     // =========================================================
-    @Test(priority = 2, description = "AUTH-02: Non-Member logs in with valid mobile + OTP")
+    @Test(priority = 2, description = "🔐 AUTHENTICATION: Non-Member OTP Login - Verify non-paid member can authenticate with valid mobile and OTP but without access to premium membership benefits")
     public void AUTH_02_NonMemberLogin() {
         System.out.println("\n>>> AUTH-02: NON-MEMBER LOGIN <<<");
         RequestContext.setCurrentFlowName("non_member_flow");
@@ -104,7 +104,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // =========================================================
     // AUTH-03 : New User Registration + Login — POSITIVE
     // =========================================================
-    @Test(priority = 3, description = "AUTH-03: New user registers and then logs in with OTP")
+    @Test(priority = 3, description = "🔐 AUTHENTICATION: New User Registration and Login - Verify new user can complete registration process and subsequently authenticate with OTP to access basic services")
     public void AUTH_03_NewUserRegistrationAndLogin() {
         System.out.println("\n>>> AUTH-03: NEW USER REGISTRATION + LOGIN <<<");
         RequestContext.setCurrentFlowName("new_user_flow");
@@ -147,7 +147,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // =========================================================
     // AUTH-04 : Invalid OTP — NEGATIVE
     // =========================================================
-    @Test(priority = 4, description = "AUTH-04: Submit wrong OTP; must be rejected")
+    @Test(priority = 4, description = "🔐 AUTHENTICATION: Invalid OTP Rejection - Verify system properly rejects authentication attempts with incorrect OTP codes and provides appropriate error messages")
     public void AUTH_04_InvalidOtpRejected() {
         System.out.println("\n>>> AUTH-04: INVALID OTP REJECTION <<<");
 
@@ -196,7 +196,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // =========================================================
     // AUTH-06 : Phlebotomist Login — POSITIVE
     // =========================================================
-    @Test(priority = 6, description = "AUTH-06: Phlebotomist logs in and receives GUID for order assignment")
+    @Test(priority = 6, description = "🔐 AUTHENTICATION: Phlebotomist Login - Verify phlebotomist can authenticate to receive GUID for order assignment and access phlebotomist-specific functions")
     public void AUTH_06_PhlebotomistLogin() {
         System.out.println("\n>>> AUTH-06: PHLEBOTOMIST LOGIN <<<");
 
@@ -226,7 +226,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // =========================================================
     // AUTH-07 : Missing Mobile Number — NEGATIVE
     // =========================================================
-    @Test(priority = 7, description = "AUTH-07: OTP request with missing mobile number must be rejected")
+    @Test(priority = 7, description = "🔐 AUTHENTICATION: Missing Mobile Number Validation - Verify system rejects OTP requests when mobile number parameter is missing or null with proper validation")
     public void AUTH_07_MissingMobileRejected() {
         System.out.println("\n>>> AUTH-07: MISSING MOBILE NUMBER <<<");
 
@@ -257,7 +257,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // =========================================================
     // AUTH-08 : Empty OTP Field — NEGATIVE
     // =========================================================
-    @Test(priority = 8, description = "AUTH-08: Verify OTP call with empty OTP field is rejected")
+    @Test(priority = 8, description = "🔐 AUTHENTICATION: Empty OTP Field Validation - Verify system rejects authentication attempts when OTP field is empty or contains only whitespace characters")
     public void AUTH_08_EmptyOtpRejected() {
         System.out.println("\n>>> AUTH-08: EMPTY OTP FIELD <<<");
 
@@ -299,7 +299,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // AUTH-09 : Token Validity — Authenticated Request Passes — POSITIVE
     // =========================================================
     @Test(priority = 9,
-          description = "AUTH-09: A valid token allows access to a protected API (GetCart)")
+          description = "🔐 AUTHENTICATION: Valid Token Protected API Access - Verify valid authentication tokens allow access to protected API endpoints like GetCart with proper authorization")
     public void AUTH_09_ValidTokenAllowsAccess() {
         System.out.println("\n>>> AUTH-09: VALID TOKEN — PROTECTED API ACCESS <<<");
 
@@ -330,7 +330,7 @@ public class Section1_AuthenticationTest extends BaseTest {
     // AUTH-10 : Invalid Token — Auth Enforcement Check — NEGATIVE
     // =========================================================
     @Test(priority = 10,
-          description = "AUTH-10: Documents staging server auth enforcement behavior with an invalid token")
+          description = "🔐 AUTHENTICATION: Invalid Token Access Blocking - Verify system properly blocks access to protected APIs when invalid or expired tokens are provided with appropriate security enforcement")
     public void AUTH_10_InvalidTokenBlocksAccess() {
         System.out.println("\n>>> AUTH-10: INVALID TOKEN — AUTH ENFORCEMENT CHECK <<<");
 

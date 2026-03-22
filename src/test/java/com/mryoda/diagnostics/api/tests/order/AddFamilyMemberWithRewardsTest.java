@@ -34,7 +34,7 @@ import java.util.Map;
 public class AddFamilyMemberWithRewardsTest extends BaseTest {
 
     @Parameters({ "userType", "orderType" })
-    @Test(dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest.verifyPackagesCatalog")
+    @Test(dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest.verifyPackagesCatalog", description = "QA Automation: Verify Add Family Member And Add To Cart With Rewards")
     public void testAddFamilyMemberAndAddToCartWithRewards(@Optional("member") String userType,
             @Optional("lab") String orderType) {
         System.out.println("\n>>> TEST: ADD FAMILY MEMBER + CART WITH REWARDS_USED (" + userType + " | " + orderType + ") <<<");

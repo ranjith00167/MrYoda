@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class COD_10_FinalVerificationTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Final Verification")
     public void step10_FinalVerification() {
         System.out.println("\n>>> STEP 10: FINAL VERIFICATION (Status & Phlebo - MULTI-ORDER) <<<");
         java.util.List<String> trackingIds = RequestContext.getCurrentOrderTrackingIds();

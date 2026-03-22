@@ -39,7 +39,7 @@ public class DeleteFamilyMemberTest {
 
     // ==================== POSITIVE TESTS ====================
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "QA Automation: Verify Delete Family Member Valid Id Verify Deletion")
     public void test_DeleteFamilyMember_ValidId_VerifyDeletion() {
         System.out.println("\n>>> POSITIVE TEST: Delete Family Member - Valid ID with Verification <<<");
 
@@ -100,7 +100,7 @@ public class DeleteFamilyMemberTest {
 
     // ==================== NEGATIVE TESTS ====================
 
-    @Test(priority = 10)
+    @Test(priority = 10, description = "QA Automation: Verify Delete Family Member Non Existent Guid")
     public void test_DeleteFamilyMember_NonExistentGuid() {
         System.out.println("\n>>> NEGATIVE TEST: Delete Family Member - Non-existent GUID <<<");
 
@@ -123,7 +123,7 @@ public class DeleteFamilyMemberTest {
         System.out.println("   ✅ Correctly handled deletion of non-existent family member");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11, description = "QA Automation: Verify Delete Family Member Invalid Guid Format")
     public void test_DeleteFamilyMember_InvalidGuidFormat() {
         System.out.println("\n>>> NEGATIVE TEST: Delete Family Member - Invalid GUID Format <<<");
 
@@ -144,7 +144,7 @@ public class DeleteFamilyMemberTest {
         System.out.println("   ✅ Correctly rejected invalid GUID format");
     }
 
-    @Test(priority = 12)
+    @Test(priority = 12, description = "QA Automation: Verify Delete Family Member Empty Guid")
     public void test_DeleteFamilyMember_EmptyGuid() {
         System.out.println("\n>>> NEGATIVE TEST: Delete Family Member - Empty GUID <<<");
 
@@ -164,7 +164,7 @@ public class DeleteFamilyMemberTest {
         System.out.println("   ✅ Correctly rejected empty GUID");
     }
 
-    @Test(priority = 13)
+    @Test(priority = 13, description = "QA Automation: Verify Delete Family Member No Auth Token")
     public void test_DeleteFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Delete Family Member - No Authorization Token <<<");
 
@@ -199,7 +199,7 @@ public class DeleteFamilyMemberTest {
         System.out.println("   ✅ Correctly rejected delete without auth token");
     }
 
-    @Test(priority = 14)
+    @Test(priority = 14, description = "QA Automation: Verify Delete Family Member Invalid Auth Token")
     public void test_DeleteFamilyMember_InvalidAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Delete Family Member - Invalid Authorization Token <<<");
 
@@ -235,7 +235,7 @@ public class DeleteFamilyMemberTest {
         System.out.println("   ✅ Correctly rejected invalid auth token");
     }
 
-    @Test(priority = 15)
+    @Test(priority = 15, description = "QA Automation: Verify Delete Family Member Already Deleted")
     public void test_DeleteFamilyMember_AlreadyDeleted() {
         System.out.println("\n>>> NEGATIVE TEST: Delete Family Member - Already Deleted (Double Delete) <<<");
 

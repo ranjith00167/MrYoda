@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class COD_13_UpdateStatusSamplesCollectedTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Update Status Samples Collected")
     public void step13_UpdateStatusSamplesCollected() {
         System.out.println("\n>>> STEP 13: UPDATE STATUS (SAMPLES COLLECTED - MULTI-ORDER) <<<");
         String sampleType = RequestContext.getCurrentSampleType();

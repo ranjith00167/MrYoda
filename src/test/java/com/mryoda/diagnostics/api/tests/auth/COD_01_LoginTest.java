@@ -26,7 +26,7 @@ public class COD_01_LoginTest extends CreateOrderCODAPITest {
         return normalized;
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Login And Setup")
     public void step01_LoginAndSetup() {
         System.out.println("\n>>> STEP 1: DETAILED FLOW - LOGIN & SETUP <<<");
 

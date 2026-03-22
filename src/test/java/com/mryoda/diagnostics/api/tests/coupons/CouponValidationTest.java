@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class CouponValidationTest extends BaseTest {
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "QA Automation: Verify Get All Coupons Prime")
     public void testGetAllCoupons_Prime() {
         System.out.println("\n>>> TESTS: Validate GetAllCoupons - Prime <<<");
 
@@ -62,7 +62,7 @@ public class CouponValidationTest extends BaseTest {
         }
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, description = "QA Automation: Verify Get All Coupons Non Prime")
     public void testGetAllCoupons_NonPrime() {
         System.out.println("\n>>> TESTS: Validate GetAllCoupons - NonPrime <<<");
 
@@ -99,7 +99,7 @@ public class CouponValidationTest extends BaseTest {
 
     // --- NEGATIVE SCENARIOS ---
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "QA Automation: Verify Get All Coupons Invalid User Type")
     public void testGetAllCoupons_InvalidUserType() {
         System.out.println("\n>>> TESTS: Validate GetAllCoupons - Invalid User Type <<<");
         Map<String, String> payload = new HashMap<>();
@@ -126,7 +126,7 @@ public class CouponValidationTest extends BaseTest {
         }
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, description = "QA Automation: Verify Get All Coupons Empty User Type")
     public void testGetAllCoupons_EmptyUserType() {
         System.out.println("\n>>> TESTS: Validate GetAllCoupons - Empty User Type <<<");
         Map<String, String> payload = new HashMap<>();

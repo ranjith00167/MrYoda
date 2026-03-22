@@ -56,7 +56,7 @@ public class PayOnlineCrossApiValidationTest {
         System.out.println("   Package Tests: " + RequestContext.getPackageTestNames());
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 01 Order Status Validation")
     public void stepCrossApi_01_OrderStatusValidation() {
         System.out.println("\n>>> STEP CROSS-01: ORDER STATUS & PAYMENT VALIDATION <<<");
 
@@ -156,7 +156,7 @@ public class PayOnlineCrossApiValidationTest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 02 Price Validation")
     public void stepCrossApi_02_PriceValidation() {
         System.out.println("\n>>> STEP CROSS-02: PRICE CONSISTENCY VALIDATION <<<");
 
@@ -276,7 +276,7 @@ public class PayOnlineCrossApiValidationTest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 03 Product Name Validation")
     public void stepCrossApi_03_ProductNameValidation() {
         System.out.println("\n>>> STEP CROSS-03: PRODUCT NAME VALIDATION <<<");
 
@@ -371,7 +371,7 @@ public class PayOnlineCrossApiValidationTest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 04 Visit Number Validation")
     public void stepCrossApi_04_VisitNumberValidation() {
         System.out.println("\n>>> STEP CROSS-04: VISIT NUMBER VALIDATION <<<");
 
@@ -424,7 +424,7 @@ public class PayOnlineCrossApiValidationTest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 05 Order Items Price Consistency")
     public void stepCrossApi_05_OrderItemsPriceConsistency() {
         System.out.println("\n>>> STEP CROSS-05: ORDER ITEMS PRICE CONSISTENCY <<<");
 
@@ -504,7 +504,7 @@ public class PayOnlineCrossApiValidationTest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 06 Rewards Validation")
     public void stepCrossApi_06_RewardsValidation() {
         System.out.println("\n>>> STEP CROSS-06: REWARDS VALIDATION <<<");
 
@@ -587,7 +587,7 @@ public class PayOnlineCrossApiValidationTest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 07 Payment Details Validation")
     public void stepCrossApi_07_PaymentDetailsValidation() {
         System.out.println("\n>>> STEP CROSS-07: getPaymentById VALIDATION <<<");
 
@@ -770,7 +770,7 @@ public class PayOnlineCrossApiValidationTest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 08 Final Reward Balance Check")
     public void stepCrossApi_08_FinalRewardBalanceCheck() {
         System.out.println("\n>>> STEP CROSS-08: FINAL REWARD BALANCE CHECK <<<");
         
@@ -936,7 +936,7 @@ public class PayOnlineCrossApiValidationTest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 09 Multi Member Validation")
     public void stepCrossApi_09_MultiMemberValidation() {
         System.out.println("\n>>> STEP CROSS-09: MULTI-MEMBER VALIDATION <<<");
         
@@ -1011,7 +1011,7 @@ public class PayOnlineCrossApiValidationTest {
      *   Catalog API price  ↔  UI-captured price  ↔  order_items.actual_price (per order)
      * Also validates per-order totals vs catalog sum.
      */
-    @Test
+    @Test(description = "QA Automation: Verify Step Cross Api 10 Catalog Price Validation")
     public void stepCrossApi_10_CatalogPriceValidation() {
         System.out.println("\n>>> STEP CROSS-10: CATALOG PRICE VALIDATION (getAllTests + getAllPackages) <<<");
 

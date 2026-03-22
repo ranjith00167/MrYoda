@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class COD_19_OrderCancellationTest {
 
-    @Test(groups = "cancel_flow")
+    @Test(groups = "cancel_flow", description = "QA Automation: Verify A Verify Order Before Cancellation")
     public void step19_A_VerifyOrderBeforeCancellation() {
         System.out.println("\n>>> STEP 19-A: VERIFY ORDER BEFORE CANCELLATION <<<");
         String orderId = RequestContext.getCurrentOrderId();
@@ -50,7 +50,7 @@ public class COD_19_OrderCancellationTest {
         // modular flow
     }
 
-    @Test(groups = "cancel_flow", dependsOnMethods = "step19_A_VerifyOrderBeforeCancellation")
+    @Test(groups = "cancel_flow", dependsOnMethods = "step19_A_VerifyOrderBeforeCancellation", description = "QA Automation: Verify B Cancel Order")
     public void step19_B_CancelOrder() {
         System.out.println("\n>>> STEP 19-B: CANCEL ORDER <<<");
         String orderId = RequestContext.getCurrentOrderId();
@@ -90,7 +90,7 @@ public class COD_19_OrderCancellationTest {
         System.out.println("✅ Order Status Updated to 'Cancelled' successfully.");
     }
 
-    @Test(groups = "cancel_flow", dependsOnMethods = "step19_B_CancelOrder")
+    @Test(groups = "cancel_flow", dependsOnMethods = "step19_B_CancelOrder", description = "QA Automation: Verify C Verify Order After Cancellation")
     public void step19_C_VerifyOrderAfterCancellation() {
         System.out.println("\n>>> STEP 19-C: VERIFY ORDER AFTER CANCELLATION <<<");
         String orderId = RequestContext.getCurrentOrderId();

@@ -2053,7 +2053,7 @@ public class CreateOrderCODAPITest extends BaseTest {
         System.out.println("✅ Lab Cart updated successfully.");
     }
 
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 1, enabled = false, description = "QA Automation: Verify COD Flow For New User")
     public void testCOD_Flow_ForNewUser() {
         System.out.println("\n>>> STARTING COD FLOW FOR NEW USER <<<");
         String token = RequestContext.getNewUserToken();
@@ -2061,7 +2061,7 @@ public class CreateOrderCODAPITest extends BaseTest {
         executeCODFlow(token, userId);
     }
 
-    @Test(priority = 2, enabled = false)
+    @Test(priority = 2, enabled = false, description = "QA Automation: Verify COD Flow For Member")
     public void testCOD_Flow_ForMember() {
         System.out.println("\n>>> STARTING COD FLOW FOR MEMBER <<<");
         String token = RequestContext.getMemberToken();
@@ -2074,7 +2074,7 @@ public class CreateOrderCODAPITest extends BaseTest {
         executeCODFlow(token, userId);
     }
 
-    @Test(priority = 3, enabled = false)
+    @Test(priority = 3, enabled = false, description = "QA Automation: Verify COD Flow For Non Member")
     public void testCOD_Flow_ForNonMember() {
         System.out.println("\n>>> STARTING COD FLOW FOR NON-MEMBER (EXISTING USER) <<<");
         String token = RequestContext.getExistingMemberToken(); // Assuming this is the non-member/existing user

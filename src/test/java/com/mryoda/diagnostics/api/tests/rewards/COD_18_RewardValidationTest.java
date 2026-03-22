@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
 
-    @Test(groups = "reward_initial")
+    @Test(groups = "reward_initial", description = "QA Automation: Verify A Verify Initial Rewards")
     public void step18_A_VerifyInitialRewards() {
         System.out.println("\n>>> STEP 18-A: VERIFY INITIAL REWARDS (Pre-Payment) <<<");
         String mobile = RequestContext.getMobile();
@@ -24,7 +24,7 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
         System.out.println("✅ Initial Rewards Stored: " + initialRewards);
     }
 
-    @Test(groups = "reward_validation", dependsOnMethods = "com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest.step15_ApprovePayment")
+    @Test(groups = "reward_validation", dependsOnMethods = "com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest.step15_ApprovePayment", description = "QA Automation: Verify B Verify Rewards Gain")
     public void step18_B_VerifyRewardsGain() {
         System.out.println("\n>>> STEP 18-B: VERIFY REWARDS GAIN (From Payment) <<<");
 
@@ -128,7 +128,7 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
         System.out.println("✅ Rewards Gain Validation Completed.");
     }
 
-    @Test(groups = "reward_validation", dependsOnMethods = "step18_B_VerifyRewardsGain")
+    @Test(groups = "reward_validation", dependsOnMethods = "step18_B_VerifyRewardsGain", description = "QA Automation: Verify C Verify Final Rewards Balance")
     public void step18_C_VerifyFinalRewardsBalance() {
         System.out.println("\n>>> STEP 18-C: VERIFY FINAL REWARDS BALANCE (Post-Payment) <<<");
         String mobile = RequestContext.getMobile();

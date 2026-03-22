@@ -369,45 +369,44 @@ public class Section5_CartOperationsTest extends BaseTest {
     // =========================================================
     // CRT-05 : Add to Cart — Discount Cap (Zero Payable) — POSITIVE
     // =========================================================
-    @Test(priority = 5, description = "CRT-05: If Discount >= Subtotal, verify totalPrice is not negative")
+    @Test(priority = 5, description = "🛒 CART OPERATIONS: Verify Discount Cap Logic - Ensure totalPrice doesn't go negative when discount >= subtotal")
     public void CRT_05_AddToCart_DiscountCap() {
         System.out.println("\n>>> CRT-05: ADD TO CART — DISCOUNT CAP (ZERO PAYABLE) <<<");
         ensureTokensAndTests();
         
         String token = RequestContext.getMemberToken();
         String userId = RequestContext.getMemberUserId();
+        String addressId = RequestContext.getMemberAddressId();
         
+        Assert.assertNotNull(addressId, "Address ID is required for slot booking");
+
+        // For discount cap test, we'll create a scenario where discount >= subtotal
         Map<String, Object> payload = buildCartPayload(userId, "home");
-        String couponGuid = fetchBestAvailableCouponGuid("prime");
         
+        // Apply a high-value coupon if available
+        String couponGuid = fetchBestAvailableCouponGuid("prime");
         if (couponGuid != null) {
             payload.put("coupon_guid", couponGuid);
-            Response res = callAddToCart(token, payload);
-            
-            if (res.getStatusCode() == 200 || res.getStatusCode() == 201) {
-                Object priceVal = null;
-                try { priceVal = res.jsonPath().get("data.totalPrice"); } catch (Exception ignored) {}
-                if (priceVal == null) {
-                    try { priceVal = res.jsonPath().get("total_amount"); } catch (Exception ignored) {}
-                }
-                
-                double totalPrice = toDouble(priceVal, -1.0);
-                if (priceVal != null) {
-                    Assert.assertTrue(totalPrice >= 0, "totalPrice should never be negative");
-                    System.out.println("   ✅ totalPrice >= 0 verified. Total: " + totalPrice);
-                }
-            }
-        } else {
-            System.out.println("   ⚠️ No coupon available to test discount cap.");
+            RequestContext.setMemberCouponGuid(couponGuid);
+            System.out.println("   [CRT-05] Applied High-Value Coupon: " + couponGuid);
         }
+
+        Response response = callAddToCart(token, payload);
+        AssertionUtil.verifyTrue(response.getStatusCode() == 200 || response.getStatusCode() == 201, "AddToCart must return 200/201");
+
+        // Verify totalPrice is not negative
+        Object totalPriceObj = response.jsonPath().get("data.totalPrice");
+        double totalPrice = toDouble(totalPriceObj, 0.0);
         
-        System.out.println("   ✅ CRT-05 PASSED\n");
+        Assert.assertTrue(totalPrice >= 0.0, "Total price should not be negative even with high discount");
+        System.out.println("   ✅ Total Price (after discount): ₹" + totalPrice);
+        System.out.println("   ✅ CRT-05 PASSED - Discount cap working correctly\n");
     }
 
     // =========================================================
     // CRT-06 : Cart Updated After Slot Booking — POSITIVE
     // =========================================================
-    @Test(priority = 6, description = "CRT-06: Cart Updated After Slot Booking. Verify date and time are passed, and coupon remains")
+    @Test(priority = 6, description = "🛒 CART OPERATIONS: Verify Cart Updates After Slot Booking - Ensure date/time are passed and coupons remain valid")
     public void CRT_06_CartUpdatedAfterSlotBooking() {
         System.out.println("\n>>> CRT-06: CART UPDATED AFTER SLOT BOOKING <<<");
         ensureTokensAndTests();
@@ -469,12 +468,10 @@ public class Section5_CartOperationsTest extends BaseTest {
         System.out.println("   [CRT-06] Booking Slot: " + slotGuid + " for Date: " + dateStr + " Time: " + slotTime);
 
         // Step 2: Add to Cart WITH Slot info AND Coupon
-        // (Just updating an existing cart by passing the same user_id and products, but with new slot fields)
         Map<String, Object> cartPayload = buildCartPayload(userId, "home");
         
         // Pass the necessary slot fields
         cartPayload.put("slot_guid", slotGuid);
-        // Important: this sends date to the cart update!
         cartPayload.put("slot_start_time", dateStr);    
         cartPayload.put("slot_time", slotTime);         
         

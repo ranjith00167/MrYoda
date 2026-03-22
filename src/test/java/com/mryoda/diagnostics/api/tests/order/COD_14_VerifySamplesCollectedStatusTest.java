@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class COD_14_VerifySamplesCollectedStatusTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Samples Collected Status")
     public void step14_VerifySamplesCollectedStatus() {
         System.out.println("\n>>> STEP 14: VERIFY STATUS (SAMPLES COLLECTED) IN ORDER DETAILS - MULTI-ORDER <<<");
         String token = RequestContext.getToken();

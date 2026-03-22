@@ -62,7 +62,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
         // ==================== POSITIVE FLOW (CRUD VALIDATIONS) ===================
         // =========================================================================
 
-        @Test(priority = 1)
+        @Test(priority = 1, description = "QA Automation: Verify 01 Add Family Member Positive")
         public void test01_AddFamilyMember_Positive() {
                 System.out.print("\n[POSITIVE] 1. ADD FAMILY MEMBER... ");
                 initialFirstName = "Fam" + RandomDataUtil.getRandomFirstName();
@@ -90,7 +90,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                 System.out.println("Done. ID: " + familyMemberId);
         }
 
-        @Test(priority = 2, dependsOnMethods = "test01_AddFamilyMember_Positive")
+        @Test(priority = 2, dependsOnMethods = "test01_AddFamilyMember_Positive", description = "QA Automation: Verify 02 Get Family Member Field Validations")
         public void test02_GetFamilyMember_FieldValidations() {
                 System.out.print("[POSITIVE] 2. GET FAMILY MEMBER (Verify All Fields)... ");
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
@@ -105,7 +105,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                 System.out.println("Done. 11 fields verified.");
         }
 
-        @Test(priority = 3, dependsOnMethods = "test01_AddFamilyMember_Positive")
+        @Test(priority = 3, dependsOnMethods = "test01_AddFamilyMember_Positive", description = "QA Automation: Verify 03 Update Family Member Flow")
         public void test03_UpdateFamilyMember_Flow() {
                 System.out.print("[POSITIVE] 3. UPDATE FAMILY MEMBER... ");
                 String updatedFirstName = initialFirstName + "Upd";
@@ -122,7 +122,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                 System.out.println("Done.");
         }
 
-        @Test(priority = 4, dependsOnMethods = "test03_UpdateFamilyMember_Flow")
+        @Test(priority = 4, dependsOnMethods = "test03_UpdateFamilyMember_Flow", description = "QA Automation: Verify 04 Get Verify Persistence")
         public void test04_Get_VerifyPersistence() {
                 System.out.print("[POSITIVE] 4. VERIFY UPDATE PERSISTENCE... ");
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
@@ -134,7 +134,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                 System.out.println("Done.");
         }
 
-        @Test(priority = 5, dependsOnMethods = "test01_AddFamilyMember_Positive")
+        @Test(priority = 5, dependsOnMethods = "test01_AddFamilyMember_Positive", description = "QA Automation: Verify 05 Delete Verify Deletion")
         public void test05_Delete_VerifyDeletion() {
                 System.out.print("[POSITIVE] 5. DELETE FAMILY MEMBER... ");
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
@@ -149,54 +149,54 @@ public class FamilyMemberCompleteTest extends BaseTest {
         // =========================================================================
 
         // ADD API NEGATIVES (01-09b)
-        @Test(priority = 101)
+        @Test(priority = 101, description = "QA Automation: Verify Neg01 Add Missing All")
         public void neg01_Add_MissingAll() {
                 verifyIsError(sendPost(APIEndpoints.ADD_FAMILY_MEMBER, new HashMap<>(), validToken), "01: Missing All");
         }
 
-        @Test(priority = 102)
+        @Test(priority = 102, description = "QA Automation: Verify Neg02 Add Missing User Id")
         public void neg02_Add_MissingUserId() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.remove("user_id");
                 verifyIsError(sendPost(APIEndpoints.ADD_FAMILY_MEMBER, p, validToken), "02: Missing user_id");
         }
 
-        @Test(priority = 103)
+        @Test(priority = 103, description = "QA Automation: Verify Neg03 Add Missing First Name")
         public void neg03_Add_MissingFirstName() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.remove("first_name");
                 verifyIsError(sendPost(APIEndpoints.ADD_FAMILY_MEMBER, p, validToken), "03: Missing first_name");
         }
 
-        @Test(priority = 104)
+        @Test(priority = 104, description = "QA Automation: Verify Neg04 Add Missing Last Name")
         public void neg04_Add_MissingLastName() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.remove("last_name");
                 verifyIsError(sendPost(APIEndpoints.ADD_FAMILY_MEMBER, p, validToken), "04: Missing last_name");
         }
 
-        @Test(priority = 105)
+        @Test(priority = 105, description = "QA Automation: Verify Neg05 Add Invalid Mobile")
         public void neg05_Add_InvalidMobile() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.put("mobile", "123");
                 verifyIsError(sendPost(APIEndpoints.ADD_FAMILY_MEMBER, p, validToken), "05: Invalid Mobile");
         }
 
-        @Test(priority = 106)
+        @Test(priority = 106, description = "QA Automation: Verify Neg06 Add Invalid Gender")
         public void neg06_Add_InvalidGender() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.put("gender", "invalid");
                 verifyIsError(sendPost(APIEndpoints.ADD_FAMILY_MEMBER, p, validToken), "06: Invalid Gender");
         }
 
-        @Test(priority = 107)
+        @Test(priority = 107, description = "QA Automation: Verify Neg07 Add Invalid Date Format")
         public void neg07_Add_InvalidDateFormat() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.put("dob", "01/01/1990");
                 verifyIsError(sendPost(APIEndpoints.ADD_FAMILY_MEMBER, p, validToken), "07: Invalid Date Format");
         }
 
-        @Test(priority = 108)
+        @Test(priority = 108, description = "QA Automation: Verify Neg08 Add No Auth")
         public void neg08_Add_NoAuth() {
                 Response r = new RequestBuilder()
                                 .setEndpoint(APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.ADD_FAMILY_MEMBER)
@@ -204,13 +204,13 @@ public class FamilyMemberCompleteTest extends BaseTest {
                 AssertionUtil.verifyEquals(r.getStatusCode(), 401, "08: No Auth");
         }
 
-        @Test(priority = 109)
+        @Test(priority = 109, description = "QA Automation: Verify Neg09 Add Invalid Auth")
         public void neg09_Add_InvalidAuth() {
                 verifyIsError(sendPost(APIEndpoints.ADD_FAMILY_MEMBER, buildValidAddPayload(), "invalid_token"),
                                 "09: Invalid Auth");
         }
 
-        @Test(priority = 109)
+        @Test(priority = 109, description = "QA Automation: Verify Neg09a Add Future DOB")
         public void neg09a_Add_FutureDOB() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.put("dob", "2050-01-01");
@@ -219,7 +219,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                         System.out.println("   ⚠️ GAP: Future DOB accepted");
         }
 
-        @Test(priority = 109)
+        @Test(priority = 109, description = "QA Automation: Verify Neg09b Add Very Long Name")
         public void neg09b_Add_VeryLongName() {
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < 300; i++)
@@ -232,7 +232,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
         }
 
         // GET API NEGATIVES (10-14a)
-        @Test(priority = 110)
+        @Test(priority = 110, description = "QA Automation: Verify Neg10 Get Non Existent")
         public void neg10_Get_NonExistent() {
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.GET_FAMILY_MEMBER_BY_ID.replace("{guid}",
                                 "00000000-0000-0000-0000-000000000000");
@@ -240,7 +240,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 .get(), "10: Non-existent GUID");
         }
 
-        @Test(priority = 111)
+        @Test(priority = 111, description = "QA Automation: Verify Neg11 Get Invalid Format")
         public void neg11_Get_InvalidFormat() {
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
                                 + APIEndpoints.GET_FAMILY_MEMBER_BY_ID.replace("{guid}", "invalid-guid");
@@ -248,7 +248,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 .get(), "11: Invalid GUID Format");
         }
 
-        @Test(priority = 112)
+        @Test(priority = 112, description = "QA Automation: Verify Neg12 Get Empty Guid")
         public void neg12_Get_EmptyGuid() {
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
                                 + APIEndpoints.GET_FAMILY_MEMBER_BY_ID.replace("{guid}", "");
@@ -256,7 +256,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 .get(), "12: Empty GUID");
         }
 
-        @Test(priority = 113)
+        @Test(priority = 113, description = "QA Automation: Verify Neg13 Get No Auth")
         public void neg13_Get_NoAuth() {
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
                                 + APIEndpoints.GET_FAMILY_MEMBER_BY_ID.replace("{guid}", "any");
@@ -264,7 +264,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 "13: No Auth Get");
         }
 
-        @Test(priority = 114)
+        @Test(priority = 114, description = "QA Automation: Verify Neg14 Get Invalid Auth")
         public void neg14_Get_InvalidAuth() {
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
                                 + APIEndpoints.GET_FAMILY_MEMBER_BY_ID.replace("{guid}", "any");
@@ -272,7 +272,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 "14: Invalid Auth Get");
         }
 
-        @Test(priority = 114)
+        @Test(priority = 114, description = "QA Automation: Verify Neg14a Get Special Chars")
         public void neg14a_Get_SpecialChars() {
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
                                 + APIEndpoints.GET_FAMILY_MEMBER_BY_ID.replace("{guid}", "@@@$$$%%%");
@@ -281,27 +281,27 @@ public class FamilyMemberCompleteTest extends BaseTest {
         }
 
         // UPDATE API NEGATIVES (15-21a)
-        @Test(priority = 115)
+        @Test(priority = 115, description = "QA Automation: Verify Neg15 Update Missing Guid")
         public void neg15_Update_MissingGuid() {
                 verifyIsError(sendPost(APIEndpoints.UPDATE_FAMILY_MEMBER, buildValidAddPayload(), validToken),
                                 "15: Missing GUID");
         }
 
-        @Test(priority = 116)
+        @Test(priority = 116, description = "QA Automation: Verify Neg16 Update Non Existent")
         public void neg16_Update_NonExistent() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.put("guid", "00000000-0000-0000-0000-000000000000");
                 verifyIsError(sendPost(APIEndpoints.UPDATE_FAMILY_MEMBER, p, validToken), "16: Non-existent GUID");
         }
 
-        @Test(priority = 117)
+        @Test(priority = 117, description = "QA Automation: Verify Neg17 Update Invalid Guid Format")
         public void neg17_Update_InvalidGuidFormat() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.put("guid", "invalid-guid");
                 verifyIsError(sendPost(APIEndpoints.UPDATE_FAMILY_MEMBER, p, validToken), "17: Invalid GUID Format");
         }
 
-        @Test(priority = 118)
+        @Test(priority = 118, description = "QA Automation: Verify Neg18 Update Invalid Mobile")
         public void neg18_Update_InvalidMobile() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.put("guid", "dummy");
@@ -309,7 +309,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                 verifyIsError(sendPost(APIEndpoints.UPDATE_FAMILY_MEMBER, p, validToken), "18: Invalid Mobile");
         }
 
-        @Test(priority = 119)
+        @Test(priority = 119, description = "QA Automation: Verify Neg19 Update Invalid Gender")
         public void neg19_Update_InvalidGender() {
                 Map<String, Object> p = buildValidAddPayload();
                 p.put("guid", "dummy");
@@ -317,7 +317,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                 verifyIsError(sendPost(APIEndpoints.UPDATE_FAMILY_MEMBER, p, validToken), "19: Invalid Gender");
         }
 
-        @Test(priority = 120)
+        @Test(priority = 120, description = "QA Automation: Verify Neg20 Update No Auth")
         public void neg20_Update_NoAuth() {
                 Response r = new RequestBuilder()
                                 .setEndpoint(APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.UPDATE_FAMILY_MEMBER)
@@ -325,20 +325,20 @@ public class FamilyMemberCompleteTest extends BaseTest {
                 AssertionUtil.verifyEquals(r.getStatusCode(), 401, "20: No Auth Update");
         }
 
-        @Test(priority = 121)
+        @Test(priority = 121, description = "QA Automation: Verify Neg21 Update Invalid Auth")
         public void neg21_Update_InvalidAuth() {
                 verifyIsError(sendPost(APIEndpoints.UPDATE_FAMILY_MEMBER, buildValidAddPayload(), "invalid"),
                                 "21: Invalid Auth Update");
         }
 
-        @Test(priority = 121)
+        @Test(priority = 121, description = "QA Automation: Verify Neg21a Update Empty Payload")
         public void neg21a_Update_EmptyPayload() {
                 verifyIsErrorNoAssert(sendPost(APIEndpoints.UPDATE_FAMILY_MEMBER, new HashMap<>(), validToken),
                                 "21a: Empty Update");
         }
 
         // DELETE API NEGATIVES (22-28)
-        @Test(priority = 122)
+        @Test(priority = 122, description = "QA Automation: Verify Neg22 Delete Non Existent")
         public void neg22_Delete_NonExistent() {
                 verifyIsError(sendPost("",
                                 APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.DELETE_FAMILY_MEMBER_BY_ID
@@ -346,7 +346,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 validToken), "22: Non-existent Delete");
         }
 
-        @Test(priority = 123)
+        @Test(priority = 123, description = "QA Automation: Verify Neg23 Delete Invalid Format")
         public void neg23_Delete_InvalidFormat() {
                 verifyIsError(sendPost("",
                                 APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.DELETE_FAMILY_MEMBER_BY_ID
@@ -354,7 +354,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 validToken), "23: Invalid Format Delete");
         }
 
-        @Test(priority = 124)
+        @Test(priority = 124, description = "QA Automation: Verify Neg24 Delete Empty Guid")
         public void neg24_Delete_EmptyGuid() {
                 verifyIsError(sendPost("",
                                 APIEndpoints.DIAGNOSTICS_BASE_URL
@@ -362,7 +362,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 validToken), "24: Empty GUID Delete");
         }
 
-        @Test(priority = 125)
+        @Test(priority = 125, description = "QA Automation: Verify Neg25 Delete No Auth")
         public void neg25_Delete_NoAuth() {
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
                                 + APIEndpoints.DELETE_FAMILY_MEMBER_BY_ID.replace("{guid}", "any");
@@ -370,7 +370,7 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 "25: No Auth Delete");
         }
 
-        @Test(priority = 126)
+        @Test(priority = 126, description = "QA Automation: Verify Neg26 Delete Invalid Auth")
         public void neg26_Delete_InvalidAuth() {
                 verifyIsError(sendPost("",
                                 APIEndpoints.DIAGNOSTICS_BASE_URL
@@ -378,13 +378,13 @@ public class FamilyMemberCompleteTest extends BaseTest {
                                 "invalid"), "26: Invalid Auth Delete");
         }
 
-        @Test(priority = 127)
+        @Test(priority = 127, description = "QA Automation: Verify Neg27 Delete Double Delete")
         public void neg27_Delete_DoubleDelete() {
                 System.out.println("\n>>> NEGATIVE: Delete - Double Deletion Check <<<");
                 // Handled by success of subsequent delete calls on same ID
         }
 
-        @Test(priority = 128)
+        @Test(priority = 128, description = "QA Automation: Verify Neg28 Delete SQLInjection")
         public void neg28_Delete_SQLInjection() {
                 String url = APIEndpoints.DIAGNOSTICS_BASE_URL
                                 + APIEndpoints.DELETE_FAMILY_MEMBER_BY_ID.replace("{guid}", "' OR '1'='1");

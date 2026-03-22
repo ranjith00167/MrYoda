@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class COD_02_GetCartTest extends CreateOrderCODAPITest {
 
     @org.testng.annotations.Parameters({ "orderType" })
-    @Test
+    @Test(description = "QA Automation: Verify Cart And Price")
     public void step02_VerifyCartAndPrice(@org.testng.annotations.Optional("home") String orderTypeParam) {
         System.out.println("\n>>> STEP 2: GET CART & VERIFY PRICE <<<");
         String token = RequestContext.getToken();

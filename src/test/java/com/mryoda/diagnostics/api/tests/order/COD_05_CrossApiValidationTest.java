@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class COD_05_CrossApiValidationTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Cross Api Validation")
     public void step05_CrossApiValidation() {
         System.out.println("\n>>> STEP 5: CROSS-API VALIDATION <<<");
         String token = RequestContext.getToken();

@@ -132,7 +132,7 @@ public class Section4_OrderCreationTest extends BaseTest {
     // =========================================================
     // ORD-01 : Add Delivery Address — Member — POSITIVE
     // =========================================================
-    @Test(priority = 1, description = "ORD-01: Add delivery address for Member; verify _id returned and stored")
+    @Test(priority = 1, description = "📦 ORDER MANAGEMENT: Add Delivery Address for Member - Verify member can add delivery address with proper validation and storage")
     public void ORD_01_AddAddress_Member() {
         System.out.println("\n>>> ORD-01: ADD DELIVERY ADDRESS — MEMBER <<<");
         ensureTokensAndCart();
@@ -683,7 +683,7 @@ public class Section4_OrderCreationTest extends BaseTest {
     // =========================================================
     // ORD-08 : Create Order — Missing cart_id — NEGATIVE
     // =========================================================
-    @Test(priority = 8, description = "ORD-08: Create order with empty cart_id — must be rejected gracefully")
+    @Test(priority = 8, description = "📦 ORDER MANAGEMENT: Create Order with Missing Cart ID - Verify system rejects order creation when cart_id is empty or null")
     public void ORD_08_CreateOrder_MissingCartId() {
         System.out.println("\n>>> ORD-08: CREATE ORDER — MISSING CART_ID <<<");
         ensureTokensAndCart();
@@ -728,7 +728,7 @@ public class Section4_OrderCreationTest extends BaseTest {
     // =========================================================
     // ORD-09 : Create Order — Invalid payment_mode — NEGATIVE
     // =========================================================
-    @Test(priority = 9, description = "ORD-09: Create order with invalid payment_mode — must be rejected")
+    @Test(priority = 9, description = "📦 ORDER MANAGEMENT: Create Order with Invalid Payment Mode - Verify system rejects unsupported payment methods")
     public void ORD_09_CreateOrder_InvalidPaymentMode() {
         System.out.println("\n>>> ORD-09: CREATE ORDER — INVALID PAYMENT_MODE <<<");
         ensureTokensAndCart();

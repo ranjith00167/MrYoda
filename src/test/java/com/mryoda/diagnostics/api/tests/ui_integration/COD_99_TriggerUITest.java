@@ -48,7 +48,7 @@ public class COD_99_TriggerUITest {
         }
     }
 
-    @Test
+    @Test(description = "QA Automation: Verify Trigger UIAutomation")
     public void triggerUIAutomation() throws Throwable{
 
         System.out.println("\n=======================================================");

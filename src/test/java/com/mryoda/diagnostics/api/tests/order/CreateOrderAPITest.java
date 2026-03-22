@@ -237,7 +237,7 @@ public class CreateOrderAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 1️⃣ EXISTING MEMBER → Create Order
     // ---------------------------------------------------------
-    @Test(priority = 20, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.GetCartByIdAPITest.testGetCartById_ForNonMember")
+    @Test(priority = 20, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.GetCartByIdAPITest.testGetCartById_ForNonMember", description = "QA Automation: Verify Create Order For Non Member")
     public void testCreateOrder_ForNonMember() {
 
         System.out.println("\n==========================================================");
@@ -270,7 +270,7 @@ public class CreateOrderAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 2️⃣ MEMBER → Create Order
     // ---------------------------------------------------------
-    @Test(priority = 20, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.GetCartByIdAPITest.testGetCartById_ForMember")
+    @Test(priority = 20, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.GetCartByIdAPITest.testGetCartById_ForMember", description = "QA Automation: Verify Create Order For Member")
     public void testCreateOrder_ForMember() {
 
         System.out.println("\n==========================================================");
@@ -301,7 +301,7 @@ public class CreateOrderAPITest extends BaseTest {
     // ---------------------------------------------------------
     // 3️⃣ NEW USER → Create Order
     // ---------------------------------------------------------
-    @Test(priority = 21, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.GetCartByIdAPITest.testGetCartById_ForNewUser")
+    @Test(priority = 21, dependsOnMethods = "com.mryoda.diagnostics.api.tests.cart.GetCartByIdAPITest.testGetCartById_ForNewUser", description = "QA Automation: Verify Create Order For New User")
     public void testCreateOrder_ForNewUser() {
 
         System.out.println("\n==========================================================");

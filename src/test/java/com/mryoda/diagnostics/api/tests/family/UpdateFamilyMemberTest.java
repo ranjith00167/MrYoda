@@ -66,7 +66,7 @@ public class UpdateFamilyMemberTest extends BaseTest {
 
         // ==================== POSITIVE TESTS ====================
 
-        @Test(priority = 1)
+        @Test(priority = 1, description = "👨‍👩‍👧‍👦 FAMILY MANAGEMENT: Update Family Member with Valid Data - Verify system can successfully update all family member fields with proper validation and data persistence")
         public void test_UpdateFamilyMember_ValidData_AllFieldsValidated() {
                 System.out.println("\n>>> POSITIVE TEST: Update Family Member - Valid Data with Validations <<<");
 
@@ -136,7 +136,7 @@ public class UpdateFamilyMemberTest extends BaseTest {
 
         // ==================== NEGATIVE TESTS - MANDATORY FIELDS ====================
 
-        @Test(priority = 10)
+        @Test(priority = 10, description = "👨‍👩‍👧‍👦 FAMILY MANAGEMENT: Update Family Member Missing GUID - Verify system rejects update requests when family member GUID is missing or null with proper validation")
         public void test_UpdateFamilyMember_MissingGuid() {
                 System.out.println("\n>>> NEGATIVE TEST: Update Family Member - Missing GUID <<<");
 
@@ -157,7 +157,7 @@ public class UpdateFamilyMemberTest extends BaseTest {
                 System.out.println("   ✅ Correctly rejected update without GUID");
         }
 
-        @Test(priority = 11)
+        @Test(priority = 11, description = "👨‍👩‍👧‍👦 FAMILY MANAGEMENT: Update Non-Existent Family Member - Verify system handles update requests for non-existent family members gracefully with appropriate error responses")
         public void test_UpdateFamilyMember_NonExistentGuid() {
                 System.out.println("\n>>> NEGATIVE TEST: Update Family Member - Non-existent GUID <<<");
 
@@ -177,7 +177,7 @@ public class UpdateFamilyMemberTest extends BaseTest {
                 System.out.println("   ✅ Correctly handled update of non-existent family member");
         }
 
-        @Test(priority = 12)
+        @Test(priority = 12, description = "👨‍👩‍👧‍👦 FAMILY MANAGEMENT: Update Family Member Invalid GUID Format - Verify system rejects update requests with malformed GUIDs and provides proper validation messages")
         public void test_UpdateFamilyMember_InvalidGuidFormat() {
                 System.out.println("\n>>> NEGATIVE TEST: Update Family Member - Invalid GUID Format <<<");
 
@@ -199,7 +199,7 @@ public class UpdateFamilyMemberTest extends BaseTest {
 
         // ==================== NEGATIVE TESTS - INVALID DATA ====================
 
-        @Test(priority = 20)
+        @Test(priority = 20, description = "👨‍👩‍👧‍👦 FAMILY MANAGEMENT: Update Family Member Invalid Mobile Format - Verify system rejects mobile numbers with invalid formats and maintains data integrity")
         public void test_UpdateFamilyMember_InvalidMobileFormat() {
                 System.out.println("\n>>> NEGATIVE TEST: Update Family Member - Invalid Mobile Format <<<");
 
@@ -219,7 +219,7 @@ public class UpdateFamilyMemberTest extends BaseTest {
                 System.out.println("   ✅ Correctly rejected invalid mobile format");
         }
 
-        @Test(priority = 21)
+        @Test(priority = 21, description = "👨‍👩‍👧‍👦 FAMILY MANAGEMENT: Update Family Member Invalid Gender - Verify system rejects invalid gender values and enforces data validation rules")
         public void test_UpdateFamilyMember_InvalidGender() {
                 System.out.println("\n>>> NEGATIVE TEST: Update Family Member - Invalid Gender <<<");
 
@@ -241,7 +241,7 @@ public class UpdateFamilyMemberTest extends BaseTest {
 
         // ==================== NEGATIVE TESTS - AUTHENTICATION ====================
 
-        @Test(priority = 30)
+        @Test(priority = 30, description = "👨‍👩‍👧‍👦 FAMILY MANAGEMENT: Update Family Member No Authentication - Verify system enforces security by rejecting update requests without valid authorization tokens")
         public void test_UpdateFamilyMember_NoAuthToken() {
                 System.out.println("\n>>> NEGATIVE TEST: Update Family Member - No Authorization Token <<<");
 
@@ -260,7 +260,7 @@ public class UpdateFamilyMemberTest extends BaseTest {
                 System.out.println("   ✅ Correctly rejected update without auth token");
         }
 
-        @Test(priority = 31)
+        @Test(priority = 31, description = "👨‍👩‍👧‍👦 FAMILY MANAGEMENT: Update Family Member Invalid Authentication - Verify system blocks unauthorized access with invalid or expired tokens")
         public void test_UpdateFamilyMember_InvalidAuthToken() {
                 System.out.println("\n>>> NEGATIVE TEST: Update Family Member - Invalid Authorization Token <<<");
 

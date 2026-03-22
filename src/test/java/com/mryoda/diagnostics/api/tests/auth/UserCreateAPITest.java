@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
  */
 public class UserCreateAPITest extends BaseTest {
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "QA Automation: Verify User Registration Create New User")
     public void testUserRegistration_CreateNewUser() {
 
         System.out.println("\n==========================================================");

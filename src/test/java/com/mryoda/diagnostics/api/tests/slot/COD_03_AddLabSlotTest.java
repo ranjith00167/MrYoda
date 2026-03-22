@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class COD_03_AddLabSlotTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Add Lab Slot")
     public void step03_AddLabSlot() {
         System.out.println("\n>>> STEP 3: ADD LAB SLOT <<<");
         String token = RequestContext.getToken();

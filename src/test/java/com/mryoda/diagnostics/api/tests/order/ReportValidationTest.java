@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.*;
 
 public class ReportValidationTest {
 
-    @Test
+    @Test(description = "QA Automation: Validate Reports From API")
     public void validateReportsFromAPI() throws Exception {
 
         // 1️⃣ Call Report API

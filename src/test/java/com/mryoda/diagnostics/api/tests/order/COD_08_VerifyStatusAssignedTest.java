@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class COD_08_VerifyStatusAssignedTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Status Assigned")
     public void step08_VerifyStatusAssigned() {
         System.out.println("\n>>> STEP 8: VERIFY STATUS (ASSIGNED - MULTI-ORDER) <<<");
         java.util.List<String> trackingIds = RequestContext.getCurrentOrderTrackingIds();

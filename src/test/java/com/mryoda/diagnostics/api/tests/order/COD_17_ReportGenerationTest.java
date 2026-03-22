@@ -23,7 +23,7 @@ public class COD_17_ReportGenerationTest extends BaseTest {
     // Centralized Automation Failure Log File
     private static final String COD_FAILURE_LOG = "logs/Automation_Failures.log";
 
-    @Test
+    @Test(description = "QA Automation: Verify Get Report And Verify PDF")
     public void testGetReportAndVerifyPDF() {
         LoggerUtil.info(">>> STEP 17: GET REPORT DETAILS & PDF TEXT EXTRACTION <<<");
         

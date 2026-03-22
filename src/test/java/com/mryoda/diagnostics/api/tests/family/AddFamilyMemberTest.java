@@ -42,7 +42,7 @@ public class AddFamilyMemberTest extends BaseTest {
 
     // ==================== POSITIVE TESTS ====================
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "QA Automation: Verify Add Family Member Valid Data All Fields Validated")
     public void test_AddFamilyMember_ValidData_AllFieldsValidated() {
         System.out.println("\n>>> POSITIVE TEST: Add Family Member - Valid Data with All Field Validations <<<");
 
@@ -109,7 +109,7 @@ public class AddFamilyMemberTest extends BaseTest {
 
     // ==================== NEGATIVE TESTS - MANDATORY FIELDS ====================
 
-    @Test(priority = 10)
+    @Test(priority = 10, description = "QA Automation: Verify Add Family Member Missing All Required Fields")
     public void test_AddFamilyMember_MissingAllRequiredFields() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Missing All Required Fields <<<");
 
@@ -131,7 +131,7 @@ public class AddFamilyMemberTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected empty payload");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11, description = "QA Automation: Verify Add Family Member Missing User Id")
     public void test_AddFamilyMember_MissingUserId() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Missing user_id <<<");
 
@@ -151,7 +151,7 @@ public class AddFamilyMemberTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected missing user_id");
     }
 
-    @Test(priority = 12)
+    @Test(priority = 12, description = "QA Automation: Verify Add Family Member Missing First Name")
     public void test_AddFamilyMember_MissingFirstName() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Missing first_name <<<");
 
@@ -171,7 +171,7 @@ public class AddFamilyMemberTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected missing first_name");
     }
 
-    @Test(priority = 13)
+    @Test(priority = 13, description = "QA Automation: Verify Add Family Member Missing Last Name")
     public void test_AddFamilyMember_MissingLastName() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Missing last_name <<<");
 
@@ -193,7 +193,7 @@ public class AddFamilyMemberTest extends BaseTest {
 
     // ==================== NEGATIVE TESTS - INVALID FORMATS ====================
 
-    @Test(priority = 20)
+    @Test(priority = 20, description = "QA Automation: Verify Add Family Member Invalid Mobile Format Too Short")
     public void test_AddFamilyMember_InvalidMobileFormat_TooShort() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Invalid Mobile (Too Short) <<<");
 
@@ -213,7 +213,7 @@ public class AddFamilyMemberTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected invalid mobile format");
     }
 
-    @Test(priority = 21)
+    @Test(priority = 21, description = "QA Automation: Verify Add Family Member Invalid Gender")
     public void test_AddFamilyMember_InvalidGender() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Invalid Gender Value <<<");
 
@@ -233,7 +233,7 @@ public class AddFamilyMemberTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected invalid gender value");
     }
 
-    @Test(priority = 22)
+    @Test(priority = 22, description = "QA Automation: Verify Add Family Member Invalid Date Format")
     public void test_AddFamilyMember_InvalidDateFormat() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Invalid Date Format <<<");
 
@@ -255,7 +255,7 @@ public class AddFamilyMemberTest extends BaseTest {
 
     // ==================== NEGATIVE TESTS - AUTHENTICATION ====================
 
-    @Test(priority = 30)
+    @Test(priority = 30, description = "QA Automation: Verify Add Family Member No Auth Token")
     public void test_AddFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - No Authorization Token <<<");
 
@@ -274,7 +274,7 @@ public class AddFamilyMemberTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected request without auth token");
     }
 
-    @Test(priority = 31)
+    @Test(priority = 31, description = "QA Automation: Verify Add Family Member Invalid Auth Token")
     public void test_AddFamilyMember_InvalidAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Invalid Authorization Token <<<");
 

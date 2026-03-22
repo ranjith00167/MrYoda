@@ -50,7 +50,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
     private Response deleteResponse;
     private Response negativeResponse;
 
-    @Test(priority = 0)
+    @Test(priority = 0, description = "QA Automation: Verify Register New User")
     public void step00_RegisterNewUser() {
         System.out.println("\n>>> STEP 0: REGISTER NEW USER <<<");
 
@@ -78,7 +78,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
     /*
      * Temporarily disabled - testing without profile update step
      * 
-     * @Test(priority = 1, dependsOnMethods = "step00_RegisterNewUser")
+     * @Test(priority = 1, dependsOnMethods = "step00_RegisterNewUser", description = "QA Automation: Verify B Register User Profile")
      * public void step00b_RegisterUserProfile() {
      * System.out.
      * println("\n>>> STEP 0b: UPDATE USER PROFILE (Using UPDATE_PROFILE) <<<");
@@ -120,7 +120,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
      * }
      */
 
-    @Test(priority = 10, dependsOnMethods = "step00_RegisterNewUser")
+    @Test(priority = 10, dependsOnMethods = "step00_RegisterNewUser", description = "QA Automation: Verify 00 Perform Add Request")
     public void step01_00_PerformAddRequest() {
         System.out.println("\n>>> STEP 1: ADD FAMILY MEMBER (New User) - REQUEST <<<");
 
@@ -153,12 +153,12 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   Response Status: " + addResponse.getStatusCode());
     }
 
-    @Test(priority = 11, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 11, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 01 Validate Add Status")
     public void step01_01_ValidateAddStatus() {
         AssertionUtil.verifyEquals(addResponse.getStatusCode(), 201, "Add Family Member should return 201");
     }
 
-    @Test(priority = 12, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 12, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 02 Validate Add Guid")
     public void step01_02_ValidateAddGuid() {
         familyMemberId = addResponse.jsonPath().getString("data.guid");
         if (familyMemberId == null)
@@ -170,43 +170,43 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Family Member Added with ID: " + familyMemberId);
     }
 
-    @Test(priority = 13, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 13, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 03 Validate Add First Name")
     public void step01_03_ValidateAddFirstName() {
         String fn = addResponse.jsonPath().getString("data.first_name");
         AssertionUtil.verifyEquals(fn, initialFirstName, "First name should match in Add response");
     }
 
-    @Test(priority = 14, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 14, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 04 Validate Add Last Name")
     public void step01_04_ValidateAddLastName() {
         String ln = addResponse.jsonPath().getString("data.last_name");
         AssertionUtil.verifyEquals(ln, initialLastName, "Last name should match in Add response");
     }
 
-    @Test(priority = 15, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 15, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 05 Validate Add Mobile")
     public void step01_05_ValidateAddMobile() {
         String mob = addResponse.jsonPath().getString("data.mobile");
         AssertionUtil.verifyEquals(mob, initialMobile, "Mobile should match in Add response");
     }
 
-    @Test(priority = 16, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 16, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 06 Validate Add Gender")
     public void step01_06_ValidateAddGender() {
         String gen = addResponse.jsonPath().getString("data.gender");
         AssertionUtil.verifyEquals(gen, initialGender, "Gender should match in Add response");
     }
 
-    @Test(priority = 17, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 17, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 07 Validate Add Dob")
     public void step01_07_ValidateAddDob() {
         String dob = addResponse.jsonPath().getString("data.dob");
         AssertionUtil.verifyEquals(dob.startsWith(initialDob), true, "DOB should match in Add response");
     }
 
-    @Test(priority = 18, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 18, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 08 Validate Add Relation")
     public void step01_08_ValidateAddRelation() {
         String rel = addResponse.jsonPath().getString("data.relation");
         AssertionUtil.verifyEquals(rel, initialRelation, "Relation should match in Add response");
     }
 
-    @Test(priority = 20, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 20, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 00 Perform Get Request")
     public void step02_00_PerformGetRequest() {
         System.out.println("\n>>> STEP 2: GET FAMILY MEMBER BY ID (Verify Initial) - REQUEST <<<");
         Assert.assertNotNull(familyMemberId, "Family Member ID is required");
@@ -222,53 +222,53 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   GET Response Status: " + getResponse.getStatusCode());
     }
 
-    @Test(priority = 21, dependsOnMethods = "step02_00_PerformGetRequest")
+    @Test(priority = 21, dependsOnMethods = "step02_00_PerformGetRequest", description = "QA Automation: Verify 01 Validate Get Status")
     public void step02_01_ValidateGetStatus() {
         AssertionUtil.verifyEquals(getResponse.getStatusCode(), 200, "Get Family Member By ID should return 200");
     }
 
-    @Test(priority = 22, dependsOnMethods = "step02_00_PerformGetRequest")
+    @Test(priority = 22, dependsOnMethods = "step02_00_PerformGetRequest", description = "QA Automation: Verify 02 Validate Get First Name")
     public void step02_02_ValidateGetFirstName() {
         AssertionUtil.verifyEquals(getResponse.jsonPath().getString("data.first_name"), initialFirstName,
                 "First Name should match");
     }
 
-    @Test(priority = 23, dependsOnMethods = "step02_00_PerformGetRequest")
+    @Test(priority = 23, dependsOnMethods = "step02_00_PerformGetRequest", description = "QA Automation: Verify 03 Validate Get Last Name")
     public void step02_03_ValidateGetLastName() {
         AssertionUtil.verifyEquals(getResponse.jsonPath().getString("data.last_name"), initialLastName,
                 "Last Name should match");
     }
 
-    @Test(priority = 24, dependsOnMethods = "step02_00_PerformGetRequest")
+    @Test(priority = 24, dependsOnMethods = "step02_00_PerformGetRequest", description = "QA Automation: Verify 04 Validate Get Mobile")
     public void step02_04_ValidateGetMobile() {
         AssertionUtil.verifyEquals(getResponse.jsonPath().getString("data.mobile"), initialMobile,
                 "Mobile should match");
     }
 
-    @Test(priority = 25, dependsOnMethods = "step02_00_PerformGetRequest")
+    @Test(priority = 25, dependsOnMethods = "step02_00_PerformGetRequest", description = "QA Automation: Verify 05 Validate Get Gender")
     public void step02_05_ValidateGetGender() {
         AssertionUtil.verifyEquals(getResponse.jsonPath().getString("data.gender"), initialGender,
                 "Gender should match");
     }
 
-    @Test(priority = 26, dependsOnMethods = "step02_00_PerformGetRequest")
+    @Test(priority = 26, dependsOnMethods = "step02_00_PerformGetRequest", description = "QA Automation: Verify 06 Validate Get Dob")
     public void step02_06_ValidateGetDob() {
         String dob = getResponse.jsonPath().getString("data.dob");
         AssertionUtil.verifyEquals(dob.startsWith(initialDob), true, "DOB should match");
     }
 
-    @Test(priority = 27, dependsOnMethods = "step02_00_PerformGetRequest")
+    @Test(priority = 27, dependsOnMethods = "step02_00_PerformGetRequest", description = "QA Automation: Verify 07 Validate Get Relation")
     public void step02_07_ValidateGetRelation() {
         AssertionUtil.verifyEquals(getResponse.jsonPath().getString("data.relation"), initialRelation,
                 "Relation should match");
     }
 
-    @Test(priority = 28, dependsOnMethods = "step02_00_PerformGetRequest")
+    @Test(priority = 28, dependsOnMethods = "step02_00_PerformGetRequest", description = "QA Automation: Verify 08 Validate Get Guid")
     public void step02_08_ValidateGetGuid() {
         AssertionUtil.verifyEquals(getResponse.jsonPath().getString("data.guid"), familyMemberId, "GUID should match");
     }
 
-    @Test(priority = 30, dependsOnMethods = "step01_00_PerformAddRequest")
+    @Test(priority = 30, dependsOnMethods = "step01_00_PerformAddRequest", description = "QA Automation: Verify 00 Perform Update Request")
     // Ideally depends on Step 2 success, but step01 is the creation.
     public void step03_00_PerformUpdateRequest() {
         System.out.println("\n>>> STEP 3: UPDATE FAMILY MEMBER (New User) - REQUEST <<<");
@@ -293,12 +293,12 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         initialFirstName = updatedFirstName; // Update expectation
     }
 
-    @Test(priority = 31, dependsOnMethods = "step03_00_PerformUpdateRequest")
+    @Test(priority = 31, dependsOnMethods = "step03_00_PerformUpdateRequest", description = "QA Automation: Verify 01 Validate Update Status")
     public void step03_01_ValidateUpdateStatus() {
         AssertionUtil.verifyEquals(updateResponse.getStatusCode(), 200, "Update Family Member should return 200");
     }
 
-    @Test(priority = 40, dependsOnMethods = "step03_00_PerformUpdateRequest")
+    @Test(priority = 40, dependsOnMethods = "step03_00_PerformUpdateRequest", description = "QA Automation: Verify 00 Perform Get Verify Update")
     public void step04_00_PerformGetVerifyUpdate() {
         System.out.println("\n>>> STEP 4: GET FAMILY MEMBER BY ID (Verify Update) - REQUEST <<<");
 
@@ -315,19 +315,19 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   GET Response Status: " + getResponse.getStatusCode());
     }
 
-    @Test(priority = 41, dependsOnMethods = "step04_00_PerformGetVerifyUpdate")
+    @Test(priority = 41, dependsOnMethods = "step04_00_PerformGetVerifyUpdate", description = "QA Automation: Verify 01 Validate Verify Update Status")
     public void step04_01_ValidateVerifyUpdateStatus() {
         AssertionUtil.verifyEquals(getResponse.getStatusCode(), 200, "Get Family Member By ID should return 200");
     }
 
-    @Test(priority = 42, dependsOnMethods = "step04_00_PerformGetVerifyUpdate")
+    @Test(priority = 42, dependsOnMethods = "step04_00_PerformGetVerifyUpdate", description = "QA Automation: Verify 02 Validate Verify Update First Name")
     public void step04_02_ValidateVerifyUpdateFirstName() {
         String fn = getResponse.jsonPath().getString("data.first_name");
         System.out.println("   Fetched Name (Post Update): " + fn);
         Assert.assertEquals(fn, initialFirstName, "First Name should utilize updated value");
     }
 
-    @Test(priority = 50, dependsOnMethods = "step04_00_PerformGetVerifyUpdate")
+    @Test(priority = 50, dependsOnMethods = "step04_00_PerformGetVerifyUpdate", description = "QA Automation: Verify 00 Perform Delete Request")
     public void step05_00_PerformDeleteRequest() {
         System.out.println("\n>>> STEP 5: DELETE FAMILY MEMBER BY ID - REQUEST <<<");
         Assert.assertNotNull(familyMemberId, "Family Member ID is required");
@@ -343,12 +343,12 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   Response Status: " + deleteResponse.getStatusCode());
     }
 
-    @Test(priority = 51, dependsOnMethods = "step05_00_PerformDeleteRequest")
+    @Test(priority = 51, dependsOnMethods = "step05_00_PerformDeleteRequest", description = "QA Automation: Verify 01 Validate Delete Status")
     public void step05_01_ValidateDeleteStatus() {
         AssertionUtil.verifyEquals(deleteResponse.getStatusCode(), 200, "Delete Family Member should return 200");
     }
 
-    @Test(priority = 52, dependsOnMethods = "step05_00_PerformDeleteRequest")
+    @Test(priority = 52, dependsOnMethods = "step05_00_PerformDeleteRequest", description = "QA Automation: Verify 02 Validate Delete Message")
     public void step05_02_ValidateDeleteMessage() {
         // Just print, optional strict check
         String msg = deleteResponse.jsonPath().getString("message");
@@ -357,7 +357,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         Assert.assertNotNull(msg, "Delete should return a message");
     }
 
-    @Test(priority = 60, dependsOnMethods = "step05_00_PerformDeleteRequest")
+    @Test(priority = 60, dependsOnMethods = "step05_00_PerformDeleteRequest", description = "QA Automation: Verify Delete User")
     public void step06_DeleteUser() {
         System.out.println("\n>>> STEP 6: DELETE USER (Cleanup) <<<");
         // Cleanup logic...
@@ -365,7 +365,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
 
     // ==================== NEGATIVE TESTS - ADD API (9 tests) ====================
 
-    @Test(priority = 100)
+    @Test(priority = 100, description = "QA Automation: Verify Negative Test01 00 Add Missing All Request")
     public void negativeTest01_00_Add_MissingAll_Request() {
         System.out.println("\n>>> NEGATIVE TEST 01: ADD - Missing All Fields - REQUEST <<<");
         Map<String, Object> payload = new java.util.HashMap<>();
@@ -378,13 +378,13 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   Response Status: " + negativeResponse.getStatusCode());
     }
 
-    @Test(priority = 101, dependsOnMethods = "negativeTest01_00_Add_MissingAll_Request")
+    @Test(priority = 101, dependsOnMethods = "negativeTest01_00_Add_MissingAll_Request", description = "QA Automation: Verify Negative Test01 01 Add Missing All Validate")
     public void negativeTest01_01_Add_MissingAll_Validate() {
         boolean isError = (negativeResponse.getStatusCode() == 400 || negativeResponse.getStatusCode() == 422);
         AssertionUtil.verifyEquals(isError, true, "Should return 400/422 for missing all fields");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11, description = "QA Automation: Verify Negative Test02 Add Family Member Missing User Id")
     public void negativeTest02_AddFamilyMember_MissingUserId() {
         System.out.println("\n>>> NEGATIVE TEST 2: Add - Missing user_id <<<");
 
@@ -408,7 +408,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 42: Missing user_id correctly rejected");
     }
 
-    @Test(priority = 12)
+    @Test(priority = 12, description = "QA Automation: Verify Negative Test03 Add Family Member Missing First Name")
     public void negativeTest03_AddFamilyMember_MissingFirstName() {
         System.out.println("\n>>> NEGATIVE TEST 3: Add - Missing first_name <<<");
 
@@ -432,7 +432,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 43: Missing first_name correctly rejected");
     }
 
-    @Test(priority = 13)
+    @Test(priority = 13, description = "QA Automation: Verify Negative Test04 Add Family Member Missing Last Name")
     public void negativeTest04_AddFamilyMember_MissingLastName() {
         System.out.println("\n>>> NEGATIVE TEST 4: Add - Missing last_name <<<");
 
@@ -460,7 +460,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
                 "Should reject missing last_name (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 14)
+    @Test(priority = 14, description = "QA Automation: Verify Negative Test05 Add Family Member Invalid Mobile Format")
     public void negativeTest05_AddFamilyMember_InvalidMobileFormat() {
         System.out.println("\n>>> NEGATIVE TEST 5: Add - Invalid Mobile Format <<<");
 
@@ -483,7 +483,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 45: Invalid mobile format correctly rejected");
     }
 
-    @Test(priority = 15)
+    @Test(priority = 15, description = "QA Automation: Verify Negative Test06 Add Family Member Invalid Gender")
     public void negativeTest06_AddFamilyMember_InvalidGender() {
         System.out.println("\n>>> NEGATIVE TEST 6: Add - Invalid Gender <<<");
 
@@ -510,7 +510,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
                 "Should reject invalid gender (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 16)
+    @Test(priority = 16, description = "QA Automation: Verify Negative Test07 Add Family Member Invalid Date Format")
     public void negativeTest07_AddFamilyMember_InvalidDateFormat() {
         System.out.println("\n>>> NEGATIVE TEST 7: Add - Invalid Date Format <<<");
 
@@ -537,7 +537,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
                 "Should reject invalid date format (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 17)
+    @Test(priority = 17, description = "QA Automation: Verify Negative Test08 Add Family Member No Auth Token")
     public void negativeTest08_AddFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST 8: Add - No Authorization Token <<<");
 
@@ -562,7 +562,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
                 "Should return 401 for missing auth (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 18)
+    @Test(priority = 18, description = "QA Automation: Verify Negative Test09 Add Family Member Invalid Auth Token")
     public void negativeTest09_AddFamilyMember_InvalidAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST 9: Add - Invalid Authorization Token <<<");
 
@@ -591,7 +591,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
 
     // === NEW ADD SCENARIOS ===
 
-    @Test(priority = 19)
+    @Test(priority = 19, description = "QA Automation: Verify Negative Test09a Add Family Member Future DOB")
     public void negativeTest09a_AddFamilyMember_FutureDOB() {
         System.out.println("\n>>> NEGATIVE TEST 9A: Add - Future DOB <<<");
 
@@ -611,7 +611,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
             System.out.println("   ⚠️ WARNING: Future DOB accepted");
     }
 
-    @Test(priority = 19)
+    @Test(priority = 19, description = "QA Automation: Verify Negative Test09b Add Family Member Very Long Name")
     public void negativeTest09b_AddFamilyMember_VeryLongName() {
         System.out.println("\n>>> NEGATIVE TEST 9B: Add - Very Long First Name <<<");
 
@@ -639,7 +639,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
 
     // ==================== NEGATIVE TESTS - GET API (5 tests) ====================
 
-    @Test(priority = 20)
+    @Test(priority = 20, description = "QA Automation: Verify Negative Test10 Get Family Member Non Existent Guid")
     public void negativeTest10_GetFamilyMember_NonExistentGuid() {
         System.out.println("\n>>> NEGATIVE TEST 10: GET - Non-existent GUID <<<");
 
@@ -660,7 +660,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 50: Non-existent GUID correctly handled");
     }
 
-    @Test(priority = 21)
+    @Test(priority = 21, description = "QA Automation: Verify Negative Test11 Get Family Member Invalid Guid Format")
     public void negativeTest11_GetFamilyMember_InvalidGuidFormat() {
         System.out.println("\n>>> NEGATIVE TEST 11: GET - Invalid GUID Format <<<");
 
@@ -685,7 +685,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         AssertionUtil.verifyEquals(isError, true, "Should reject invalid GUID (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 22)
+    @Test(priority = 22, description = "QA Automation: Verify Negative Test12 Get Family Member Empty Guid")
     public void negativeTest12_GetFamilyMember_EmptyGuid() {
         System.out.println("\n>>> NEGATIVE TEST 12: GET - Empty GUID <<<");
 
@@ -705,7 +705,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 52: Empty GUID correctly rejected");
     }
 
-    @Test(priority = 23)
+    @Test(priority = 23, description = "QA Automation: Verify Negative Test13 Get Family Member No Auth Token")
     public void negativeTest13_GetFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST 13: GET - No Authorization Token <<<");
 
@@ -727,7 +727,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
                 "Should return 401 (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 24)
+    @Test(priority = 24, description = "QA Automation: Verify Negative Test14 Get Family Member Invalid Auth Token")
     public void negativeTest14_GetFamilyMember_InvalidAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST 14: GET - Invalid Authorization Token <<<");
 
@@ -751,7 +751,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
     }
 
     // === NEW GET SCENARIO ===
-    @Test(priority = 25)
+    @Test(priority = 25, description = "QA Automation: Verify Negative Test14a Get Family Member Special Charsin Guid")
     public void negativeTest14a_GetFamilyMember_SpecialCharsinGuid() {
         System.out.println("\n>>> NEGATIVE TEST 14A: GET - Special Chars in GUID <<<");
         String endpoint = APIEndpoints.DIAGNOSTICS_BASE_URL +
@@ -767,7 +767,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
     // ==================== NEGATIVE TESTS - UPDATE API (7 tests)
     // ====================
 
-    @Test(priority = 30)
+    @Test(priority = 30, description = "QA Automation: Verify Negative Test15 Update Family Member Missing Guid")
     public void negativeTest15_UpdateFamilyMember_MissingGuid() {
         System.out.println("\n>>> NEGATIVE TEST 15: UPDATE - Missing GUID <<<");
 
@@ -791,7 +791,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 55: Missing GUID correctly rejected");
     }
 
-    @Test(priority = 31)
+    @Test(priority = 31, description = "QA Automation: Verify Negative Test16 Update Family Member Non Existent Guid")
     public void negativeTest16_UpdateFamilyMember_NonExistentGuid() {
         System.out.println("\n>>> NEGATIVE TEST 16: UPDATE - Non-existent GUID <<<");
 
@@ -815,7 +815,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 56: Non-existent GUID correctly handled");
     }
 
-    @Test(priority = 32)
+    @Test(priority = 32, description = "QA Automation: Verify Negative Test17 Update Family Member Invalid Guid Format")
     public void negativeTest17_UpdateFamilyMember_InvalidGuidFormat() {
         System.out.println("\n>>> NEGATIVE TEST 17: UPDATE - Invalid GUID Format <<<");
 
@@ -838,7 +838,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 57: Invalid GUID format correctly rejected");
     }
 
-    @Test(priority = 33)
+    @Test(priority = 33, description = "QA Automation: Verify Negative Test18 Update Family Member Invalid Mobile Format")
     public void negativeTest18_UpdateFamilyMember_InvalidMobileFormat() {
         System.out.println("\n>>> NEGATIVE TEST 18: UPDATE - Invalid Mobile Format <<<");
 
@@ -861,7 +861,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 58: Invalid mobile format correctly rejected");
     }
 
-    @Test(priority = 34)
+    @Test(priority = 34, description = "QA Automation: Verify Negative Test19 Update Family Member Invalid Gender")
     public void negativeTest19_UpdateFamilyMember_InvalidGender() {
         System.out.println("\n>>> NEGATIVE TEST 19: UPDATE - Invalid Gender <<<");
 
@@ -884,7 +884,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 59: Invalid gender correctly rejected");
     }
 
-    @Test(priority = 35)
+    @Test(priority = 35, description = "QA Automation: Verify Negative Test20 Update Family Member No Auth Token")
     public void negativeTest20_UpdateFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST 20: UPDATE - No Authorization Token <<<");
 
@@ -909,7 +909,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
                 "Should return 401 (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 36)
+    @Test(priority = 36, description = "QA Automation: Verify Negative Test21 Update Family Member Invalid Auth Token")
     public void negativeTest21_UpdateFamilyMember_InvalidAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST 21: UPDATE - Invalid Authorization Token <<<");
 
@@ -936,7 +936,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
     }
 
     // === NEW UPDATE SCENARIO ===
-    @Test(priority = 37)
+    @Test(priority = 37, description = "QA Automation: Verify Negative Test21a Update Family Member Empty Payload")
     public void negativeTest21a_UpdateFamilyMember_EmptyPayload() {
         System.out.println("\n>>> NEGATIVE TEST 21A: UPDATE - Empty Payload <<<");
         Response response = new RequestBuilder()
@@ -951,7 +951,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
     // ==================== NEGATIVE TESTS - DELETE API (6 tests)
     // ====================
 
-    @Test(priority = 40)
+    @Test(priority = 40, description = "QA Automation: Verify Negative Test22 Delete Family Member Non Existent Guid")
     public void negativeTest22_DeleteFamilyMember_NonExistentGuid() {
         System.out.println("\n>>> NEGATIVE TEST 22: DELETE - Non-existent GUID <<<");
 
@@ -972,7 +972,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 62: Non-existent GUID correctly handled");
     }
 
-    @Test(priority = 41)
+    @Test(priority = 41, description = "QA Automation: Verify Negative Test23 Delete Family Member Invalid Guid Format")
     public void negativeTest23_DeleteFamilyMember_InvalidGuidFormat() {
         System.out.println("\n>>> NEGATIVE TEST 23: DELETE - Invalid GUID Format <<<");
         String invalidGuid = "invalid-guid";
@@ -993,7 +993,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         AssertionUtil.verifyEquals(isError, true, "Should return 400/404 (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 42)
+    @Test(priority = 42, description = "QA Automation: Verify Negative Test24 Delete Family Member Empty Guid")
     public void negativeTest24_DeleteFamilyMember_EmptyGuid() {
         System.out.println("\n>>> NEGATIVE TEST 24: DELETE - Empty GUID <<<");
 
@@ -1013,7 +1013,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         System.out.println("   ✅ Validation 64: Empty GUID correctly rejected");
     }
 
-    @Test(priority = 43)
+    @Test(priority = 43, description = "QA Automation: Verify Negative Test25 Delete Family Member No Auth Token")
     public void negativeTest25_DeleteFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST 25: DELETE - No Authorization Token <<<");
         String testGuid = "test-guid-123";
@@ -1032,7 +1032,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
                 "Should return 401 (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 44)
+    @Test(priority = 44, description = "QA Automation: Verify Negative Test26 Delete Family Member Invalid Auth Token")
     public void negativeTest26_DeleteFamilyMember_InvalidAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST 26: DELETE - Invalid Authorization Token <<<");
         String testGuid = "test-guid-123";
@@ -1054,7 +1054,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
         AssertionUtil.verifyEquals(isAuthError, true, "Should return 401/403 (Got " + response.getStatusCode() + ")");
     }
 
-    @Test(priority = 45)
+    @Test(priority = 45, description = "QA Automation: Verify Negative Test27 Delete Family Member Double Delete")
     public void negativeTest27_DeleteFamilyMember_DoubleDelete() {
         System.out.println("\n>>> NEGATIVE TEST 27: DELETE - Double Deletion (Already Deleted) <<<");
         try {
@@ -1106,7 +1106,7 @@ public class FamilyMemberFlowTest extends CreateOrderCODAPITest {
     }
 
     // === NEW DELETE SCENARIO ===
-    @Test(priority = 46)
+    @Test(priority = 46, description = "QA Automation: Verify Negative Test28 Delete Family Member SQLInjection")
     public void negativeTest28_DeleteFamilyMember_SQLInjection() {
         System.out.println("\n>>> NEGATIVE TEST 28: DELETE - SQL Injection in GUID <<<");
         String sqlInjection = "' OR '1'='1";

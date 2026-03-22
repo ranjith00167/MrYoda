@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class COD_12_GetSampleTypeTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Get Sample Type")
     public void step12_GetSampleType() {
         System.out.println("\n>>> STEP 12: GET SAMPLE TYPE <<<");
         String token = RequestContext.getToken();

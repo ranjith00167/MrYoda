@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class COD_09_UpdateOrderTrackingTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Update Order Tracking")
     public void step09_UpdateOrderTracking() {
         System.out.println("\n>>> STEP 9: UPDATE ORDER TRACKING (MULTI-ORDER) <<<");
 

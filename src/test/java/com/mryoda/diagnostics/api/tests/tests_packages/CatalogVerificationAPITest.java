@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class CatalogVerificationAPITest extends BaseTest {
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "QA Automation: Verify Diagnostics Catalog")
     public void verifyDiagnosticsCatalog() {
         System.out.println("\n==========================================================");
         System.out.println("      CATALOG VERIFICATION - DIAGNOSTICS");
@@ -51,7 +51,7 @@ public class CatalogVerificationAPITest extends BaseTest {
         searchAndVerifyItem(APIEndpoints.GET_ALL_TESTS, payload, "Diagnostics", targetName);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, description = "QA Automation: Verify Dna Decoder Catalog")
     public void verifyDnaDecoderCatalog() {
         System.out.println("\n==========================================================");
         System.out.println("      CATALOG VERIFICATION - DNA DECODER");
@@ -69,7 +69,7 @@ public class CatalogVerificationAPITest extends BaseTest {
         searchAndVerifyItem(APIEndpoints.GET_ALL_TESTS, payload, "DNA Decoder", targetName);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "QA Automation: Verify Pgx Catalog")
     public void verifyPgxCatalog() {
         System.out.println("\n==========================================================");
         System.out.println("      CATALOG VERIFICATION - PGX (PHARMACOGENOMICS)");
@@ -93,7 +93,7 @@ public class CatalogVerificationAPITest extends BaseTest {
         searchAndVerifyItem(APIEndpoints.GET_ALL_TESTS, payload, "PGX", targetName);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, description = "QA Automation: Verify Fetal Medicine Catalog")
     public void verifyFetalMedicineCatalog() {
         System.out.println("\n==========================================================");
         System.out.println("      CATALOG VERIFICATION - FETAL MEDICINE");
@@ -117,7 +117,7 @@ public class CatalogVerificationAPITest extends BaseTest {
         searchAndVerifyItem(APIEndpoints.GET_FETAL_MEDICINE_TESTS, payload, "Fetal Medicine", targetName);
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, description = "QA Automation: Verify Packages Catalog")
     public void verifyPackagesCatalog() {
         System.out.println("\n==========================================================");
         System.out.println("      CATALOG VERIFICATION - PACKAGES");

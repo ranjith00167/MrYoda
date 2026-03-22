@@ -194,19 +194,19 @@ public class GlobalSearchAPITest extends BaseTest {
         System.out.println("\n✅ GLOBAL SEARCH COMPLETE (Stored " + foundCount + " tests)");
     }
 
-    @Test(priority = 7, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest.testGetBrands_ForMember")
+    @Test(priority = 7, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest.testGetBrands_ForMember", description = "QA Automation: Verify Global Search For Member")
     public void testGlobalSearch_ForMember() {
         System.out.println("Running Global Search as part of MEMBER flow...");
         performGlobalSearch();
     }
 
-    @Test(priority = 7, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest.testGetBrands_ForNonMember")
+    @Test(priority = 7, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest.testGetBrands_ForNonMember", description = "QA Automation: Verify Global Search For Non Member")
     public void testGlobalSearch_ForNonMember() {
         System.out.println("Running Global Search as part of NON-MEMBER flow...");
         performGlobalSearch();
     }
 
-    @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest.testGetBrands_ForNewUser")
+    @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest.testGetBrands_ForNewUser", description = "QA Automation: Verify Global Search For New User")
     public void testGlobalSearch_ForNewUser() {
         System.out.println("Running Global Search as part of NEW USER flow...");
         performGlobalSearch();

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class COD_03_AddAddressAndSlotTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Add Address And Slot")
     public void step03_AddAddressAndSlot() {
         System.out.println("\n>>> STEP 3: ADD ADDRESS & SLOT <<<");
         String token = RequestContext.getToken();

@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class COD_06_PhlebotomistLoginTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Phlebotomist Login")
     public void step06_PhlebotomistLogin() {
         System.out.println("\n>>> STEP 6: PHLEBOTOMIST LOGIN <<<");
         String phlebotomistGuid = callPhlebotomistLoginAPI();

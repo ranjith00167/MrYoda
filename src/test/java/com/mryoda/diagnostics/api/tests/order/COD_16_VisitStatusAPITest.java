@@ -50,7 +50,7 @@ public class COD_16_VisitStatusAPITest {
     }
 
 
-    @Test
+    @Test(description = "QA Automation: Verify Get Visit Status")
     public void testGetVisitStatus() {
         System.out.println("\n>>> STEP 16: GET VISIT STATUS API (UAT) WITH MULTI-TEST VALIDATION <<<");
 

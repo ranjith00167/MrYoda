@@ -75,7 +75,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
 
     // ==================== ADD FAMILY MEMBER - NEGATIVE TESTS ====================
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "QA Automation: Verify Add Family Member Missing Required Fields")
     public void test_AddFamilyMember_MissingRequiredFields() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Missing Required Fields <<<");
 
@@ -94,7 +94,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected missing required fields");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, description = "QA Automation: Verify Add Family Member Missing User Id")
     public void test_AddFamilyMember_MissingUserId() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Missing user_id <<<");
 
@@ -113,7 +113,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected missing user_id");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "QA Automation: Verify Add Family Member Missing First Name")
     public void test_AddFamilyMember_MissingFirstName() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Missing first_name <<<");
 
@@ -132,7 +132,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected missing first_name");
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, description = "QA Automation: Verify Add Family Member Invalid Mobile Format")
     public void test_AddFamilyMember_InvalidMobileFormat() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Invalid mobile format <<<");
 
@@ -151,7 +151,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected invalid mobile format");
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, description = "QA Automation: Verify Add Family Member Invalid Gender")
     public void test_AddFamilyMember_InvalidGender() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Invalid gender value <<<");
 
@@ -170,7 +170,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected invalid gender");
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, description = "QA Automation: Verify Add Family Member Invalid Date Format")
     public void test_AddFamilyMember_InvalidDateFormat() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Invalid DOB format <<<");
 
@@ -189,7 +189,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected invalid date format");
     }
 
-    @Test(priority = 7)
+    @Test(priority = 7, description = "QA Automation: Verify Add Family Member No Auth Token")
     public void test_AddFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - No Authorization Token <<<");
 
@@ -207,7 +207,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected request without auth token");
     }
 
-    @Test(priority = 8)
+    @Test(priority = 8, description = "QA Automation: Verify Add Family Member Invalid Auth Token")
     public void test_AddFamilyMember_InvalidAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Add Family Member - Invalid Authorization Token <<<");
 
@@ -228,7 +228,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
 
     // ==================== GET FAMILY MEMBER - NEGATIVE TESTS ====================
 
-    @Test(priority = 10)
+    @Test(priority = 10, description = "QA Automation: Verify Get Family Member Invalid Guid")
     public void test_GetFamilyMember_InvalidGuid() {
         System.out.println("\n>>> NEGATIVE TEST: Get Family Member - Invalid GUID <<<");
 
@@ -247,7 +247,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly handled non-existent family member");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11, description = "QA Automation: Verify Get Family Member No Auth Token")
     public void test_GetFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Get Family Member - No Authorization <<<");
 
@@ -267,7 +267,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
     // ==================== UPDATE FAMILY MEMBER - NEGATIVE TESTS
     // ====================
 
-    @Test(priority = 15)
+    @Test(priority = 15, description = "QA Automation: Verify Update Family Member Missing Guid")
     public void test_UpdateFamilyMember_MissingGuid() {
         System.out.println("\n>>> NEGATIVE TEST: Update Family Member - Missing GUID <<<");
 
@@ -286,7 +286,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected update without GUID");
     }
 
-    @Test(priority = 16)
+    @Test(priority = 16, description = "QA Automation: Verify Update Family Member Non Existent Guid")
     public void test_UpdateFamilyMember_NonExistentGuid() {
         System.out.println("\n>>> NEGATIVE TEST: Update Family Member - Non-existent GUID <<<");
 
@@ -308,7 +308,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
     // ==================== DELETE FAMILY MEMBER - NEGATIVE TESTS
     // ====================
 
-    @Test(priority = 20)
+    @Test(priority = 20, description = "QA Automation: Verify Delete Family Member Invalid Guid")
     public void test_DeleteFamilyMember_InvalidGuid() {
         System.out.println("\n>>> NEGATIVE TEST: Delete Family Member - Invalid GUID <<<");
 
@@ -327,7 +327,7 @@ public class FamilyMemberNegativeTest extends BaseTest {
         System.out.println("   ✅ Correctly rejected invalid GUID format");
     }
 
-    @Test(priority = 21)
+    @Test(priority = 21, description = "QA Automation: Verify Delete Family Member No Auth Token")
     public void test_DeleteFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Delete Family Member - No Authorization <<<");
 

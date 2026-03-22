@@ -77,7 +77,7 @@ public class GetFamilyMemberTest {
 
     // ==================== POSITIVE TESTS ====================
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "QA Automation: Verify Get Family Member Valid Id All Fields Validated")
     public void test_GetFamilyMember_ValidId_AllFieldsValidated() {
         System.out.println("\n>>> POSITIVE TEST: Get Family Member - Valid ID with All 11 Field Validations <<<");
 
@@ -140,7 +140,7 @@ public class GetFamilyMemberTest {
 
     // ==================== NEGATIVE TESTS ====================
 
-    @Test(priority = 10)
+    @Test(priority = 10, description = "QA Automation: Verify Get Family Member Non Existent Guid")
     public void test_GetFamilyMember_NonExistentGuid() {
         System.out.println("\n>>> NEGATIVE TEST: Get Family Member - Non-existent GUID <<<");
 
@@ -163,7 +163,7 @@ public class GetFamilyMemberTest {
         System.out.println("   ✅ Correctly handled non-existent family member");
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11, description = "QA Automation: Verify Get Family Member Invalid Guid Format")
     public void test_GetFamilyMember_InvalidGuidFormat() {
         System.out.println("\n>>> NEGATIVE TEST: Get Family Member - Invalid GUID Format <<<");
 
@@ -184,7 +184,7 @@ public class GetFamilyMemberTest {
         System.out.println("   ✅ Correctly rejected invalid GUID format");
     }
 
-    @Test(priority = 12)
+    @Test(priority = 12, description = "QA Automation: Verify Get Family Member No Auth Token")
     public void test_GetFamilyMember_NoAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Get Family Member - No Authorization Token <<<");
 
@@ -203,7 +203,7 @@ public class GetFamilyMemberTest {
         System.out.println("   ✅ Correctly rejected unauthorized access");
     }
 
-    @Test(priority = 13)
+    @Test(priority = 13, description = "QA Automation: Verify Get Family Member Invalid Auth Token")
     public void test_GetFamilyMember_InvalidAuthToken() {
         System.out.println("\n>>> NEGATIVE TEST: Get Family Member - Invalid Authorization Token <<<");
 
@@ -223,7 +223,7 @@ public class GetFamilyMemberTest {
         System.out.println("   ✅ Correctly rejected invalid auth token");
     }
 
-    @Test(priority = 14)
+    @Test(priority = 14, description = "QA Automation: Verify Get Family Member Empty Guid")
     public void test_GetFamilyMember_EmptyGuid() {
         System.out.println("\n>>> NEGATIVE TEST: Get Family Member - Empty GUID <<<");
 

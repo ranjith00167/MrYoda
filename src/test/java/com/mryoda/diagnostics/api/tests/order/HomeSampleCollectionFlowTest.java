@@ -26,7 +26,7 @@ public class HomeSampleCollectionFlowTest extends DetailedCODFlowTest {
     private String familyMemberGuid;
     private String familyMemberName;
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "QA Automation: Verify B Add Family Member")
     public void step02b_AddFamilyMember() {
         System.out.println("\n>>> STEP 2b: ADD FAMILY MEMBER (FOR HOME COLLECTION) <<<");
 

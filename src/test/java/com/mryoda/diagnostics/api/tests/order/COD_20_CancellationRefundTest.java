@@ -46,7 +46,7 @@ public class COD_20_CancellationRefundTest {
     // -----------------------------------------------------------------------
     // STEP 20-C  –  Admin approves the cancellation request (LAST)
     // -----------------------------------------------------------------------
-    @Test(groups = "refund_flow", dependsOnMethods = "step20_B_FinalUpdateOrderCancelled")
+    @Test(groups = "refund_flow", dependsOnMethods = "step20_B_FinalUpdateOrderCancelled", description = "QA Automation: Verify C Approve Cancelled Order")
     public void step20_C_ApproveCancelledOrder() {
         System.out.println("\n=======================================================");
         System.out.println(">>> STEP 20-C: APPROVE CANCELLED ORDER <<<");
@@ -137,7 +137,7 @@ public class COD_20_CancellationRefundTest {
     // 409 is a known business-rule response: "Order cannot be cancelled once
     //   a phlebotomist has been assigned." All fields on 409 are validated too.
     // -----------------------------------------------------------------------
-    @Test(groups = "refund_flow")
+    @Test(groups = "refund_flow", description = "QA Automation: Verify A Process Cashback")
     public void step20_A_ProcessCashback() {
         System.out.println("\n=======================================================");
         System.out.println(">>> STEP 20-A: ADMIN RETURNING CASHBACK <<<");
@@ -643,7 +643,7 @@ public class COD_20_CancellationRefundTest {
     // -----------------------------------------------------------------------
     // STEP 20-B  –  Final status update to confirm order is Cancelled
     // -----------------------------------------------------------------------
-    @Test(groups = "refund_flow")
+    @Test(groups = "refund_flow", description = "QA Automation: Verify B Final Update Order Cancelled")
     public void step20_B_FinalUpdateOrderCancelled() {
         System.out.println("\n=======================================================");
         System.out.println(">>> STEP 20-B: FINAL UPDATE ORDER STATUS → Cancelled <<<");
@@ -743,7 +743,7 @@ public class COD_20_CancellationRefundTest {
     //   data[0].order_items[] — each has order_status, admin_approval_status, cancelled_at
     //   data[0].user_details.guid == user_id
     // -----------------------------------------------------------------------
-    @Test(groups = "refund_flow", dependsOnMethods = "step20_B_FinalUpdateOrderCancelled")
+    @Test(groups = "refund_flow", dependsOnMethods = "step20_B_FinalUpdateOrderCancelled", description = "QA Automation: Verify D Verify Cancelled Order Details")
     public void step20_D_VerifyCancelledOrderDetails() {
         System.out.println("\n=======================================================");
         System.out.println(">>> STEP 20-D: VERIFY CANCELLED ORDER DETAILS (GET) <<<");
@@ -1715,7 +1715,7 @@ public class COD_20_CancellationRefundTest {
     //   data.order_items[]               — each item's order_id, product_name,
     //                                      final_price, quantity, patient_guid
     // -----------------------------------------------------------------------
-    @Test(groups = "refund_flow", dependsOnMethods = "step20_D_VerifyCancelledOrderDetails")
+    @Test(groups = "refund_flow", dependsOnMethods = "step20_D_VerifyCancelledOrderDetails", description = "QA Automation: Verify E Verify Payment By Id")
     public void step20_E_VerifyPaymentById() {
         System.out.println("\n=======================================================");
         System.out.println(">>> STEP 20-E: VERIFY PAYMENT BY ID (POST-REFUND) <<<");
@@ -2104,7 +2104,7 @@ public class COD_20_CancellationRefundTest {
     //   data.customer_id     — stored as membership customer_id  (CROSS-API)
     //   data.mobile          — == RequestContext.getMobile()       (CROSS-API)
     // -----------------------------------------------------------------------
-    @Test(groups = "refund_flow", dependsOnMethods = "step20_E_VerifyPaymentById")
+    @Test(groups = "refund_flow", dependsOnMethods = "step20_E_VerifyPaymentById", description = "QA Automation: Verify F Verify Rewards By Mobile")
     public void step20_F_VerifyRewardsByMobile() {
         System.out.println("\n=======================================================");
         System.out.println(">>> STEP 20-F: VERIFY REWARDS BY MOBILE (POST-CANCEL) <<<");
@@ -2323,7 +2323,7 @@ public class COD_20_CancellationRefundTest {
     //   status  |  is_reverted  |  created_at  |  updated_at
     //   patient_first_name  |  patient_last_name  |  dob  |  gender
     // -----------------------------------------------------------------------
-    @Test(groups = "refund_flow", dependsOnMethods = "step20_E_VerifyPaymentById", alwaysRun = true)
+    @Test(groups = "refund_flow", dependsOnMethods = "step20_E_VerifyPaymentById", alwaysRun = true, description = "QA Automation: Verify G Verify Transaction By Mobile")
     public void step20_G_VerifyTransactionByMobile() {
         System.out.println("\n=======================================================");
         System.out.println(">>> STEP 20-G: VERIFY TRANSACTION BY MOBILE <<<");

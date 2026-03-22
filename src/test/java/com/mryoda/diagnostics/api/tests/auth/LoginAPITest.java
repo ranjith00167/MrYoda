@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class LoginAPITest extends BaseTest {
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "🔐 AUTHENTICATION: Member Login with OTP - Verify paid member can successfully authenticate and access member benefits")
     public void testLoginWithOTP() {
 
         System.out.println("\n==========================================================");
@@ -32,7 +32,7 @@ public class LoginAPITest extends BaseTest {
                 RequestContext.getMemberFirstName() + " " + RequestContext.getMemberLastName());
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "🔐 AUTHENTICATION: Non-Member Login with OTP - Verify non-paid member can authenticate without member benefits")
     public void testLoginWithOTP_NonMember() {
 
         System.out.println("\n==========================================================");
@@ -56,7 +56,7 @@ public class LoginAPITest extends BaseTest {
                 RequestContext.getNonMemberFirstName() + " " + RequestContext.getNonMemberLastName());
     }
 
-    @Test(priority = 2, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest.testUserRegistration_CreateNewUser")
+    @Test(priority = 2, dependsOnMethods = "com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest.testUserRegistration_CreateNewUser", description = "QA Automation: Verify Login With OTP Newly Registered User")
     public void testLoginWithOTP_NewlyRegisteredUser() {
 
         System.out.println("\n==========================================================");

@@ -25,7 +25,7 @@ import java.util.Map;
 public class AddFamilyMemberTest extends BaseTest {
 
     @Parameters({ "userType", "orderType" })
-    @Test(dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest.verifyPackagesCatalog")
+    @Test(dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest.verifyPackagesCatalog", description = "QA Automation: Verify Add Family Member And Add To Cart")
     public void testAddFamilyMemberAndAddToCart(@Optional("member") String userType,
             @Optional("home") String orderType) {
         System.out.println("\n>>> TEST: ADD FAMILY MEMBER (" + userType + " | " + orderType + ") <<<");

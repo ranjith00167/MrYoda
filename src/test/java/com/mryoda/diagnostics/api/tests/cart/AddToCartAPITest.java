@@ -706,7 +706,7 @@ public class AddToCartAPITest extends BaseTest {
     }
 
     @Parameters({ "orderType", "applyCoupon" })
-    @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForMember")
+    @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForMember", description = "🛒 CART OPERATIONS: Add Tests to Cart for Member - Verify paid member can add tests to cart for both home collection and lab visit with proper pricing and coupon application")
     public void testAddToCart_ForMember(@Optional("home") String orderType, @Optional("false") String applyCoupon) {
         System.out.println(
                 "\n--- AddToCart For Member (Parameter: " + orderType + ", applyCoupon: " + applyCoupon + ") ---");
@@ -733,7 +733,7 @@ public class AddToCartAPITest extends BaseTest {
      * The backend will reduce the payable cash amount by rewards_used.
      */
     @Parameters({ "orderType", "applyCoupon" })
-    @Test(priority = 7, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForMember")
+    @Test(priority = 7, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForMember", description = "🛒 CART OPERATIONS: Add Tests to Cart with Rewards Points - Verify member can apply rewards points to reduce payable amount with proper calculation and validation")
     public void testAddToCart_WithRewardsUsed(@Optional("lab") String orderType, @Optional("false") String applyCoupon) {
         System.out.println("\n--- AddToCart With Rewards Used (orderType=" + orderType + ", applyCoupon=" + applyCoupon + ") ---");
         System.setProperty("orderType", orderType);
@@ -820,7 +820,7 @@ public class AddToCartAPITest extends BaseTest {
     }
 
     @Parameters({ "orderType", "applyCoupon" })
-    @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNonMember")
+    @Test(priority = 8, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNonMember", description = "🛒 CART OPERATIONS: Add Tests to Cart for Non-Member - Verify non-paid member can add tests to cart with standard pricing without membership benefits or premium discounts")
     public void testAddToCart_ForNonMember(@Optional("home") String orderType, @Optional("false") String applyCoupon) {
         System.out.println(
                 "\n--- AddToCart For Non-Member (Parameter: " + orderType + ", applyCoupon: " + applyCoupon + ") ---");
@@ -838,7 +838,7 @@ public class AddToCartAPITest extends BaseTest {
     }
 
     @Parameters({ "orderType", "applyCoupon" })
-    @Test(priority = 9, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNewUser")
+    @Test(priority = 9, dependsOnMethods = "com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNewUser", description = "🛒 CART OPERATIONS: Add Tests to Cart for New User - Verify newly registered user can add tests to cart with appropriate pricing and new user promotional offers if available")
     public void testAddToCart_ForNewUser(@Optional("home") String orderType, @Optional("false") String applyCoupon) {
         System.out.println(
                 "\n--- AddToCart For New User (Parameter: " + orderType + ", applyCoupon: " + applyCoupon + ") ---");

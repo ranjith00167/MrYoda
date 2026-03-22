@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class COD_11_AdminVerifyOtpTest extends CreateOrderCODAPITest {
 
-    @Test
+    @Test(description = "QA Automation: Verify Admin Verify Otp")
     public void step11_AdminVerifyOtp() {
         System.out.println("\n>>> STEP 11: ADMIN VERIFY OTP (MULTI-ORDER) <<<");
         java.util.List<String> trackingIds = RequestContext.getCurrentOrderTrackingIds();
