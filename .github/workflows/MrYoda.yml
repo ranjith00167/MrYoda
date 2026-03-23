@@ -5,14 +5,17 @@ on:
     branches:
       - feature/stagingMrYoda
 
+# FIX 1: Prevent unwanted cancellations
 concurrency:
   group: test-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   run-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+
+    # FIX 2: Increased timeout (your tests already hit ~3h)
+    timeout-minutes: 300
 
     strategy:
       fail-fast: false
@@ -40,12 +43,10 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
 
-      - name: Build Project
-        run: mvn -T 1C clean install -DskipTests
-
+      # FIX 3: Removed redundant build step (clean install + test merged)
       - name: Run Tests
         run: |
-          mvn test \
+          mvn -T 1C clean test \
           -Dsurefire.suiteXmlFiles=test-suites/${{ matrix.suite }}/testng_${{ matrix.suite }}_all.xml \
           -Dheadless=true
 
