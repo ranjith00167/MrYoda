@@ -54,12 +54,10 @@ public class GlobalSearchAPITest extends BaseTest {
         System.out.println("   ✅ This location will be used for Global Search");
 
         String[] testsToSearch = {
-                "Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME", "Complete Blood Count (CBC)",
-                "T4 - THYROXINE"
+                "Bone Profile -1", "T4 - THYROXINE", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME"
         };
 
-        System.out.println("\n⚠️  IMPORTANT: We are NOT searching for CBC!");
-        System.out.println("   If CBC appears in results, it's a bug in the search logic.");
+        System.out.println("\n✅  IMPORTANT: Tests to search have been configured.");
 
         System.out.println("\n🎯 Tests to Search: " + String.join(", ", testsToSearch));
         System.out.println("📊 Total Tests: " + testsToSearch.length);
@@ -186,9 +184,7 @@ public class GlobalSearchAPITest extends BaseTest {
             // Only a warning if we didn't search for a package, but if we did, this is good
             // info
             System.out.println("   ℹ️  No package content stored (Context is empty or no package found)");
-            if (java.util.Arrays.asList(testsToSearch).contains("Full Body Health Checkup")) {
-                System.out.println("   ⚠️  WARNING: We searched for 'Full Body Health Checkup' but found no content?");
-            }
+            // No package searches in this run; individual tests only.
         }
 
         System.out.println("\n✅ GLOBAL SEARCH COMPLETE (Stored " + foundCount + " tests)");

@@ -81,7 +81,8 @@ public class Section5_CartOperationsTest extends BaseTest {
         }
         if (RequestContext.getAllTests() == null || RequestContext.getAllTests().isEmpty()) {
             System.out.println("   [SETUP] Running GlobalSearch to populate test IDs...");
-            String[] tests = {"Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "Complete Blood Count (CBC)"};
+            String[] tests = {"Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME",
+                    "Complete Blood Count (CBC)", "T4 - THYROXINE", "Comprehensive Sepsis Panel"};
             Response res = GlobalSearchHelper.searchTestsByFullNames(tests, DEFAULT_LOCATION);
             GlobalSearchHelper.extractAndStoreTests(res, tests);
         }
@@ -98,7 +99,7 @@ public class Section5_CartOperationsTest extends BaseTest {
         payload.put("first_name", "Test");
         payload.put("last_name", "Member");
         payload.put("mobile", MEMBER_MOBILE);
-        payload.put("pincode", "500033"); // Madhapur
+        payload.put("pincode", "500016"); // Ameerpet (HQ)
         payload.put("email", "test@mryoda.com");
         payload.put("addressType", "home");
         payload.put("address", "123 Test Street");

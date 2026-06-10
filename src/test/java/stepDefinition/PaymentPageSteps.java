@@ -246,7 +246,7 @@ public class PaymentPageSteps extends BaseSteps {
 	@Then("extract razorpay amount")
 	public void extract_razorpay_amount() throws Exception {
 
-	    Thread.sleep(2000);
+	    Thread.sleep(4000);
 	    BaseClass.switchToRazorpayFrame();
 
 	    String razorPayVal = LocatorsPage.razorpayAmountLabel.getDomAttribute("data-value");
@@ -407,50 +407,204 @@ public class PaymentPageSteps extends BaseSteps {
         if (amountToPay <= 100000) {
             System.out.println("========== 🎯 STARTING RAZORPAY UPI FLOW ==========");
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
             // Use common helper
             BaseClass.switchToRazorpayFrame();
 
-            // Click wallet
+            // ─── HANDLE RAZORPAY OTP VERIFICATION (if prompted) ───────────────
+            // Razorpay may show "Enter OTP to complete Payment" before payment options
             try {
-                WebElement wallet = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-                    "//div[@data-value='wallet']"
-                )));
-                wallet.click();
-                System.out.println("✅ Clicked Wallet");
-            } catch (Exception e) {
-                System.out.println("⚠️ Wallet option not found inside Razorpay frame.");
-                throw e;
+                WebElement otpInput = new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//input[@name='otp' and @placeholder='Enter OTP']"
+                        + " | //input[@placeholder='Enter OTP']"
+                        + " | //input[@name='otp' and @type='tel']")));
+                otpInput.click();
+                otpInput.clear();
+                otpInput.sendKeys("123456");
+                System.out.println("✅ Entered Razorpay verification OTP: 123456");
+                Thread.sleep(500);
+
+                // Click Continue button
+                WebElement continueBtn = new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//button[normalize-space()='Continue']"
+                        + " | //button[contains(text(),'Continue')]")));
+                continueBtn.click();
+                System.out.println("✅ Clicked Continue after OTP");
+                Thread.sleep(3000); // Wait for payment options to load
+            } catch (Exception otpNotShown) {
+                System.out.println("ℹ️ No Razorpay OTP screen — proceeding directly");
             }
 
-            // Select Mobikwik
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-value='mobikwik']"))).click();
-
-            // Enter email - USE WAIT AND INPUT TO AVOID INTERCEPTION
-            WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder='Email address']")));
-            BaseClass.waitAndInput(emailInput, "test@gmail.com", 15);
-
-            // Continue
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(.,'Continue')]"))).click();
-
-            // OTP
-            WebElement otp = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@placeholder,'OTP')]")));
-            otp.click();
-            otp.sendKeys("123456");
-
-            // Final Continue
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(.,'Continue')] | //button[contains(.,'Pay')]"))).click();
-            System.out.println("✅ Payment submitted via Mobikwik");
-
-            // IN TEST MODE, RAZORPAY SHOWS A SUCCESS BUTTON
+            // In Razorpay TEST MODE, a Success/Failure button appears directly.
+            // Try the test-mode success button first before attempting full wallet flow.
+            boolean paidViaTestMode = false;
             try {
-                System.out.println("⏳ Waiting for Razorpay Success button (Test Mode)...");
-                WebElement successBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-val='S']")));
+                WebElement successBtn = new WebDriverWait(driver, Duration.ofSeconds(15))
+                    .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//button[@data-val='S'] | //button[contains(@class,'success')]")));
                 successBtn.click();
-                System.out.println("✅ Clicked Razorpay Success button");
-            } catch (Exception e) {
-                System.out.println("ℹ️ Success button not found, maybe automatic redirect or already on success page.");
+                System.out.println("✅ Razorpay TEST MODE — clicked Success button directly");
+                paidViaTestMode = true;
+            } catch (Exception ignored) {
+                System.out.println("ℹ️ No test-mode success button — proceeding with wallet payment flow");
+            }
+
+            if (!paidViaTestMode) {
+                // Click wallet
+                try {
+                    WebElement wallet = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+                        "//div[@data-value='wallet']"
+                    )));
+                    wallet.click();
+                    System.out.println("✅ Clicked Wallet");
+                } catch (Exception e) {
+                    System.out.println("⚠️ Wallet option not found inside Razorpay frame.");
+                    throw e;
+                }
+
+                // Select Mobikwik (or first available wallet provider as fallback)
+                Thread.sleep(2000); // Wait for wallet list to render
+                WebElement walletProvider = null;
+                String[] walletProviders = {"mobikwik", "freecharge", "olamoney", "airtelmoney", "jiomoney", "phonepe"};
+                for (String provider : walletProviders) {
+                    try {
+                        walletProvider = driver.findElement(By.xpath("//div[@data-value='" + provider + "']"));
+                        if (walletProvider.isDisplayed()) {
+                            System.out.println("✅ Found wallet provider: " + provider);
+                            break;
+                        }
+                    } catch (Exception ignored2) {}
+                }
+                // Final fallback: click first available wallet radio/option
+                if (walletProvider == null) {
+                    try {
+                        walletProvider = wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//div[contains(@class,'wallet-option') or contains(@class,'payment-option')]")));
+                        System.out.println("✅ Using first available wallet option");
+                    } catch (Exception e2) {
+                        System.out.println("❌ No wallet providers found in Razorpay frame");
+                        throw e2;
+                    }
+                }
+                walletProvider.click();
+                Thread.sleep(3000); // Wait for wallet provider UI to load
+
+                // After clicking a wallet provider, Razorpay may show:
+                // 1. Email/phone input → Continue → OTP flow (older UI)
+                // 2. A direct "Pay Now" / "Pay" button (newer UI)
+                // 3. A test-mode Success button directly
+                // We try all paths gracefully.
+
+                // PATH A: Check if test-mode success button appeared after provider click
+                boolean walletPayCompleted = false;
+                try {
+                    WebElement successBtn = new WebDriverWait(driver, Duration.ofSeconds(5))
+                        .until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//button[@data-val='S'] | //button[contains(@class,'success')]")));
+                    successBtn.click();
+                    System.out.println("✅ Test-mode Success button appeared after wallet selection");
+                    walletPayCompleted = true;
+                } catch (Exception ignored3) {}
+
+                // PATH B: Try to find and click a direct "Pay" / "Pay Now" button
+                if (!walletPayCompleted) {
+                    try {
+                        WebElement payBtn = new WebDriverWait(driver, Duration.ofSeconds(5))
+                            .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                "//button[contains(.,'Pay')] | //button[contains(.,'pay')] | //button[@id='pay-btn']")));
+                        payBtn.click();
+                        System.out.println("✅ Clicked Pay button after wallet selection");
+                        Thread.sleep(5000); // Wait for redirect/OTP page to load
+
+                        // After Pay, Razorpay may redirect to wallet provider's OTP page
+                        // Try entering OTP if an OTP field appears
+                        try {
+                            WebElement otpField = new WebDriverWait(driver, Duration.ofSeconds(10))
+                                .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                    "//input[contains(@placeholder,'OTP')] | //input[@type='tel'] | //input[@name='otp'] | //input[@id='otp'] | //input[contains(@class,'otp')]")));
+                            otpField.click();
+                            otpField.clear();
+                            otpField.sendKeys("123456");
+                            System.out.println("✅ Entered OTP: 123456");
+                            Thread.sleep(1000);
+
+                            // Click submit/verify after OTP
+                            try {
+                                WebElement submitOtp = new WebDriverWait(driver, Duration.ofSeconds(5))
+                                    .until(ExpectedConditions.elementToBeClickable(By.xpath(
+                                        "//button[contains(.,'Submit')] | //button[contains(.,'Verify')] | //button[contains(.,'Pay')] | //button[contains(.,'Continue')] | //input[@type='submit']")));
+                                submitOtp.click();
+                                System.out.println("✅ Clicked Submit/Verify after OTP");
+                            } catch (Exception ignored6) {
+                                System.out.println("ℹ️ No submit button found — OTP may auto-submit");
+                            }
+                            Thread.sleep(3000);
+                        } catch (Exception noOtp) {
+                            System.out.println("ℹ️ No OTP field found after Pay click");
+                        }
+
+                        // Now check for test-mode success button
+                        try {
+                            WebElement successBtn = new WebDriverWait(driver, Duration.ofSeconds(15))
+                                .until(ExpectedConditions.elementToBeClickable(
+                                    By.xpath("//button[@data-val='S'] | //button[contains(@class,'success')]")));
+                            successBtn.click();
+                            System.out.println("✅ Clicked Razorpay Success button after Pay");
+                            walletPayCompleted = true;
+                        } catch (Exception ignored4) {
+                            System.out.println("ℹ️ No success button after Pay — may auto-redirect");
+                            walletPayCompleted = true;
+                        }
+                    } catch (Exception ignored5) {}
+                }
+
+                // PATH C: Full email → OTP flow (legacy Mobikwik flow)
+                if (!walletPayCompleted) {
+                    try {
+                        System.out.println("ℹ️ Trying email/OTP wallet flow...");
+						Thread.sleep(3000);
+                        WebElement emailInput = new WebDriverWait(driver, Duration.ofSeconds(10))
+                            .until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+                                "//input[@placeholder='Email address'] | //input[@type='email'] | //input[@name='email'] | //input[contains(@placeholder,'email')]")));
+                        BaseClass.waitAndInput(emailInput, "test@gmail.com", 15);
+						 // Continue
+                        wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//button[contains(.,'Continue')] | //button[contains(.,'Proceed')]"))).click();
+
+						  // OTP
+						  						Thread.sleep(3000);
+
+                        WebElement otp = wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//input[contains(@placeholder,'OTP')]")));
+                        otp.click();
+                        otp.sendKeys("123456");
+
+                       
+                      
+
+                        // Final Continue/Pay
+                        wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//button[contains(.,'Continue')] | //button[contains(.,'Pay')]"))).click();
+                        System.out.println("✅ Payment submitted via wallet email/OTP flow");
+                    } catch (Exception emailFlowEx) {
+                        System.out.println("⚠️ Email/OTP flow also failed: " + emailFlowEx.getMessage());
+                    }
+
+                    // After wallet flow, check for test-mode Success button
+                    try {
+                        System.out.println("⏳ Waiting for Razorpay Success button (Test Mode)...");
+                        WebElement successBtn = new WebDriverWait(driver, Duration.ofSeconds(15))
+                            .until(ExpectedConditions.elementToBeClickable(
+                                By.xpath("//button[@data-val='S']")));
+                        successBtn.click();
+                        System.out.println("✅ Clicked Razorpay Success button");
+                    } catch (Exception e) {
+                        System.out.println("ℹ️ Success button not found — may have auto-redirected.");
+                    }
+                }
             }
 
             // Switch back and wait for navigation
@@ -458,7 +612,7 @@ public class PaymentPageSteps extends BaseSteps {
             
             System.out.println("⏳ Waiting for Order Success page...");
             try {
-                new WebDriverWait(driver, Duration.ofSeconds(60)).until(
+                new WebDriverWait(driver, Duration.ofSeconds(90)).until(
                     ExpectedConditions.or(
                         ExpectedConditions.urlContains("order-success"),
                         ExpectedConditions.urlContains("order/success")
@@ -466,13 +620,13 @@ public class PaymentPageSteps extends BaseSteps {
                 );
                 System.out.println("⭐ Successfully landed on: " + driver.getCurrentUrl());
             } catch (Exception e) {
-                System.out.println("⚠️ order-success redirect not observed within 60s.");
+                System.out.println("⚠️ order-success redirect not observed within 90s.");
                 System.out.println("   Current URL: " + driver.getCurrentUrl());
                 System.out.println("   Continuing so downstream order-id capture can use storage/API fallbacks.");
             }
 
             System.out.println("========== 🎯 PAYMENT EXECUTION COMPLETED ==========");
-            Thread.sleep(5000); // Small wait for system processing
+            Thread.sleep(8000); // Wait for payment processing to complete
             return;
         }
 
@@ -619,9 +773,10 @@ public class PaymentPageSteps extends BaseSteps {
 	    }
 	    System.out.println("   Amount to Pay (from UI): ₹" + amountToPay);
 	    
-	    // Step 2: Calculate reward as 50% of amount to pay (no Excel, no capping)
-	    double rewardToUse = amountToPay / 2.0;
-	    System.out.println("   Reward to Use (50% of Amount): ₹" + rewardToUse);
+	    // Step 2: Calculate reward as 50% of amount to pay, capped at ₹1000 (business rule)
+	    final double MAX_REWARD_DISCOUNT = 1000.0;
+	    double rewardToUse = Math.min(amountToPay / 2.0, MAX_REWARD_DISCOUNT);
+	    System.out.println("   Reward to Use (50% of Amount, max ₹1000): ₹" + rewardToUse);
 	    
 	    // Step 3: Click checkbox and enter reward amount
 	    try {

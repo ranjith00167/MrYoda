@@ -8,7 +8,6 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -172,7 +171,7 @@ public class CouponComprehensiveTest extends BaseTest {
 
         Map<String, Object> primeCoupon = firstCoupon("prime");
         if (primeCoupon == null) {
-            throw new SkipException("No prime coupon available.");
+            Assert.fail("No prime coupon available — API returned empty list.");
         }
 
         Map<String, Object> payload = buildCartPayload(nonPrimeUserId, str(primeCoupon.get("guid")),
@@ -190,7 +189,7 @@ public class CouponComprehensiveTest extends BaseTest {
         String token = RequestContext.getMemberToken();
         Map<String, Object> nonPrimeCoupon = firstCoupon("nonPrime");
         if (nonPrimeCoupon == null) {
-            throw new SkipException("No nonPrime coupon available.");
+            Assert.fail("No nonPrime coupon available — API returned empty list.");
         }
 
         Map<String, Object> payload = buildCartPayload(userId, str(nonPrimeCoupon.get("guid")),
@@ -207,7 +206,7 @@ public class CouponComprehensiveTest extends BaseTest {
         String token = RequestContext.getMemberToken();
         Map<String, Object> coupon = firstCoupon("prime");
         if (coupon == null) {
-            throw new SkipException("No prime coupon available.");
+            Assert.fail("No prime coupon available — API returned empty list.");
         }
 
         String guid = str(coupon.get("guid"));
@@ -252,7 +251,7 @@ public class CouponComprehensiveTest extends BaseTest {
         }
 
         if (couponResult == null || !bool(couponResult.get("valid"))) {
-            throw new SkipException("Coupon not valid in cart; skipping subtraction verification.");
+            Assert.fail("Coupon not valid in cart — cannot verify subtraction. couponResult: " + couponResult);
         }
 
         double discount = 0;
@@ -441,7 +440,7 @@ public class CouponComprehensiveTest extends BaseTest {
     public void TC_CPN_027_CouponValueEqualsOrderTotal() {
         Map<String, Object> coupon = firstCoupon("prime");
         if (coupon == null)
-            throw new SkipException("No coupon available.");
+            Assert.fail("No prime coupon available — API returned empty list.");
         double couponValue = toDouble(coupon.get("coupon_value"));
         if (couponValue <= 0) {
             Assert.assertTrue(true, "Coupon value not suitable in current environment.");
@@ -465,7 +464,7 @@ public class CouponComprehensiveTest extends BaseTest {
     public void TC_CPN_028_CouponValueGreaterThanOrderTotal() {
         Map<String, Object> coupon = firstCoupon("prime");
         if (coupon == null)
-            throw new SkipException("No coupon available.");
+            Assert.fail("No prime coupon available — API returned empty list.");
         String userId = RequestContext.getMemberUserId();
         String token = RequestContext.getMemberToken();
         Map<String, Object> payload = buildCartPayload(userId, str(coupon.get("guid")), 1, false);
@@ -481,7 +480,7 @@ public class CouponComprehensiveTest extends BaseTest {
         String token = RequestContext.getMemberToken();
         Map<String, Object> coupon = firstCoupon("prime");
         if (coupon == null)
-            throw new SkipException("No coupon available.");
+            Assert.fail("No prime coupon available — API returned empty list.");
         double minOrder = Math.max(1, toDouble(coupon.get("min_order_amount")));
         Map<String, Object> payload = buildCartPayload(userId, str(coupon.get("guid")), minOrder - 1, false);
         callAddCart(token, payload);
@@ -521,7 +520,7 @@ public class CouponComprehensiveTest extends BaseTest {
         String userId = RequestContext.getMemberUserId();
         Map<String, Object> coupon = firstCoupon("prime");
         if (coupon == null)
-            throw new SkipException("No coupon available.");
+            Assert.fail("No prime coupon available — API returned empty list.");
         Map<String, Object> payload = buildCartPayload(userId, str(coupon.get("guid")),
                 toDouble(coupon.get("min_order_amount")), true);
         Response response = callAddCart("invalid-token-value", payload);
@@ -607,9 +606,7 @@ public class CouponComprehensiveTest extends BaseTest {
         for (Map<String, Object> c : coupons) {
             Instant end = parseInstant(c.get("end_date"));
             if (end != null && end.isBefore(now)) {
-                throw new SkipException(
-                        "API returned expired coupon due to delayed cleanup in staging environment. Guid: "
-                                + c.get("guid"));
+                Assert.fail("API returned expired coupon — should not be listed. Guid: " + c.get("guid"));
             }
         }
     }
@@ -621,7 +618,7 @@ public class CouponComprehensiveTest extends BaseTest {
         for (Map<String, Object> c : coupons) {
             Instant from = parseInstant(c.get("effective_from"));
             if (from != null && from.isAfter(now)) {
-                throw new SkipException("API returned future coupon. Guid: " + c.get("guid"));
+                Assert.fail("API returned future coupon — should not be listed. Guid: " + c.get("guid"));
             }
         }
     }
@@ -632,7 +629,7 @@ public class CouponComprehensiveTest extends BaseTest {
         String token = RequestContext.getMemberToken();
         Map<String, Object> active = findCoupon("prime", c -> "active".equalsIgnoreCase(str(c.get("status"))));
         if (active == null) {
-            throw new SkipException("No active prime coupon found.");
+            Assert.fail("No active prime coupon found — API returned no active coupons.");
         }
 
         String guid = str(active.get("guid"));
@@ -727,7 +724,7 @@ public class CouponComprehensiveTest extends BaseTest {
         String token = RequestContext.getMemberToken();
         Map<String, Object> coupon = firstCoupon("prime");
         if (coupon == null) {
-            throw new SkipException("No prime coupon found.");
+            Assert.fail("No prime coupon found — API returned empty list.");
         }
         double minOrder = Math.max(1.0, toDouble(coupon.get("min_order_amount")));
         Map<String, Object> payload = buildCartPayload(userId, str(coupon.get("guid")), minOrder, false);
@@ -862,8 +859,26 @@ public class CouponComprehensiveTest extends BaseTest {
     }
 
     private List<Map<String, Object>> getCoupons(String couponUserType) {
+        // API validates user_id + coupon_user_type combination:
+        //   prime user → must request "prime" coupons
+        //   nonPrime user → must request "nonPrime" coupons
+        String userId;
+        if ("nonPrime".equalsIgnoreCase(couponUserType) || "nonprime".equalsIgnoreCase(couponUserType)) {
+            userId = RequestContext.getNonMemberUserId();
+            if (userId == null) {
+                userId = RequestContext.getMemberUserId();
+            }
+        } else {
+            userId = RequestContext.getMemberUserId();
+            if (userId == null) {
+                userId = RequestContext.getNonMemberUserId();
+            }
+        }
         Map<String, String> payload = new HashMap<>();
         payload.put("coupon_user_type", couponUserType);
+        if (userId != null) {
+            payload.put("user_id", userId);
+        }
         Response response = RestAssured.given()
                 .baseUri(APIEndpoints.DIAGNOSTICS_BASE_URL)
                 .contentType(ContentType.JSON)

@@ -1,0 +1,42 @@
+services:
+  healenium-db:
+    image: postgres:13-alpine
+    container_name: healenium-db
+    environment:
+      POSTGRES_DB: healenium
+      POSTGRES_USER: healenium_user
+      POSTGRES_PASSWORD: YDk2nmNs4s9aCP6K
+    ports:
+      - "5433:5432"
+    volumes:
+      - healenium-pgdata:/var/lib/postgresql/data
+      - ./healenium-init.sql:/docker-entrypoint-initdb.d/healenium-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U healenium_user -d healenium"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  healenium-backend:
+    image: healenium/hlm-backend:3.5.0
+    container_name: healenium-backend
+    depends_on:
+      healenium-db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://healenium-db:5432/healenium
+      SPRING_DATASOURCE_USERNAME: healenium_user
+      SPRING_DATASOURCE_PASSWORD: YDk2nmNs4s9aCP6K
+      HLM_LOG_LEVEL: info
+      SPRING_LIQUIBASE_DEFAULT_SCHEMA: healenium
+    ports:
+      - "7878:7878"
+
+  healenium-selector-imitator:
+    image: healenium/hlm-selector-imitator:1.5
+    container_name: healenium-selector-imitator
+    ports:
+      - "7879:8000"
+
+volumes:
+  healenium-pgdata:

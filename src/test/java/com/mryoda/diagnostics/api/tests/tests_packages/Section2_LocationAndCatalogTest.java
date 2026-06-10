@@ -90,7 +90,7 @@ public class Section2_LocationAndCatalogTest extends BaseTest {
             System.out.println("   ✅ [" + (i+1) + "] " + title + " | City: " + city + " | ID: " + id);
         }
 
-        // Verify the default location (Madhapur) is present and set as selected
+        // Verify the default location (Ameerpet HQ) is present and set as selected
         String defaultId = RequestContext.getLocationId(DEFAULT_LOCATION);
         Assert.assertNotNull(defaultId,
                 "Default location '" + DEFAULT_LOCATION + "' must exist in the response");

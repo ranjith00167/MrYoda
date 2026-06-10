@@ -126,7 +126,7 @@ public class SlotAndCartUpdateAPITest extends BaseTest {
         if (brandId == null)
             brandId = RequestContext.getBrandId("Diagnostics");
 
-        // Get Lab Location ID (Madhapur)
+        // Get Lab Location ID (Ameerpet HQ)
         String labLocationId = RequestContext.getLocationId(DEFAULT_LOCATION);
 
         for (Map.Entry<String, Map<String, Object>> entry : allTests.entrySet()) {

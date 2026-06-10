@@ -164,6 +164,12 @@ public class RequestBuilder {
         return r;
     }
 
+    public Response getWithoutStatusCheck() {
+        Response r = prepare().when().get(endpoint).then().extract().response();
+        logPerformance(r, "GET");
+        return r;
+    }
+
     public Response put() {
         Response r = prepare().when().put(endpoint).then().extract().response();
         logPerformance(r, "PUT");
@@ -171,10 +177,22 @@ public class RequestBuilder {
         return r;
     }
 
+    public Response putWithoutStatusCheck() {
+        Response r = prepare().when().put(endpoint).then().extract().response();
+        logPerformance(r, "PUT");
+        return r;
+    }
+
     public Response delete() {
         Response r = prepare().when().delete(endpoint).then().extract().response();
         logPerformance(r, "DELETE");
         assertExpectedStatus(r);
+        return r;
+    }
+
+    public Response deleteWithoutStatusCheck() {
+        Response r = prepare().when().delete(endpoint).then().extract().response();
+        logPerformance(r, "DELETE");
         return r;
     }
 

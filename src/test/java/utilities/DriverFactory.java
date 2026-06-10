@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.PageLoadStrategy;
 
+import com.epam.healenium.SelfHealingDriver;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.Duration;
@@ -67,19 +69,29 @@ public class DriverFactory {
                     options.addArguments("--no-sandbox");
                     options.addArguments("--disable-dev-shm-usage");
 
+                } else {
+                    // Use --start-maximized arg instead of driver.manage().window().maximize()
+                    // to avoid Chrome 148+ CDP Runtime.evaluate compatibility issue
+                    options.addArguments("--start-maximized");
                 }
 
                 WebDriver webDriver = new ChromeDriver(options);
 
-                // ✅ Only maximize in headed mode
-                if (!isHeadless) {
-                    webDriver.manage().window().maximize();
-                }
-
                 // ❌ Remove implicit wait (use explicit waits only)
                 webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
 
-                driver.set(webDriver);
+                // ✅ Wrap with Healenium Self-Healing Driver
+                // If Healenium backend isn't available, gracefully fall back to regular driver
+                WebDriver finalDriver;
+                try {
+                    finalDriver = SelfHealingDriver.create(webDriver);
+                    System.out.println("✅ Healenium Self-Healing Driver initialized — broken locators will auto-heal");
+                } catch (Exception e) {
+                    System.out.println("⚠️ Healenium init failed (" + e.getMessage() + ") — using standard ChromeDriver");
+                    finalDriver = webDriver;
+                }
+
+                driver.set(finalDriver);
             }
 
             else {

@@ -65,18 +65,18 @@ public class LocationAPITest extends BaseTest {
         }
 
         // Verify critical location exists (Configured location is used in tests)
-        String madhapurLocationId = RequestContext.getLocationId(DEFAULT_LOCATION);
-        if (madhapurLocationId != null) {
+        String defaultLocationId = RequestContext.getLocationId(DEFAULT_LOCATION);
+        if (defaultLocationId != null) {
             System.out.println(
-                    "\n✅ Critical Location '" + DEFAULT_LOCATION + "' found and stored: " + madhapurLocationId);
+                    "\n✅ Critical Location '" + DEFAULT_LOCATION + "' found and stored: " + defaultLocationId);
 
             RequestContext.setSelectedLocation(DEFAULT_LOCATION); // Explicitly SET this as Selected
 
-            String madhapurLat = RequestContext.getLocationLatitude(DEFAULT_LOCATION);
-            String madhapurLong = RequestContext.getLocationLongitude(DEFAULT_LOCATION);
-            if (madhapurLat != null && madhapurLong != null) {
+            String defaultLat = RequestContext.getLocationLatitude(DEFAULT_LOCATION);
+            String defaultLong = RequestContext.getLocationLongitude(DEFAULT_LOCATION);
+            if (defaultLat != null && defaultLong != null) {
                 System.out.println(
-                        "   📍 " + DEFAULT_LOCATION + " Coordinates: Lat=" + madhapurLat + ", Long=" + madhapurLong);
+                        "   📍 " + DEFAULT_LOCATION + " Coordinates: Lat=" + defaultLat + ", Long=" + defaultLong);
             }
 
             System.out.println("   This location will be used in GlobalSearch and AddToCart APIs");

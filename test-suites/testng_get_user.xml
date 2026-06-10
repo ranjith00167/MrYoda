@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ============================================================
+  Suite  : User Collection — Get User API
+  Endpoint: GET /users/getUser/{user_id}
+  Purpose: Full positive + negative validation for the
+           getUser endpoint.
+
+  Flow   :
+    1. UserCreateAPITest  →  Registers a fresh random user,
+                             stores mobile + GUID in RequestContext
+    2. GetUserAPITest     →  All 6 test scenarios using the
+                             user_id (GUID) from RequestContext
+
+  POSITIVE (GU_01–02):
+    GU_01 — Valid user_id with valid token           → 200
+    GU_02 — Verify all response fields present       → 200
+
+  NEGATIVE — Path parameter (GU_05–06):
+    GU_05 — Non-existent GUID as user_id             → 4xx
+    GU_06 — Malformed (non-UUID) user_id             → 4xx
+  ============================================================
+-->
+<suite name="User Collection — Get User API" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="Get User — Full Validation Suite" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+
+        <classes>
+
+            <!-- ── Step 1: Register a fresh random user ────────────────── -->
+            <!-- Generates random mobile, calls /users/addUser, stores     -->
+            <!-- mobile + GUID in RequestContext for all downstream tests. -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods><include name="testUserRegistration_CreateNewUser"/></methods>
+            </class>
+
+            <!-- ── Step 2: Get User — 6 scenarios ───────────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.GetUserAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="GU_01_GetUser_ValidUserId"/>
+                    <include name="GU_02_GetUser_VerifyResponseFields"/>
+
+                    <!-- NEGATIVE — Path parameter validation -->
+                    <include name="GU_05_GetUser_NonExistentUserId"/>
+                    <include name="GU_06_GetUser_MalformedUserId"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+</suite>

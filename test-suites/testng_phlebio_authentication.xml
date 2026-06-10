@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Phlebio Authentication Regression Suite"
+       verbose="2"
+       parallel="none">
+
+    <!-- =========================
+         LISTENERS
+    ========================== -->
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- =========================
+         POSITIVE SCENARIOS
+    ========================== -->
+    <test name="Phlebio Auth Positive Scenarios"
+          preserve-order="true">
+
+        <classes>
+
+            <class name="com.mryoda.diagnostics.api.tests.phlebio.PhlebioAuthTest">
+
+                <methods>
+
+                    <include name="PHLEBO_AUTH_01_Login"/>
+                    <include name="PHLEBO_AUTH_02_ResetPasswordSendOtp"/>
+                    <include name="PHLEBO_AUTH_03_UpdatePassword"/>
+                    <include name="PHLEBO_AUTH_04_Logout"/>
+                    <include name="PHLEBO_AUTH_05_SendLoginOtp"/>
+                    <include name="PHLEBO_AUTH_06_LoginWithOtp"/>
+
+                </methods>
+
+            </class>
+
+        </classes>
+
+    </test>
+
+    <!-- =========================
+         NEGATIVE SCENARIOS
+    ========================== -->
+    <test name="Phlebio Auth Negative Scenarios"
+          preserve-order="true">
+
+        <classes>
+
+            <class name="com.mryoda.diagnostics.api.tests.phlebio.PhlebioAuthNegativeTest">
+
+                <methods>
+
+                    <!-- LOGIN NEGATIVE -->
+                    <include name="PHLEBO_AUTH_NEG_01_LoginWrongPassword"/>
+                    <include name="PHLEBO_AUTH_NEG_02_LoginUnregisteredMobile"/>
+                    <include name="PHLEBO_AUTH_NEG_03_LoginEmptyMobile"/>
+                    <include name="PHLEBO_AUTH_NEG_04_LoginEmptyPassword"/>
+                    <include name="PHLEBO_AUTH_NEG_16_LoginShortMobile"/>
+
+                    <!-- RESET PASSWORD NEGATIVE -->
+                    <include name="PHLEBO_AUTH_NEG_05_ResetOtpUnregisteredMobile"/>
+                    <include name="PHLEBO_AUTH_NEG_06_ResetOtpEmptyMobile"/>
+                    <include name="PHLEBO_AUTH_NEG_07_ResetOtpInvalidMobileFormat"/>
+
+                    <!-- UPDATE PASSWORD NEGATIVE -->
+                    <include name="PHLEBO_AUTH_NEG_08_UpdatePasswordEmptyPassword"/>
+                    <include name="PHLEBO_AUTH_NEG_09_UpdatePasswordUnregisteredMobile"/>
+                    <include name="PHLEBO_AUTH_NEG_17_UpdatePasswordEmptyMobile"/>
+
+                    <!-- LOGOUT NEGATIVE -->
+                    <include name="PHLEBO_AUTH_NEG_10_LogoutNoAuthHeader"/>
+                    <include name="PHLEBO_AUTH_NEG_11_LogoutInvalidToken"/>
+
+                    <!-- SEND LOGIN OTP NEGATIVE -->
+                    <include name="PHLEBO_AUTH_NEG_12_SendLoginOtpUnregisteredMobile"/>
+                    <include name="PHLEBO_AUTH_NEG_13_SendLoginOtpEmptyMobile"/>
+                    <include name="PHLEBO_AUTH_NEG_18_SendLoginOtpInvalidMobileFormat"/>
+
+                    <!-- LOGIN WITH OTP NEGATIVE -->
+                    <include name="PHLEBO_AUTH_NEG_14_LoginWithWrongOtp"/>
+                    <include name="PHLEBO_AUTH_NEG_15_LoginWithEmptyOtp"/>
+                    <include name="PHLEBO_AUTH_NEG_19_LoginWithOtpUnregisteredMobile"/>
+                    <include name="PHLEBO_AUTH_NEG_20_LoginWithOtpEmptyMobile"/>
+
+                </methods>
+
+            </class>
+
+        </classes>
+
+    </test>
+
+</suite>

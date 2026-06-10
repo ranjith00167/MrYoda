@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Phlebio Registration Suite"
+       verbose="2"
+       parallel="none">
+
+    <!-- =========================
+         LISTENERS
+    ========================== -->
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- =========================
+         CREATE PHLEBO (savePhlebo)
+    ========================== -->
+    <test name="Phlebio Registration Scenarios"
+          preserve-order="true">
+
+        <classes>
+
+            <class name="com.mryoda.diagnostics.api.tests.phlebio.PhlebioRegistrationTest">
+
+                <methods>
+
+                    <include name="PHLEBO_REG_01_LoginPhlebo"/>
+                    <include name="PHLEBO_REG_02_CreatePhlebo"/>
+
+                </methods>
+
+            </class>
+
+        </classes>
+
+    </test>
+
+    <!-- =========================
+         NEGATIVE SCENARIOS
+    ========================== -->
+    <test name="Phlebio Registration Negative Scenarios"
+          preserve-order="true">
+
+        <classes>
+
+            <class name="com.mryoda.diagnostics.api.tests.phlebio.PhlebioRegistrationNegativeTest">
+
+                <methods>
+
+                    <!-- AUTH FAILURES -->
+                    <include name="PHLEBO_REG_NEG_01_NoAuthHeader"/>
+                    <include name="PHLEBO_REG_NEG_02_InvalidToken"/>
+
+                    <!-- MANDATORY FIELD VALIDATION -->
+                    <include name="PHLEBO_REG_NEG_03_MissingName"/>
+                    <include name="PHLEBO_REG_NEG_04_MissingMobileNumber"/>
+                    <include name="PHLEBO_REG_NEG_05_MissingPassword"/>
+                    <include name="PHLEBO_REG_NEG_06_MissingZoneId"/>
+                    <include name="PHLEBO_REG_NEG_07_MissingType"/>
+
+                    <!-- EMPTY / BLANK FIELD VALUES -->
+                    <include name="PHLEBO_REG_NEG_08_EmptyZoneId"/>
+                    <include name="PHLEBO_REG_NEG_09_EmptyMobileNumber"/>
+                    <include name="PHLEBO_REG_NEG_10_EmptyPassword"/>
+                    <include name="PHLEBO_REG_NEG_11_EmptyName"/>
+
+                    <!-- INVALID DATA FORMAT -->
+                    <include name="PHLEBO_REG_NEG_12_DuplicateMobileNumber"/>
+                    <include name="PHLEBO_REG_NEG_13_ShortMobileNumber"/>
+                    <include name="PHLEBO_REG_NEG_14_NonNumericMobile"/>
+                    <include name="PHLEBO_REG_NEG_15_InvalidZoneIdFormat"/>
+
+                    <!-- INVALID FIELD VALUES -->
+                    <include name="PHLEBO_REG_NEG_16_InvalidTypeValue"/>
+                    <include name="PHLEBO_REG_NEG_17_MobileNumberTooLong"/>
+
+                </methods>
+
+            </class>
+
+        </classes>
+
+    </test>
+
+    <!-- =========================
+         GET PHLEBO BY GUID
+    ========================== -->
+    <test name="Phlebio Get By GUID Scenarios"
+          preserve-order="true">
+
+        <classes>
+
+            <class name="com.mryoda.diagnostics.api.tests.phlebio.PhlebioGetByGuidTest">
+
+                <methods>
+
+                    <!-- POSITIVE -->
+                    <include name="GET_BY_GUID_01_ValidGuid"/>
+
+                    <!-- RESOURCE NOT FOUND -->
+                    <include name="GET_BY_GUID_NEG_01_NonExistentGuid"/>
+                    <include name="GET_BY_GUID_NEG_02_InvalidGuidFormat"/>
+
+                </methods>
+
+            </class>
+
+        </classes>
+
+    </test>
+
+    <!-- =========================
+         UPDATE PHLEBO (PUT /api/v1/phlebo)
+    ========================== -->
+    <test name="Phlebio Update Scenarios"
+          preserve-order="true">
+
+        <classes>
+
+            <class name="com.mryoda.diagnostics.api.tests.phlebio.PhlebioUpdateTest">
+
+                <methods>
+
+                    <!-- POSITIVE -->
+                    <include name="UPDATE_01_ValidUpdate"/>
+                    <include name="UPDATE_02_SecondNameUpdate"/>
+                    <include name="UPDATE_03_EmailUpdate"/>
+
+                    <!-- GUID VALIDATION -->
+                    <include name="UPDATE_NEG_01_EmptyGuid"/>
+                    <include name="UPDATE_NEG_02_MissingGuid"/>
+                    <include name="UPDATE_NEG_03_NonExistentGuid"/>
+                    <include name="UPDATE_NEG_04_InvalidGuidFormat"/>
+
+                    <!-- NAME VALIDATION -->
+                    <include name="UPDATE_NEG_05_MissingName"/>
+                    <include name="UPDATE_NEG_06_EmptyName"/>
+                    <include name="UPDATE_NEG_07_NameTooLong"/>
+
+                    <!-- EMAIL VALIDATION -->
+                    <include name="UPDATE_NEG_08_MissingEmail"/>
+                    <include name="UPDATE_NEG_09_EmptyEmail"/>
+                    <include name="UPDATE_NEG_10_InvalidEmailNoAt"/>
+                    <include name="UPDATE_NEG_11_InvalidEmailNoDomain"/>
+                    <include name="UPDATE_NEG_12_InvalidEmailNoTld"/>
+
+                </methods>
+
+            </class>
+
+        </classes>
+
+    </test>
+
+</suite>

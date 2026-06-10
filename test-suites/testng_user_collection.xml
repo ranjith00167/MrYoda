@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ============================================================
+  Suite  : User Collection — Full API Suite
+  Endpoints:
+    POST /users/addUser
+    POST /users/updateUser
+    GET  /users/getUser/{user_id}
+    GET  /users/getAllUsers
+    POST /users/deleteUser/{user_guid}
+    GET  /users/getRewardsByMobile/{mobile}
+    GET  /users/getAllDeletedUsers
+    GET  /users/notifications/user/{user_id}
+    GET  /users/getUsersByMobile/{mobile}
+    POST /users/getAdminUsers
+
+  Flow   :
+    1. UserCreateAPITest   →  Registers a fresh random user,
+                              stores mobile + GUID in RequestContext
+
+    2. UpdateUserAPITest   →  13 scenarios for POST /users/updateUser
+       POSITIVE (USR_01–03):
+         USR_01 — All fields (mandatory + non-mandatory)
+         USR_02 — Mandatory fields only
+         USR_03 — Mandatory + empty non-mandatory strings
+       NEGATIVE — Mandatory field validation (USR_06–13):
+         USR_06 — Missing first_name               → 4xx
+         USR_07 — Missing last_name                → 4xx
+         USR_08 — Missing dob                      → 4xx
+         USR_09 — Missing gender                   → 4xx
+         USR_10 — Missing title                    → 4xx
+         USR_11 — Missing guid                     → 4xx
+         USR_12 — Missing mobile                   → 4xx
+         USR_13 — Invalid (non-existent) GUID      → 4xx
+
+    3. GetUserAPITest      →  4 scenarios for GET /users/getUser/{user_id}
+       POSITIVE (GU_01–02):
+         GU_01 — Valid user_id with valid token     → 200
+         GU_02 — Verify all response fields         → 200
+       NEGATIVE — Path parameter (GU_05–06):
+         GU_05 — Non-existent GUID as user_id       → 4xx
+         GU_06 — Malformed (non-UUID) user_id       → 4xx
+
+    4. GetAllUsersAPITest  →  7 scenarios for GET /users/getAllUsers
+       POSITIVE (GAU_01–04):
+         GAU_01 — Valid admin token, page=1, pageSize=25  → 200
+         GAU_02 — Verify response structure               → 200
+         GAU_03 — pageSize=10 (≤10 results)               → 200
+         GAU_04 — page=2 (pagination)                     → 200
+    5. DeleteUserAPITest   →  4 scenarios for POST /users/deleteUser/{user_guid}
+       POSITIVE (DU_01–02):
+         DU_01 — Delete existing user with admin token    → 200
+         DU_02 — getUser on deleted GUID → 200 + validate fields
+       NEGATIVE — Path parameter (DU_03–04):
+         DU_03 — Non-existent GUID                        → 4xx
+         DU_04 — Malformed (non-UUID) GUID                → 4xx
+
+    6. GetRewardsByMobileAPITest  →  4 scenarios for GET /users/getRewardsByMobile/{mobile}
+       MEMBER FLOW (GRM_01–02):
+         GRM_01 — Member mobile → 200, membership_status=true, total_rewards present
+         GRM_02 — Verify all member response fields with values
+       NEW USER FLOW (GRM_03–04):
+         GRM_03 — New user mobile → 200, membership_status=false/absent
+         GRM_04 — Verify all new user response fields with values
+
+    7. GetAllDeletedUsersAPITest  →  3 scenarios for GET /users/getAllDeletedUsers
+         GADU_01 — Valid admin token → 200 + data array
+         GADU_02 — Verify response structure
+         GADU_03 — Verify first record fields (guid, first_name, last_name, mobile)
+
+    8. GetUserNotificationsAPITest  →  5 scenarios for GET /users/notifications/user/{user_id}
+       POSITIVE (GUN_01–03):
+         GUN_01 — Valid admin token + valid user_id → 200
+         GUN_02 — Verify response structure (success, data)
+         GUN_03 — Verify notification record fields if non-empty
+       NEGATIVE (GUN_04–05):
+         GUN_04 — Fresh user GUID (no notifications yet)   → 200 + empty data
+         GUN_05 — Malformed (non-UUID) user_id             → 400 [API DEFECT: returns 200]
+
+    9. GetUsersByMobileAPITest  →  4 scenarios for GET /users/getUsersByMobile/{mobile}
+       Flow: Login as member → create random new user → query by random mobile
+       POSITIVE (GUM_01–02):
+         GUM_01 — Member token + newly created user's mobile → 200 + user data
+         GUM_02 — Verify all response fields (guid, mobile, first_name, last_name)
+       NEGATIVE — Path param (GUM_03–04):
+         GUM_03 — Non-existent mobile         → 4xx or empty data
+         GUM_04 — Invalid mobile format       → 4xx
+
+   10. GetAdminUsersAPITest  →  4 scenarios for POST /users/getAdminUsers
+       Flow: Admin login → POST with empty body {}
+       NOTE: Auth is not enforced on this endpoint (API defect)
+       POSITIVE (GAD_01–03):
+         GAD_01 — Valid admin token + {} body → 200 + admin users list
+         GAD_02 — Verify response structure (success, data array non-empty)
+         GAD_03 — Verify record fields (guid, mobile, is_admin_user=true, role)
+       OBSERVED BEHAVIOUR (GAD_04):
+         GAD_04 — No Authorization header → 200 [API DEFECT: auth not enforced]  ============================================================
+-->
+<suite name="User Collection — Full API Suite" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 1: Update User                                  -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Update User — Full Validation Suite" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+        <classes>
+
+            <!-- Step 1: Register a fresh random user -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods><include name="testUserRegistration_CreateNewUser"/></methods>
+            </class>
+
+            <!-- Step 2: Update User — 13 scenarios -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UpdateUserAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="USR_01_UpdateUser_AllFields"/>
+                    <include name="USR_02_UpdateUser_MandatoryFieldsOnly"/>
+                    <include name="USR_03_UpdateUser_EmptyNonMandatoryFields"/>
+
+                    <!-- NEGATIVE — Mandatory field validation -->
+                    <include name="USR_06_UpdateUser_Missing_FirstName"/>
+                    <include name="USR_07_UpdateUser_Missing_LastName"/>
+                    <include name="USR_08_UpdateUser_Missing_Dob"/>
+                    <include name="USR_09_UpdateUser_Missing_Gender"/>
+                    <include name="USR_10_UpdateUser_Missing_Title"/>
+                    <include name="USR_11_UpdateUser_Missing_Guid"/>
+                    <include name="USR_12_UpdateUser_Missing_Mobile"/>
+                    <include name="USR_13_UpdateUser_InvalidGuid"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 2: Get User                                     -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Get User — Full Validation Suite" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+        <classes>
+
+            <!-- Step 1: Register a fresh random user -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods><include name="testUserRegistration_CreateNewUser"/></methods>
+            </class>
+
+            <!-- Step 2: Get User — 4 scenarios -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.GetUserAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="GU_01_GetUser_ValidUserId"/>
+                    <include name="GU_02_GetUser_VerifyResponseFields"/>
+
+                    <!-- NEGATIVE — Path parameter validation -->
+                    <include name="GU_05_GetUser_NonExistentUserId"/>
+                    <include name="GU_06_GetUser_MalformedUserId"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 4: Get All Users (Admin)                        -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Get All Users — Admin API Suite" preserve-order="true">
+        <classes>
+
+            <!-- GetAllUsersAPITest handles its own @BeforeClass admin login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.GetAllUsersAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="GAU_01_GetAllUsers_ValidAdminToken"/>
+                    <include name="GAU_02_GetAllUsers_VerifyResponseStructure"/>
+                    <include name="GAU_03_GetAllUsers_SmallPageSize"/>
+                    <include name="GAU_04_GetAllUsers_Page2"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 5: Delete User (Admin)                          -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Delete User — Admin API Suite" preserve-order="true">
+        <classes>
+
+            <!-- DeleteUserAPITest handles its own @BeforeClass admin login + user setup -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.DeleteUserAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="DU_01_DeleteUser_ValidGuid"/>
+                    <include name="DU_02_DeleteUser_VerifyUserGone"/>
+
+                    <!-- NEGATIVE — Path parameter validation -->
+                    <include name="DU_03_DeleteUser_NonExistentGuid"/>
+                    <include name="DU_04_DeleteUser_MalformedGuid"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 6: Get Rewards By Mobile                        -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Get Rewards By Mobile — Member &amp; New User Suite" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.GetRewardsByMobileAPITest">
+                <methods>
+                    <!-- MEMBER FLOW -->
+                    <include name="GRM_01_GetRewards_Member_ValidResponse"/>
+                    <include name="GRM_02_GetRewards_Member_VerifyFields"/>
+
+                    <!-- NEW USER FLOW -->
+                    <include name="GRM_03_GetRewards_NewUser_ValidResponse"/>
+                    <include name="GRM_04_GetRewards_NewUser_VerifyFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 7: Get All Deleted Users (Admin)                -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Get All Deleted Users — Admin API Suite" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.GetAllDeletedUsersAPITest">
+                <methods>
+                    <include name="GADU_01_GetAllDeletedUsers_ValidAdminToken"/>
+                    <include name="GADU_02_GetAllDeletedUsers_VerifyStructure"/>
+                    <include name="GADU_03_GetAllDeletedUsers_VerifyRecordFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 8: Get User Notifications (Admin)               -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Get User Notifications — Admin API Suite" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.GetUserNotificationsAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="GUN_01_GetUserNotifications_ValidUserId"/>
+                    <include name="GUN_02_GetUserNotifications_VerifyStructure"/>
+                    <include name="GUN_03_GetUserNotifications_VerifyRecordFields"/>
+
+                    <!-- NEGATIVE — Path parameter validation -->
+                    <include name="GUN_04_GetUserNotifications_NonExistentUserId"/>
+                    <include name="GUN_05_GetUserNotifications_MalformedUserId"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 9: Get Users By Mobile                          -->
+    <!-- Flow: member login → create random user → query mobile -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Get Users By Mobile — Member Auth &amp; New User Suite" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <classes>
+
+            <!-- GetUsersByMobileAPITest handles its own @BeforeClass:
+                 1. Member login (ConfigLoader.memberMobile)
+                 2. Create fresh random new user via /users/addUser -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.GetUsersByMobileAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="GUM_01_GetUsersByMobile_ValidMobile"/>
+                    <include name="GUM_02_GetUsersByMobile_VerifyResponseFields"/>
+
+                    <!-- NEGATIVE — Path parameter -->
+                    <include name="GUM_03_GetUsersByMobile_NonExistentMobile"/>
+                    <include name="GUM_04_GetUsersByMobile_InvalidMobileFormat"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!-- TEST 10: Get Admin Users (Admin)                     -->
+    <!-- Flow: admin login → POST /users/getAdminUsers with {} -->
+    <!-- ════════════════════════════════════════════════════ -->
+    <test name="Get Admin Users — Admin API Suite" preserve-order="true">
+        <classes>
+
+            <!-- GetAdminUsersAPITest handles its own @BeforeClass:
+                 Admin login via POST /auth/login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.GetAdminUsersAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="GAD_01_GetAdminUsers_ValidAdminToken"/>
+                    <include name="GAD_02_GetAdminUsers_VerifyResponseStructure"/>
+                    <include name="GAD_03_GetAdminUsers_VerifyRecordFields"/>
+
+                    <!-- OBSERVED BEHAVIOUR — no auth enforcement -->
+                    <include name="GAD_04_GetAdminUsers_NoAuthToken"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+</suite>

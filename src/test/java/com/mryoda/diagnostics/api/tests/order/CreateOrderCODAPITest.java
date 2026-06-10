@@ -24,7 +24,7 @@ public class CreateOrderCODAPITest extends BaseTest {
     // Valid postal codes for service centers only
     private static final Map<String, String> LOCATION_POSTAL_CODES = new HashMap<>();
     static {
-        LOCATION_POSTAL_CODES.put("Madhapur", "500033"); // Hyderabad - Madhapur
+        // Madhapur removed — Ameerpet (HQ) is the default Hyderabad location
         LOCATION_POSTAL_CODES.put("Ameerpet (HQ)", "500016"); // Hyderabad - Ameerpet
         LOCATION_POSTAL_CODES.put("Guntur", "522001"); // Guntur
         LOCATION_POSTAL_CODES.put("Khammam", "507001"); // Khammam
@@ -721,6 +721,15 @@ public class CreateOrderCODAPITest extends BaseTest {
         System.out.println("      GET PAYMENT BY ID API (DEV)");
         System.out.println("==========================================================");
 
+        if (paymentId == null || paymentId.isEmpty()) {
+            String msg = "❌ callGetPaymentByIdAPI: paymentId is null or empty — cannot call API.";
+            logFailure(msg);
+            if (assertOnFailure) {
+                Assert.fail(msg);
+            }
+            return null;
+        }
+
         Map<String, String> payload = new HashMap<>();
         payload.put("id", paymentId);
 
@@ -824,6 +833,14 @@ public class CreateOrderCODAPITest extends BaseTest {
         // Extract payment data
         Map<String, Object> paymentData = paymentResponse.jsonPath().getMap("data.payments");
         List<Map<String, Object>> orderItems = paymentResponse.jsonPath().getList("data.order_items");
+
+        if (paymentData == null) {
+            String msg = "❌ Cross-API validation failed: 'data.payments' is null in GetPaymentById response."
+                    + " paymentId=" + expectedPaymentId
+                    + " | Response: " + paymentResponse.getBody().asString();
+            logFailure(msg);
+            throw new RuntimeException(msg);
+        }
 
         // 1. CART VS PAYMENT TOTAL VALIDATION
         System.out.println("\n📊 1. TOTAL AMOUNT CONSISTENCY CHECK:");
@@ -1090,6 +1107,12 @@ public class CreateOrderCODAPITest extends BaseTest {
                 System.setProperty("phlebo.guid", phlebotomistId != null ? phlebotomistId : ""); // Use phlebotomistId
                                                                                                  // for guid
                 RequestContext.setCurrentPhleboGuid(phlebotomistId);
+
+                // Diagnostics phlebo login does NOT return a JWT token.
+                // Login to the phlebo notification service separately to get the JWT
+                // required for clock-in (COD_06D) and other notification service calls.
+                callPhleboNotificationLoginAPI();
+
                 return phlebotomistId;
             } else {
                 String msg = "❌ Phlebotomist Login Failed: " + response.jsonPath().getString("msg");
@@ -1106,12 +1129,64 @@ public class CreateOrderCODAPITest extends BaseTest {
     }
 
     // -------------------------------
+    // HELPER: Call Phlebo Notification Service Login API
+    // Gets the JWT required for phlebo-notification endpoints (clock-in, etc.)
+    // The diagnostics /phlebo/loginPhlebo endpoint does NOT return a token;
+    // this service has its own auth and must be called separately.
+    // -------------------------------
+    protected void callPhleboNotificationLoginAPI() {
+        System.out.println("\n==========================================================");
+        System.out.println("      PHLEBO NOTIFICATION SERVICE - LOGIN");
+        System.out.println("==========================================================");
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("mobile", "9360651932");
+        payload.put("password", "12345678");
+        payload.put("token",
+                "ekyDQkzfRUadKjgG85k9Tm:APA91bHM5e1_fOa-pz_WanRU92TpRVCfBsgYsIrVJVtsWu89-MW1VaELBetRl2HxccmKtBdhUOJu_glI3aqaUU6eAaNITyfQWEG1-omkdsn9dfTLIcJO-oU");
+
+        String url = APIEndpoints.PHLEBO_NOTIFICATION_BASE_URL + APIEndpoints.PHLEBO_NOTIFICATION_LOGIN;
+        System.out.println("   Target URL     : " + url);
+        System.out.println("   Request Payload: " + payload);
+
+        Response response = new RequestBuilder()
+                .setEndpoint(url)
+                .setRequestBody(payload)
+                .post();
+
+        System.out.println("   Response Status: " + response.getStatusCode());
+        System.out.println("   Response Body  : " + response.getBody().asString());
+
+        if (response.getStatusCode() == 200 || response.getStatusCode() == 201) {
+            // Try all common token field paths used across microservices
+            String token = response.jsonPath().getString("data.token");
+            if (token == null || token.isEmpty()) token = response.jsonPath().getString("data.access_token");
+            if (token == null || token.isEmpty()) token = response.jsonPath().getString("access_token");
+            if (token == null || token.isEmpty()) token = response.jsonPath().getString("token");
+
+            if (token != null && !token.isEmpty()) {
+                RequestContext.setPhleboToken(token);
+                System.setProperty("phlebo.token", token);
+                System.out.println("✅ Phlebo notification service token obtained and stored in RequestContext.");
+            } else {
+                System.out.println("⚠️ Phlebo notification login succeeded (" + response.getStatusCode()
+                        + ") but no token field found in response — clock-in will be skipped.");
+                System.out.println("   Full response for investigation: " + response.getBody().asString());
+            }
+        } else {
+            System.out.println("⚠️ Phlebo notification login returned status " + response.getStatusCode()
+                    + " — token NOT set. Clock-in step will be skipped.");
+            System.out.println("   Response body: " + response.getBody().asString());
+        }
+    }
+
+    // -------------------------------
     // HELPER: Call Assign Order API
     // -------------------------------
-    protected String callAssignOrderAPI(String orderId, String phlebotomistGuid, int expectedTotalPrice,
+    protected String callAssignOrderAPI(List<String> orderIds, String phlebotomistGuid, int expectedTotalPrice,
             String expectedPaymentId, String expectedAddressId, String expectedUserId, String expectedSlotGuid) {
-        if (phlebotomistGuid == null || orderId == null) {
-            System.out.println("⚠️ Cannot call Assign Order API - Missing GUID or Order ID");
+        if (phlebotomistGuid == null || orderIds == null || orderIds.isEmpty()) {
+            System.out.println("⚠️ Cannot call Assign Order API - Missing GUID or Order IDs");
             return null;
         }
 
@@ -1120,8 +1195,9 @@ public class CreateOrderCODAPITest extends BaseTest {
         System.out.println("==========================================================");
 
         Map<String, Object> payload = new HashMap<>();
-        payload.put("order_id", Arrays.asList(orderId)); // Array with single order ID
+        payload.put("order_ids", orderIds);
         payload.put("phlebo_id", phlebotomistGuid);
+        payload.put("is_update", false);
 
         String assignOrderUrl = APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.ASSIGN_ORDER;
 
@@ -1154,7 +1230,7 @@ public class CreateOrderCODAPITest extends BaseTest {
             boolean success = response.jsonPath().getBoolean("success");
             if (success) {
                 System.out.println("✅ Order Assignment Successful");
-                System.out.println("   Order ID: " + orderId);
+                System.out.println("   Order IDs: " + orderIds);
                 System.out.println("   Assigned to Phlebo GUID: " + phlebotomistGuid);
 
                 // --- VERIFICATION START ---
@@ -2210,8 +2286,8 @@ public class CreateOrderCODAPITest extends BaseTest {
             String orderTrackingId = null;
             if (phlebotomistGuid != null && orderId != null && !"EMPTY_DATA".equals(orderId)) {
                 // Using addressGuid for address verification as API usually returns GUID
-                orderTrackingId = callAssignOrderAPI(orderId, phlebotomistGuid, totalPrice, paymentId, addressGuid,
-                        userId, selectedSlotGuid);
+                orderTrackingId = callAssignOrderAPI(java.util.Collections.singletonList(orderId), phlebotomistGuid,
+                        totalPrice, paymentId, addressGuid, userId, selectedSlotGuid);
             } else {
                 System.out.println("⚠️ Skipping AssignOrder due to missing order ID or phlebo GUID");
             }
@@ -2617,6 +2693,13 @@ public class CreateOrderCODAPITest extends BaseTest {
         System.out.println("      APPROVE PAYMENT API");
         System.out.println("==========================================================");
 
+        if (orderId == null || orderId.isEmpty()) {
+            String msg = "❌ Cannot Approve Payment: orderId is null or empty. Ensure COD_04 (VerifyPayment) ran successfully.";
+            logFailure(msg);
+            Assert.fail(msg);
+            return;
+        }
+
         // 1. Get Order Details to extract Payment ID
         Response orderResponse = callGetOrderByIdAPI(token, orderId);
         if (orderResponse == null || orderResponse.getStatusCode() != 200) {
@@ -2725,13 +2808,18 @@ public class CreateOrderCODAPITest extends BaseTest {
                     System.out.println("   Per-order amounts stored (no coupon): " + orderTotals);
                 }
 
-                double amountToApprove = remainingPayableFromCart > 0 ? remainingPayableFromCart : gatewayPayableAmount;
+                // Backend validates that the amount in payment_details equals the sum of
+                // final_price across all order_items in the payment record.
+                // Always use consolidatedAmount (the actual sum) — not the cart due amount.
+                double amountToApprove = consolidatedAmount > 0 ? consolidatedAmount
+                        : (remainingPayableFromCart > 0 ? remainingPayableFromCart : gatewayPayableAmount);
                 if (amountToApprove <= 0 && contextPayableAmount > 0) {
                     amountToApprove = contextPayableAmount;
                 }
                 AssertionUtil.verifyTrue(amountToApprove > 0,
                         "Payable amount for approval should be positive (due/gateway/context)");
-                System.out.println("   ✅ Using payable amount for approval: ₹" + amountToApprove);
+                System.out.println("   ✅ Using approval amount (sum of order item final_prices): ₹" + amountToApprove
+                        + "  [cart due was ₹" + remainingPayableFromCart + "]");
                 calculatedTotal = amountToApprove;
 
                 // Create a single consolidated "Cash" entry for the entire payment

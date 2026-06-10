@@ -132,7 +132,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
             locs.forEach(l -> RequestContext.storeLocation(
                     String.valueOf(l.get("title")), String.valueOf(l.get("_id"))));
         }
-        RequestContext.setSelectedLocation("Madhapur");
+        RequestContext.setSelectedLocation("Ameerpet (HQ)");
 
         System.out.println("   Initializing brand metadata...");
         try {
@@ -155,8 +155,9 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
 
         // 5. GLOBAL SEARCH (Ensures tests exist in context for Cart operations)
         System.out.println("   Performing Global Search for flow tests...");
-        String[] testNames = { "Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)" };
-        String locationId = RequestContext.getLocationId("Madhapur");
+        String[] testNames = { "Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME",
+                "Complete Blood Count (CBC)", "T4 - THYROXINE", "Comprehensive Sepsis Panel" };
+        String locationId = RequestContext.getLocationId("Ameerpet (HQ)");
         Response searchResp = GlobalSearchHelper.searchTestsByFullNames(testNames, locationId);
         GlobalSearchHelper.extractAndStoreTests(searchResp, testNames);
 
@@ -257,7 +258,7 @@ public class DetailedCODFlowTest extends CreateOrderCODAPITest {
     @Test(priority = 7, dependsOnMethods = { "step04_VerifyPaymentPreCheck", "step06_PhlebotomistLogin" }, description = "QA Automation: Verify Assign Order")
     public void step07_AssignOrder() {
         System.out.println("\n>>> STEP 7: ASSIGN ORDER <<<");
-        orderTrackingId = callAssignOrderAPI(orderId, phlebotomistGuid, totalPrice, paymentId, addressGuid, userId,
+        orderTrackingId = callAssignOrderAPI(java.util.Collections.singletonList(orderId), phlebotomistGuid, totalPrice, paymentId, addressGuid, userId,
                 slotGuid);
         Assert.assertNotNull(orderTrackingId, "Order Tracking ID must be returned");
     }

@@ -80,9 +80,9 @@ public class COD_17_ReportGenerationTest extends BaseTest {
             LoggerUtil.info("📄 VALIDATING REPORT FOR VISIT: " + visitNumber);
             LoggerUtil.info("=".repeat(120));
 
-            // Polling Configuration
-            int maxRetries = 10;       // Reduced: up to 10 × 10s = 100 seconds per visit
-            int delayMs    = 10000;    // Changed from 15000 to 10000 (10 seconds instead of 15)
+            // Polling Configuration — wait long enough for lab to fully generate report
+            int maxRetries = 10;       // Up to 20 × 15s = 300 seconds (5 min) per visit
+            int delayMs    = 10000;    // 15 seconds between retries
             Response response        = null;
             Map<String, Object> data = null;
             String reportUrl         = null;
@@ -214,11 +214,13 @@ public class COD_17_ReportGenerationTest extends BaseTest {
                 List<Map<String, Object>> finalTests = data != null
                         ? (List<Map<String, Object>>) data.get("tests") : null;
                 int total = finalTests != null ? finalTests.size() : 0;
-                String syncMsg = "   ⚠️ Visit " + visitNumber + ": Only " + lastActualTestCount + "/" + total
-                        + " tests synced after " + maxRetries + " retries. Proceeding with available data.";
-                System.out.println(syncMsg);
+                String syncMsg = "Visit " + visitNumber + ": Only " + lastActualTestCount + "/" + total
+                        + " tests synced after " + maxRetries + " retries (waited " + (maxRetries * delayMs / 1000) + "s).";
+                System.out.println("   ❌ " + syncMsg);
                 logCODWarning("Report Generation", "PARTIAL_SYNC",
                     "Visit " + visitNumber + ": " + lastActualTestCount + "/" + total + " tests synced after " + maxRetries + " retries");
+                Assert.fail("❌ Report data not fully generated. " + syncMsg
+                        + " All test results must be synced before validation can proceed.");
             }
 
             // ── Handle different sync scenarios ─────────────────────────177

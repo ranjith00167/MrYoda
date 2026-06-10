@@ -37,8 +37,8 @@ public class APIGlobalSearchPricingSteps {
 
     @Given("the location ID is available from RequestContext")
     public void locationIdAvailable() {
-        // Try named location (DEFAULT_LOCATION = "Madhapur") first, then selectedLocationId
-        locationId = RequestContext.getLocationId("Madhapur");
+        // Try named location (DEFAULT_LOCATION = "Ameerpet (HQ)") first, then selectedLocationId
+        locationId = RequestContext.getLocationId("Ameerpet (HQ)");
         if (locationId == null) {
             locationId = RequestContext.getSelectedLocationId();
         }

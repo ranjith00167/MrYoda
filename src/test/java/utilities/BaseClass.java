@@ -35,6 +35,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import com.mryoda.diagnostics.api.utils.RequestContext;
+import com.mryoda.diagnostics.api.ai.chatbot.GeminiAPI;
+import com.mryoda.diagnostics.api.ai.config.FeatureFlagManager;
+import com.mryoda.diagnostics.api.ai.locator.GeminiLocatorGenerator;
+import com.mryoda.diagnostics.api.ai.locator.LocatorHealingManager;
+import com.mryoda.diagnostics.api.ai.locator.LocatorRepository;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
@@ -71,12 +76,54 @@ public class BaseClass {
     public static WebDriver driver;
     // --- END CRITICAL CHANGE ---
     protected static String[] testNames;
+
+    // ─── AI Locator Healing ───────────────────────────────────────────────────
+    private static LocatorHealingManager healingManager;
+    private static boolean aiHealingInitialized = false;
     public static By modalScrollContainer = By
             .xpath("//div[contains(@class,'flex-col') and contains(@class,'overflow-y-auto')]");
 
     public static Map<String, String> testData;
     public static int calculatedAge;
     public static String selectedGender;
+
+    /**
+     * Initialize AI Locator Healing. Called once per test session.
+     * Reads GEMINI_API_KEY from environment variable.
+     * If unavailable, healing is silently disabled.
+     */
+    public static void initAiHealing() {
+        if (aiHealingInitialized) return;
+        aiHealingInitialized = true;
+
+        FeatureFlagManager flags = new FeatureFlagManager();
+        if (!flags.isAiHealingEnabled()) {
+            System.out.println("🤖 AI Healing: DISABLED via config");
+            return;
+        }
+
+        String apiKey = System.getenv("GEMINI_API_KEY");
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            System.out.println("🤖 AI Healing: DISABLED (GEMINI_API_KEY not set)");
+            return;
+        }
+
+        try {
+            GeminiAPI geminiApi = new GeminiAPI(apiKey);
+            GeminiLocatorGenerator generator = new GeminiLocatorGenerator(geminiApi);
+            LocatorRepository repository = new LocatorRepository();
+            healingManager = new LocatorHealingManager(generator, repository);
+            System.out.println("🤖 AI Healing: ENABLED ✅ (Gemini + Cache)");
+        } catch (Exception e) {
+            System.out.println("🤖 AI Healing: FAILED to initialize — " + e.getMessage());
+            healingManager = null;
+        }
+    }
+
+    /** Get the healing manager instance (may be null if disabled). */
+    public static LocatorHealingManager getHealingManager() {
+        return healingManager;
+    }
 
     public static WebElement getWebElement(By locator, Duration timeout) {
         return waitForElementToBeVisible(locator, timeout);
@@ -1298,12 +1345,45 @@ public static void waitForDomStable() {
 
     public static WebElement waitForElementToBeVisible(By locator, Duration timeout) { // Driver param removed
         WebDriverWait wait = new WebDriverWait(driver, timeout);
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        } catch (TimeoutException e) {
+            // AI Healing: attempt to find element with alternative locators
+            if (healingManager != null && healingManager.isEnabled()) {
+                try {
+                    WebElement healed = LocatorHealingAdapter.findWithHealing(
+                            driver, locator, healingManager, locator.toString());
+                    if (healed != null) {
+                        System.out.println("🤖 AI Healing SUCCESS for: " + locator);
+                        return healed;
+                    }
+                } catch (Exception healEx) {
+                    System.out.println("🤖 AI Healing FAILED for: " + locator + " — " + healEx.getMessage());
+                }
+            }
+            throw e;
+        }
     }
 
     public static WebElement waitForElementToBeClickable(By locator, Duration timeout) { // Driver param removed
         WebDriverWait wait = new WebDriverWait(driver, timeout);
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+        try {
+            return wait.until(ExpectedConditions.elementToBeClickable(locator));
+        } catch (TimeoutException e) {
+            if (healingManager != null && healingManager.isEnabled()) {
+                try {
+                    WebElement healed = LocatorHealingAdapter.findWithHealing(
+                            driver, locator, healingManager, locator.toString());
+                    if (healed != null) {
+                        System.out.println("🤖 AI Healing (clickable) SUCCESS for: " + locator);
+                        return healed;
+                    }
+                } catch (Exception healEx) {
+                    System.out.println("🤖 AI Healing (clickable) FAILED for: " + locator);
+                }
+            }
+            throw e;
+        }
     }
 
     public static boolean waitForUrlContains(String partialUrl, Duration timeout) { // Driver param removed
@@ -1465,6 +1545,16 @@ public static void waitForDomStable() {
                 driver.switchTo().defaultContent();
                 driver.switchTo().frame(frames.get(i));
                 System.out.println("➡ Checking Frame Index: " + i);
+
+                // =============================
+                // 🟦 0️⃣ AMOUNT / CHECKOUT LANDING
+                // =============================
+                if (isPresent(By.xpath("//h3[contains(@class,'number-flip') and @data-value]")) ||
+                        isPresent(By.xpath("//*[@class='amount']")) ||
+                        isPresent(By.xpath("//*[contains(@class,'razorpay')]"))) {
+                    System.out.println("🟢 Active Frame: AMOUNT/CHECKOUT (Index " + i + ")");
+                    return;
+                }
 
                 // =============================
                 // 🟦 1️⃣ PRICE SUMMARY FRAME

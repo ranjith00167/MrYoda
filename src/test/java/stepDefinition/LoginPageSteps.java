@@ -8,20 +8,28 @@ import utilities.ConfigReader;
 import pageObjects.Locators;
 import org.openqa.selenium.NoSuchElementException;
 import com.mryoda.diagnostics.api.utils.RequestContext;
+import com.mryoda.diagnostics.api.builders.RequestBuilder;
+import com.mryoda.diagnostics.api.endpoints.APIEndpoints;
+import com.mryoda.diagnostics.api.payloads.UserPayloadBuilder;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import org.json.JSONObject;
 
 
 public class LoginPageSteps extends BaseSteps {
 
     @Given("the user is on the login page")
-    public void the_user_is_on_the_login_page() {
+    public void the_user_is_on_the_login_page() throws Throwable {
         driver.get(ConfigReader.get("staging_yoda_url"));
         BaseClass.waitAndClick(LocatorsPage.login, 10);
+        Thread.sleep(5000);
     }
 
     @When("the user enters otp")
-    public void the_user_enters_otp() {
+    public void the_user_enters_otp() throws Throwable {
         BaseClass.waitAndInput(LocatorsPage.enter_mobile_number, BaseClass.testData.get("mobileNumber"), 10);
         BaseClass.waitAndClick(LocatorsPage.get_otp_button, 10);
+        Thread.sleep(5000);
         BaseClass.waitAndInput(LocatorsPage.otpValue, BaseClass.testData.get("otp"), 10);
     }
 
@@ -170,25 +178,86 @@ public class LoginPageSteps extends BaseSteps {
     	BaseClass.loadExcelData("Diagnostics", "7");
 
     }
+
+    @Given("load the excel data for multi member and lab visit for new user")
+    public void load_the_excel_data_for_multi_member_and_lab_visit_for_new_user() {
+        BaseClass.loadExcelData("Diagnostics", "4");
+    }
+
+    @Given("load the excel data for multi member and home collection for new user")
+    public void load_the_excel_data_for_multi_member_and_home_collection_for_new_user() {
+        BaseClass.loadExcelData("Diagnostics", "3");
+    }
+
     @When("create an account with random mobile number")
     public void create_account_with_random_mobile_number() throws Throwable {
 
         String mobile = BaseClass.generateRandomMobileNumber();
-        System.out.println(mobile);
-        TestSession.generatedMobile = mobile; // store for validation/debug
+        TestSession.generatedMobile = mobile;
 
-        System.out.println("📱 SIGNUP → Generated Mobile: " + mobile);
+        System.out.println("========== 📝 REGISTERING USER VIA API ==========");
+        System.out.println("📱 Generated Mobile: " + mobile);
 
+        // Ensure RestAssured baseURI is set
+        if (RestAssured.baseURI == null || RestAssured.baseURI.contains("localhost")) {
+            String baseUrl = ConfigReader.get("base.url");
+            if (baseUrl != null) {
+                RestAssured.baseURI = baseUrl;
+            }
+        }
+
+        // Store mobile in RequestContext for payload builder
+        RequestContext.setMobile(mobile);
+
+        // Build registration payload and call API
+        // Push Excel names into context so UserPayloadBuilder uses them instead of random values.
+        // This makes the registered name predictable and matchable against the UI later.
+        RequestContext.setExcelFirstName(BaseClass.testData.get("firstName"));
+        RequestContext.setExcelLastName(BaseClass.testData.get("lastName"));
+        RequestContext.setExcelMiddleName(BaseClass.testData.get("middleName"));
+
+        JSONObject payload = UserPayloadBuilder.buildNewUserPayload();
+        payload.put("mobile", mobile);
+
+        System.out.println("➡️ Registration Payload: " + payload.toString(2));
+
+        Response response = new RequestBuilder()
+                .setEndpoint(APIEndpoints.USER_CREATE)
+                .setRequestBody(payload.toString())
+                .post();
+
+        int statusCode = response.getStatusCode();
+        System.out.println("✅ Registration API Response Status: " + statusCode);
+
+        if (statusCode == 200 || statusCode == 201) {
+            String userId    = response.jsonPath().getString("data.guid");
+            String firstName = response.jsonPath().getString("data.first_name");
+            String lastName  = response.jsonPath().getString("data.last_name");
+            RequestContext.setUserId(userId);
+            RequestContext.setFirstName(firstName);
+            // Store the actual registered full name so member-name validation uses
+            // the real name rather than whatever is in Excel.
+            TestSession.registeredMemberNames.clear();
+            String fullName = (firstName + (lastName != null && !lastName.isBlank() ? " " + lastName : "")).trim();
+            TestSession.registeredMemberNames.add(fullName);
+            System.out.println("✅ User Registered Successfully → GUID: " + userId + " | Full Name: " + fullName);
+        } else {
+            System.out.println("⚠️ Registration returned status " + statusCode + " — proceeding with UI login anyway");
+            System.out.println("   Response: " + response.asString());
+        }
+
+        System.out.println("========== 🌐 LAUNCHING UI LOGIN ==========");
+
+        // Now login via UI with the registered mobile
         BaseClass.waitAndInput(LocatorsPage.mobile_number, mobile, 10);
-
         BaseClass.waitAndClick(LocatorsPage.get_otp_button, 10);
 
         Thread.sleep(2000);
 
-        String otp = "123456"; // ALWAYS static for QA environment
+        String otp = "123456"; // Static OTP for QA environment
         BaseClass.waitAndInput(LocatorsPage.otpValue, otp, 10);
 
-
+        System.out.println("✅ UI Login initiated with pre-registered mobile: " + mobile);
     }
 
     // ============================================================

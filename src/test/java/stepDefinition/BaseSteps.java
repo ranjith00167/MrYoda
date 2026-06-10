@@ -2,6 +2,8 @@ package stepDefinition;
 
 import java.lang.reflect.Proxy;
 import java.util.Map;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import pageObjects.Locators;
 import utilities.BaseClass;
@@ -16,7 +18,7 @@ public class BaseSteps {
      */
     protected final WebDriver driver = (WebDriver) Proxy.newProxyInstance(
         WebDriver.class.getClassLoader(),
-        new Class<?>[] { WebDriver.class },
+        new Class<?>[] { WebDriver.class, JavascriptExecutor.class, TakesScreenshot.class },
         (proxy, method, args) -> method.invoke(BaseClass.driver, args)
     );
 

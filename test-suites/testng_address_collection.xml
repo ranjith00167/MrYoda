@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ============================================================
+  Suite  : Address Collection — Full API Suite
+  Endpoints:
+    POST   /address/addAddress
+    GET    /address/getAddressByUserId/{user_id}
+    GET    /address/getAddressByGuid/{address_guid}
+    DELETE /address/deleteAddressById/{address_guid}
+    PUT    /address/UpdateAddressById
+    POST   /address/checkServingLocation
+
+  Flow:
+    @BeforeClass runs ONCE for the single <test> block:
+      Step 1 — Login as member (ConfigLoader.memberMobile)
+               → memberToken, memberUserId, memberFirstName, memberLastName
+      Step 2 — Create random new user (POST /users/addUser)
+               → newUserToken, newUserUserId, newUserFirstName, newUserLastName
+
+  ────────────────────────────────────────────────────────────
+  POST /address/addAddress
+
+    POSITIVE (ADD_01–04):
+      ADD_01 — Member token + member user_id → 201 / 409 if already exists
+      ADD_02 — Verify member address response fields (user_id, mobile, city, state)
+      ADD_03 — New user token + new user_id → 201 + success + data
+      ADD_04 — Verify all new user address fields
+               (user_id, receiver_name, mobile, city, state, latitude, longitude)
+
+    NEGATIVE (ADD_05–09, ADD_11–20):
+      ADD_05 — receiver_name with digits → 422 validation error
+      ADD_06 — Missing receiver_name → 4xx
+      ADD_07 — Missing address_line1 → 4xx [API DEFECT: returns 500]
+      ADD_08 — Missing city → 4xx
+      ADD_09 — Empty body {} → 4xx
+      ADD_11 — Missing user_id → 4xx
+      ADD_12 — Missing name → 4xx
+      ADD_13 — Missing recipient_mobile_number → 4xx
+      ADD_14 — Missing country_code → 4xx
+      ADD_15 — Missing state → 4xx
+      ADD_16 — Missing postal_code → 4xx
+      ADD_17 — Missing country → 4xx
+      ADD_18 — Missing type → 4xx
+      ADD_19 — Missing latitude → 4xx
+      ADD_20 — Missing longitude → 4xx
+
+  ────────────────────────────────────────────────────────────
+  GET /address/getAddressByUserId/{user_id}
+
+    POSITIVE (GAU_01–04):
+      GAU_01 — Member token + member user_id → 200 + addresses list
+      GAU_02 — Verify first address record fields (guid, user_id, city, state, mobile)
+      GAU_03 — New user token + new user_id → 200 + list (address from ADD_03)
+      GAU_04 — Verify all new user address record fields
+               (guid, user_id, city, state, latitude, longitude, country, mobile)
+
+    NEGATIVE (GAU_05–06, GAU_11–13):
+      GAU_05 — Non-existent UUID → 200+empty or 4xx/5xx (MEMBER + NEW USER)
+      GAU_06 — Malformed user_id (non-UUID) → 4xx/5xx (MEMBER + NEW USER)
+      GAU_11 — Numeric-only user_id → 4xx/5xx (MEMBER + NEW USER)
+      GAU_12 — SQL injection in user_id → 4xx/5xx (MEMBER + NEW USER)
+      GAU_13 — Single-char user_id → 4xx/5xx (MEMBER + NEW USER)
+
+  ────────────────────────────────────────────────────────────
+  DELETE /address/deleteAddressById/{address_guid}
+
+    POSITIVE (DAB_01–04):
+      DAB_01 — Member: create fresh address then DELETE it → 200 success=true
+      DAB_02 — Member: verify deleted address is gone (GET returns 404 or empty)
+      DAB_03 — New user: create fresh address then DELETE it → 200 success=true
+      DAB_04 — New user: verify deleted address is gone
+
+    NEGATIVE (DAB_05–11):
+      DAB_05 — Non-existent UUID → 404 (MEMBER + NEW USER)
+      DAB_06 — Malformed GUID (non-UUID) → 400 (MEMBER + NEW USER)
+      DAB_07 — Numeric-only GUID → 400 (MEMBER + NEW USER)
+      DAB_08 — SQL injection in GUID → 400 (MEMBER + NEW USER)
+      DAB_09 — Single-char GUID → 400 (MEMBER + NEW USER)
+      DAB_10 — Re-delete already-deleted GUID → 404 (MEMBER)
+      DAB_11 — Re-delete already-deleted GUID → 404 (NEW USER)
+
+  ────────────────────────────────────────────────────────────
+  PUT /address/UpdateAddressById
+
+    POSITIVE (UAB_01–04):
+      UAB_01 — Member: update receiver_name → 200 success=true
+      UAB_02 — Member: verify updated field via GET
+      UAB_03 — New user: update receiver_name → 200 success=true
+      UAB_04 — New user: verify updated field via GET
+
+    NEGATIVE (UAB_05–11):
+      UAB_05 — Missing guid field → 400 (MEMBER + NEW USER)
+      UAB_06 — Non-existent guid → 404 (MEMBER + NEW USER)
+      UAB_07 — Malformed guid (non-UUID) → 400 (MEMBER + NEW USER)
+      UAB_08 — Empty body {} → 400 (MEMBER + NEW USER)
+      UAB_09 — Invalid receiver_name (digits) → 422 (MEMBER + NEW USER)
+      UAB_10 — SQL injection in guid → 400 (MEMBER + NEW USER)
+      UAB_11 — Single-char guid → 400 (MEMBER + NEW USER)
+
+  ────────────────────────────────────────────────────────────
+  POST /address/checkServingLocation
+
+    POSITIVE (CSL_01–03):
+      CSL_01 — Valid lat/long with Member token → 200
+      CSL_02 — Valid lat/long with New User token → 200
+      CSL_03 — Verify response fields (success, data)
+
+    NEGATIVE (CSL_04–13):
+      CSL_04 — Missing latitude → 4xx (MEMBER + NEW USER)
+      CSL_05 — Missing longitude → 4xx (MEMBER + NEW USER)
+      CSL_06 — Empty body → 4xx (MEMBER + NEW USER)
+      CSL_07 — Latitude as string → 4xx (MEMBER + NEW USER)
+      CSL_08 — Longitude as string → 4xx (MEMBER + NEW USER)
+      CSL_09 — Out-of-range latitude (999) → 4xx or 200 non-served
+      CSL_10 — Non-served location (Antarctica) → 200
+      CSL_11 — Null latitude → 4xx (MEMBER + NEW USER)
+      CSL_12 — Null longitude → 4xx (MEMBER + NEW USER)
+      CSL_13 — No auth token → 401/403 or 200 (if auth optional)
+  ============================================================
+-->
+<suite name="Address Collection — Full API Suite" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ════════════════════════════════════════════════════════════════════ -->
+    <!-- TEST 1: Address API — Full Suite                                    -->
+    <!--   POST   /address/addAddress  — Positive (ADD_01–04) + Negative (ADD_05–09, ADD_11–20)  -->
+    <!--   GET    /address/getAddressByUserId/{user_id}  — Positive (GAU_01–04) + Negative (GAU_05–06, GAU_11–13) -->
+    <!--   DELETE /address/deleteAddressById — Positive (DAB_01–04) + Negative (DAB_05–11) -->
+    <!--   PUT    /address/UpdateAddressById — Positive (UAB_01–04) + Negative (UAB_05–11) -->
+    <!--                                                                     -->
+    <!--   @BeforeClass runs ONCE:                                           -->
+    <!--     • Member login  → memberToken, memberUserId                     -->
+    <!--     • New user created → newUserToken, newUserUserId                -->
+    <!--   ADD_03 adds an address for the new user so GAU_03/04 can query it -->
+    <!-- ════════════════════════════════════════════════════════════════════ -->
+    <test name="Address API — Full Suite" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.address.AddAddressAPITest">
+                <methods>
+                    <!-- ── POST /address/addAddress — POSITIVE ────────── -->
+                    <include name="ADD_01_AddAddress_MemberUser_ValidData"/>
+                    <include name="ADD_02_AddAddress_MemberUser_VerifyResponseFields"/>
+                    <include name="ADD_03_AddAddress_NewUser_ValidData"/>
+                    <include name="ADD_04_AddAddress_NewUser_VerifyResponseFields"/>
+
+                    <!-- ── POST /address/addAddress — NEGATIVE ────────── -->
+                    <include name="ADD_05_AddAddress_InvalidReceiverName_WithDigits"/>
+                    <include name="ADD_06_AddAddress_MissingReceiverName"/>
+                    <include name="ADD_07_AddAddress_MissingAddressLine1"/>
+                    <include name="ADD_08_AddAddress_MissingCity"/>
+                    <include name="ADD_09_AddAddress_EmptyBody"/>
+                    <include name="ADD_11_AddAddress_MissingUserId"/>
+                    <include name="ADD_12_AddAddress_MissingName"/>
+                    <include name="ADD_13_AddAddress_MissingRecipientMobile"/>
+                    <include name="ADD_14_AddAddress_MissingCountryCode"/>
+                    <include name="ADD_15_AddAddress_MissingState"/>
+                    <include name="ADD_16_AddAddress_MissingPostalCode"/>
+                    <include name="ADD_17_AddAddress_MissingCountry"/>
+                    <include name="ADD_18_AddAddress_MissingType"/>
+                    <include name="ADD_19_AddAddress_MissingLatitude"/>
+                    <include name="ADD_20_AddAddress_MissingLongitude"/>
+
+                    <!-- ── GET /address/getAddressByUserId — POSITIVE ─── -->
+                    <include name="GAU_01_GetAddressByUserId_MemberUser_Valid"/>
+                    <include name="GAU_02_GetAddressByUserId_MemberUser_VerifyFields"/>
+                    <include name="GAU_03_GetAddressByUserId_NewUser_Valid"/>
+                    <include name="GAU_04_GetAddressByUserId_NewUser_VerifyFields"/>
+
+                    <!-- ── GET /address/getAddressByGuid — POSITIVE ── -->
+                    <include name="GBG_01_GetAddressByGuid_MemberUser_Valid"/>
+                    <include name="GBG_02_GetAddressByGuid_MemberUser_VerifyFields"/>
+                    <include name="GBG_03_GetAddressByGuid_NewUser_Valid"/>
+                    <include name="GBG_04_GetAddressByGuid_NewUser_VerifyFields"/>
+
+                    <!-- ── GET /address/getAddressByGuid — NEGATIVE ── -->
+                    <include name="GBG_05_GetAddressByGuid_NonExistentGuid"/>
+                    <include name="GBG_06_GetAddressByGuid_MalformedGuid"/>
+                    <include name="GBG_09_GetAddressByGuid_NumericGuid"/>
+                    <include name="GBG_10_GetAddressByGuid_SqlInjectionGuid"/>
+                    <include name="GBG_11_GetAddressByGuid_SingleCharGuid"/>
+
+                    <!-- ── GET /address/getAddressByUserId — NEGATIVE ─── -->
+                    <include name="GAU_05_GetAddressByUserId_NonExistentUserId"/>
+                    <include name="GAU_06_GetAddressByUserId_MalformedUserId"/>
+                    <include name="GAU_11_GetAddressByUserId_NumericUserId"/>
+                    <include name="GAU_12_GetAddressByUserId_SqlInjectionUserId"/>
+                    <include name="GAU_13_GetAddressByUserId_SingleCharUserId"/>
+
+                    <!-- ── DELETE /address/deleteAddressById — POSITIVE ── -->
+                    <include name="DAB_01_DeleteAddressById_MemberUser_Valid"/>
+                    <include name="DAB_02_DeleteAddressById_MemberUser_VerifyGone"/>
+                    <include name="DAB_03_DeleteAddressById_NewUser_Valid"/>
+                    <include name="DAB_04_DeleteAddressById_NewUser_VerifyGone"/>
+
+                    <!-- ── DELETE /address/deleteAddressById — NEGATIVE ── -->
+                    <include name="DAB_05_DeleteAddressById_NonExistentGuid"/>
+                    <include name="DAB_06_DeleteAddressById_MalformedGuid"/>
+                    <include name="DAB_07_DeleteAddressById_NumericGuid"/>
+                    <include name="DAB_08_DeleteAddressById_SqlInjectionGuid"/>
+                    <include name="DAB_09_DeleteAddressById_SingleCharGuid"/>
+                    <include name="DAB_10_DeleteAddressById_AlreadyDeleted_Member"/>
+                    <include name="DAB_11_DeleteAddressById_AlreadyDeleted_NewUser"/>
+
+                    <!-- ── PUT /address/UpdateAddressById — POSITIVE ──── -->
+                    <include name="UAB_01_UpdateAddressById_MemberUser_ValidReceiverName"/>
+                    <include name="UAB_02_UpdateAddressById_MemberUser_VerifyUpdated"/>
+                    <include name="UAB_03_UpdateAddressById_NewUser_ValidReceiverName"/>
+                    <include name="UAB_04_UpdateAddressById_NewUser_VerifyUpdated"/>
+
+                    <!-- ── PUT /address/UpdateAddressById — NEGATIVE ──── -->
+                    <include name="UAB_05_UpdateAddressById_MissingGuid"/>
+                    <include name="UAB_06_UpdateAddressById_NonExistentGuid"/>
+                    <include name="UAB_07_UpdateAddressById_MalformedGuid"/>
+                    <include name="UAB_08_UpdateAddressById_EmptyBody"/>
+                    <include name="UAB_09_UpdateAddressById_InvalidReceiverName"/>
+                    <include name="UAB_10_UpdateAddressById_SqlInjectionGuid"/>
+                    <include name="UAB_11_UpdateAddressById_SingleCharGuid"/>
+
+                    <!-- ── POST /address/checkServingLocation — POSITIVE ── -->
+                    <include name="CSL_01_CheckServingLocation_ValidCoordinates_Member"/>
+                    <include name="CSL_02_CheckServingLocation_ValidCoordinates_NewUser"/>
+                    <include name="CSL_03_CheckServingLocation_VerifyResponseFields"/>
+
+                    <!-- ── POST /address/checkServingLocation — NEGATIVE ── -->
+                    <include name="CSL_04_CheckServingLocation_MissingLatitude"/>
+                    <include name="CSL_05_CheckServingLocation_MissingLongitude"/>
+                    <include name="CSL_06_CheckServingLocation_EmptyBody"/>
+                    <include name="CSL_07_CheckServingLocation_InvalidLatitude_String"/>
+                    <include name="CSL_08_CheckServingLocation_InvalidLongitude_String"/>
+                    <include name="CSL_09_CheckServingLocation_OutOfRangeLatitude"/>
+                    <include name="CSL_10_CheckServingLocation_NonServedLocation"/>
+                    <include name="CSL_11_CheckServingLocation_NullLatitude"/>
+                    <include name="CSL_12_CheckServingLocation_NullLongitude"/>
+                    <include name="CSL_13_CheckServingLocation_NoAuthToken"/>
+
+                    <!-- ── POST /address/checkServingLocation — LOCATION COVERAGE ── -->
+                    <include name="CSL_14_CheckServingLocation_Delhi"/>
+                    <include name="CSL_15_CheckServingLocation_Mumbai"/>
+                    <include name="CSL_16_CheckServingLocation_Bangalore"/>
+                    <include name="CSL_17_CheckServingLocation_Chennai"/>
+                    <include name="CSL_18_CheckServingLocation_NewYork"/>
+                    <include name="CSL_19_CheckServingLocation_London"/>
+                    <include name="CSL_20_CheckServingLocation_NullIsland"/>
+                    <include name="CSL_21_CheckServingLocation_RemoteRuralIndia"/>
+                    <include name="CSL_22_CheckServingLocation_Hyderabad_Served"/>
+                    <include name="CSL_23_CheckServingLocation_Sydney"/>
+                    <include name="CSL_24_CheckServingLocation_ExtremeCoordinates"/>
+
+                    <!-- ── POST /address/checkServingLocation — HYDERABAD AREAS ── -->
+                    <include name="CSL_25_CheckServingLocation_Khammam"/>
+                    <include name="CSL_26_CheckServingLocation_Miyapur"/>
+                    <include name="CSL_27_CheckServingLocation_Kukatpally"/>
+                    <include name="CSL_28_CheckServingLocation_Secunderabad"/>
+                    <include name="CSL_29_CheckServingLocation_Gachibowli"/>
+                    <include name="CSL_30_CheckServingLocation_Ameerpet"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

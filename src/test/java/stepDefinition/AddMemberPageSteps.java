@@ -31,8 +31,55 @@ public class AddMemberPageSteps extends BaseSteps {
 
     @When("select the member for multi member scenario")
     public void select_the_member_for_multi_member_scenario() throws Throwable {
- 
-        BaseClass.waitAndClick(LocatorsPage.members_tab, 10);
+
+        // Wait for the checkout page to fully render before looking for Members tab
+        Thread.sleep(3000);
+
+        // Try multiple locator strategies for the Members tab
+        By[] membersTabLocators = {
+            By.xpath("//p[text()='Members']"),
+            By.xpath("//p[normalize-space()='Members']"),
+            By.xpath("//*[text()='Members']"),
+            By.xpath("//*[normalize-space()='Members']"),
+            By.xpath("//*[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'members')]"),
+            By.xpath("//button[contains(text(),'Member')] | //div[contains(@class,'tab')]//p[contains(text(),'Member')]"),
+        };
+
+        WebElement membersTab = null;
+        for (By locator : membersTabLocators) {
+            try {
+                List<WebElement> found = driver.findElements(locator);
+                if (found != null && !found.isEmpty()) {
+                    membersTab = found.get(0);
+                    System.out.println("✅ Members tab found with: " + locator);
+                    break;
+                }
+            } catch (Exception ignored) { }
+        }
+
+        if (membersTab == null) {
+            // JS fallback
+            org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
+            membersTab = (WebElement) js.executeScript(
+                "return Array.from(document.querySelectorAll('p, button, div, span, a'))"
+                + ".find(el => (el.innerText || '').trim().toLowerCase() === 'members');"
+            );
+            if (membersTab != null) {
+                System.out.println("✅ Members tab found via JS fallback");
+            }
+        }
+
+        if (membersTab == null) {
+            throw new RuntimeException("❌ Members tab not found on checkout page. "
+                + "The tab may have been renamed or the checkout page did not load properly.");
+        }
+
+        try {
+            membersTab.click();
+        } catch (Exception e) {
+            org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", membersTab);
+        }
         Thread.sleep(1500);
  
         String[] excelMembers =BaseClass. testData.get("memberNames").split(",");
@@ -332,29 +379,38 @@ public class AddMemberPageSteps extends BaseSteps {
         System.out.println("==========================================\n");
     }
 
-    // -------- EXCEL NAME EXTRACTION --------
+    // -------- REGISTERED NAME EXTRACTION --------
     @When("the user extracts the member names from the excel sheet")
     public void the_user_extracts_the_member_names_from_the_excel_sheet() {
 
         excelMemberNames.clear();
 
-        // Read from already loaded Excel row (Row 6 in this scenario)
+        // Prefer names that were actually recorded at runtime during registration /
+        // family-member form submission. These are the ground truth — they reflect
+        // what was really entered, whether the names came from Excel or were generated.
+        if (TestSession.registeredMemberNames != null && !TestSession.registeredMemberNames.isEmpty()) {
+            excelMemberNames.addAll(TestSession.registeredMemberNames);
+            System.out.println("\n📌 Using runtime-registered member names (ground truth): " + excelMemberNames);
+            return;
+        }
+
+        // Fallback: if runtime names were never populated (e.g. the test path skipped
+        // registration steps), read from the Excel 'memberNames' column.
         String memberNamesCell = BaseClass.testData.get("memberNames");
-        System.out.println("\n📌 Raw Excel Value → memberNames: " + memberNamesCell);
+        System.out.println("\n📌 Runtime names not found — falling back to Excel memberNames: " + memberNamesCell);
 
         if (memberNamesCell == null || memberNamesCell.trim().isEmpty()) {
-            throw new AssertionError("❌ Excel member names missing. Fix Excel data!");
+            throw new AssertionError("❌ No registered member names captured at runtime and Excel memberNames is also empty!");
         }
 
         List<String> formattedExcelNames = BaseClass.getUiFormattedMemberNames(memberNamesCell);
 
         if (formattedExcelNames == null || formattedExcelNames.isEmpty()) {
-            throw new AssertionError("❌ Formatting failed. No valid Excel names returned!");
+            throw new AssertionError("❌ Formatting failed. No valid names returned from Excel fallback!");
         }
 
         excelMemberNames.addAll(formattedExcelNames);
-        System.out.println("🧹 Formatted Excel Member Names: " + excelMemberNames);
-        System.out.println("✔ Excel Member Names successfully extracted & formatted!");
+        System.out.println("🧹 Fallback Excel Member Names: " + excelMemberNames);
     }
 
 

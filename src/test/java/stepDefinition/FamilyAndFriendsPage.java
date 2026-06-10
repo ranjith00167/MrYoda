@@ -29,8 +29,10 @@ public class FamilyAndFriendsPage extends BaseSteps {
 	}
 	@When("the user enters first name")
 	public void the_user_enters_first_name() {
- 		BaseClass.waitAndInput(LocatorsPage.firstName_Input, BaseClass.testData.get("firstName"), 10);
-
+		String first = BaseClass.testData.get("firstName");
+ 		BaseClass.waitAndInput(LocatorsPage.firstName_Input, first, 10);
+		// Track first name so we can assemble the full name after last name is entered
+		TestSession._pendingMemberFirstName = first;
 	}
 	@When("the user enters middle name")
 	public void the_user_enters_middle_name() {
@@ -40,8 +42,14 @@ public class FamilyAndFriendsPage extends BaseSteps {
 	}
 	@When("the user enters last name")
 	public void the_user_enters_last_name() {
-
-BaseClass.waitAndInput(LocatorsPage.lastName_Input,  BaseClass.testData.get("lastName"), 10);
+		String last = BaseClass.testData.get("lastName");
+		BaseClass.waitAndInput(LocatorsPage.lastName_Input, last, 10);
+		// Now we have both parts — record the full member name
+		String first = TestSession._pendingMemberFirstName != null ? TestSession._pendingMemberFirstName : "";
+		String fullName = (first + (last != null && !last.isBlank() ? " " + last : "")).trim();
+		TestSession.registeredMemberNames.add(fullName);
+		TestSession._pendingMemberFirstName = null;
+		System.out.println("📝 Recorded family member name: " + fullName);
 	}
 	@When("the user selects country code")
 	public void the_user_selects_country_code() {

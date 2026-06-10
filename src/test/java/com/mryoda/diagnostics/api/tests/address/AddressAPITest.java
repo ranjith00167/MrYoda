@@ -16,7 +16,7 @@ public class AddressAPITest extends BaseTest {
     // Valid postal codes for service centers only
     private static final Map<String, String> LOCATION_POSTAL_CODES = new HashMap<>();
     static {
-        LOCATION_POSTAL_CODES.put("Madhapur", "500033"); // Hyderabad - Madhapur
+        // Madhapur removed — Ameerpet (HQ) is the default Hyderabad location
         LOCATION_POSTAL_CODES.put("Ameerpet (HQ)", "500016"); // Hyderabad - Ameerpet
         LOCATION_POSTAL_CODES.put("Guntur", "522001"); // Guntur
         LOCATION_POSTAL_CODES.put("Khammam", "507001"); // Khammam
@@ -47,7 +47,7 @@ public class AddressAPITest extends BaseTest {
             longitude = "78.4071173";
 
         // Get correct postal code for the location (must match service centers)
-        String postalCode = LOCATION_POSTAL_CODES.getOrDefault(locationName, "500033"); // Default to Madhapur
+        String postalCode = LOCATION_POSTAL_CODES.getOrDefault(locationName, "500016"); // Default to Ameerpet (HQ)
 
         // Build payload matching exact backend API structure from sample
         Map<String, Object> payload = new HashMap<>();

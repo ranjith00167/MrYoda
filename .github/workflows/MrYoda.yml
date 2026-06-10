@@ -1,9 +1,16 @@
 name: MrYoda Hybrid Automation Project
 
 on:
+  # Trigger 1: On push to staging branch
   push:
     branches:
       - feature/stagingMrYoda
+
+  # Trigger 2: When a deployment to staging succeeds
+  deployment_status:
+
+  # Trigger 3: Manual trigger (optional)
+  workflow_dispatch:
 
 # FIX 1: Prevent unwanted cancellations
 concurrency:
@@ -13,6 +20,14 @@ concurrency:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+
+    # Run on push/manual OR when staging deployment succeeds
+    if: >
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'deployment_status' &&
+       github.event.deployment_status.state == 'success' &&
+       github.event.deployment_status.environment == 'staging')
 
     # FIX 2: Increased timeout (your tests already hit ~3h)
     timeout-minutes: 300
@@ -56,3 +71,27 @@ jobs:
         with:
           name: Extent-Report-${{ matrix.suite }}
           path: target/ExtentReport/
+
+      - name: Send Test Report Email
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.office365.com
+          server_port: 587
+          secure: false
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "[${{ job.status }}] MrYoda Test Report - ${{ matrix.suite }} - Run #${{ github.run_number }}"
+          to: ranjith@labsquire.com
+          from: MrYoda CI <ranjith@labsquire.com>
+          body: |
+            MrYoda Automation Test Results
+            ================================
+            Suite: ${{ matrix.suite }}
+            Status: ${{ job.status }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+            Triggered by: ${{ github.actor }}
+            
+            View full run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          attachments: target/ExtentReport/**/*.html

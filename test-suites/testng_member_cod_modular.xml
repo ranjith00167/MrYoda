@@ -44,6 +44,9 @@
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
             <class name="com.mryoda.diagnostics.api.tests.auth.COD_06_PhlebotomistLoginTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_06B_AssignShiftTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_06C_GetPhleboShiftsTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_06D_PhleboClockInTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_07_AssignOrderTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_08_VerifyStatusAssignedTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_09_UpdateOrderTrackingTest"/>
@@ -117,6 +120,9 @@
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
             <class name="com.mryoda.diagnostics.api.tests.auth.COD_06_PhlebotomistLoginTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_06B_AssignShiftTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_06C_GetPhleboShiftsTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_06D_PhleboClockInTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_07_AssignOrderTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_08_VerifyStatusAssignedTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_09_UpdateOrderTrackingTest"/>

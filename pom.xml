@@ -16,6 +16,7 @@
     <allure.version>2.24.0</allure.version>
     <cucumber.version>7.14.0</cucumber.version>
     <junit.version>4.13.2</junit.version>
+    <healenium.version>3.5.6</healenium.version>
     <browser>chrome</browser>
     <headless>false</headless>
   </properties>
@@ -87,8 +88,38 @@
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-java</artifactId>
-        <version>4.27.0</version>
+        <version>4.25.0</version>
         <scope>test</scope>
+    </dependency>
+
+    <!-- Guice: required by TestNG 7.x and healenium-web StackUtils call stack scanning -->
+    <dependency>
+        <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
+        <version>6.0.0</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Healenium - Self-Healing Selenium Locators -->
+    <dependency>
+        <groupId>com.epam.healenium</groupId>
+        <artifactId>healenium-web</artifactId>
+        <version>${healenium.version}</version>
+        <scope>test</scope>
+        <exclusions>
+            <exclusion>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-launcher</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-commons</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
 <dependency>
     <groupId>io.cucumber</groupId>
@@ -294,6 +325,7 @@
         <configuration>
            <!-- Support for both TestNG Suite XML and Cucumber Runners -->
             <testFailureIgnore>true</testFailureIgnore>
+            <useSystemClassLoader>false</useSystemClassLoader>
             <systemPropertyVariables>
                 <browser>${browser}</browser>
                 <headless>${headless}</headless>

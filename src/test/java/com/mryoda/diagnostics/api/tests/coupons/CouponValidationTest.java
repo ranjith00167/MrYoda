@@ -20,8 +20,16 @@ public class CouponValidationTest extends BaseTest {
     public void testGetAllCoupons_Prime() {
         System.out.println("\n>>> TESTS: Validate GetAllCoupons - Prime <<<");
 
+        String userId = RequestContext.getMemberUserId();
+        if (userId == null) {
+            userId = RequestContext.getNonMemberUserId();
+        }
+
         Map<String, String> payload = new HashMap<>();
         payload.put("coupon_user_type", "prime");
+        if (userId != null) {
+            payload.put("user_id", userId);
+        }
 
         Response response = RestAssured.given()
                 .baseUri(APIEndpoints.DIAGNOSTICS_BASE_URL)
@@ -66,8 +74,17 @@ public class CouponValidationTest extends BaseTest {
     public void testGetAllCoupons_NonPrime() {
         System.out.println("\n>>> TESTS: Validate GetAllCoupons - NonPrime <<<");
 
+        // nonPrime coupons require a non-prime user_id
+        String userId = RequestContext.getNonMemberUserId();
+        if (userId == null) {
+            userId = RequestContext.getMemberUserId();
+        }
+
         Map<String, String> payload = new HashMap<>();
         payload.put("coupon_user_type", "nonPrime");
+        if (userId != null) {
+            payload.put("user_id", userId);
+        }
 
         Response response = RestAssured.given()
                 .baseUri(APIEndpoints.DIAGNOSTICS_BASE_URL)

@@ -365,12 +365,32 @@ public class GlobalSearchHelper {
 
         System.out.println("\n🔍 SEARCHING FOR " + fullTestNames.length + " TESTS");
 
-        // Override location to Madhapur as per user request
-        locationName = "Madhapur";
+        // Override location to Ameerpet (HQ) as per user request
+        locationName = "Ameerpet (HQ)";
 
-        // Set location
-        RequestContext.setSelectedLocation(locationName);
-        String locationId = RequestContext.getSelectedLocationId();
+        // Set location — fall back gracefully if the exact name is not in context
+        String locationId;
+        try {
+            RequestContext.setSelectedLocation(locationName);
+            locationId = RequestContext.getSelectedLocationId();
+        } catch (RuntimeException e) {
+            // Location name not found — try an already-selected ID or pick the first stored location
+            locationId = RequestContext.getSelectedLocationId();
+            if (locationId == null) {
+                Map<String, String> allLocs = RequestContext.getAllLocations();
+                if (allLocs != null && !allLocs.isEmpty()) {
+                    Map.Entry<String, String> first = allLocs.entrySet().iterator().next();
+                    locationId = first.getValue();
+                    RequestContext.setSelectedLocationId(locationId);
+                    System.out.println("   ⚠️ Location '" + locationName + "' not found in context. Using first available: "
+                            + first.getKey() + " (ID: " + locationId + ")");
+                } else {
+                    throw new RuntimeException("❌ No locations available in RequestContext. Run LocationAPITest first.");
+                }
+            } else {
+                System.out.println("   ⚠️ Location '" + locationName + "' not found by name. Reusing previously selected ID: " + locationId);
+            }
+        }
         System.out.println("📌 LOCATION: " + locationName + " → " + locationId);
 
         // Get token with fallback strategy

@@ -3,7 +3,6 @@ package stepDefinition;
 import api.cart.CartClient;
 import api.order.OrderClient;
 import api.payment.PaymentClient;
-import api.user.UserClient;
 import com.mryoda.diagnostics.api.utils.TokenManager;
 import com.mryoda.diagnostics.api.builders.RequestBuilder;
 import com.mryoda.diagnostics.api.endpoints.APIEndpoints;
@@ -15,6 +14,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.openqa.selenium.JavascriptExecutor;
+import pageObjects.Locators;
 import utilities.BaseClass;
 import utilities.ScenarioContext;
 
@@ -86,7 +86,7 @@ public class PayOnlineHybridSteps extends BaseSteps {
         ScenarioContext.totalAmountForPayment = (int) TestSession.uiAmountCheckout;
 
         // ── Visit / order type ────────────────────────────────────────────────
-        String visitType = LocatorsPage.visitTypeSelected;
+        String visitType = Locators.visitTypeSelected;
         ScenarioContext.orderType = (visitType != null && visitType.equalsIgnoreCase("Lab Visit"))
                                     ? "lab_visit"
                                     : "home_collection";
@@ -122,10 +122,10 @@ public class PayOnlineHybridSteps extends BaseSteps {
         ScenarioContext.apiAddressId    = BaseClass.testData.getOrDefault("addressId", "");
         ScenarioContext.apiSlotId       = BaseClass.testData.getOrDefault("slotId",    "");
 
-        // ── labLocationId: Excel → RequestContext (live Madhapur location stored during LocationAPI) ──
+        // ── labLocationId: Excel → RequestContext (live Ameerpet location stored during LocationAPI) ──
         String excelLocId = BaseClass.testData.getOrDefault("labLocationId", "");
         if (excelLocId == null || excelLocId.isBlank()) {
-            String rcLocId = com.mryoda.diagnostics.api.utils.RequestContext.getLocationId("Madhapur");
+            String rcLocId = com.mryoda.diagnostics.api.utils.RequestContext.getLocationId("Ameerpet (HQ)");
             if (rcLocId == null || rcLocId.isBlank()) {
                 // Fallback: use any stored location ID
                 java.util.Map<String, String> locs = com.mryoda.diagnostics.api.utils.RequestContext.getAllLocations();
@@ -1169,14 +1169,18 @@ public class PayOnlineHybridSteps extends BaseSteps {
             }
         }
 
-        // Priority 1: Excel testData mobileNumber (member / non-member scenarios)
-        String mobile = (BaseClass.testData != null) ? BaseClass.testData.get("mobileNumber") : null;
-
-        // Priority 2: Randomly generated mobile from new-user signup
+        // Priority 1: Randomly generated mobile from new-user signup (takes precedence)
         String generatedMobile = stepDefinition.TestSession.generatedMobile;
-        boolean isNewUser = (mobile == null || mobile.isBlank()) && (generatedMobile != null && !generatedMobile.isBlank());
+        boolean isNewUser = (generatedMobile != null && !generatedMobile.isBlank());
+        String mobile = null;
         if (isNewUser) {
             mobile = generatedMobile;
+            System.out.println("📱 Using randomly generated mobile (new user): " + mobile);
+        }
+
+        // Priority 2: Excel testData mobileNumber (member / non-member scenarios)
+        if (mobile == null || mobile.isBlank()) {
+            mobile = (BaseClass.testData != null) ? BaseClass.testData.get("mobileNumber") : null;
         }
 
         // Priority 3: Fallback to config
@@ -1236,17 +1240,17 @@ public class PayOnlineHybridSteps extends BaseSteps {
                                 com.mryoda.diagnostics.api.utils.RequestContext.storeLocationCityState(title, String.valueOf(city), String.valueOf(state));
                             }
                         }
-                        // Set selected location to Madhapur (default) if available
-                        String madhapurId = com.mryoda.diagnostics.api.utils.RequestContext.getLocationId("Madhapur");
-                        if (madhapurId != null) {
-                            com.mryoda.diagnostics.api.utils.RequestContext.setSelectedLocationId(madhapurId);
-                            System.out.println("📍 Location populated. Madhapur ID: " + madhapurId);
+                        // Set selected location to Ameerpet (HQ) (default) if available
+                        String ameerpetId = com.mryoda.diagnostics.api.utils.RequestContext.getLocationId("Ameerpet (HQ)");
+                        if (ameerpetId != null) {
+                            com.mryoda.diagnostics.api.utils.RequestContext.setSelectedLocationId(ameerpetId);
+                            System.out.println("📍 Location populated. Ameerpet (HQ) ID: " + ameerpetId);
                         } else {
                             // Fallback: use first available location
                             java.util.Map<String, Object> first = locs.get(0);
                             String fallbackId = String.valueOf(first.get("_id"));
                             com.mryoda.diagnostics.api.utils.RequestContext.setSelectedLocationId(fallbackId);
-                            System.out.println("📍 Madhapur not found; using fallback location ID: " + fallbackId);
+                            System.out.println("📍 Ameerpet (HQ) not found; using fallback location ID: " + fallbackId);
                         }
                     }
                 } else {
@@ -1433,8 +1437,7 @@ public class PayOnlineHybridSteps extends BaseSteps {
                 Response response = orderClient.getOrderById(token, orderId);
                 
                 if (response.getStatusCode() == 200) {
-                    Double apiCouponAmount = response.jsonPath().getDouble("data[0].coupon_amount");
-                    if (apiCouponAmount == null) apiCouponAmount = 0.0;
+                    double apiCouponAmount = response.jsonPath().getDouble("data[0].coupon_amount");
                     apiCouponSumTotal += apiCouponAmount;
                     
                     double difference = Math.abs(apiCouponAmount - expectedCouponSplit);
@@ -1476,5 +1479,92 @@ public class PayOnlineHybridSteps extends BaseSteps {
         } else {
             System.out.println("⚠️ Coupon sum difference (rounding): ₹" + totalDiff);
         }
+    }
+
+    // =========================================================================
+    // VALIDATE FREE MEMBERSHIP REMARKS IN REWARDS API
+    // =========================================================================
+
+    @Then("validate free membership remarks in getRewardsByMobile API")
+    public void validate_free_membership_remarks_in_rewards_api() {
+        System.out.println("\n========== 🎁 VALIDATE FREE MEMBERSHIP REMARKS ==========");
+
+        String mobile = com.mryoda.diagnostics.api.utils.RequestContext.getMobile();
+        if (mobile == null || mobile.isEmpty()) {
+            throw new AssertionError("❌ Mobile number not available in RequestContext");
+        }
+        System.out.println("   Mobile: " + mobile);
+
+        String token = com.mryoda.diagnostics.api.utils.RequestContext.getToken();
+        if (token == null || token.isEmpty()) {
+            token = ScenarioContext.authToken;
+        }
+        if (token == null || token.isEmpty()) {
+            throw new AssertionError("❌ Auth token not available");
+        }
+
+        String endpoint = APIEndpoints.MEMBER_BASE_URL
+                + APIEndpoints.GET_REWARDS_BY_MOBILE.replace("{mobile_number}", mobile);
+        System.out.println("   Endpoint: " + endpoint);
+
+        Response response = new RequestBuilder()
+                .setEndpoint(endpoint)
+                .addHeader("Authorization", "Bearer " + token)
+                .get();
+
+        System.out.println("   HTTP Status: " + response.getStatusCode());
+        System.out.println("   Response Body: " + response.getBody().asString());
+
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyEquals(
+                response.getStatusCode(), 200,
+                "getRewardsByMobile must return HTTP 200");
+
+        // Check for "remarks": "free membership added" in the response
+        // The remarks field could be at data.remarks or data[0].remarks depending on response structure
+        String remarks = response.jsonPath().getString("data.remarks");
+        if (remarks == null) {
+            remarks = response.jsonPath().getString("data[0].remarks");
+        }
+        // Also check in reward_history array if present
+        if (remarks == null) {
+            List<String> allRemarks = response.jsonPath().getList("data.reward_history.remarks");
+            if (allRemarks != null) {
+                for (String r : allRemarks) {
+                    if (r != null && r.toLowerCase().contains("free membership added")) {
+                        remarks = r;
+                        break;
+                    }
+                }
+            }
+        }
+        // Also check in transactions array
+        if (remarks == null) {
+            List<String> txnRemarks = response.jsonPath().getList("data.transactions.remarks");
+            if (txnRemarks != null) {
+                for (String r : txnRemarks) {
+                    if (r != null && r.toLowerCase().contains("free membership added")) {
+                        remarks = r;
+                        break;
+                    }
+                }
+            }
+        }
+
+        System.out.println("   Remarks found: " + remarks);
+
+        if (remarks != null && remarks.toLowerCase().contains("free membership added")) {
+            System.out.println("✅ VALIDATED: remarks contains 'free membership added'");
+        } else {
+            // Check if the full response body contains the string as a fallback
+            String body = response.getBody().asString();
+            if (body.contains("free membership added")) {
+                System.out.println("✅ VALIDATED: Response body contains 'free membership added' (found in nested structure)");
+            } else {
+                throw new AssertionError("❌ Expected remarks 'free membership added' not found in getRewardsByMobile response. " +
+                        "Actual remarks: " + remarks);
+            }
+        }
+
+        System.out.println("========== ✅ FREE MEMBERSHIP REMARKS VALIDATION COMPLETE ==========\n");
     }
 }

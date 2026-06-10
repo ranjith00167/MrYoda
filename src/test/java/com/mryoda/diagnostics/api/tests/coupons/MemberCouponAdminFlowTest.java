@@ -66,7 +66,7 @@ public class MemberCouponAdminFlowTest extends CreateOrderCODAPITest {
                 String locId = (String) loc.get("_id");
                 if (locName != null && locId != null) {
                     RequestContext.storeLocation(locName, locId);
-                    if ("Madhapur".equalsIgnoreCase(locName)) {
+                    if ("Ameerpet (HQ)".equalsIgnoreCase(locName)) {
                         selectedLocName = locName;
                         selectedLocId = locId;
                     }
@@ -150,8 +150,16 @@ public class MemberCouponAdminFlowTest extends CreateOrderCODAPITest {
     @Test(priority = 4, dependsOnMethods = "step03_GlobalSearch", description = "Step 4: Discover Coupon")
     public void step04_DiscoverCoupon() {
         System.out.println("\n>>> Step 4: Discovering Valid Coupon <<<");
+        String userId = RequestContext.getMemberUserId();
+        if (userId == null) {
+            userId = RequestContext.getUserId();
+        }
+
         Map<String, String> payload = new HashMap<>();
         payload.put("coupon_user_type", "prime");
+        if (userId != null) {
+            payload.put("user_id", userId);
+        }
 
         Response response = RestAssured.given()
                 .baseUri(APIEndpoints.DIAGNOSTICS_BASE_URL)
@@ -166,7 +174,8 @@ public class MemberCouponAdminFlowTest extends CreateOrderCODAPITest {
             minOrderAmount = mo instanceof Number ? ((Number) mo).doubleValue() : 0;
             System.out.println("   ✅ Coupon Found: " + validCouponGuid + " (Min Order: " + minOrderAmount + ")");
         } else {
-            Assert.fail("No prime coupons found for member");
+            System.out.println("   ❌ No prime coupons available for member in staging");
+            Assert.fail("No prime coupons found for member — API returned empty list");
         }
     }
 

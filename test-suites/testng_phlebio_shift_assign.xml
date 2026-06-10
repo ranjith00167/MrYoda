@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Phlebio Shift Assignment Suite"
+       verbose="2"
+       parallel="none">
+
+    <!-- =========================
+         LISTENERS
+    ========================== -->
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- =========================
+         SHIFT ASSIGNMENT — POSITIVE FLOW
+         Step 1 : Admin login  → obtain adminToken
+         Step 2 : Create phlebo (savePhlebo) → extract createdPhleboGuid
+         Step 3 : Assign shifts (POST /api/v1/phlebo/shifts/assign)
+                  phlebo_guids : [createdPhleboGuid]
+                  from_date / to_date : today (yyyy-MM-dd, dynamic)
+                  slots : [{ start_time: "09:00", end_time: "18:00" }]
+    ========================== -->
+    <test name="Phlebio Shift Assignment Positive Scenarios"
+          preserve-order="true">
+
+        <classes>
+
+            <class name="com.mryoda.diagnostics.api.tests.phlebio.PhlebioShiftAssignTest">
+
+                <methods>
+
+                    <include name="PHLEBO_SHIFT_01_AdminLogin"/>
+                    <include name="PHLEBO_SHIFT_02_CreatePhlebo"/>
+                    <include name="PHLEBO_SHIFT_03_AssignShifts"/>
+                    <include name="PHLEBO_SHIFT_04_GetPhleboShifts"/>
+                    <include name="PHLEBO_SHIFT_05_DeletePhleboShifts"/>
+
+                </methods>
+
+            </class>
+
+        </classes>
+
+    </test>
+
+</suite>

@@ -448,7 +448,18 @@ public class RequestContext {
     public static void setSelectedLocation(String title) {
         String id = locations.get(title);
         if (id == null) {
-            throw new RuntimeException("❌ Location not found in RequestContext: " + title);
+            // Case-insensitive fallback — handles mismatches like "ameerpet (hq)" vs "Ameerpet (HQ)"
+            for (Map.Entry<String, String> entry : locations.entrySet()) {
+                if (entry.getKey().equalsIgnoreCase(title)) {
+                    id = entry.getValue();
+                    System.out.println("   ℹ️ setSelectedLocation: matched '" + title + "' → stored key '" + entry.getKey() + "'");
+                    break;
+                }
+            }
+        }
+        if (id == null) {
+            throw new RuntimeException("❌ Location not found in RequestContext: " + title
+                    + ". Available locations: " + locations.keySet());
         }
         selectedLocationId = id;
     }
@@ -1527,6 +1538,18 @@ public class RequestContext {
     public static double getRewardsUsed() {
         return rewardsUsed.get() != null ? rewardsUsed.get() : 0.0;
     }
+
+    // ── Excel name hints for payload builder ────────────────────────────────
+    private static final ThreadLocal<String> excelFirstName  = new ThreadLocal<>();
+    private static final ThreadLocal<String> excelLastName   = new ThreadLocal<>();
+    private static final ThreadLocal<String> excelMiddleName = new ThreadLocal<>();
+
+    public static void setExcelFirstName(String v)  { excelFirstName.set(v);  }
+    public static void setExcelLastName(String v)   { excelLastName.set(v);   }
+    public static void setExcelMiddleName(String v) { excelMiddleName.set(v); }
+    public static String getExcelFirstName()  { return excelFirstName.get();  }
+    public static String getExcelLastName()   { return excelLastName.get();   }
+    public static String getExcelMiddleName() { return excelMiddleName.get(); }
 
     public static void setCurrentDueAmount(double v) {
         currentDueAmount.set(v);

@@ -1,3 +1,5 @@
+package com.mryoda.diagnostics.api.tests.order;
+
 import io.restassured.response.Response;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;

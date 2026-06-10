@@ -137,15 +137,15 @@ public WebElement investigationTextArea;
     public WebElement proceed_cart;
     @FindBy(xpath = "//div[contains(@class,'custom-select')]//span[@title] | //span[@title and (ancestor::div[contains(@class,'select')] or ancestor::div[contains(@class,'location')])]")
     public WebElement locationText;
-    @FindBy(xpath = "//input[@placeholder='Search Lab Locations...']")
+    @FindBy(xpath = "//input[contains(@placeholder,'Search') and contains(@placeholder,'Location')]")
     public WebElement searchLabLocationField;
-    @FindBy(xpath = " //input[@placeholder='Search Lab Locations...']//following::div[1]")
+    @FindBy(xpath = "//input[contains(@placeholder,'Search') and contains(@placeholder,'Location')]//following::div[1]")
     public WebElement searchlabParticularLocation;
     @FindBy(xpath = "//div[contains(@class,'overflow-y-auto')]//button[normalize-space()='Proceed']")
     public WebElement location_proceed;
     @FindBy(xpath = "//button[text()='Pay Online']")
     public WebElement payOnlineButton;
-    @FindBy(xpath = "//div[contains(@class,'overflow-y-auto')]//button[normalize-space()='Proceed']")
+    @FindBy(xpath = "//div[contains(@class,'overflow-y-auto')]//button[text()='Proceed ']")
     public WebElement slot_proceed;
     @FindBy(xpath = "(//div[@data-value='upi'])[1]")
     public WebElement paymentUpiOption;

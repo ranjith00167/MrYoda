@@ -37,7 +37,7 @@ public class Section4_OrderCreationTest extends BaseTest {
     // Postal codes matching staging service centres
     private static final Map<String, String> POSTAL_CODES = new HashMap<>();
     static {
-        POSTAL_CODES.put("Madhapur",        "500033");
+        // Madhapur removed — Ameerpet (HQ) is the default Hyderabad location
         POSTAL_CODES.put("Ameerpet (HQ)",   "500016");
         POSTAL_CODES.put("Guntur",          "522001");
         POSTAL_CODES.put("Khammam",         "507001");
@@ -79,7 +79,8 @@ public class Section4_OrderCreationTest extends BaseTest {
 
     private void ensureGlobalSearchAndCart(String userType, String token, String userId) {
         // Mini global search → add to cart
-        String[] tests = {"Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "Complete Blood Count (CBC)"};
+        String[] tests = {"Bone Profile -1", "RANDOM BLOOD GLUCOSE (RBS)", "CLOTTING TIME",
+                "Complete Blood Count (CBC)", "T4 - THYROXINE", "Comprehensive Sepsis Panel"};
         Response res = GlobalSearchHelper.searchTestsByFullNames(tests, DEFAULT_LOCATION);
         GlobalSearchHelper.extractAndStoreTests(res, tests);
 

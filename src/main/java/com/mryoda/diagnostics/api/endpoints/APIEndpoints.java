@@ -14,6 +14,15 @@ public class APIEndpoints {
     public static final String USER_CREATE = "/users/addUser";
     public static final String USER_PROFILE = "/user/profile";
     public static final String UPDATE_PROFILE = "/user/update";
+    public static final String UPDATE_USER   = "/users/updateUser";
+    public static final String GET_USER      = "/users/getUser/{user_id}";
+    public static final String GET_ALL_USERS              = "/users/getAllUsers";
+    public static final String GET_ADMIN_USERS            = "/users/getAdminUsers";
+    public static final String GET_ALL_DELETED_USERS      = "/users/getAllDeletedUsers";
+    public static final String DELETE_USER                 = "/users/deleteUser/{user_guid}";
+    public static final String GET_USER_REWARDS_BY_MOBILE  = "/users/getRewardsByMobile/{mobile}";
+    public static final String GET_USERS_BY_MOBILE         = "/users/getUsersByMobile/{mobile}";
+    public static final String GET_USER_NOTIFICATIONS      = "/users/notifications/user/{user_id}";
 
     // ========== LOCATION & SEARCH ==========
     public static final String GET_LOCATION = "/tests/getlocations";
@@ -31,8 +40,12 @@ public class APIEndpoints {
     public static final String GET_CART_BY_ID = "/carts/v2/getCartById/{user_id}";
 
     // ========== ADDRESS MANAGEMENT ==========
-    public static final String ADD_ADDRESS = "/address/addAddress";
+    public static final String ADD_ADDRESS            = "/address/addAddress";
     public static final String GET_ADDRESS_BY_USER_ID = "/address/getAddressByUserId/{user_id}";
+    public static final String GET_ADDRESS_BY_GUID    = "/address/getAddressByGuid/{address_guid}";
+    public static final String DELETE_ADDRESS_BY_ID   = "/address/deleteAddressById/{address_guid}";
+    public static final String UPDATE_ADDRESS_BY_ID   = "/address/UpdateAddressById";
+    public static final String CHECK_SERVING_LOCATION = "/address/checkServingLocation";
 
     // ========== SLOT & CENTER MANAGEMENT ==========
     public static final String GET_CENTERS_BY_ADD = "/slot/getCentersByadd";
@@ -50,7 +63,6 @@ public class APIEndpoints {
     public static final String DIAGNOSTICS_BASE_URL = "https://staging-api-diagnostics.yodaprojects.com";
 
     // ========== MEMBERSHIP ==========
-    public static final String GET_USER = "/users/getUser/{user_id}";
 
     // ========== ORDER & TRACKING ==========
     public static final String ASSIGN_ORDER = "/order_tracking/assignOrder";
@@ -82,4 +94,11 @@ public class APIEndpoints {
     public static final String DELETE_FAMILY_MEMBER_BY_ID = "/familymembers/deleteFamilyMemberById/{guid}";
     public static final String GET_ALL_COUPONS = "/coupons/getAllCoupons";
     public static final String ADMIN_LOGIN = "/auth/login";
+
+    // ========== PHLEBO NOTIFICATION SERVICE ==========
+    public static final String PHLEBO_NOTIFICATION_BASE_URL = "https://staging-api-phlebo-notification.yodadiagnostics.com";
+    public static final String PHLEBO_NOTIFICATION_LOGIN = "/api/v1/phlebo/login";
+    public static final String PHLEBO_ASSIGN_SHIFTS = "/api/v1/phlebo/assign-shifts";
+    public static final String PHLEBO_GET_SHIFTS = "/api/v1/phlebo/{phlebo_guid}/shifts";
+    public static final String PHLEBO_CLOCK_IN = "/api/v1/phlebo/shift/clock-in";
 }

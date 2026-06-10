@@ -63,6 +63,9 @@ public class Hooks {
         WebDriver driver = DriverFactory.getDriver(browser);
         BaseClass.driver = driver;
 
+        // Initialize AI Locator Healing (once per session, idempotent)
+        BaseClass.initAiHealing();
+
         Collection<String> tags = scenario.getSourceTagNames();
 
         // ================================
@@ -115,6 +118,13 @@ public class Hooks {
 
     @AfterStep
     public void afterStep(Scenario scenario) {
+        // Global synchronization delay after every step to avoid timing issues
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ignored) {
+            Thread.currentThread().interrupt();
+        }
+
         if (getTest() != null) {
             if (scenario.isFailed()) {
                 getTest().log(Status.FAIL, "🔴 Step failed.");

@@ -511,9 +511,6 @@ Feature: Place lab orders and complete payment via UI, then verify via getOrderB
     And all packages should have pricing information
     And package prices should be parsed correctly
     And log package pricing summary - total packages retrieved
-    # ── UI : Profile Registration (new user only) ────────────────────────────────
-    And click on the profile icon
-    Then validate whether the user is a new user by checking the presence of welcome message
     # ── UI : Test Selection ─────────────────────────────────────────────────────
     And click the Best Seller View All button
     And load test names from Excel
@@ -592,24 +589,8 @@ Feature: Place lab orders and complete payment via UI, then verify via getOrderB
     And verify whether the already selected tests are retained in the cart after login
     # Login via API immediately after UI login to establish token
     And login via API and refresh auth token
-    And click on the profile icon
-    Then validate whether the user is a new user by checking the presence of welcome message
-    When click the profile registration icon
-    When the user selects title from the dropdown
-    And the user enters first name in registration page
-    And the user enters middle name in registration page
-    And the user enters last name  in registration page
-    And the user selects gender
-    And the user enters date of birth  in registration page
-    And the user clicks on submit button
-    Then the new member should be added successfully
-    When the user clicks on the profile icon
-    Then validate the profile name matches with the registered name
-    Then validate the age should be correct based on DOB entered
-    Then validate the gender should be correct based on selection
-    Then validate the mobile number should be correct based on registration
-    # Login via API immediately after UI login to establish token
-    And login via API and refresh auth token
+    # Profile is already registered via Create User API in the "create an account" step above.
+    # No UI profile registration needed.
     # ── API : Pricing Data Retrieval (before UI selection) ─────────────────────
     Then the location ID is available from RequestContext
     And a valid authentication token is available
@@ -624,9 +605,6 @@ Feature: Place lab orders and complete payment via UI, then verify via getOrderB
     And all packages should have pricing information
     And package prices should be parsed correctly
     And log package pricing summary - total packages retrieved
-    # ── UI : Profile Registration (new user only) ────────────────────────────────
-    And click on the profile icon
-    Then validate whether the user is a new user by checking the presence of welcome message
     # ── UI : Test Selection ─────────────────────────────────────────────────────
     And click the Best Seller View All button
     And load test names from Excel

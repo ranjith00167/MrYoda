@@ -1,0 +1,124 @@
+package com.mryoda.diagnostics.api.ai.locator;
+
+/**
+ * Locator Healing Result - Enhanced result with confidence gating.
+ *
+ * Contains:
+ * - bestLocator: The highest-confidence healed locator
+ * - backupLocator: Second-best alternative
+ * - confidence: Confidence score (0.0 - 1.0)
+ * - reason: AI's reasoning for the choice
+ * - healingSource: Where the heal came from (HEALENIUM, CACHE, GEMINI)
+ *
+ * Confidence Gating:
+ * - confidence >= 0.75 → auto-heal and proceed
+ * - confidence < 0.75  → DO NOT auto-heal, log warning
+ */
+public class LocatorHealingResult {
+
+    private static final double AUTO_HEAL_THRESHOLD = 0.75;
+
+    private final String bestLocator;
+    private final String bestStrategy;
+    private final String backupLocator;
+    private final String backupStrategy;
+    private final double confidence;
+    private final String reason;
+    private final HealingSource healingSource;
+    private final boolean autoHealAllowed;
+
+    public LocatorHealingResult(String bestLocator, String bestStrategy,
+                                 String backupLocator, String backupStrategy,
+                                 double confidence, String reason,
+                                 HealingSource healingSource) {
+        this.bestLocator = bestLocator;
+        this.bestStrategy = bestStrategy;
+        this.backupLocator = backupLocator;
+        this.backupStrategy = backupStrategy;
+        this.confidence = confidence;
+        this.reason = reason;
+        this.healingSource = healingSource;
+        this.autoHealAllowed = confidence >= AUTO_HEAL_THRESHOLD;
+    }
+
+    /**
+     * Create a result from Gemini-generated suggestions.
+     */
+    public static LocatorHealingResult fromGeminiSuggestions(
+            GeminiLocatorGenerator.LocatorSuggestion best,
+            GeminiLocatorGenerator.LocatorSuggestion backup) {
+        return new LocatorHealingResult(
+                best != null ? best.getValue() : null,
+                best != null ? best.getStrategy() : null,
+                backup != null ? backup.getValue() : null,
+                backup != null ? backup.getStrategy() : null,
+                best != null ? best.getConfidence() : 0.0,
+                best != null ? best.getReasoning() : "No suggestion available",
+                HealingSource.GEMINI);
+    }
+
+    /**
+     * Create a result from repository cache.
+     */
+    public static LocatorHealingResult fromCache(LocatorRepository.HealedLocator cached) {
+        return new LocatorHealingResult(
+                cached.getValue(), cached.getStrategy(),
+                null, null,
+                cached.getConfidence(),
+                "Previously healed (success count: " + cached.getSuccessCount() + ")",
+                HealingSource.CACHE);
+    }
+
+    /**
+     * Create a result from Healenium tree-diff.
+     */
+    public static LocatorHealingResult fromHealenium(String healedLocator, String strategy) {
+        return new LocatorHealingResult(
+                healedLocator, strategy, null, null,
+                0.85, // Healenium tree-diff is generally reliable
+                "Healed by Healenium tree-based diffing",
+                HealingSource.HEALENIUM);
+    }
+
+    /**
+     * Create a failed result.
+     */
+    public static LocatorHealingResult failed(String reason) {
+        return new LocatorHealingResult(null, null, null, null, 0.0, reason, HealingSource.NONE);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // GETTERS
+    // ─────────────────────────────────────────────────────────────────────────
+
+    public String getBestLocator() { return bestLocator; }
+    public String getBestStrategy() { return bestStrategy; }
+    public String getBackupLocator() { return backupLocator; }
+    public String getBackupStrategy() { return backupStrategy; }
+    public double getConfidence() { return confidence; }
+    public String getReason() { return reason; }
+    public HealingSource getHealingSource() { return healingSource; }
+    public boolean isAutoHealAllowed() { return autoHealAllowed; }
+    public boolean isSuccess() { return bestLocator != null; }
+    public boolean hasBackup() { return backupLocator != null; }
+
+    public static double getAutoHealThreshold() { return AUTO_HEAL_THRESHOLD; }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "HealingResult[source=%s, best=%s='%s', confidence=%.2f, autoHeal=%s, reason=%s]",
+                healingSource, bestStrategy, bestLocator, confidence, autoHealAllowed, reason);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // ENUMS
+    // ─────────────────────────────────────────────────────────────────────────
+
+    public enum HealingSource {
+        HEALENIUM,  // Healed by Healenium tree-diff (Step 1)
+        CACHE,      // Found in LocatorRepository (Step 2)
+        GEMINI,     // Generated by Gemini AI (Step 3)
+        NONE        // Healing failed
+    }
+}

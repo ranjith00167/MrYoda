@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+  ============================================================
+  Suite  : User Collection — Update User API
+  Endpoint: POST /users/updateUser
+  Purpose: Full positive + negative + mandatory field validation
+           for the updateUser endpoint.
+
+  Flow   :
+    1. COD_01_LoginTest  →  Authenticates as Member, stores
+                            token + GUID in RequestContext
+    2. UpdateUserAPITest →  All 13 test scenarios consuming
+                            token/GUID from RequestContext
+
+  Mandatory fields  : first_name, last_name, dob, gender, guid, mobile, title
+  Non-mandatory     : alt_mobile, email, middle_name
+
+  POSITIVE (USR_01–03):
+    USR_01 — All fields (mandatory + all non-mandatory with real data)
+    USR_02 — Mandatory fields only (no alt_mobile/email/middle_name keys)
+    USR_03 — Mandatory + non-mandatory as empty strings
+
+  NEGATIVE — Auth (USR_04–05):
+    USR_04 — No Authorization header          → 401/403
+    USR_05 — Invalid / tampered Bearer token  → 401/403
+
+  NEGATIVE — Mandatory field validation (USR_06–13):
+    USR_06 — Missing first_name               → 4xx
+    USR_07 — Missing last_name                → 4xx
+    USR_08 — Missing dob                      → 4xx
+    USR_09 — Missing gender                   → 4xx
+    USR_10 — Missing title                    → 4xx
+    USR_11 — Missing guid                     → 4xx
+    USR_12 — Missing mobile                   → 4xx
+    USR_13 — Invalid (non-existent) GUID      → 4xx
+  ============================================================
+-->
+<suite name="User Collection — Update User API" verbose="2" parallel="none">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="Update User — Full Validation Suite" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+
+        <classes>
+
+            <!-- ── Step 1: Register a fresh random user ────────────────── -->
+            <!-- Generates random mobile, calls /users/addUser, stores     -->
+            <!-- mobile + GUID in RequestContext for all downstream tests. -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods><include name="testUserRegistration_CreateNewUser"/></methods>
+            </class>
+
+            <!-- ── Step 2: Update User — 13 scenarios ───────────────────── -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UpdateUserAPITest">
+                <methods>
+                    <!-- POSITIVE -->
+                    <include name="USR_01_UpdateUser_AllFields"/>
+                    <include name="USR_02_UpdateUser_MandatoryFieldsOnly"/>
+                    <include name="USR_03_UpdateUser_EmptyNonMandatoryFields"/>
+
+                    <!-- NEGATIVE — Auth -->
+                    <include name="USR_04_UpdateUser_NoAuthToken"/>
+                    <include name="USR_05_UpdateUser_InvalidAuthToken"/>
+
+                    <!-- NEGATIVE — Mandatory field validation -->
+                    <include name="USR_06_UpdateUser_Missing_FirstName"/>
+                    <include name="USR_07_UpdateUser_Missing_LastName"/>
+                    <include name="USR_08_UpdateUser_Missing_Dob"/>
+                    <include name="USR_09_UpdateUser_Missing_Gender"/>
+                    <include name="USR_10_UpdateUser_Missing_Title"/>
+                    <include name="USR_11_UpdateUser_Missing_Guid"/>
+                    <include name="USR_12_UpdateUser_Missing_Mobile"/>
+                    <include name="USR_13_UpdateUser_InvalidGuid"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+</suite>

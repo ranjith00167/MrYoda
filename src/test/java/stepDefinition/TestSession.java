@@ -1,5 +1,8 @@
 package stepDefinition;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestSession {
 
 	public static String locationText = null;
@@ -16,5 +19,16 @@ public class TestSession {
     public static String selectedSlotDate = null;         // date for validation (e.g. "01 Dec")
     public static String generatedMobile;
 
+    /**
+     * Stores the actual full names used during registration and family-member creation.
+     * Populated at runtime (not from Excel) so validation always reflects what was
+     * actually entered in the UI / sent to the API.
+     * Index 0 = profile owner, Index 1+ = family members added in order.
+     */
+    public static List<String> registeredMemberNames = new ArrayList<>();
+
+    /** Temporary holder for first name while the add-member form is being filled,
+     *  cleared once last name is captured and full name is assembled. */
+    public static String _pendingMemberFirstName = null;
 
 }

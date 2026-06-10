@@ -29,35 +29,43 @@ public class HomePageSteps extends BaseSteps {
 	 * whereas text() only reads direct text nodes (misses React span wrappers).
 	 *
 	 * Priority:
-	 *  1. div/button whose total text is × or ✕ (U+00D7 / U+2715)
+	 *  1. div/button whose total text is × or ✕ or similar close chars
 	 *  2. Any element with aria-label containing remove/close/delete
-	 *  3. JS-based deep search as last resort
+	 *  3. SVG close icons (common in modern React UIs)
+	 *  4. JS-based deep search as last resort
 	 */
 	private static final String CART_REMOVE_BTN_XPATH =
 	    "//div[contains(@class,'cursor-pointer') and ("
 	    + "  normalize-space(.)='\u00d7' or"	// × U+00D7
 	    + "  normalize-space(.)='\u2715' or"	// ✕ U+2715  
 	    + "  normalize-space(.)='\u2716' or"	// ✖ U+2716
+	    + "  normalize-space(.)='\u256b' or"	// ╫ U+256B (seen in production)
+	    + "  normalize-space(.)='X' or"
 	    + "  normalize-space(.)='x'"
 	    + ")] |"
 	    + "//button["
 	    + "  normalize-space(.)='\u00d7' or"
 	    + "  normalize-space(.)='\u2715' or"
-	    + "  normalize-space(.)='\u2716'"
+	    + "  normalize-space(.)='\u2716' or"
+	    + "  normalize-space(.)='\u256b'"
 	    + "] |"
 	    // aria-label based fallback
 	    + "//*[@aria-label='Remove' or @aria-label='remove'"
 	    + "    or @aria-label='Close' or @aria-label='close'"
 	    + "    or @aria-label='Delete' or @aria-label='delete'"
-	    + "]";
+	    + "    or @aria-label='Remove item'"
+	    + "] |"
+	    // SVG-based close/remove icons inside cart panel
+	    + "//div[contains(@class,'cart')]//svg[contains(@class,'close') or contains(@class,'remove')]/parent::* |"
+	    + "//*[contains(@class,'cart')]//div[contains(@class,'delete') or contains(@class,'remove')]";
 
 	/** JS snippet: returns all remove-like buttons visible in the cart drawer */
 	private static final String CART_REMOVE_JS =
 	    "return Array.from(document.querySelectorAll("
-	    + "  '[class*=cursor-pointer], button'"
+	    + "  '[class*=cursor-pointer], button, [class*=remove], [class*=delete], [class*=close]'"
 	    + ")).filter(function(el) {"
 	    + "  var t = (el.innerText || el.textContent || '').trim();"
-	    + "  return t === '\u00d7' || t === '\u2715' || t === '\u2716';"
+	    + "  return t === '\u00d7' || t === '\u2715' || t === '\u2716' || t === '\u256b' || t === 'X' || t === 'x';"
 	    + "});";
 
 	@Then("verify whether the already selected tests are retained in the cart after login")
@@ -65,27 +73,49 @@ public class HomePageSteps extends BaseSteps {
 
 	    // Wait for the home page to be fully interactive before touching the cart icon
 	    try {
-	        new WebDriverWait(driver, Duration.ofSeconds(10))
+	        new WebDriverWait(driver, Duration.ofSeconds(15))
 	            .until(ExpectedConditions.elementToBeClickable(
 	                By.xpath("//div[contains(@class,'cursor-pointer')][.//img[@alt='Cart']]")));
 	    } catch (Exception ignored) { /* proceed even if cart icon not yet clickable */ }
 
 	    // Open the cart drawer
-		Thread.sleep(3000); // let the drawer animate open
+		Thread.sleep(3000); // let page stabilize after login
 	    BaseClass.waitAndClickWithJSFallback(LocatorsPage.cart_logo, 10);
-	    Thread.sleep(3000); // let the drawer animate open
+	    Thread.sleep(4000); // let the drawer animate open fully
 
-	    // Wait for the drawer to show either a Checkout button or empty-state text
+	    // Wait for the drawer to show either a Checkout button, item content, or empty-state text
 	    try {
-	        new WebDriverWait(driver, Duration.ofSeconds(8))
+	        new WebDriverWait(driver, Duration.ofSeconds(12))
 	            .until(ExpectedConditions.presenceOfElementLocated(
-	                By.xpath("//*[contains(text(),'Checkout')] | //*[contains(text(),'empty')]"
+	                By.xpath("//*[contains(text(),'Checkout')] | //*[contains(text(),'empty')] | //*[contains(text(),'Remove')] | //*[contains(@class,'cart')]//div[contains(@class,'cursor-pointer')]"
 	            )));
-	    } catch (Exception ignored) { /* no Checkout visible yet — proceed anyway */ }
+	    } catch (Exception ignored) { /* no cart content visible yet — proceed anyway */ }
 
 	    JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
 	    int maxIterations = 40;
 	    int iteration = 0;
+
+	    // ── Initial check: if first scan finds nothing, try re-opening drawer ──
+	    List<WebElement> initialCheck = driver.findElements(By.xpath(CART_REMOVE_BTN_XPATH));
+	    if (initialCheck == null || initialCheck.isEmpty()) {
+	        // Try JS scan
+	        @SuppressWarnings("unchecked")
+	        List<WebElement> jsCheck = (List<WebElement>) js.executeScript(CART_REMOVE_JS);
+	        if (jsCheck == null || jsCheck.isEmpty()) {
+	            // Log drawer state for diagnostics
+	            String pageSnippet = (String) js.executeScript(
+	                "var cart = document.querySelector('[class*=cart], [class*=drawer], [class*=sidebar], [class*=panel]');"
+	                + "return cart ? cart.innerText.substring(0, 500) : 'NO CART PANEL FOUND';"
+	            );
+	            System.out.println("🔍 Cart drawer content: " + pageSnippet);
+
+	            // Retry: click cart icon again (drawer might not have opened)
+	            System.out.println("⚠️ No remove buttons found. Retrying cart open...");
+	            Thread.sleep(2000);
+	            BaseClass.waitAndClickWithJSFallback(LocatorsPage.cart_logo, 10);
+	            Thread.sleep(4000);
+	        }
+	    }
 
 	    while (iteration++ < maxIterations) {
 
@@ -192,6 +222,7 @@ public class HomePageSteps extends BaseSteps {
         String location = BaseClass.getText(LocatorsPage.locationText, 10);
         TestSession.locationText = location;
         System.out.println("Location Text: " + TestSession.locationText);
+		Thread.sleep(2000);
 
         try {
             if (!BaseClass.isElementVisible(LocatorsPage.viewAll_BestSeller, 10)) {

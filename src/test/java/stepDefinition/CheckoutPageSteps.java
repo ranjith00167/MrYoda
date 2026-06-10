@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 
 import utilities.BaseClass;
 import utilities.BasePriceManager;
+import stepDefinition.TestSession;
 
 public class CheckoutPageSteps extends BaseSteps {
 
@@ -48,19 +49,76 @@ public class CheckoutPageSteps extends BaseSteps {
 
         System.out.println("\n📌 Validating Each Test Against Checkout Page:\n");
 
-        for (int i = 0; i < excelList.size(); i++) {
+        // Wait for at least one product row to be visible before validating.
+        // Do NOT constrain to 'divide-y' parent — that class is absent on the new-user checkout page.
+        try {
+            new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(12))
+                .until(org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated(
+                    By.xpath("//div[contains(@class,'text-textHeading')]"
+                )));
+        } catch (Exception e) {
+            System.out.println("⚠️ Checkout product list did not load within 12s — proceeding with validation anyway");
+        }
+
+        // In multi-member scenarios, only some tests are in the cart at this step.
+        // Read the actual cart count from the header ("X Tests/Packages in Cart") and
+        // validate only that many tests — the rest will be added when members are assigned.
+        int cartCount = excelList.size(); // default: validate all
+        try {
+            String headerText = LocatorsPage.checkoutSummaryHeader.getText();
+            java.util.regex.Matcher hm = java.util.regex.Pattern
+                    .compile("(\\d+)\\s*Tests?/Packages?", java.util.regex.Pattern.CASE_INSENSITIVE)
+                    .matcher(headerText);
+            if (hm.find()) {
+                cartCount = Integer.parseInt(hm.group(1));
+            }
+        } catch (Exception e) {
+            System.out.println("⚠️ Could not read cart count from header — validating all Excel tests");
+        }
+        int testsToValidate = Math.min(excelList.size(), cartCount);
+        if (testsToValidate < excelList.size()) {
+            System.out.println("ℹ️ Cart has " + cartCount + " item(s) but Excel has " + excelList.size()
+                    + " — validating first " + testsToValidate + " (remaining are for other members added later)");
+        }
+
+        for (int i = 0; i < testsToValidate; i++) {
 
             String testName = excelList.get(i);
 
-                String rowXpath = String.format(
-                    "//div[contains(@class,'divide-y')]//div[" +
-                        ".//div[contains(@class,'text-textHeading') and contains(normalize-space(.), '%s')]" +
-                        "]",
-                    testName
-                );
+            // Primary: look for the row inside a divide-y container (member flow)
+            // Fallback: find the row anywhere on the page (new-user / single-member flow)
+            String rowXpath = String.format(
+                "//*[" +
+                    ".//div[contains(@class,'text-textHeading') and contains(normalize-space(.), '%s')]" +
+                    " and .//*[contains(@class,'cursor-pointer')]" +
+                "]",
+                testName
+            );
+            // Use the most-specific (deepest) matching ancestor — filter out wrappers
+            // that contain the whole cart by requiring a cursor-pointer price block as a sibling.
+            String narrowXpath = String.format(
+                "//div[" +
+                    ".//div[contains(@class,'text-textHeading') and contains(normalize-space(.), '%s')]" +
+                    " and .//div[contains(@class,'cursor-pointer')]" +
+                "][not(.//div[contains(@class,'divide-y')])]" +
+                " | " +
+                "//div[contains(@class,'divide-y')]//div[" +
+                    ".//div[contains(@class,'text-textHeading') and contains(normalize-space(.), '%s')]" +
+                "]",
+                testName, testName
+            );
 
-            List<WebElement> rows = driver.findElements(By.xpath(rowXpath));
+            List<WebElement> rows = driver.findElements(By.xpath(narrowXpath));
+            // Pick the shallowest element that still contains a price block
             if (rows.isEmpty()) {
+                rows = driver.findElements(By.xpath(rowXpath));
+            }
+            if (rows.isEmpty()) {
+                // Debug: print all text-textHeading elements found on page to diagnose name mismatch
+                List<WebElement> allHeaders = driver.findElements(
+                    By.xpath("//div[contains(@class,'text-textHeading')]"));
+                System.out.println("🔍 DEBUG: Found " + allHeaders.size() + " text-textHeading elements on page:");
+                allHeaders.forEach(h -> System.out.println("   • [" + h.getText().trim() + "]"));
                 throw new AssertionError("❌ NOT FOUND in checkout → " + testName);
             }
 

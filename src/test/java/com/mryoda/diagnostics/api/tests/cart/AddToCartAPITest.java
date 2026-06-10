@@ -776,14 +776,16 @@ public class AddToCartAPITest extends BaseTest {
             }
         }
 
-        // 3. Compute rewards_used = min(floor(cartTotal/2), initialRewards)
+        // 3. Compute rewards_used = min(floor(cartTotal/2), initialRewards, MAX_REWARD_DISCOUNT)
+        //    Business rule: maximum rewards discount per order is ₹1000.
+        final double MAX_REWARD_DISCOUNT = 1000.0;
         double rewardsUsed;
         if (cartTotal > 0) {
-            rewardsUsed = Math.min(Math.floor(cartTotal / 2.0), initialRewards);
+            rewardsUsed = Math.min(Math.min(Math.floor(cartTotal / 2.0), initialRewards), MAX_REWARD_DISCOUNT);
         } else {
             // Last resort: use half the cart total as floor(pre-discount/2)
             // This shouldn't happen if getCartById succeeds
-            rewardsUsed = Math.min(500.0, initialRewards);
+            rewardsUsed = Math.min(Math.min(500.0, initialRewards), MAX_REWARD_DISCOUNT);
             System.out.println("   ⚠️  cartTotal not available from getCartById — using safe fallback: " + rewardsUsed);
         }
         System.out.println("   cartTotal=" + cartTotal + ", initialRewards=" + initialRewards
