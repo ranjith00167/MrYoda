@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     USER — GetByGuids API Validation Suite
+     ══════════════════════════════════════════════════════════════════════════
+     Validates POST /users/getByGuids endpoint with:
+     - Positive: Single/multiple GUIDs, field validation, response time, security
+     - Negative: Empty array, invalid GUIDs, no auth, SQL injection, XSS
+
+     Run:  mvn test -DsuiteXmlFile=test-suites/testng_user_getbyguids_suite.xml
+     ══════════════════════════════════════════════════════════════════════════ -->
+
+<suite name="User GetByGuids API Validation Suite" verbose="2" parallel="false">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- Login first to obtain token -->
+    <test name="Authentication" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest"/>
+        </classes>
+    </test>
+
+    <!-- GetByGuids API Tests -->
+    <test name="GetByGuids API Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.user.GetByGuidsValidationTest"/>
+        </classes>
+    </test>
+
+</suite>

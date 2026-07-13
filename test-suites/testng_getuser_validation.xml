@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="GetUser API Validation Suite - All User Types" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ===================================================== -->
+    <!-- SCENARIO 1 — MEMBER: GetUser Validations              -->
+    <!-- ===================================================== -->
+
+    <test name="Member - GetUser API Validations" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <parameter name="flowType" value="validation"/>
+
+        <classes>
+
+            <!-- Login as Member -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP"/></methods>
+            </class>
+
+            <!-- GetUser Validation Tests -->
+            <class name="com.mryoda.diagnostics.api.tests.user.GetUserValidationTest"/>
+
+            <!-- GetUserByMobile Validation Tests -->
+            <class name="com.mryoda.diagnostics.api.tests.user.GetUserByMobileValidationTest"/>
+
+            <!-- GetByGuids Validation Tests -->
+            <class name="com.mryoda.diagnostics.api.tests.user.GetByGuidsValidationTest"/>
+
+        </classes>
+    </test>
+
+    <!-- ===================================================== -->
+    <!-- SCENARIO 2 — NON-MEMBER: GetUser Validations          -->
+    <!-- ===================================================== -->
+
+    <test name="Non-Member - GetUser API Validations" preserve-order="true">
+        <parameter name="userType" value="non_member"/>
+        <parameter name="flowType" value="validation"/>
+
+        <classes>
+
+            <!-- Login as Non-Member -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP_NonMember"/></methods>
+            </class>
+
+            <!-- GetUser Validation Tests -->
+            <class name="com.mryoda.diagnostics.api.tests.user.GetUserValidationTest"/>
+
+            <!-- GetUserByMobile Validation Tests -->
+            <class name="com.mryoda.diagnostics.api.tests.user.GetUserByMobileValidationTest"/>
+
+        </classes>
+    </test>
+
+    <!-- ===================================================== -->
+    <!-- SCENARIO 3 — NEW USER: Registration + GetUser         -->
+    <!-- ===================================================== -->
+
+    <test name="New User - Registration + GetUser API Validations" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+        <parameter name="flowType" value="validation"/>
+
+        <classes>
+
+            <!-- Register New User -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods><include name="testUserRegistration_CreateNewUser"/></methods>
+            </class>
+
+            <!-- Login with Newly Registered User -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP_NewlyRegisteredUser"/></methods>
+            </class>
+
+            <!-- GetUser Validation Tests -->
+            <class name="com.mryoda.diagnostics.api.tests.user.GetUserValidationTest"/>
+
+            <!-- GetUserByMobile Validation Tests -->
+            <class name="com.mryoda.diagnostics.api.tests.user.GetUserByMobileValidationTest"/>
+
+        </classes>
+    </test>
+
+</suite>

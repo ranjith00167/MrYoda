@@ -1,43 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<!-- ══════════════════════════════════════════════════════════════════════════
-     FREE MEMBERSHIP — PAY ONLINE HYBRID SUITE
-     ══════════════════════════════════════════════════════════════════════════
-     Feature: TC_16__FreeMembership.feature
-     Scenarios:
-       1. Single Member – Lab Visit – Pay Online
-       2. Single Member – Lab Visit – Reward + Coupon
-       3. Multi Member – Reward + Coupon
-       4. Multi Member – Reward Only
-       5. Single Non-Member – Lab Visit – Pay Online
-       6. Single New User – Lab Visit – Pay Online
-       7. New User – Add Member – Lab Visit
-       8. Add Member – Multi Lab Order – Membership
-       9. Single Member – Coupon Only
-      10. Single Non-Member – Coupon Only
-      11. Multi Member – Coupon Only
-      12. Multi Member Non-Member – Coupon Only
-      13. Single Member – Reward Only
-
-     Run:  mvn test "-DsuiteXmlFile=test-suites/testng_free_membership_suite.xml"
-     ══════════════════════════════════════════════════════════════════════════ -->
-
-<suite name="Free Membership Pay Online Hybrid Suite" verbose="2" parallel="false">
+<suite name="Free Membership Regression Suite" verbose="2" parallel="false">
 
     <listeners>
         <listener class-name="utilities.TestNGExtentReportListener"/>
     </listeners>
 
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- TEST : Free Membership — All Scenarios (Hybrid UI + API)           -->
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <test name="Free Membership - All Scenarios" preserve-order="true">
-        <parameter name="cucumber.filter.tags" value="@payOnlineHybrid"/>
+    <!-- ========================================================= -->
+    <!-- FLOW 1 : Free Membership Order Creation Flow              -->
+    <!-- ========================================================= -->
+    <test name="FM_FLOW_01 - Order Creation" preserve-order="true">
+
+        <parameter name="cucumber.filter.tags"
+                   value="@hybridLabOrderMember"/>
 
         <classes>
             <class name="testRunner.FreeMembershipSuiteRunner"/>
         </classes>
+
     </test>
+
+    <!-- ========================================================= -->
+    <!-- FLOW 2 : Order Creation + Cancellation Flow               -->
+    <!-- Independent Flow                                          -->
+    <!-- Creates a fresh order and then cancels it                 -->
+    <!-- ========================================================= -->
+    <test name="FM_FLOW_02 - Order Creation And Cancellation"
+          preserve-order="true">
+
+        <parameter name="cucumber.filter.tags"
+                   value="@hybridLabOrderMemberCancellation"/>
+
+        <classes>
+            <class name="testRunner.FreeMembershipSuiteRunner"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.FreeMembershipCancellationFlowTest"/>
+        </classes>
+
+    </test>
+
+    <!-- ========================================================= -->
+    <!-- FLOW 3 : Multi-Member Free Membership – Positive Flow     -->
+    <!-- Creates 2 family members via API (Ranjith Kumar A,        -->
+    <!-- Sathish Kumar) then places a multi-member lab order       -->
+    <!-- ========================================================= -->
+    <test name="FM_FLOW_03 - Multi Member Order Creation"
+          preserve-order="true">
+
+        <parameter name="cucumber.filter.tags"
+                   value="@hybridLabOrderMemberMulti"/>
+
+        <classes>
+            <class name="testRunner.FreeMembershipSuiteRunner"/>
+        </classes>
+
+    </test>
+
+    <!-- ========================================================= -->
+    <!-- FLOW 4 : Multi-Member Free Membership – Cancellation Flow -->
+    <!-- Same family-member creation + order, then full API        -->
+    <!-- cancellation (Cashback → Cancel → Admin Approve)          -->
+    <!-- ========================================================= -->
+    <test name="FM_FLOW_04 - Multi Member Order Cancellation"
+          preserve-order="true">
+
+        <parameter name="cucumber.filter.tags"
+                   value="@hybridLabOrderMemberMultiCancellation"/>
+
+        <classes>
+            <class name="testRunner.FreeMembershipSuiteRunner"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.FreeMembershipCancellationFlowTest"/>
+        </classes>
+
+    </test>
+
+
 
 </suite>

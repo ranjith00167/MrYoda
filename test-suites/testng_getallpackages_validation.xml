@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="GetAllPackages API Validation Suite" verbose="1">
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="GetAllPackages API Tests" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesValidationTest"/>
+        </classes>
+    </test>
+</suite>

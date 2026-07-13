@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="GetAllSymptoms Validation Suite" verbose="2">
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="GetAllSymptoms Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GetAllSymptomsValidationTest"/>
+        </classes>
+    </test>
+</suite>

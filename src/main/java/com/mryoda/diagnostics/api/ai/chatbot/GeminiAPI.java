@@ -21,8 +21,8 @@ import java.util.Map;
  */
 public class GeminiAPI {
 
-    private static final String GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta";
-    private static final String DEFAULT_MODEL = "gemini-pro";
+    private static final String GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1";
+    private static final String DEFAULT_MODEL = "gemini-2.0-flash";
 
     private final String apiKey;
     private final String model;

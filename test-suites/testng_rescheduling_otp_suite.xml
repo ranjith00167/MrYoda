@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+  Rescheduling OTP API Test Suite (RS_001 – RS_057)
+  Endpoint : POST https://staging-api-diagnostics.yodaprojects.com/otps/send
+  Run with : mvn test -DsuiteXmlFile=test-suites/testng_rescheduling_otp_suite.xml
+-->
+<suite name="Rescheduling OTP API Suite" parallel="none" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="Rescheduling OTP - All Scenarios (RS_001 to RS_057)" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.ReschedulingOTPTest"/>
+        </classes>
+    </test>
+
+</suite>

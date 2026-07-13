@@ -248,8 +248,22 @@ public class LoginPageSteps extends BaseSteps {
 
         System.out.println("========== 🌐 LAUNCHING UI LOGIN ==========");
 
+        // Re-open login modal if it was closed during API registration calls
+        try {
+            boolean inputVisible = BaseClass.isElementDisplayed(LocatorsPage.enter_mobile_number);
+            if (!inputVisible) {
+                System.out.println("⚠️ Login modal not visible — reopening...");
+                BaseClass.waitAndClick(LocatorsPage.login, 10);
+                Thread.sleep(3000);
+            }
+        } catch (Exception e) {
+            System.out.println("⚠️ Checking modal state failed — clicking login to ensure modal is open...");
+            BaseClass.waitAndClick(LocatorsPage.login, 10);
+            Thread.sleep(3000);
+        }
+
         // Now login via UI with the registered mobile
-        BaseClass.waitAndInput(LocatorsPage.mobile_number, mobile, 10);
+        BaseClass.waitAndInput(LocatorsPage.enter_mobile_number, mobile, 10);
         BaseClass.waitAndClick(LocatorsPage.get_otp_button, 10);
 
         Thread.sleep(2000);

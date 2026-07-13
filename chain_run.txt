@@ -1,0 +1,3946 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< MrYoda:MrYoda >----------------------------
+[INFO] Building MrYoda 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ MrYoda ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ MrYoda ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ MrYoda ---
+[INFO] Copying 24 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ MrYoda ---
+[INFO] Changes detected - recompiling the module! :input tree
+[INFO] Compiling 186 source files with javac [debug release 11] to target\test-classes
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[396,53] getExistingMemberUserId() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2156,38] getExistingMemberToken() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2157,39] getExistingMemberUserId() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2256,54] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/otp/SuperAdminOTPVerifyTest.java:[935,46] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>[]
+  found:    java.util.Map[]
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java:[285,93] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java:[583,85] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[171,57] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[173,73] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[175,72] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[177,72] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[286,53] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[288,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[290,68] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[292,68] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java:[420,65] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/SingleMemberCancellationFlowTest.java:[1176,42] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/SingleMemberCancellationFlowTest.java:[1181,58] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    capture#1 of ?
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java:[47,77] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java:[103,77] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/customer/AddCustomerAPITest.java:[205,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/customer/AddCustomerAPITest.java:[446,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[243,82] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[244,74] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[296,74] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[1016,85] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/COD_17_ReportGenerationTest.java:[449,89] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ MrYoda ---
+[INFO] Using auto detected provider org.apache.maven.surefire.testng.TestNGProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+SLF4J(W): Class path contains multiple SLF4J providers.
+SLF4J(W): Found provider [org.slf4j.simple.SimpleServiceProvider@578486a3]
+SLF4J(W): Found provider [org.apache.logging.slf4j.SLF4JServiceProvider@551aa95a]
+SLF4J(W): See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J(I): Actual provider is of type [org.slf4j.simple.SimpleServiceProvider@578486a3]
+...
+... TestNG 7.8.0 by CΘdric Beust (cedric@beust.com)
+...
+
+
+#########################################################
+  STARTING NEW XML TEST FLOW - RESETTING CONTEXT
+#########################################################
+
+[CLEANING] RequestContext Flow State...
+[SUCCESS] RequestContext State Successfully Cleared.
+
+========================================
+SETUP: Fetching packages & extracting _id/slug
+========================================
+Request Body: {limit=50, pageSize=50, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 50,
+    "pageSize": 50,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 1196 ms
+----------------------------
+
+   Total Packages: 50
+   Total Pages: 3
+   First _id: 675921b2ba6f16b8c0d7becc
+   First slug: antenatal-profile-2
+   Random _id: 675921b2ba6f16b8c0d7bee3
+   Random slug: covid-profile-recovery
+   Fields: [_id, package_id, package_name, components, turn_around_time, specimen, slug, tests_included, stability, comment, usage, locations, department, doctor_speciality, test_method, organ, doctorsSpeciality, diseases, price, original_price, cpt_comment, cpt_price, actual_cprt_price, b2b_price, home_collection, popular, speciality_tests, frequently_booked, pre_test_information, business_type, status, createdAt, updatedAt, gender, description, full_body_checkup, tests_id_included, frequently_asked_questions, other_names, result_interpretation, search_keywords, index, advanced_package, courier_charges, featured, file_name, icon, image, is_yodaara, max_cut_off_price, no_of_parameters, offer_expiry, report_path, result_interpretation_yoda, sample_required_yoda, speciality_package, test_measures, trf_path, turn_around_time_yoda, usage_yoda, default_doctor_percentage, is_doctor_percentage_applicable, test_name, discount_rate, rewards_percentage, discount_percentage]
+? Setup complete
+========================================
+
+Request Body: {limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 230 ms
+----------------------------
+
+? TC01 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC01_ValidRequest
+Request Body: {limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 208 ms
+----------------------------
+
+? TC02 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC02_StatusCode200
+Request Body: {limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 199 ms
+----------------------------
+
+   Packages: 20
+? TC03 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC03_PackageListNotEmpty
+   All 50 packages have _id
+? TC04 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC04_IdPresent
+   All 50 packages have slug
+? TC05 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC05_SlugPresent
+? TC06 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC06_PackageNamePresent
+? TC07 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC07_PricePresent
+   membership_price present: false
+   cpt_price present: true
+? TC08 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC08_MembershipPrice
+   rewards_percentage: 90
+? TC09 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC09_RewardsPercentage
+   home_collection: AVAILABLE
+? TC10 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC10_HomeCollection
+Request Body: {searchString=Ante, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "Ante",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 206 ms
+----------------------------
+
+   Search: 'Ante' ? 1 results
+? TC11 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC11_SearchReturnsMatch
+Request Body: {searchString=Antenatal Profile -2, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "Antenatal Profile -2",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 162 ms
+----------------------------
+
+? TC12 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC12_ExactNameSearch
+Request Body: {searchString=Ant, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "Ant",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 155 ms
+----------------------------
+
+   Partial 'Ant' ? 2
+? TC13 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC13_PartialSearch
+Request Body: {searchString=bone, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "bone",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 159 ms
+----------------------------
+
+   'bone' ? 3
+? TC14 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC14_LowercaseSearch
+Request Body: {searchString=BONE, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "BONE",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 163 ms
+----------------------------
+
+   'BONE' ? 3
+? TC15 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC15_UppercaseSearch
+Request Body: {searchString=BoNe, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "BoNe",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 135 ms
+----------------------------
+
+? TC16 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC16_MixedCaseSearch
+Request Body: {searchString=!@#$%, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "!@#$%",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 116 ms
+----------------------------
+
+   Status: 200
+? TC17 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC17_SpecialCharSearch
+Request Body: {searchString=  Bone  , limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "  Bone  ",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 135 ms
+----------------------------
+
+? TC18 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC18_SearchWithSpaces
+Request Body: {searchString=, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 140 ms
+----------------------------
+
+   Status: 200
+? TC19 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC19_EmptySearch
+Request Body: {searchString=null, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": null,
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 141 ms
+----------------------------
+
+   Status: 200
+? TC20 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC20_NullSearch
+Request Body: {searchString=zzznonexistent999xyz, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "zzznonexistent999xyz",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 105 ms
+----------------------------
+
+? TC21 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC21_InvalidSearch
+Request Body: {searchString=xxxxxxxxx_no_match_xxxxxxxxx, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "xxxxxxxxx_no_match_xxxxxxxxx",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 141 ms
+----------------------------
+
+? TC22 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC22_NoMatchSearch
+Request Body: {limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 112 ms
+----------------------------
+
+? TC23 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC23_Page1
+Request Body: {limit=5, pageSize=5, page=2}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 5,
+    "pageSize": 5,
+    "page": 2
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 113 ms
+----------------------------
+
+   Page 2 results: 5
+? TC24 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC24_PageGreaterThan1
+Request Body: {limit=20, pageSize=10, page=0}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 0
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 93 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC25_PageZero
+Request Body: {limit=20, pageSize=10, page=-1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": -1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 94 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC26_PageNegative
+Request Body: {limit=20, pageSize=10, page=null}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": null
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 103 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC27_PageNull
+Request Body: {limit=20, pageSize=10}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 88 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC28_PageMissing
+Request Body: {limit=10, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 10,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 113 ms
+----------------------------
+
+? TC29 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC29_PageSize10
+Request Body: {limit=20, pageSize=0, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 0,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 108 ms
+----------------------------
+
+   Status: 200
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC30_PageSizeZero
+Request Body: {limit=20, pageSize=-1, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": -1,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 126 ms
+----------------------------
+
+   Status: 200
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC31_PageSizeNegative
+Request Body: {limit=20, pageSize=null, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": null,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 122 ms
+----------------------------
+
+   Status: 200
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC32_PageSizeNull
+Request Body: {limit=20, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 114 ms
+----------------------------
+
+   Status: 200
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC33_PageSizeMissing
+Request Body: {limit=20, pageSize=20, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 20,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 128 ms
+----------------------------
+
+? TC34 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC34_Limit20
+Request Body: {limit=0, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 0,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 96 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC35_LimitZero
+Request Body: {limit=-1, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": -1,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 119 ms
+----------------------------
+
+   Status: 200
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC36_LimitNegative
+Request Body: {limit=null, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": null,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 89 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC37_LimitNull
+Request Body: {pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 109 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC38_LimitMissing
+   50 unique packages
+? TC39 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC39_NoDuplicates
+? TC40 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC40_NoInactivePackages
+? TC41 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC41_NoDeletedPackages
+Request Body: {limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 162 ms
+----------------------------
+
+? TC42 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC42_ResponseSchema
+Request Body: {limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 123 ms
+----------------------------
+
+   Time: 123ms
+? TC43 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC43_ResponseTime
+Request Body: {limit=5, pageSize=5, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 5,
+    "pageSize": 5,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 112 ms
+----------------------------
+
+   Page 1 size: 5
+? TC44 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC44_PaginationCount
+Request Body: {limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 120 ms
+----------------------------
+
+   total_pages: 6
+? TC45 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC45_TotalRecords
+   Extracted 50 _ids
+   Sample: 675921b2ba6f16b8c0d7becc
+? TC46 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC46_ExtractId
+   Extracted 50 slugs
+   Sample: antenatal-profile-2
+? TC47 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC47_ExtractSlug
+? TC48 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC48_IdNotNull
+? TC49 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC49_SlugNotNull
+? TC50 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC50_IdUnique
+? TC51 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC51_SlugUnique
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 143 ms
+----------------------------
+
+   Fetched package by _id: 675921b2ba6f16b8c0d7becc
+? TC52 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC52_GetByIdSuccess
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 127 ms
+----------------------------
+
+? TC53 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC53_StatusCode200
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 120 ms
+----------------------------
+
+   Returned _id: [675921b2ba6f16b8c0d7becc]
+? TC54 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC54_PackageIdInResponse
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 111 ms
+----------------------------
+
+   slug: [antenatal-profile-2]
+? TC55 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC55_SlugInResponse
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 133 ms
+----------------------------
+
+   package_name: [Antenatal Profile -2]
+? TC56 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC56_PackageNameInResponse
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 132 ms
+----------------------------
+
+   price: [2000]
+? TC57 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC57_PriceInResponse
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 123 ms
+----------------------------
+
+   Response body (first 200): {"status":200,"success":true,"msg":"Test details fetched successfully","page":1,"limit":10,"total_pages":0,"data":[{"_id":"675921b2ba6f16b8c0d7becc","package_id":"675921b2ba6f16b8c0d7becc","package_na
+? TC58 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC58_MembershipPriceById
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 232 ms
+----------------------------
+
+? TC59 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC59_RewardsById
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 120 ms
+----------------------------
+
+   tests_included: present
+? TC60 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC60_IncludedTests
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 130 ms
+----------------------------
+
+? TC61 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC61_HomeCollectionById
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 124 ms
+----------------------------
+
+? TC62 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC62_ValidId
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/invalid_id_999
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/invalid_id_999
+   Time    : ? 131 ms
+----------------------------
+
+   Status: 500
+   Response: {"success":false,"message":"Cannot read properties of undefined (reading 'tests_id_included')"}
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC63_InvalidId
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/
+   Time    : ? 76 ms
+----------------------------
+
+   Status: 404
+? TC64 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC64_EmptyId
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/null
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/null
+   Time    : ? 121 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC65_NullId
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/000000000000000000000000
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/000000000000000000000000
+   Time    : ? 148 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC66_DeletedId
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 125 ms
+----------------------------
+
+? TC67 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC67_InactiveId
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/%21%40%23%24%25%5E%26*%28%29
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/!@#$%^&*()
+   Time    : ? 120 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC68_SpecialCharsInId
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/%27%20OR%201%3D1%20--
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/' OR 1=1 --
+   Time    : ? 121 ms
+----------------------------
+
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC69_SQLInjection
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/%3Cscript%3Ealert%281%29%3C/script%3E
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/<script>alert(1)</script>
+   Time    : ? 102 ms
+----------------------------
+
+   Status: 404
+? TC70 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC70_XSSInId
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 143 ms
+----------------------------
+
+? TC71 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC71_ByIdResponseSchema
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 134 ms
+----------------------------
+
+   Time: 134ms
+? TC72 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC72_ByIdResponseTime
+
+>>> TC73: API CHAINING FLOW <<<
+Request Body: {limit=5, pageSize=5, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 5,
+    "pageSize": 5,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 125 ms
+----------------------------
+
+   Extracted _id: 675921b2ba6f16b8c0d7becc
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 125 ms
+----------------------------
+
+   GetPackageById: 200 OK
+? TC73 PASSED: Chain flow works
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC73_ChainFlow
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 120 ms
+----------------------------
+
+   Expected: 675921b2ba6f16b8c0d7becc | Got: 675921b2ba6f16b8c0d7becc
+? TC74 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC74_IdMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 168 ms
+----------------------------
+
+   Expected: antenatal-profile-2 | Got: antenatal-profile-2
+? TC75 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC75_SlugMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 133 ms
+----------------------------
+
+   Antenatal Profile -2 ?
+? TC76 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC76_NameMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 147 ms
+----------------------------
+
+   Price: 2000 ?
+? TC77 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC77_PriceMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 135 ms
+----------------------------
+
+   cpt_price: 1000 ?
+? TC78 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC78_MembershipPriceMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 117 ms
+----------------------------
+
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC79_RewardsMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 119 ms
+----------------------------
+
+? TC80 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC80_HomeCollectionMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 118 ms
+----------------------------
+
+   Tests count: 8 ?
+? TC81 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC81_IncludedTestsMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 124 ms
+----------------------------
+
+? TC82 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC82_StatusMatch
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 158 ms
+----------------------------
+
+   All critical fields match ?
+? TC83 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC83_AllFieldsConsistent
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7bee3
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7bee3
+   Time    : ? 122 ms
+----------------------------
+
+   Random package 675921b2ba6f16b8c0d7bee3 ? consistent ?
+? TC84 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC84_RandomPackageConsistency
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 115 ms
+----------------------------
+
+   First package ?
+? TC85 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC85_FirstPackageConsistency
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7bee6
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7bee6
+   Time    : ? 125 ms
+----------------------------
+
+   Last package 675921b2ba6f16b8c0d7bee6 ?
+? TC86 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC86_LastPackageConsistency
+Request Body: {}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 92 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC87_EmptyBody
+Request Body: {limit=null, pageSize=null, page=null}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": null,
+    "pageSize": null,
+    "page": null
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 93 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC88_NullBody
+Request Body: {limit=20, pageSize=10, page=abc}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": "abc"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 130 ms
+----------------------------
+
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC90_InvalidPageType
+Request Body: {limit=20, pageSize=abc, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": "abc",
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 120 ms
+----------------------------
+
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC91_InvalidPageSizeType
+Request Body: {limit=abc, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": "abc",
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 174 ms
+----------------------------
+
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC92_InvalidLimitType
+Request Body: {searchString=12345, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": 12345,
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 126 ms
+----------------------------
+
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC93_InvalidSearchType
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/12345
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/12345
+   Time    : ? 114 ms
+----------------------------
+
+   Status: 500
+
+[FAIL] GetAllPackagesGetByIdChainTest.testTC94_InvalidIdType
+Request Body: {searchString=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 104 ms
+----------------------------
+
+   Status: 200 | Time: 104ms
+? TC95 PASSED
+
+[PASS] GetAllPackagesGetByIdChainTest.testTC95_LargePayload
+
+>>> SECURITY [searchString]: SQL Injection in searchString <<<
+Request Body: {searchString=' OR 1=1 --, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "' OR 1=1 --",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 94 ms
+----------------------------
+
+   Status: 200
+? PASSED: SQL Injection in searchString
+
+[PASS] GetAllPackagesGetByIdChainTest.testSecurity_SearchString
+
+>>> SECURITY [searchString]: XSS in searchString <<<
+Request Body: {searchString=<script>alert(1)</script>, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "<script>alert(1)</script>",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 96 ms
+----------------------------
+
+   Status: 200
+? PASSED: XSS in searchString
+
+[PASS] GetAllPackagesGetByIdChainTest.testSecurity_SearchString
+
+>>> SECURITY [searchString]: HTML Injection in searchString <<<
+Request Body: {searchString=<h1>Injected</h1>, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "<h1>Injected</h1>",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 122 ms
+----------------------------
+
+   Status: 200
+? PASSED: HTML Injection in searchString
+
+[PASS] GetAllPackagesGetByIdChainTest.testSecurity_SearchString
+
+>>> SECURITY [package_id]: SQL Injection in package_id <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/%27%20OR%201%3D1%20--
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/' OR 1=1 --
+   Time    : ? 143 ms
+----------------------------
+
+
+[FAIL] GetAllPackagesGetByIdChainTest.testSecurity_PackageId
+
+>>> SECURITY [package_id]: XSS in package_id <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/%3Cscript%3Ealert%281%29%3C/script%3E
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/<script>alert(1)</script>
+   Time    : ? 87 ms
+----------------------------
+
+   Status: 404
+? PASSED: XSS in package_id
+
+[PASS] GetAllPackagesGetByIdChainTest.testSecurity_PackageId
+
+>>> HIGH PRIORITY: E2E FLOW <<<
+   [TC101] GetAllPackages...
+Request Body: {limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 120 ms
+----------------------------
+
+   [TC102] Search...
+Request Body: {searchString=Antenatal Profile -2, limit=20, pageSize=10, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "searchString": "Antenatal Profile -2",
+    "limit": 20,
+    "pageSize": 10,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 99 ms
+----------------------------
+
+   [TC103] Extract _id...
+   [TC104] Extract slug...
+   [TC105] GetPackageById...
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/675921b2ba6f16b8c0d7becc
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/675921b2ba6f16b8c0d7becc
+   Time    : ? 130 ms
+----------------------------
+
+   [TC106] _id match...
+   [TC107] slug match...
+   [TC108] package_name match...
+   [TC109] price match...
+   [TC110] membership price...
+   [TC111] Invalid _id...
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getPackageById/invalid_xyz_999
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /tests/getPackageById/invalid_xyz_999
+   Time    : ? 124 ms
+----------------------------
+
+
+[FAIL] GetAllPackagesGetByIdChainTest.testHighPriority_E2EFlow
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 149 ms | Max: 1196 ms | Calls: 49
+   > History: [1196, 230, 208, 199, 206, 162, 155, 159, 163, 135, 116, 135, 140, 141, 105, 141, 112, 113, 93, 94, 103, 88, 113, 108, 126, 122, 114, 128, 96, 119, 89, 109, 162, 123, 112, 120, 125, 92, 93, 130, 120, 174, 126, 104, 94, 96, 122, 120, 99]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/invalid_xyz_999                                           
+   > Status: [FAST] | Avg: 124 ms | Max: 124 ms | Calls: 1
+   > History: [124]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/675921b2ba6f16b8c0d7becc                                  
+   > Status: [FAST] | Avg: 133 ms | Max: 232 ms | Calls: 27
+   > History: [143, 127, 120, 111, 133, 132, 123, 232, 120, 130, 124, 125, 143, 134, 125, 120, 168, 133, 147, 135, 117, 119, 118, 124, 158, 115, 130]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/000000000000000000000000                                  
+   > Status: [FAST] | Avg: 148 ms | Max: 148 ms | Calls: 1
+   > History: [148]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/invalid_id_999                                            
+   > Status: [FAST] | Avg: 131 ms | Max: 131 ms | Calls: 1
+   > History: [131]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/675921b2ba6f16b8c0d7bee6                                  
+   > Status: [FAST] | Avg: 125 ms | Max: 125 ms | Calls: 1
+   > History: [125]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/12345                                                     
+   > Status: [FAST] | Avg: 114 ms | Max: 114 ms | Calls: 1
+   > History: [114]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/null                                                      
+   > Status: [FAST] | Avg: 121 ms | Max: 121 ms | Calls: 1
+   > History: [121]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/675921b2ba6f16b8c0d7bee3                                  
+   > Status: [FAST] | Avg: 122 ms | Max: 122 ms | Calls: 1
+   > History: [122]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/                                                          
+   > Status: [FAST] | Avg: 76 ms | Max: 76 ms | Calls: 1
+   > History: [76]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/' OR 1=1 --                                               
+   > Status: [FAST] | Avg: 132 ms | Max: 143 ms | Calls: 2
+   > History: [121, 143]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/<script>alert(1)</script>                                 
+   > Status: [FAST] | Avg: 94 ms | Max: 102 ms | Calls: 2
+   > History: [102, 87]
+   --------------------------------------------------------------------------------
+   /tests/getPackageById/!@#$%^&*()                                                
+   > Status: [FAST] | Avg: 120 ms | Max: 120 ms | Calls: 1
+   > History: [120]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+
+
+==========================================================================================
+                               TEST EXECUTION SUMMARY                                     
+==========================================================================================
+Test Method                                                                      | Status    
+------------------------------------------------------------------------------------------
+GetAllPackagesGetByIdChainTest.testTC01_ValidRequest                             | PASS ?
+GetAllPackagesGetByIdChainTest.testTC02_StatusCode200                            | PASS ?
+GetAllPackagesGetByIdChainTest.testTC03_PackageListNotEmpty                      | PASS ?
+GetAllPackagesGetByIdChainTest.testTC04_IdPresent                                | PASS ?
+GetAllPackagesGetByIdChainTest.testTC05_SlugPresent                              | PASS ?
+GetAllPackagesGetByIdChainTest.testTC06_PackageNamePresent                       | PASS ?
+GetAllPackagesGetByIdChainTest.testTC07_PricePresent                             | PASS ?
+GetAllPackagesGetByIdChainTest.testTC08_MembershipPrice                          | PASS ?
+GetAllPackagesGetByIdChainTest.testTC09_RewardsPercentage                        | PASS ?
+GetAllPackagesGetByIdChainTest.testTC10_HomeCollection                           | PASS ?
+GetAllPackagesGetByIdChainTest.testTC11_SearchReturnsMatch                       | PASS ?
+GetAllPackagesGetByIdChainTest.testTC12_ExactNameSearch                          | PASS ?
+GetAllPackagesGetByIdChainTest.testTC13_PartialSearch                            | PASS ?
+GetAllPackagesGetByIdChainTest.testTC14_LowercaseSearch                          | PASS ?
+GetAllPackagesGetByIdChainTest.testTC15_UppercaseSearch                          | PASS ?
+GetAllPackagesGetByIdChainTest.testTC16_MixedCaseSearch                          | PASS ?
+GetAllPackagesGetByIdChainTest.testTC17_SpecialCharSearch                        | PASS ?
+GetAllPackagesGetByIdChainTest.testTC18_SearchWithSpaces                         | PASS ?
+GetAllPackagesGetByIdChainTest.testTC19_EmptySearch                              | PASS ?
+GetAllPackagesGetByIdChainTest.testTC20_NullSearch                               | PASS ?
+GetAllPackagesGetByIdChainTest.testTC21_InvalidSearch                            | PASS ?
+GetAllPackagesGetByIdChainTest.testTC22_NoMatchSearch                            | PASS ?
+GetAllPackagesGetByIdChainTest.testTC23_Page1                                    | PASS ?
+GetAllPackagesGetByIdChainTest.testTC24_PageGreaterThan1                         | PASS ?
+GetAllPackagesGetByIdChainTest.testTC25_PageZero                                 | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC26_PageNegative                             | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC27_PageNull                                 | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC28_PageMissing                              | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC29_PageSize10                               | PASS ?
+GetAllPackagesGetByIdChainTest.testTC30_PageSizeZero                             | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC31_PageSizeNegative                         | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC32_PageSizeNull                             | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC33_PageSizeMissing                          | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC34_Limit20                                  | PASS ?
+GetAllPackagesGetByIdChainTest.testTC35_LimitZero                                | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC36_LimitNegative                            | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC37_LimitNull                                | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC38_LimitMissing                             | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC39_NoDuplicates                             | PASS ?
+GetAllPackagesGetByIdChainTest.testTC40_NoInactivePackages                       | PASS ?
+GetAllPackagesGetByIdChainTest.testTC41_NoDeletedPackages                        | PASS ?
+GetAllPackagesGetByIdChainTest.testTC42_ResponseSchema                           | PASS ?
+GetAllPackagesGetByIdChainTest.testTC43_ResponseTime                             | PASS ?
+GetAllPackagesGetByIdChainTest.testTC44_PaginationCount                          | PASS ?
+GetAllPackagesGetByIdChainTest.testTC45_TotalRecords                             | PASS ?
+GetAllPackagesGetByIdChainTest.testTC46_ExtractId                                | PASS ?
+GetAllPackagesGetByIdChainTest.testTC47_ExtractSlug                              | PASS ?
+GetAllPackagesGetByIdChainTest.testTC48_IdNotNull                                | PASS ?
+GetAllPackagesGetByIdChainTest.testTC49_SlugNotNull                              | PASS ?
+GetAllPackagesGetByIdChainTest.testTC50_IdUnique                                 | PASS ?
+GetAllPackagesGetByIdChainTest.testTC51_SlugUnique                               | PASS ?
+GetAllPackagesGetByIdChainTest.testTC52_GetByIdSuccess                           | PASS ?
+GetAllPackagesGetByIdChainTest.testTC53_StatusCode200                            | PASS ?
+GetAllPackagesGetByIdChainTest.testTC54_PackageIdInResponse                      | PASS ?
+GetAllPackagesGetByIdChainTest.testTC55_SlugInResponse                           | PASS ?
+GetAllPackagesGetByIdChainTest.testTC56_PackageNameInResponse                    | PASS ?
+GetAllPackagesGetByIdChainTest.testTC57_PriceInResponse                          | PASS ?
+GetAllPackagesGetByIdChainTest.testTC58_MembershipPriceById                      | PASS ?
+GetAllPackagesGetByIdChainTest.testTC59_RewardsById                              | PASS ?
+GetAllPackagesGetByIdChainTest.testTC60_IncludedTests                            | PASS ?
+GetAllPackagesGetByIdChainTest.testTC61_HomeCollectionById                       | PASS ?
+GetAllPackagesGetByIdChainTest.testTC62_ValidId                                  | PASS ?
+GetAllPackagesGetByIdChainTest.testTC63_InvalidId                                | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC64_EmptyId                                  | PASS ?
+GetAllPackagesGetByIdChainTest.testTC65_NullId                                   | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC66_DeletedId                                | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC67_InactiveId                               | PASS ?
+GetAllPackagesGetByIdChainTest.testTC68_SpecialCharsInId                         | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC69_SQLInjection                             | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC70_XSSInId                                  | PASS ?
+GetAllPackagesGetByIdChainTest.testTC71_ByIdResponseSchema                       | PASS ?
+GetAllPackagesGetByIdChainTest.testTC72_ByIdResponseTime                         | PASS ?
+GetAllPackagesGetByIdChainTest.testTC73_ChainFlow                                | PASS ?
+GetAllPackagesGetByIdChainTest.testTC74_IdMatch                                  | PASS ?
+GetAllPackagesGetByIdChainTest.testTC75_SlugMatch                                | PASS ?
+GetAllPackagesGetByIdChainTest.testTC76_NameMatch                                | PASS ?
+GetAllPackagesGetByIdChainTest.testTC77_PriceMatch                               | PASS ?
+GetAllPackagesGetByIdChainTest.testTC78_MembershipPriceMatch                     | PASS ?
+GetAllPackagesGetByIdChainTest.testTC79_RewardsMatch                             | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC80_HomeCollectionMatch                      | PASS ?
+GetAllPackagesGetByIdChainTest.testTC81_IncludedTestsMatch                       | PASS ?
+GetAllPackagesGetByIdChainTest.testTC82_StatusMatch                              | PASS ?
+GetAllPackagesGetByIdChainTest.testTC83_AllFieldsConsistent                      | PASS ?
+GetAllPackagesGetByIdChainTest.testTC84_RandomPackageConsistency                 | PASS ?
+GetAllPackagesGetByIdChainTest.testTC85_FirstPackageConsistency                  | PASS ?
+GetAllPackagesGetByIdChainTest.testTC86_LastPackageConsistency                   | PASS ?
+GetAllPackagesGetByIdChainTest.testTC87_EmptyBody                                | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC88_NullBody                                 | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC90_InvalidPageType                          | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC91_InvalidPageSizeType                      | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC92_InvalidLimitType                         | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC93_InvalidSearchType                        | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC94_InvalidIdType                            | FAIL ?
+GetAllPackagesGetByIdChainTest.testTC95_LargePayload                             | PASS ?
+GetAllPackagesGetByIdChainTest.testSecurity_SearchString                         | PASS ?
+GetAllPackagesGetByIdChainTest.testSecurity_SearchString                         | PASS ?
+GetAllPackagesGetByIdChainTest.testSecurity_SearchString                         | PASS ?
+GetAllPackagesGetByIdChainTest.testSecurity_PackageId                            | FAIL ?
+GetAllPackagesGetByIdChainTest.testSecurity_PackageId                            | PASS ?
+GetAllPackagesGetByIdChainTest.testHighPriority_E2EFlow                          | FAIL ?
+==========================================================================================
+
+
+[ERROR] Tests run: 100, Failures: 27, Errors: 0, Skipped: 0, Time elapsed: 22.04 s <<< FAILURE! -- in TestSuite
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC25_PageZero -- Time elapsed: 0.126 s <<< FAILURE!
+java.lang.AssertionError: BUG: page=0 should return 400. Actual: 500 (API crashes with 500) expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC25_PageZero(GetAllPackagesGetByIdChainTest.java:363)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC26_PageNegative -- Time elapsed: 0.115 s <<< FAILURE!
+java.lang.AssertionError: BUG: page=-1 should return 400. Actual: 500 (API crashes with 500) expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC26_PageNegative(GetAllPackagesGetByIdChainTest.java:376)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC27_PageNull -- Time elapsed: 0.129 s <<< FAILURE!
+java.lang.AssertionError: BUG: page=null should return 400. Actual: 500 (API crashes with 500) expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC27_PageNull(GetAllPackagesGetByIdChainTest.java:389)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC28_PageMissing -- Time elapsed: 0.107 s <<< FAILURE!
+java.lang.AssertionError: BUG: missing page should return 400. Actual: 500 (API crashes with 500) expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC28_PageMissing(GetAllPackagesGetByIdChainTest.java:401)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC30_PageSizeZero -- Time elapsed: 0.142 s <<< FAILURE!
+java.lang.AssertionError: BUG: pageSize=0 should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC30_PageSizeZero(GetAllPackagesGetByIdChainTest.java:422)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC31_PageSizeNegative -- Time elapsed: 0.195 s <<< FAILURE!
+java.lang.AssertionError: BUG: pageSize=-1 should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC31_PageSizeNegative(GetAllPackagesGetByIdChainTest.java:435)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC32_PageSizeNull -- Time elapsed: 0.194 s <<< FAILURE!
+java.lang.AssertionError: BUG: pageSize=null should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC32_PageSizeNull(GetAllPackagesGetByIdChainTest.java:448)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC33_PageSizeMissing -- Time elapsed: 0.171 s <<< FAILURE!
+java.lang.AssertionError: BUG: missing pageSize should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC33_PageSizeMissing(GetAllPackagesGetByIdChainTest.java:460)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC35_LimitZero -- Time elapsed: 0.110 s <<< FAILURE!
+java.lang.AssertionError: BUG: limit=0 should return 400. Actual: 500 expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC35_LimitZero(GetAllPackagesGetByIdChainTest.java:481)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC36_LimitNegative -- Time elapsed: 0.137 s <<< FAILURE!
+java.lang.AssertionError: BUG: limit=-1 should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC36_LimitNegative(GetAllPackagesGetByIdChainTest.java:494)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC37_LimitNull -- Time elapsed: 0.111 s <<< FAILURE!
+java.lang.AssertionError: BUG: limit=null should return 400. Actual: 500 expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC37_LimitNull(GetAllPackagesGetByIdChainTest.java:507)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC38_LimitMissing -- Time elapsed: 0.130 s <<< FAILURE!
+java.lang.AssertionError: BUG: missing limit should return 400. Actual: 500 expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC38_LimitMissing(GetAllPackagesGetByIdChainTest.java:519)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC63_InvalidId -- Time elapsed: 0.146 s <<< FAILURE!
+java.lang.AssertionError: Invalid _id should return 200(empty)/400/404. Got: 500 expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC63_InvalidId(GetAllPackagesGetByIdChainTest.java:769)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC65_NullId -- Time elapsed: 0.137 s <<< FAILURE!
+java.lang.AssertionError: 'null' _id should not crash API did not expect [500] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failEquals(Assert.java:1582)
+	at org.testng.Assert.assertNotEqualsImpl(Assert.java:157)
+	at org.testng.Assert.assertNotEquals(Assert.java:2198)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC65_NullId(GetAllPackagesGetByIdChainTest.java:788)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC66_DeletedId -- Time elapsed: 0.160 s <<< FAILURE!
+java.lang.AssertionError: Deleted _id should return 200(empty)/404. Got: 500 expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC66_DeletedId(GetAllPackagesGetByIdChainTest.java:797)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC68_SpecialCharsInId -- Time elapsed: 0.138 s <<< FAILURE!
+java.lang.AssertionError: Special chars should not crash API did not expect [500] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failEquals(Assert.java:1582)
+	at org.testng.Assert.assertNotEqualsImpl(Assert.java:157)
+	at org.testng.Assert.assertNotEquals(Assert.java:2198)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC68_SpecialCharsInId(GetAllPackagesGetByIdChainTest.java:814)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC69_SQLInjection -- Time elapsed: 0.136 s <<< FAILURE!
+java.lang.AssertionError: SQL injection should not crash API did not expect [500] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failEquals(Assert.java:1582)
+	at org.testng.Assert.assertNotEqualsImpl(Assert.java:157)
+	at org.testng.Assert.assertNotEquals(Assert.java:2198)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC69_SQLInjection(GetAllPackagesGetByIdChainTest.java:823)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC79_RewardsMatch -- Time elapsed: 0.164 s <<< FAILURE!
+java.lang.AssertionError: rewards_percentage mismatch expected [90] but found [100]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:656)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC79_RewardsMatch(GetAllPackagesGetByIdChainTest.java:959)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC87_EmptyBody -- Time elapsed: 0.101 s <<< FAILURE!
+java.lang.AssertionError: BUG: Empty body should return 400. Actual: 500 expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC87_EmptyBody(GetAllPackagesGetByIdChainTest.java:1064)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC88_NullBody -- Time elapsed: 0.109 s <<< FAILURE!
+java.lang.AssertionError: BUG: All-null fields should return 400. Actual: 500 expected [400] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC88_NullBody(GetAllPackagesGetByIdChainTest.java:1077)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC90_InvalidPageType -- Time elapsed: 0.173 s <<< FAILURE!
+java.lang.AssertionError: BUG: page='abc' should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC90_InvalidPageType(GetAllPackagesGetByIdChainTest.java:1088)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC91_InvalidPageSizeType -- Time elapsed: 0.168 s <<< FAILURE!
+java.lang.AssertionError: BUG: pageSize='abc' should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC91_InvalidPageSizeType(GetAllPackagesGetByIdChainTest.java:1099)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC92_InvalidLimitType -- Time elapsed: 0.326 s <<< FAILURE!
+java.lang.AssertionError: BUG: limit='abc' should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC92_InvalidLimitType(GetAllPackagesGetByIdChainTest.java:1110)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC93_InvalidSearchType -- Time elapsed: 0.153 s <<< FAILURE!
+java.lang.AssertionError: BUG: searchString=12345 should return 400. Actual: 200 expected [400] but found [200]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC93_InvalidSearchType(GetAllPackagesGetByIdChainTest.java:1122)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC94_InvalidIdType -- Time elapsed: 0.126 s <<< FAILURE!
+java.lang.AssertionError: Invalid _id type should not crash did not expect [500] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failEquals(Assert.java:1582)
+	at org.testng.Assert.assertNotEqualsImpl(Assert.java:157)
+	at org.testng.Assert.assertNotEquals(Assert.java:2198)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testTC94_InvalidIdType(GetAllPackagesGetByIdChainTest.java:1131)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testSecurity_PackageId[' OR 1=1 --, SQL Injection in package_id](1) -- Time elapsed: 0.156 s <<< FAILURE!
+java.lang.AssertionError: SQL Injection in package_id crashed API did not expect [500] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failEquals(Assert.java:1582)
+	at org.testng.Assert.assertNotEqualsImpl(Assert.java:157)
+	at org.testng.Assert.assertNotEquals(Assert.java:2198)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testSecurity_PackageId(GetAllPackagesGetByIdChainTest.java:1195)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testHighPriority_E2EFlow -- Time elapsed: 0.583 s <<< FAILURE!
+java.lang.AssertionError: did not expect [500] but found [500]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failEquals(Assert.java:1582)
+	at org.testng.Assert.assertNotEqualsImpl(Assert.java:157)
+	at org.testng.Assert.assertNotEquals(Assert.java:2198)
+	at org.testng.Assert.assertNotEquals(Assert.java:2220)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GetAllPackagesGetByIdChainTest.testHighPriority_E2EFlow(GetAllPackagesGetByIdChainTest.java:1280)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   GetAllPackagesGetByIdChainTest.testHighPriority_E2EFlow:1280 did not expect [500] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testSecurity_PackageId:1195 SQL Injection in package_id crashed API did not expect [500] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC25_PageZero:363 BUG: page=0 should return 400. Actual: 500 (API crashes with 500) expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC26_PageNegative:376 BUG: page=-1 should return 400. Actual: 500 (API crashes with 500) expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC27_PageNull:389 BUG: page=null should return 400. Actual: 500 (API crashes with 500) expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC28_PageMissing:401 BUG: missing page should return 400. Actual: 500 (API crashes with 500) expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC30_PageSizeZero:422 BUG: pageSize=0 should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC31_PageSizeNegative:435 BUG: pageSize=-1 should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC32_PageSizeNull:448 BUG: pageSize=null should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC33_PageSizeMissing:460 BUG: missing pageSize should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC35_LimitZero:481 BUG: limit=0 should return 400. Actual: 500 expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC36_LimitNegative:494 BUG: limit=-1 should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC37_LimitNull:507 BUG: limit=null should return 400. Actual: 500 expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC38_LimitMissing:519 BUG: missing limit should return 400. Actual: 500 expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC63_InvalidId:769 Invalid _id should return 200(empty)/400/404. Got: 500 expected [true] but found [false]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC65_NullId:788 'null' _id should not crash API did not expect [500] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC66_DeletedId:797 Deleted _id should return 200(empty)/404. Got: 500 expected [true] but found [false]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC68_SpecialCharsInId:814 Special chars should not crash API did not expect [500] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC69_SQLInjection:823 SQL injection should not crash API did not expect [500] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC79_RewardsMatch:959 rewards_percentage mismatch expected [90] but found [100]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC87_EmptyBody:1064 BUG: Empty body should return 400. Actual: 500 expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC88_NullBody:1077 BUG: All-null fields should return 400. Actual: 500 expected [400] but found [500]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC90_InvalidPageType:1088 BUG: page='abc' should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC91_InvalidPageSizeType:1099 BUG: pageSize='abc' should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC92_InvalidLimitType:1110 BUG: limit='abc' should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC93_InvalidSearchType:1122 BUG: searchString=12345 should return 400. Actual: 200 expected [400] but found [200]
+[ERROR]   GetAllPackagesGetByIdChainTest.testTC94_InvalidIdType:1131 Invalid _id type should not crash did not expect [500] but found [500]
+[INFO] 
+[ERROR] Tests run: 100, Failures: 27, Errors: 0, Skipped: 0
+[INFO] 
+[ERROR] There are test failures.
+
+Please refer to C:\Users\RANJITH\MrYoda\target\surefire-reports for the individual test results.
+Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  40.548 s
+[INFO] Finished at: 2026-06-18T14:28:19+05:30
+[INFO] ------------------------------------------------------------------------

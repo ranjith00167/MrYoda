@@ -7,6 +7,8 @@ public class PaymentEndpoints {
     public static final String VERIFY_PAYMENT    = "/gateway/v2/VerifyPayment";
     /** Fetch payment details by internal order / cart id. */
     public static final String GET_PAYMENT_BY_ID = "/gateway/getPaymentById";
+    /** Fetch payment details by user ID. */
+    public static final String GET_PAYMENT_BY_USER_ID = "/gateway/getPaymentByUserId/{user_id}";
     /** Poll current payment status. */
     public static final String PAYMENT_STATUS    = "/gateway/v2/paymentStatus";
 }

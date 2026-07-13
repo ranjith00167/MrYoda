@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+  OTP Resend API Test Suite (OR_001 – OR_063)
+  Endpoint : POST https://staging-api-diagnostics.yodaprojects.com/otps/resend
+  Headers  : Authorization: Bearer <token> | Content-Type: application/json
+  Body     : { "mobile": "...", "country_code": "+91" }
+  Run with : mvn test -DsuiteXmlFile=test-suites/testng_otp_resend_suite.xml
+-->
+<suite name="OTP Resend API Suite" parallel="none" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="OTP Resend - All Scenarios (OR_001 to OR_063)" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPResendTest"/>
+        </classes>
+    </test>
+
+</suite>

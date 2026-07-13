@@ -3,6 +3,7 @@ package utilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.PageLoadStrategy;
 
 import com.epam.healenium.SelfHealingDriver;
@@ -29,17 +30,11 @@ public class DriverFactory {
 
                 ChromeOptions options = new ChromeOptions();
 
-                // ✅ Preferences
+                // ✅ Preferences (flat dot-notation keys for Chrome 148+)
                 Map<String, Object> prefs = new HashMap<>();
-                Map<String, Object> profile = new HashMap<>();
-
-                Map<String, Object> defaultContentSettings = new HashMap<>();
-                defaultContentSettings.put("geolocation", 1);
-                defaultContentSettings.put("media_stream_mic", 1);
-                defaultContentSettings.put("notifications", 2);
-
-                profile.put("default_content_setting_values", defaultContentSettings);
-                prefs.put("profile", profile);
+                prefs.put("profile.default_content_setting_values.geolocation", 1);
+                prefs.put("profile.default_content_setting_values.media_stream_mic", 1);
+                prefs.put("profile.default_content_setting_values.notifications", 2);
 
                 options.setExperimentalOption("prefs", prefs);
 
@@ -47,6 +42,9 @@ public class DriverFactory {
                 options.addArguments("--disable-notifications");
                 options.addArguments("--disable-popup-blocking");
                 options.addArguments("--disable-infobars");
+                options.addArguments("--enable-features=GeolocationOverride");
+                options.addArguments("--flag-switches-begin");
+                options.addArguments("--flag-switches-end");
 
                 // 🔥 CRITICAL for headless stability
                 options.addArguments("--disable-renderer-backgrounding");
@@ -77,8 +75,32 @@ public class DriverFactory {
 
                 WebDriver webDriver = new ChromeDriver(options);
 
+                // ✅ Grant geolocation permission via CDP (Chrome 148+ ignores prefs)
+                try {
+                    Map<String, Object> grantParams = new HashMap<>();
+                    grantParams.put("origin", "https://staging-mryoda.yodaprojects.com");
+                    grantParams.put("permission", Map.of("name", "geolocation"));
+                    grantParams.put("setting", "granted");
+                    ((ChromiumDriver) webDriver).executeCdpCommand("Browser.setPermission", grantParams);
+                    System.out.println("✅ Geolocation permission granted via CDP");
+                } catch (Exception e) {
+                    System.out.println("⚠️ CDP geolocation grant failed: " + e.getMessage());
+                }
+
+                // ✅ Set mock GPS coordinates (Chennai) so site auto-detects location
+                try {
+                    Map<String, Object> geoParams = new HashMap<>();
+                    geoParams.put("latitude", 13.0827);
+                    geoParams.put("longitude", 80.2707);
+                    geoParams.put("accuracy", 1);
+                    ((ChromiumDriver) webDriver).executeCdpCommand("Emulation.setGeolocationOverride", geoParams);
+                    System.out.println("✅ Mock geolocation set: Chennai (13.0827, 80.2707)");
+                } catch (Exception e) {
+                    System.out.println("⚠️ CDP geolocation override failed: " + e.getMessage());
+                }
+
                 // ❌ Remove implicit wait (use explicit waits only)
-                webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+                webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(90));
 
                 // ✅ Wrap with Healenium Self-Healing Driver
                 // If Healenium backend isn't available, gracefully fall back to regular driver

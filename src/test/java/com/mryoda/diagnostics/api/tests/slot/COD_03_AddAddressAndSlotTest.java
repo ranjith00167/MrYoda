@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class COD_03_AddAddressAndSlotTest extends CreateOrderCODAPITest {
 
+    private static final String CENTER_ID = "64870066842708a0d5ae6c77";
+
     @Test(description = "QA Automation: Verify Add Address And Slot")
     public void step03_AddAddressAndSlot() {
         System.out.println("\n>>> STEP 3: ADD ADDRESS & SLOT <<<");
@@ -22,29 +24,24 @@ public class COD_03_AddAddressAndSlotTest extends CreateOrderCODAPITest {
 
         // Store Address Details - specifically Lat/Lng/Name for later
         RequestContext.storeLocationCoordinates("UserAddress", addressDetails.get("lat"), addressDetails.get("lng"));
-        RequestContext.storeLocation("UserAddressName", addressDetails.get("name")); // using loose usage of
-                                                                                     // storeLocation map
+        RequestContext.storeLocation("UserAddressName", addressDetails.get("name"));
         RequestContext.setCurrentAddressGuid(addressGuid);
         RequestContext.setCurrentAddressId(addressId);
 
-        // Store simple map-like access for lat/lng/name if needed by recreating it or
-        // using global map in RequestContext
-        // For simplicity, we assume Step 9 will retrieve from RequestContext's
-        // specialized storage or we augment RequestContext
-        // Let's stick to using what we just added: currentAddressGuid.
-        // We need lat/lng later.
-
-        // Find Slot
-        Map<String, String> slotDetails = findAvailableSlot(token, addressGuid);
+        // Find Slot - Use lab slot search (lab visit flow)
+        Map<String, String> slotDetails = findAvailableLabSlot(token, CENTER_ID);
         String slotGuid = slotDetails.get("guid");
         Assert.assertNotNull(slotGuid, "Slot GUID required");
 
         RequestContext.setCurrentSlotGuid(slotGuid);
         RequestContext.setExpectedSlotTiming(slotDetails.get("date"), slotDetails.get("time"));
-        RequestContext.setExpectedAddressName(addressDetails.get("address")); // Assuming "address" is the key from
-                                                                              // callAddAddressAPI
+        RequestContext.setExpectedAddressName(addressDetails.get("address"));
+
+        // Sync slot date/time to fields read by COD_04
+        RequestContext.setSlotStartDate(slotDetails.get("date"));
+        RequestContext.setNonMemberSlotTime(slotDetails.get("time"));
 
         updateCartWithSlot(token, userId, slotGuid, addressGuid);
-        System.out.println("✅ Address & Slot Configured.");
+        System.out.println("✅ Address & Slot Configured (Lab Visit).");
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+  Super Admin OTP Verify API Test Suite (SA_001 – SA_060)
+  Endpoint : POST https://staging-api-diagnostics.yodaprojects.com/auth/admin/otp/verify
+  Headers  : type: Mr.Yoda-Admin | Authorization: Bearer <token>
+  Body     : { "mobile": "...", "otp": "...", "is_admin_user": true }
+  Run with : mvn test -DsuiteXmlFile=test-suites/testng_super_admin_otp_suite.xml
+-->
+<suite name="Super Admin OTP Verify API Suite" parallel="none" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="Super Admin OTP Verify - All Scenarios (SA_001 to SA_060)" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.SuperAdminOTPVerifyTest"/>
+        </classes>
+    </test>
+
+</suite>

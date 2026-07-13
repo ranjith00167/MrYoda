@@ -1,0 +1,659 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< MrYoda:MrYoda >----------------------------
+[INFO] Building MrYoda 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ MrYoda ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ MrYoda ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ MrYoda ---
+[INFO] Copying 24 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ MrYoda ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ MrYoda ---
+[INFO] Using auto detected provider org.apache.maven.surefire.testng.TestNGProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+SLF4J(W): Class path contains multiple SLF4J providers.
+SLF4J(W): Found provider [org.slf4j.simple.SimpleServiceProvider@578486a3]
+SLF4J(W): Found provider [org.apache.logging.slf4j.SLF4JServiceProvider@551aa95a]
+SLF4J(W): See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J(I): Actual provider is of type [org.slf4j.simple.SimpleServiceProvider@578486a3]
+...
+... TestNG 7.8.0 by CΘdric Beust (cedric@beust.com)
+...
+
+
+#########################################################
+  STARTING NEW XML TEST FLOW - RESETTING CONTEXT
+#########################################################
+
+[CLEANING] RequestContext Flow State...
+[SUCCESS] RequestContext State Successfully Cleared.
+
+>>> OTP_001: Generate OTP with valid mobile and country code <<<
+[OTP_001] HTTP 200 | 851ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_001] HTTP 200 | Body: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_002: Generate OTP for existing user <<<
+[OTP_002] HTTP 200 | 110ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_003: Generate OTP for new user <<<
+[OTP_003] HTTP 200 | 94ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_004: Generate OTP using different valid country codes <<<
+[OTP_004 [+91]] HTTP 200 | 110ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_004 [+1]] HTTP 200 | 103ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_004 [+44]] HTTP 200 | 99ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_005: Generate OTP after previous OTP expiry <<<
+[OTP_005 [first]] HTTP 200 | 108ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_005 [after-expiry]] HTTP 200 | 138ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_006: Generate OTP after cooldown period <<<
+[OTP_006] HTTP 200 | 119ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 192 ms | Max: 851 ms | Calls: 9
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_007: Empty mobile <<<
+[OTP_007] HTTP 400 | 85ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_007] Correct error HTTP 400
+
+>>> OTP_008: Null mobile <<<
+[OTP_008] HTTP 400 | 95ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+[OTP_008] Correct error HTTP 400
+
+>>> OTP_009: Missing mobile field <<<
+[OTP_009] HTTP 400 | 2014ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+[OTP_009] Correct error HTTP 400
+
+>>> OTP_010: Mobile with only spaces <<<
+[OTP_010] HTTP 400 | 95ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_010] Correct error HTTP 400
+
+>>> OTP_011: Mobile too short <<<
+[OTP_011] HTTP 400 | 91ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_011] Correct error HTTP 400
+
+>>> OTP_012: Mobile too long <<<
+[OTP_012] HTTP 400 | 83ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_012] Correct error HTTP 400
+
+>>> OTP_013: Alphabetic mobile <<<
+[OTP_013] HTTP 400 | 120ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_013] Correct error HTTP 400
+
+>>> OTP_014: Alphanumeric mobile <<<
+[OTP_014] HTTP 400 | 96ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_014] Correct error HTTP 400
+
+>>> OTP_015: Mobile with special characters <<<
+[OTP_015] HTTP 400 | 87ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_015] Correct error HTTP 400
+
+>>> OTP_016: Mobile with emoji <<<
+[OTP_016] HTTP 400 | 91ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_016] Correct error HTTP 400
+
+>>> OTP_017: Mobile with unicode digits <<<
+[OTP_017] HTTP 400 | 90ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_017] Correct error HTTP 400
+
+>>> OTP_018: Mobile with leading spaces <<<
+[OTP_018] HTTP 200 | 109ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_018: Status 200 ù verifying trim-or-reject behavior
+
+>>> OTP_019: Mobile with trailing spaces <<<
+[OTP_019] HTTP 200 | 98ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_019: Status 200 ù verifying trim-or-reject behavior
+
+>>> OTP_020: Mobile with leading zeros <<<
+[OTP_020] HTTP 200 | 128ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_020: Status 200 ù verifying business rule for leading zeros
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 218 ms | Max: 2014 ms | Calls: 23
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_021: Valid country code +91 <<<
+[OTP_021] HTTP 200 | 92ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_021] HTTP 200 | Body: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_022: Empty country code <<<
+[OTP_022] HTTP 400 | 28029ms | {"error":"Validation failed","details":[{"field":"country_code","message":"Country code must start with + and contain 1-4 digits"}]}
+[OTP_022] Correct error HTTP 400
+
+>>> OTP_023: Null country code <<<
+[OTP_023] HTTP 400 | 88ms | {"error":"Validation failed","details":[{"field":"country_code","message":"Invalid type: Expected string but received null"}]}
+[OTP_023] Correct error HTTP 400
+
+>>> OTP_024: Missing country_code field <<<
+[OTP_024] HTTP 200 | 97ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_024: API returned HTTP 200 for missing country_code. Expected: validation error (4xx or success=false). Current behavior: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_025: Country code without '+' <<<
+[OTP_025] HTTP 400 | 136ms | {"error":"Validation failed","details":[{"field":"country_code","message":"Country code must start with + and contain 1-4 digits"}]}
+[OTP_025] Correct error HTTP 400
+
+>>> OTP_026: Alphabetic country code <<<
+[OTP_026] HTTP 400 | 79ms | {"error":"Validation failed","details":[{"field":"country_code","message":"Country code must start with + and contain 1-4 digits"}]}
+[OTP_026] Correct error HTTP 400
+
+>>> OTP_027: Special character country code <<<
+[OTP_027] HTTP 400 | 117ms | {"error":"Validation failed","details":[{"field":"country_code","message":"Country code must start with + and contain 1-4 digits"}]}
+[OTP_027] Correct error HTTP 400
+
+>>> OTP_028: Extremely large country code <<<
+[OTP_028] HTTP 400 | 273ms | {"error":"Validation failed","details":[{"field":"country_code","message":"Country code must start with + and contain 1-4 digits"}]}
+[OTP_028] Correct error HTTP 400
+
+>>> OTP_029: Unsupported country code <<<
+[OTP_029] HTTP 200 | 87ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_029: API returned HTTP 200 for unsupported country code +999. Expected: validation error. Current behavior: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [SLOW] | Avg: 1062 ms | Max: 28029 ms | Calls: 32
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_030: No Authorization header ù public API must succeed <<<
+[OTP_030] HTTP 200 | 110ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_030] HTTP 200 | Body: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_031: Valid request without auth <<<
+[OTP_031] HTTP 200 | 99ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_031] HTTP 200 | Body: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_032: Empty Authorization header <<<
+[OTP_032] HTTP 200 | 101ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_033: Request without type header <<<
+[OTP_033] HTTP 200 | 90ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_033: Status 200 without type header (document business rule)
+
+>>> OTP_034: Minimal headers request <<<
+[OTP_034] HTTP 200 | 241ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_035: All standard headers <<<
+[OTP_035] HTTP 200 | 81ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_035] HTTP 200 | Body: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_036: Multiple requests without auth <<<
+[OTP_036 [1]] HTTP 200 | 88ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_036 [2]] HTTP 200 | 234ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_036 [3]] HTTP 200 | 94ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_036: All 3 requests completed without server errors.
+
+>>> OTP_037: Extra irrelevant headers ignored <<<
+[OTP_037] HTTP 200 | 116ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_037] HTTP 200 | Body: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 839 ms | Max: 28029 ms | Calls: 42
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_038: All valid headers <<<
+[OTP_038] HTTP 200 | 88ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_038] HTTP 200 | Body: {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_039: Missing Content-Type header <<<
+[OTP_039] HTTP 400 | 90ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+OTP_039: Status 400 for missing Content-Type
+
+>>> OTP_040: Invalid Content-Type <<<
+[OTP_040] HTTP 400 | 90ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+
+>>> OTP_041: Missing Accept header <<<
+[OTP_041] HTTP 200 | 126ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_042: Missing 'type' header <<<
+[OTP_042] HTTP 200 | 108ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_042: Without 'type' header ù status: 200 (verify business rule with dev team)
+
+>>> OTP_043: Invalid Origin header <<<
+[OTP_043] HTTP 200 | 98ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_043: Invalid Origin response status: 200 (verify CORS policy with dev team)
+
+>>> OTP_044: Invalid Referer header <<<
+[OTP_044] HTTP 200 | 89ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_044: Invalid Referer response status: 200 (verify referer enforcement policy)
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 733 ms | Max: 28029 ms | Calls: 49
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_045: Empty request body <<<
+[OTP_045] HTTP 400 | 121ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+[OTP_045] Correct error HTTP 400
+
+>>> OTP_046: Null request body <<<
+[OTP_046] HTTP 400 | 80ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+
+>>> OTP_047: Invalid JSON structure <<<
+[OTP_047] HTTP 400 | 67ms | {"status":400,"success":false,"msg":"Unexpected token m in JSON at position 1"}
+
+>>> OTP_048: Extra unexpected field <<<
+[OTP_048] HTTP 200 | 88ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_048: Status 200 for extra field (verify ignore vs. reject policy)
+
+>>> OTP_049: Nested JSON instead of string <<<
+[OTP_049] HTTP 400 | 75ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+[OTP_049] Correct error HTTP 400
+
+>>> OTP_050: Array instead of string <<<
+[OTP_050] HTTP 400 | 96ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+[OTP_050] Correct error HTTP 400
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 663 ms | Max: 28029 ms | Calls: 55
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89, 121, 80, 67, 88, 75, 96]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_051: Generate OTP first time <<<
+[OTP_051] HTTP 200 | 86ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_051: OTP msg ù OTP sent successfully
+
+>>> OTP_052: Resend OTP <<<
+[OTP_052 [1st]] HTTP 200 | 82ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_052 [resend]] HTTP 200 | 105ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_053: Previous OTP invalidated on new generation <<<
+[OTP_053 [1st]] HTTP 200 | 103ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_053 [2nd]] HTTP 200 | 88ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_053: Two consecutive OTPs generated. Previous OTP invalidation is enforced server-side ù verify via /otps/verifyOtp endpoint if available.
+
+>>> OTP_054: Verify OTP expiry <<<
+[OTP_054] HTTP 200 | 86ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_054: Response data field ù null | Expiry enforcement is a backend concern; confirm expiry_at field with dev team.
+
+>>> OTP_055: Verify retry count <<<
+[OTP_055 [attempt 1]] HTTP 200 | 84ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_055 [attempt 2]] HTTP 200 | 94ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_055 [attempt 3]] HTTP 200 | 99ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_056: OTP linked to correct mobile <<<
+[OTP_056] HTTP 200 | 126ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_056: OTP generated successfully; mobile linkage is enforced server-side.
+
+>>> OTP_057: Verify OTP sent through SMS provider <<<
+[OTP_057] HTTP 200 | 109ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_057: SMS trigger confirmed by API. Actual delivery is handled by SMS provider.
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 568 ms | Max: 28029 ms | Calls: 66
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89, 121, 80, 67, 88, 75, 96, 86, 82, 105, 103, 88, 86, 84, 94, 99, 126, 109]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_058: Status code validation <<<
+[OTP_058] HTTP 200 | 97ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_059: Success message validation <<<
+[OTP_059] HTTP 200 | 94ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_059: msg ù "OTP sent successfully"
+
+>>> OTP_060: Response schema validation <<<
+[OTP_060] HTTP 200 | 96ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_060: Schema ù status=200, success=true, msg=OTP sent successfully
+
+>>> OTP_061: Mandatory fields <<<
+[OTP_061] HTTP 200 | 108ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+
+>>> OTP_062: Data type validation <<<
+[OTP_062] HTTP 200 | 96ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_062: Data types validated ù status(Integer), success(Boolean), msg(String)
+
+>>> OTP_063: Response headers validation <<<
+[OTP_063] HTTP 200 | 91ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_063: Content-Type = application/json; charset=utf-8
+
+>>> OTP_064: Response content validation <<<
+[OTP_064] HTTP 200 | 98ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_064: No sensitive data detected in response body.
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 523 ms | Max: 28029 ms | Calls: 73
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89, 121, 80, 67, 88, 75, 96, 86, 82, 105, 103, 88, 86, 84, 94, 99, 126, 109, 97, 94, 96, 108, 96, 91, 98]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_065: SQL Injection in mobile <<<
+[OTP_065] HTTP 400 | 86ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_065] Correct error HTTP 400
+
+>>> OTP_066: NoSQL Injection in mobile <<<
+[OTP_066] HTTP 400 | 98ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number is required"}]}
+[OTP_066] Correct error HTTP 400
+
+>>> OTP_067: Script Injection in mobile <<<
+[OTP_067] HTTP 400 | 86ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_067] Correct error HTTP 400
+
+>>> OTP_068: Command Injection in mobile <<<
+[OTP_068] HTTP 400 | 86ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_068] Correct error HTTP 400
+
+>>> OTP_069: JSON Injection in mobile <<<
+[OTP_069] HTTP 400 | 87ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+
+>>> OTP_070: Long payload attack <<<
+[OTP_070] HTTP 400 | 96ms | {"error":"Validation failed","details":[{"field":"mobile","message":"Mobile number must be between 8 and 13 digits"}]}
+[OTP_070] Correct error HTTP 400
+
+>>> OTP_071: JWT manipulation attempt <<<
+[OTP_071] HTTP 200 | 92ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_071: Status 200 for tampered-token request on public API
+
+>>> OTP_072: Sensitive data exposure check <<<
+[OTP_072] HTTP 200 | 84ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_072: No sensitive data detected. Response body length: 59
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 480 ms | Max: 28029 ms | Calls: 81
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89, 121, 80, 67, 88, 75, 96, 86, 82, 105, 103, 88, 86, 84, 94, 99, 126, 109, 97, 94, 96, 108, 96, 91, 98, 86, 98, 86, 86, 87, 96, 92, 84]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_073: Repeated requests ù same mobile <<<
+[OTP_073 [1]] HTTP 200 | 82ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [2]] HTTP 200 | 127ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [3]] HTTP 200 | 117ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [4]] HTTP 200 | 96ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [5]] HTTP 200 | 4956ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [6]] HTTP 200 | 111ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [7]] HTTP 200 | 132ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [8]] HTTP 200 | 485ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [9]] HTTP 200 | 109ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_073 [10]] HTTP 200 | 104ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_073: Rate limit NOT triggered after 10 requests (successful: 10). Verify rate limit threshold with the dev team.
+OTP_073: Rate limit enforced = false
+
+>>> OTP_074: Multiple requests within 1 minute <<<
+[OTP_074 [1/5]] HTTP 200 | 100ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_074 [2/5]] HTTP 200 | 88ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_074 [3/5]] HTTP 200 | 117ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_074 [4/5]] HTTP 200 | 85ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_074 [5/5]] HTTP 200 | 3934ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_074: Status codes observed = [200, 200, 200, 200, 200]
+
+>>> OTP_075: Multiple mobiles simultaneously <<<
+[OTP_075 [9800000001]] HTTP 200 | 98ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_075 [9800000002]] HTTP 200 | 83ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_075 [9800000003]] HTTP 200 | 93ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_075 [9800000004]] HTTP 200 | 94ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_075 [9800000005]] HTTP 200 | 90ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_075: All 5 different-mobile requests completed without 5xx.
+
+>>> OTP_076: OTP spam attack simulation <<<
+[OTP_076 [spam #1]] HTTP 200 | 105ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #2]] HTTP 200 | 93ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #3]] HTTP 200 | 83ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #4]] HTTP 200 | 81ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #5]] HTTP 200 | 111ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #6]] HTTP 200 | 104ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #7]] HTTP 200 | 84ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #8]] HTTP 200 | 115ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #9]] HTTP 200 | 177ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_076 [spam #10]] HTTP 200 | 99ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_076: No throttling observed. Confirm rate limit policy with the dev team ù staging may have relaxed limits.
+
+>>> OTP_077: Cooldown validation <<<
+[OTP_077 [initial]] HTTP 200 | 97ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_077: Initial request status = 200
+[OTP_077 [immediate-retry]] HTTP 200 | 125ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_077: Immediate retry status = 200 | If 429, cooldown is enforced. If 200, cooldown window has not kicked in or is not configured.
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 454 ms | Max: 28029 ms | Calls: 113
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89, 121, 80, 67, 88, 75, 96, 86, 82, 105, 103, 88, 86, 84, 94, 99, 126, 109, 97, 94, 96, 108, 96, 91, 98, 86, 98, 86, 86, 87, 96, 92, 84, 82, 127, 117, 96, 4956, 111, 132, 485, 109, 104, 100, 88, 117, 85, 3934, 98, 83, 93, 94, 90, 105, 93, 83, 81, 111, 104, 84, 115, 177, 99, 97, 125]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_078: OTP record inserted <<<
+[OTP_078] HTTP 200 | 1952ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_078: API-level confirmation received. For direct DB verification, query: SELECT * FROM otps WHERE mobile='9890909898' ORDER BY created_at DESC LIMIT 1;
+
+>>> OTP_079: Correct mobile stored <<<
+[OTP_079] HTTP 200 | 97ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_079: DB verification SQL: SELECT mobile FROM otps WHERE mobile='9876543210';
+
+>>> OTP_080: Correct country code stored <<<
+[OTP_080] HTTP 200 | 101ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_080: DB verification SQL: SELECT country_code FROM otps WHERE mobile='9890909898' ORDER BY id DESC LIMIT 1;
+
+>>> OTP_081: OTP expiry stored <<<
+[OTP_081] HTTP 200 | 99ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_081: DB verification SQL: SELECT expiry_at FROM otps WHERE mobile='9890909898' ORDER BY id DESC LIMIT 1;
+
+>>> OTP_082: Retry count updated <<<
+[OTP_082 [request 1]] HTTP 200 | 88ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_082 [request 2]] HTTP 200 | 77ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_082: DB verification SQL: SELECT retry_count FROM otps WHERE mobile='9890909898' ORDER BY id DESC LIMIT 1;
+
+>>> OTP_083: Previous OTP invalidated <<<
+[OTP_083 [1st]] HTTP 200 | 83ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_083 [2nd]] HTTP 200 | 75ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_083: DB verification SQL: SELECT is_valid, otp FROM otps WHERE mobile='9890909898' ORDER BY id DESC LIMIT 2;
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 445 ms | Max: 28029 ms | Calls: 121
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89, 121, 80, 67, 88, 75, 96, 86, 82, 105, 103, 88, 86, 84, 94, 99, 126, 109, 97, 94, 96, 108, 96, 91, 98, 86, 98, 86, 86, 87, 96, 92, 84, 82, 127, 117, 96, 4956, 111, 132, 485, 109, 104, 100, 88, 117, 85, 3934, 98, 83, 93, 94, 90, 105, 93, 83, 81, 111, 104, 84, 115, 177, 99, 97, 125, 1952, 97, 101, 99, 88, 77, 83, 75]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_084: Response time check <<<
+[OTP_084] HTTP 200 | 82ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_084: Response time = 82ms (SLA: 3000ms)
+
+>>> OTP_085: 10 requests load test <<<
+OTP_085: Starting 10-request sequential load test...
+OTP_085 [1/10]: HTTP 200 | 92ms
+OTP_085 [2/10]: HTTP 200 | 73ms
+OTP_085 [3/10]: HTTP 200 | 96ms
+OTP_085 [4/10]: HTTP 200 | 99ms
+OTP_085 [5/10]: HTTP 200 | 96ms
+OTP_085 [6/10]: HTTP 200 | 91ms
+OTP_085 [7/10]: HTTP 200 | 77ms
+OTP_085 [8/10]: HTTP 200 | 79ms
+OTP_085 [9/10]: HTTP 200 | 80ms
+OTP_085 [10/10]: HTTP 200 | 124ms
+OTP_085: Completed. Avg=90ms | 5xx=0 | 429 rate-limited=0
+
+>>> OTP_086: 20 requests load test <<<
+OTP_086: Starting 20-request sequential load test...
+OTP_086 [1/20]: HTTP 200 | 78ms
+OTP_086 [2/20]: HTTP 200 | 92ms
+OTP_086 [3/20]: HTTP 200 | 138ms
+OTP_086 [4/20]: HTTP 200 | 73ms
+OTP_086 [5/20]: HTTP 200 | 85ms
+OTP_086 [6/20]: HTTP 200 | 85ms
+OTP_086 [7/20]: HTTP 200 | 81ms
+OTP_086 [8/20]: HTTP 200 | 77ms
+OTP_086 [9/20]: HTTP 200 | 87ms
+OTP_086 [10/20]: HTTP 200 | 86ms
+OTP_086 [11/20]: HTTP 200 | 95ms
+OTP_086 [12/20]: HTTP 200 | 114ms
+OTP_086 [13/20]: HTTP 200 | 92ms
+OTP_086 [14/20]: HTTP 200 | 89ms
+OTP_086 [15/20]: HTTP 200 | 89ms
+OTP_086 [16/20]: HTTP 200 | 88ms
+OTP_086 [17/20]: HTTP 200 | 79ms
+OTP_086 [18/20]: HTTP 200 | 83ms
+OTP_086 [19/20]: HTTP 200 | 101ms
+OTP_086 [20/20]: HTTP 200 | 89ms
+OTP_086: Completed. Avg=90ms | 5xx=0 | 429 rate-limited=0
+
+>>> OTP_087: 30 requests (proxy for 1000-request baseline) <<<
+OTP_087: Starting 30-request sequential load test...
+OTP_087 [1/30]: HTTP 200 | 89ms
+OTP_087 [2/30]: HTTP 200 | 107ms
+OTP_087 [3/30]: HTTP 200 | 87ms
+OTP_087 [4/30]: HTTP 200 | 85ms
+OTP_087 [5/30]: HTTP 200 | 91ms
+OTP_087 [6/30]: HTTP 200 | 582ms
+OTP_087 [7/30]: HTTP 200 | 95ms
+OTP_087 [8/30]: HTTP 200 | 104ms
+OTP_087 [9/30]: HTTP 200 | 99ms
+OTP_087 [10/30]: HTTP 200 | 98ms
+OTP_087 [11/30]: HTTP 200 | 94ms
+OTP_087 [12/30]: HTTP 200 | 91ms
+OTP_087 [13/30]: HTTP 200 | 82ms
+OTP_087 [14/30]: HTTP 200 | 85ms
+OTP_087 [15/30]: HTTP 200 | 83ms
+OTP_087 [16/30]: HTTP 200 | 78ms
+OTP_087 [17/30]: HTTP 200 | 79ms
+OTP_087 [18/30]: HTTP 200 | 95ms
+OTP_087 [19/30]: HTTP 200 | 93ms
+OTP_087 [20/30]: HTTP 200 | 98ms
+OTP_087 [21/30]: HTTP 200 | 90ms
+OTP_087 [22/30]: HTTP 200 | 86ms
+OTP_087 [23/30]: HTTP 200 | 81ms
+OTP_087 [24/30]: HTTP 200 | 97ms
+OTP_087 [25/30]: HTTP 200 | 99ms
+OTP_087 [26/30]: HTTP 200 | 97ms
+OTP_087 [27/30]: HTTP 200 | 95ms
+OTP_087 [28/30]: HTTP 200 | 104ms
+OTP_087 [29/30]: HTTP 200 | 147ms
+OTP_087 [30/30]: HTTP 200 | 8119ms
+OTP_087: Completed. Avg=377ms | 5xx=0 | 429 rate-limited=0
+
+>>> OTP_088: Spike test <<<
+OTP_088: Sending spike of 15 requests...
+OTP_088: Request #1 ù status: 200 | 201ms
+OTP_088: Request #2 ù status: 200 | 99ms
+OTP_088: Request #3 ù status: 200 | 819ms
+OTP_088: Request #4 ù status: 200 | 102ms
+OTP_088: Request #5 ù status: 200 | 124ms
+OTP_088: Request #6 ù status: 200 | 92ms
+OTP_088: Request #7 ù status: 200 | 85ms
+OTP_088: Request #8 ù status: 200 | 92ms
+OTP_088: Request #9 ù status: 200 | 94ms
+OTP_088: Request #10 ù status: 200 | 99ms
+OTP_088: Request #11 ù status: 200 | 82ms
+OTP_088: Request #12 ù status: 200 | 87ms
+OTP_088: Request #13 ù status: 200 | 98ms
+OTP_088: Request #14 ù status: 200 | 76ms
+OTP_088: Request #15 ù status: 200 | 89ms
+OTP_088: Spike test completed ù no server crashes detected.
+
+>>> OTP_089: Endurance test <<<
+OTP_089: Iteration 1 ù HTTP 200 | 105ms
+OTP_089: Baseline response time = 105ms
+OTP_089: Iteration 2 ù HTTP 200 | 86ms
+OTP_089: Iteration 3 ù HTTP 200 | 87ms
+OTP_089: Iteration 4 ù HTTP 200 | 1585ms
+OTP_089: Iteration 5 ù HTTP 200 | 90ms
+OTP_089: Iteration 6 ù HTTP 200 | 86ms
+OTP_089: Iteration 7 ù HTTP 200 | 88ms
+OTP_089: Iteration 8 ù HTTP 200 | 84ms
+OTP_089: Iteration 9 ù HTTP 200 | 93ms
+OTP_089: Iteration 10 ù HTTP 200 | 81ms
+OTP_089: Iteration 11 ù HTTP 200 | 419ms
+OTP_089: Iteration 12 ù HTTP 200 | 81ms
+OTP_089: Iteration 13 ù HTTP 200 | 100ms
+OTP_089: Iteration 14 ù HTTP 200 | 92ms
+OTP_089: Iteration 15 ù HTTP 200 | 86ms
+OTP_089: Iteration 16 ù HTTP 200 | 92ms
+OTP_089: Iteration 17 ù HTTP 200 | 87ms
+OTP_089: Iteration 18 ù HTTP 200 | 108ms
+OTP_089: Iteration 19 ù HTTP 200 | 86ms
+OTP_089: Iteration 20 ù HTTP 200 | 85ms
+OTP_089: Endurance test completed. No degradation detected over 20 iterations.
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 442 ms | Max: 28029 ms | Calls: 122
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89, 121, 80, 67, 88, 75, 96, 86, 82, 105, 103, 88, 86, 84, 94, 99, 126, 109, 97, 94, 96, 108, 96, 91, 98, 86, 98, 86, 86, 87, 96, 92, 84, 82, 127, 117, 96, 4956, 111, 132, 485, 109, 104, 100, 88, 117, 85, 3934, 98, 83, 93, 94, 90, 105, 93, 83, 81, 111, 104, 84, 115, 177, 99, 97, 125, 1952, 97, 101, 99, 88, 77, 83, 75, 82]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> OTP_090: Required fields always present <<<
+[OTP_090 [call 1]] HTTP 200 | 76ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_090 [call 1]: Response body = {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_090 [call 2]] HTTP 200 | 89ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_090 [call 2]: Response body = {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_090 [call 3]] HTTP 200 | 713ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_090 [call 3]: Response body = {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_090: All required fields present across 3 consecutive calls.
+
+>>> OTP_091: Field datatype consistency <<<
+[OTP_091 [call 1]] HTTP 200 | 248ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_091: Baseline ù success: Boolean, msg: String
+[OTP_091 [call 2]] HTTP 200 | 93ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_091 [call 3]] HTTP 200 | 92ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_091: Data types consistent across all 3 calls.
+
+>>> OTP_092: No field removal between calls <<<
+[OTP_092 [call 1]] HTTP 200 | 83ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+[OTP_092 [call 2]] HTTP 200 | 96ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_092: Schema stable ù no fields removed across consecutive calls.
+
+>>> OTP_093: Backward compatibility <<<
+[OTP_093] HTTP 200 | 79ms | {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_093: Response body = {"status":200,"success":true,"msg":"OTP sent successfully"}
+OTP_093: Backward-compatible schema confirmed. success=true | msg="OTP sent successfully"
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 423 ms | Max: 28029 ms | Calls: 131
+   > History: [851, 110, 94, 110, 103, 99, 108, 138, 119, 85, 95, 2014, 95, 91, 83, 120, 96, 87, 91, 90, 109, 98, 128, 92, 28029, 88, 97, 136, 79, 117, 273, 87, 110, 99, 101, 90, 241, 81, 88, 234, 94, 116, 88, 90, 90, 126, 108, 98, 89, 121, 80, 67, 88, 75, 96, 86, 82, 105, 103, 88, 86, 84, 94, 99, 126, 109, 97, 94, 96, 108, 96, 91, 98, 86, 98, 86, 86, 87, 96, 92, 84, 82, 127, 117, 96, 4956, 111, 132, 485, 109, 104, 100, 88, 117, 85, 3934, 98, 83, 93, 94, 90, 105, 93, 83, 81, 111, 104, 84, 115, 177, 99, 97, 125, 1952, 97, 101, 99, 88, 77, 83, 75, 82, 76, 89, 713, 248, 93, 92, 83, 96, 79]
+   --------------------------------------------------------------------------------
+====================================================
+
+[INFO] Tests run: 93, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 82.06 s -- in TestSuite
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 93, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:26 min
+[INFO] Finished at: 2026-06-11T12:08:35+05:30
+[INFO] ------------------------------------------------------------------------

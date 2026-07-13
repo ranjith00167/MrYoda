@@ -107,7 +107,7 @@ public WebElement investigationTextArea;
     @FindBy(xpath = "//input[@id='phone-number']")
     public WebElement mobile_number;
 
-    @FindBy(xpath = "//input[@placeholder='Enter Mobile Number']")
+    @FindBy(xpath = "//input[@placeholder='Enter Mobile Number' or @id='phone-number' or @name='mobile']")
     public WebElement enter_mobile_number;
     @FindBy(xpath = " //button[@aria-label='Get OTP']")
     public WebElement get_otp_button;

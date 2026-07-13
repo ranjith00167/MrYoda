@@ -24,8 +24,13 @@ public class CartPageSteps extends BaseSteps {
     @When("set the visit type from UI for lab visit")
     public void set_the_visit_type_from_ui_for_lab_visit() throws Throwable {
 
-        // Wait for the checkout/cart page to fully render the visit type buttons
-        Thread.sleep(3000);
+        org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
+        org.openqa.selenium.support.ui.WebDriverWait wait =
+            new org.openqa.selenium.support.ui.WebDriverWait(driver, java.time.Duration.ofSeconds(30));
+
+        // Wait for page to be fully ready before searching for buttons
+        wait.until(webDriver -> js.executeScript("return document.readyState").equals("complete"));
+        Thread.sleep(4000);
 
         // Try multiple locator strategies for the Lab Visit button
         By[] labVisitLocators = {
@@ -36,33 +41,53 @@ public class CartPageSteps extends BaseSteps {
             By.xpath("//*[contains(@class,'cursor-pointer') and contains(text(),'Lab Visit')]"),
             By.xpath("//*[contains(@class,'cursor-pointer') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'lab visit')]"),
             By.xpath("//div[contains(@class,'tab') or contains(@class,'visit')]//button[1]"),
+            By.xpath("//*[@role='tab' and contains(text(),'Lab')]"),
         };
 
         WebElement labBtn = null;
-        for (By locator : labVisitLocators) {
-            try {
-                List<WebElement> found = driver.findElements(locator);
-                if (found != null && !found.isEmpty()) {
-                    labBtn = found.get(0);
-                    System.out.println("✅ Lab Visit button found with: " + locator);
-                    break;
-                }
-            } catch (Exception ignored) { }
-        }
 
-        if (labBtn == null) {
-            // Final fallback: JS search for any clickable element containing "Lab Visit"
-            org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
-            labBtn = (WebElement) js.executeScript(
-                "return Array.from(document.querySelectorAll('button, [class*=cursor-pointer], [role=tab]'))"
-                + ".find(el => (el.innerText || '').trim().toLowerCase().includes('lab visit'));"
-            );
-            if (labBtn != null) {
-                System.out.println("✅ Lab Visit button found via JS fallback");
+        // Up to 3 attempts with increasing waits to handle slow page renders
+        for (int attempt = 1; attempt <= 3 && labBtn == null; attempt++) {
+            if (attempt > 1) {
+                System.out.println("⏳ Retry " + attempt + " — waiting extra " + (attempt * 3) + "s for Lab Visit button...");
+                Thread.sleep(attempt * 3000L);
+                wait.until(webDriver -> js.executeScript("return document.readyState").equals("complete"));
+                // Scroll to top to ensure visit-type section is in view
+                js.executeScript("window.scrollTo(0, 0);");
+            }
+
+            for (By locator : labVisitLocators) {
+                try {
+                    List<WebElement> found = driver.findElements(locator);
+                    if (found != null && !found.isEmpty() && found.get(0).isDisplayed()) {
+                        labBtn = found.get(0);
+                        System.out.println("✅ Lab Visit button found with: " + locator + " (attempt " + attempt + ")");
+                        break;
+                    }
+                } catch (Exception ignored) { }
+            }
+
+            if (labBtn == null) {
+                // JS fallback scan
+                labBtn = (WebElement) js.executeScript(
+                    "return Array.from(document.querySelectorAll('button, [class*=cursor-pointer], [role=tab]'))"
+                    + ".find(el => (el.innerText || '').trim().toLowerCase().includes('lab visit'));"
+                );
+                if (labBtn != null) {
+                    System.out.println("✅ Lab Visit button found via JS fallback (attempt " + attempt + ")");
+                }
             }
         }
 
         if (labBtn == null) {
+            // Log all visible buttons to help diagnose what's on the page
+            try {
+                List<WebElement> allButtons = driver.findElements(By.tagName("button"));
+                System.out.println("⚠️ All visible buttons on page (" + allButtons.size() + "):");
+                allButtons.forEach(b -> {
+                    try { System.out.println("   [button] " + b.getText()); } catch (Exception ignored) { }
+                });
+            } catch (Exception ignored) { }
             throw new RuntimeException("❌ Lab Visit button not found on checkout page. "
                 + "The button may have been renamed or the checkout page did not load properly.");
         }
@@ -71,11 +96,10 @@ public class CartPageSteps extends BaseSteps {
         try {
             labBtn.click();
         } catch (Exception e) {
-            org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
             js.executeScript("arguments[0].click();", labBtn);
         }
 
-        Thread.sleep(3000); // Wait for UI to update selection
+        Thread.sleep(4000); // Wait for UI to update selection
         System.out.println("========== 🧭 DETECTING VISIT TYPE FROM UI ==========");
 
         String selectedType = "";
@@ -121,6 +145,8 @@ public class CartPageSteps extends BaseSteps {
     }
     @When("select the location")
     public void select_the_location() throws Throwable {
+
+         Thread.sleep(5000);
 
         if (TestSession.locationText == null || TestSession.locationText.trim().isEmpty()) {
             throw new AssertionError("❌ Location is missing in Excel. Fill the 'Area' column.");

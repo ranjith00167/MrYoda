@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="GetTransactionByMobile Suite" verbose="2">
+    <test name="GetTransactionByMobile Tests">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.membership.GetTransactionByMobileTest"/>
+        </classes>
+    </test>
+</suite>

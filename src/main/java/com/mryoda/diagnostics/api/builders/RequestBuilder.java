@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import com.mryoda.diagnostics.api.utils.LogManager;
 import com.mryoda.diagnostics.api.utils.RequestContext;
+import com.mryoda.diagnostics.api.utils.ApiReportContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class RequestBuilder {
     private final Map<String, Object> queryParams = new HashMap<>();
     private Integer expectedStatus = null;
     private final Map<String, Object> bodyParams = new HashMap<>();
+    private String description = "";
 
     public RequestBuilder() {
     }
@@ -83,6 +85,11 @@ public class RequestBuilder {
 
     public RequestBuilder expectStatus(int status) {
         this.expectedStatus = status;
+        return this;
+    }
+
+    public RequestBuilder setDescription(String description) {
+        this.description = description;
         return this;
     }
 

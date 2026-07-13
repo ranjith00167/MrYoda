@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="GetTestBySlug API Validation Suite" verbose="1">
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="GetTestBySlug API Tests" preserve-order="true">
+        <classes>
+            <!-- Prerequisites: Login and other setup tests -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods>
+                    <include name="testLogin_ValidCredentials"/>
+                </methods>
+            </class>
+
+            <!-- GetTestBySlug Validation Tests -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GetTestBySlugValidationTest">
+                <!-- All tests will run in priority order -->
+            </class>
+        </classes>
+    </test>
+</suite>

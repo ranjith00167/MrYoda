@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Add to Cart API Validation Suite - Member and Non-Member" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ===================================================== -->
+    <!-- SCENARIO 1 — MEMBER: Add to Cart Validations         -->
+    <!-- ===================================================== -->
+
+    <test name="Member - Add to Cart API Validations" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <parameter name="flowType" value="validation"/>
+
+        <classes>
+
+            <!-- Login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><exclude name="testLoginWithOTP_NewlyRegisteredUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+
+            <!-- Add to Cart Validation Tests (includes GetCartById validation) -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartValidationTest"/>
+
+        </classes>
+    </test>
+
+    <!-- ===================================================== -->
+    <!-- SCENARIO 2 — NON-MEMBER: Add to Cart Validations     -->
+    <!-- ===================================================== -->
+
+    <test name="Non-Member - Add to Cart API Validations" preserve-order="true">
+        <parameter name="userType" value="non_member"/>
+        <parameter name="flowType" value="validation"/>
+
+        <classes>
+
+            <!-- Login as Non-Member -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><exclude name="testLoginWithOTP_NewlyRegisteredUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForNonMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForNonMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForNonMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+
+            <!-- Add to Cart Validation Tests (includes GetCartById validation) -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartValidationTest"/>
+
+        </classes>
+    </test>
+
+</suite>

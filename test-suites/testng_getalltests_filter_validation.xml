@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="GetAllTests Filter Validation Suite" verbose="1" preserve-order="true">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="GetAllTests Filter Validation - Yodaara OTT, Pharmacogenomics, DNADecoder">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GetAllTestsFilterValidationTest"/>
+        </classes>
+    </test>
+
+</suite>

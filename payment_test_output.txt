@@ -1,0 +1,2964 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< MrYoda:MrYoda >----------------------------
+[INFO] Building MrYoda 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ MrYoda ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ MrYoda ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ MrYoda ---
+[INFO] Copying 24 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ MrYoda ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ MrYoda ---
+[INFO] Using auto detected provider org.apache.maven.surefire.testng.TestNGProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+SLF4J(W): Class path contains multiple SLF4J providers.
+SLF4J(W): Found provider [org.slf4j.simple.SimpleServiceProvider@578486a3]
+SLF4J(W): Found provider [org.apache.logging.slf4j.SLF4JServiceProvider@551aa95a]
+SLF4J(W): See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J(I): Actual provider is of type [org.slf4j.simple.SimpleServiceProvider@578486a3]
+...
+... TestNG 7.8.0 by CΘdric Beust (cedric@beust.com)
+...
+
+
+#########################################################
+  STARTING NEW XML TEST FLOW - RESETTING CONTEXT
+#########################################################
+
+[CLEANING] RequestContext Flow State...
+[SUCCESS] RequestContext State Successfully Cleared.
+
+========================================
+  GET PAYMENT BY USER ID - TEST SETUP
+========================================
+
+==================================================
+========== TOKEN GENERATION START (MEMBER) ==========
+==================================================
+Request Body: {"country_code":"+91","mobile":"8056477884"}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/otps/getOtp
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "country_code": "+91",
+    "mobile": "8056477884"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /otps/getOtp
+   Time    : ? 766 ms
+----------------------------
+
+Request Body: {"country_code":"+91","mobile":"8056477884","otp":"123456"}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/otps/getOtp
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "country_code": "+91",
+    "mobile": "8056477884",
+    "otp": "123456"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /otps/getOtp
+   Time    : ? 122 ms
+----------------------------
+
+Token generated for MEMBER: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+   ? Login Successful
+   Member UserId: 60cdff44-e801-4c75-a873-69caf965e763
+========================================
+
+
+>>> TC09: Valid UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6710 ms
+----------------------------
+
+   ? Valid userId accepted
+
+>>> TC10: Existing UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6464 ms
+----------------------------
+
+   ? Existing userId returned 1723 records
+
+>>> TC11: Non-Existing UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/00000000-0000-0000-0000-000000000000
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/00000000-0000-0000-0000-000000000000
+   Time    : ? 112 ms
+----------------------------
+
+   Status: 404
+
+>>> TC12: Invalid UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/invalid-user-id-12345
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/invalid-user-id-12345
+   Time    : ? 101 ms
+----------------------------
+
+   ? Invalid userId rejected - Status: 500
+
+>>> TC13: UserId = 0 <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/0
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/0
+   Time    : ? 126 ms
+----------------------------
+
+   ? userId=0 rejected - Status: 500
+
+>>> TC14: UserId = -1 <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/-1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/-1
+   Time    : ? 143 ms
+----------------------------
+
+   ? userId=-1 rejected - Status: 500
+
+>>> TC15: UserId = null <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/null
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/null
+   Time    : ? 109 ms
+----------------------------
+
+   ? userId=null rejected - Status: 500
+
+>>> TC16: Empty UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/
+   Time    : ? 85 ms
+----------------------------
+
+   ? Empty userId rejected - Status: 404
+
+>>> TC17: UserId As String <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/abc_string_value
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/abc_string_value
+   Time    : ? 106 ms
+----------------------------
+
+   ? String userId rejected - Status: 500
+
+>>> TC18: UserId With Special Characters <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/%21%40%23%24%25%5E%26*%28%29
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/!@#$%^&*()
+   Time    : ? 108 ms
+----------------------------
+
+   ? Special char userId rejected - Status: 500
+
+>>> TC19: Very Large UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   Time    : ? 333 ms
+----------------------------
+
+   ? Very large userId rejected - Status: 500
+
+>>> TC20: Payment Details Returned Successfully <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 7172 ms
+----------------------------
+
+   ? Payment details fetched successfully
+
+>>> TC21: User Payment History Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6411 ms
+----------------------------
+
+   ? Payment history returned - Records: 10
+
+>>> TC22: Latest Payment Record Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6250 ms
+----------------------------
+
+   ? Latest record first: 2026-06-16T05:21:32.124Z
+
+>>> TC23: Multiple Payment Records Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6367 ms
+----------------------------
+
+   ? Total records: 1723
+
+>>> TC24: Payment Records Belong To Requested User <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6311 ms
+----------------------------
+
+   ? All 10 records belong to userId: 60cdff44-e801-4c75-a873-69caf965e763
+
+>>> TC25: Payment Status Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6522 ms
+----------------------------
+
+   ? Payment statuses: [Payment Pending, Payment Pending, Payment Pending]
+
+>>> TC26: Payment Mode Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6398 ms
+----------------------------
+
+   ? Payment types: [COD, COD, COD]
+
+>>> TC27: Transaction Reference ID Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6742 ms
+----------------------------
+
+   Has valid payment_gateway_id: false
+   ? Transaction reference ID check completed
+
+>>> TC28: Order ID Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6403 ms
+----------------------------
+
+   ? Order ID: eea9480f-f885-4f55-8b9c-f3a48e30e36b
+
+>>> TC29: Payment Amount Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6916 ms
+----------------------------
+
+   ? Payment amounts: [2722, 922, 922]
+
+>>> TC30: Payment Date Returned <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 8143 ms
+----------------------------
+
+   ? Payment date: 2026-06-16T05:21:32.124Z
+
+>>> TC31: Verify Success Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 7151 ms
+----------------------------
+
+   ? Success payments: 0
+
+>>> TC32: Verify Pending Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6984 ms
+----------------------------
+
+   ? Pending payments: 10
+
+>>> TC33: Verify Failed Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6525 ms
+----------------------------
+
+   ? Failed payments: 0
+
+>>> TC34: Verify Cancelled Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6496 ms
+----------------------------
+
+   ? Cancelled payments: 0
+
+>>> TC35: Verify Refunded Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12217 ms
+   ??  WARNING: Response is becoming slow (12217ms)
+----------------------------
+
+   ? Refunded payments: 0
+
+>>> TC36: Verify Status Values Are Correct <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12533 ms
+   ??  WARNING: Response is becoming slow (12533ms)
+----------------------------
+
+   ? All status values have valid prefix
+
+>>> TC37: Verify UPI Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 11419 ms
+   ??  WARNING: Response is becoming slow (11419ms)
+----------------------------
+
+   ? UPI payments: 0
+
+>>> TC38: Verify Card Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12881 ms
+   ??  WARNING: Response is becoming slow (12881ms)
+----------------------------
+
+   ? Card payments: 0
+
+>>> TC39: Verify Net Banking Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12862 ms
+   ??  WARNING: Response is becoming slow (12862ms)
+----------------------------
+
+   ? Net Banking payments: 0
+
+>>> TC40: Verify Wallet Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12871 ms
+   ??  WARNING: Response is becoming slow (12871ms)
+----------------------------
+
+   ? Wallet payments: 0
+
+>>> TC41: Verify COD Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12561 ms
+   ??  WARNING: Response is becoming slow (12561ms)
+----------------------------
+
+   ? COD payments: 10
+
+>>> TC42: Verify Membership Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12462 ms
+   ??  WARNING: Response is becoming slow (12462ms)
+----------------------------
+
+   ? Membership payments: 0
+
+>>> TC43: Verify Payment Mode Accuracy <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13260 ms
+   ??  WARNING: Response is becoming slow (13260ms)
+----------------------------
+
+   ? Payment mode accuracy verified
+
+>>> TC44: Verify payment_id Present <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12866 ms
+   ??  WARNING: Response is becoming slow (12866ms)
+----------------------------
+
+   ? payment_id: c0162386-ed3f-45e1-a711-d09d55b83d0f
+
+>>> TC45: Verify order_id Present <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13232 ms
+   ??  WARNING: Response is becoming slow (13232ms)
+----------------------------
+
+   ? order_id: eea9480f-f885-4f55-8b9c-f3a48e30e36b
+
+>>> TC46: Verify transaction_id Present <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12758 ms
+   ??  WARNING: Response is becoming slow (12758ms)
+----------------------------
+
+   Has transaction_id (payment_gateway_id): false
+   ? transaction_id check completed
+
+>>> TC47: Verify Payment Amount Present <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12553 ms
+   ??  WARNING: Response is becoming slow (12553ms)
+----------------------------
+
+   ? All payments have amount
+
+>>> TC48: Verify Payment Status Present <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12615 ms
+   ??  WARNING: Response is becoming slow (12615ms)
+----------------------------
+
+   ? All payments have payment_status
+
+>>> TC49: Verify Payment Mode Present <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12773 ms
+   ??  WARNING: Response is becoming slow (12773ms)
+----------------------------
+
+   ? All payments have payment_type
+
+>>> TC50: Verify Created Date Present <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12896 ms
+   ??  WARNING: Response is becoming slow (12896ms)
+----------------------------
+
+   ? All payments have created_at
+
+>>> TC51: Verify Updated Date Field <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13698 ms
+   ??  WARNING: Response is becoming slow (13698ms)
+----------------------------
+
+   ? Date fields verified
+
+>>> TC52: Verify Mandatory Fields Not Null <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12937 ms
+   ??  WARNING: Response is becoming slow (12937ms)
+----------------------------
+
+   ? All mandatory fields are not null
+
+>>> TC53: Verify Mandatory Fields Not Empty <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12416 ms
+   ??  WARNING: Response is becoming slow (12416ms)
+----------------------------
+
+   ? All mandatory fields are not empty
+
+>>> TC54: Verify Successful Online Payment <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13000 ms
+   ??  WARNING: Response is becoming slow (13000ms)
+----------------------------
+
+   ?? No successful online payment found
+
+>>> TC55: Verify Pending Payment Details <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12711 ms
+   ??  WARNING: Response is becoming slow (12711ms)
+----------------------------
+
+   ? Pending payment - Type: COD
+
+>>> TC56: Verify Cancelled Payment Details <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12168 ms
+   ??  WARNING: Response is becoming slow (12168ms)
+----------------------------
+
+   ?? No cancelled payment found
+
+>>> TC57: Verify Refunded Payment Details <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13291 ms
+   ??  WARNING: Response is becoming slow (13291ms)
+----------------------------
+
+   ?? No refunded payment found
+
+>>> TC58: Verify Membership Payment Details <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12938 ms
+   ??  WARNING: Response is becoming slow (12938ms)
+----------------------------
+
+   ?? No membership-linked payment found
+
+>>> TC59: Verify Order Payment Mapping <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12900 ms
+   ??  WARNING: Response is becoming slow (12900ms)
+----------------------------
+
+   ? All payments mapped to orders
+
+>>> TC60: Verify Payment Amount Valid <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6394 ms
+----------------------------
+
+   ? All amounts are valid non-negative numbers
+
+>>> TC61: Invalid UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/xyz-invalid
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/xyz-invalid
+   Time    : ? 94 ms
+----------------------------
+
+   ? Invalid userId rejected - Status: 500
+
+>>> TC62: Empty UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/
+   Time    : ? 84 ms
+----------------------------
+
+   ? Empty userId rejected - Status: 404
+
+>>> TC63: Null UserId <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/null
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/null
+   Time    : ? 91 ms
+----------------------------
+
+   ? Null userId rejected - Status: 500
+
+>>> TC64: User Not Found <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+   Time    : ? 146 ms
+----------------------------
+
+   ? User not found handled - Status: 404
+
+>>> TC65: No Payment History <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/11111111-2222-3333-4444-555555555555
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/11111111-2222-3333-4444-555555555555
+   Time    : ? 90 ms
+----------------------------
+
+
+>>> TC67: Invalid Endpoint <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserIdInvalid/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserIdInvalid/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 104 ms
+----------------------------
+
+   ? Invalid endpoint returns 404
+
+>>> TC68: Unsupported HTTP Method (GET) <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 100 ms
+----------------------------
+
+   Status: 404
+
+>>> TC69: SQL Injection - OR 1=1 <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/%27%20OR%201%3D1%20--
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/' OR 1=1 --
+   Time    : ? 85 ms
+----------------------------
+
+   ? SQL injection blocked - Status: 500
+
+>>> TC70: SQL Injection - DROP TABLE <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/DROP%20TABLE%20users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/DROP TABLE users
+   Time    : ? 111 ms
+----------------------------
+
+   ? SQL injection DROP blocked - Status: 500
+
+>>> TC71: XSS Injection <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/%3Cscript%3Ealert%281%29%3C/script%3E
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/<script>alert(1)</script>
+   Time    : ? 82 ms
+----------------------------
+
+   ? XSS injection blocked - Status: 404
+
+>>> TC73: Verify Sensitive Info Masked <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 6499 ms
+----------------------------
+
+   ? No sensitive data exposed
+
+>>> TC74: Verify Stack Trace Not Exposed <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/%27%3B%20INVALID%20SQL
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/'; INVALID SQL
+   Time    : ? 88 ms
+----------------------------
+
+   ? No stack trace exposed
+
+>>> TC75: Verify Internal DB Details Not Exposed <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/invalid-uuid-format
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/invalid-uuid-format
+   Time    : ? 119 ms
+----------------------------
+
+   ? No internal DB details exposed
+
+>>> TC76: Verify Status Code 200 <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12272 ms
+   ??  WARNING: Response is becoming slow (12272ms)
+----------------------------
+
+   ? Status code: 200
+
+>>> TC77: Verify Response Schema <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12588 ms
+   ??  WARNING: Response is becoming slow (12588ms)
+----------------------------
+
+   ? Response schema validated
+
+>>> TC78: Verify Response Message <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13019 ms
+   ??  WARNING: Response is becoming slow (13019ms)
+----------------------------
+
+   ? Message verified
+
+>>> TC79: Verify Response Success Flag <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13096 ms
+   ??  WARNING: Response is becoming slow (13096ms)
+----------------------------
+
+   ? Success flag: true
+
+>>> TC80: Verify Response Data Object <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12581 ms
+   ??  WARNING: Response is becoming slow (12581ms)
+----------------------------
+
+   ? Data is a list with 10 items
+
+>>> TC81: Verify Response Count <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12691 ms
+   ??  WARNING: Response is becoming slow (12691ms)
+----------------------------
+
+   ? Total: 1723 | Data size: 10
+
+>>> TC82: Verify Response Time <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13034 ms
+   ??  WARNING: Response is becoming slow (13034ms)
+----------------------------
+
+   Response Time: 13034ms
+
+>>> TC83: Verify Concurrent Requests <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12772 ms
+   ??  WARNING: Response is becoming slow (12772ms)
+----------------------------
+
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12620 ms
+   ??  WARNING: Response is becoming slow (12620ms)
+----------------------------
+
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12402 ms
+   ??  WARNING: Response is becoming slow (12402ms)
+----------------------------
+
+   ? All 3 requests consistent
+
+>>> TC84: Verify Response Consistency <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12714 ms
+   ??  WARNING: Response is becoming slow (12714ms)
+----------------------------
+
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12874 ms
+   ??  WARNING: Response is becoming slow (12874ms)
+----------------------------
+
+   ? Responses are consistent
+
+>>> TC85: Verify Large Payment History <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12944 ms
+   ??  WARNING: Response is becoming slow (12944ms)
+----------------------------
+
+   Total: 1723 | Limit: 1723
+   ? Large history handled
+
+>>> TC86: Verify Payment Exists <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12769 ms
+   ??  WARNING: Response is becoming slow (12769ms)
+----------------------------
+
+   ? Payment records exist
+
+>>> TC87: Verify Amount Format <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12694 ms
+   ??  WARNING: Response is becoming slow (12694ms)
+----------------------------
+
+   ? All amounts are valid numeric
+
+>>> TC88: Verify Payment Status Format <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12690 ms
+   ??  WARNING: Response is becoming slow (12690ms)
+----------------------------
+
+   ? All statuses valid
+
+>>> TC89: Verify Payment Mode <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12705 ms
+   ??  WARNING: Response is becoming slow (12705ms)
+----------------------------
+
+   ? All payment types valid
+
+>>> TC90: Verify Transaction ID Format <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12289 ms
+   ??  WARNING: Response is becoming slow (12289ms)
+----------------------------
+
+   ? Transaction IDs have valid format
+
+>>> TC91: Valid User Validation <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 15824 ms
+   ??  WARNING: Response is becoming slow (15824ms)
+----------------------------
+
+   ? Valid user returns data
+
+>>> TC92: Invalid User Validation <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/not-a-uuid
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/not-a-uuid
+   Time    : ? 103 ms
+----------------------------
+
+   ? Invalid user rejected
+
+>>> TC93: No Payment History <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/22222222-3333-4444-5555-666666666666
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/22222222-3333-4444-5555-666666666666
+   Time    : ? 135 ms
+----------------------------
+
+   ? No history handled
+
+>>> TC94: Payment Status Validation <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13978 ms
+   ??  WARNING: Response is becoming slow (13978ms)
+----------------------------
+
+   ? Statuses: [Payment Pending]
+
+>>> TC95: Payment Mode Validation <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13081 ms
+   ??  WARNING: Response is becoming slow (13081ms)
+----------------------------
+
+   ? Modes: [COD]
+
+>>> TC96: Amount Validation <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12949 ms
+   ??  WARNING: Response is becoming slow (12949ms)
+----------------------------
+
+   ? All amounts valid
+
+>>> TC97: Transaction ID Validation <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12397 ms
+   ??  WARNING: Response is becoming slow (12397ms)
+----------------------------
+
+   Online payments with valid gateway ID: 0
+   ? Transaction ID validation completed
+
+>>> TC99: Response Schema Validation <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12765 ms
+   ??  WARNING: Response is becoming slow (12765ms)
+----------------------------
+
+   ? Full schema validated
+
+>>> TC100: Response Time Validation <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12552 ms
+   ??  WARNING: Response is becoming slow (12552ms)
+----------------------------
+
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13270 ms
+   ??  WARNING: Response is becoming slow (13270ms)
+----------------------------
+
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 14037 ms
+   ??  WARNING: Response is becoming slow (14037ms)
+----------------------------
+
+   Avg Response Time: 13286ms
+
+>>> TC101: Online Payment Order Returns Details <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12687 ms
+   ??  WARNING: Response is becoming slow (12687ms)
+----------------------------
+
+   ?? No successful online payment found
+
+>>> TC102: COD Order Returns Correct Mode <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13209 ms
+   ??  WARNING: Response is becoming slow (13209ms)
+----------------------------
+
+   ? COD order: MY26AAA4530
+
+>>> TC103: Membership Payment Mode <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12758 ms
+   ??  WARNING: Response is becoming slow (12758ms)
+----------------------------
+
+   ?? No membership payment found
+
+>>> TC104: Cancelled Payments Correct <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13244 ms
+   ??  WARNING: Response is becoming slow (13244ms)
+----------------------------
+
+   Cancelled: 0
+   ? Cancelled payments verified
+
+>>> TC105: Refunded Payments Correct <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12524 ms
+   ??  WARNING: Response is becoming slow (12524ms)
+----------------------------
+
+   Refunded: 0
+   ? Refunded payments verified
+
+>>> TC106: Razorpay Payment ID <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12673 ms
+   ??  WARNING: Response is becoming slow (12673ms)
+----------------------------
+
+   ?? No Razorpay payment IDs in current page (paginated response)
+
+>>> TC107: Razorpay Order ID <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12412 ms
+   ??  WARNING: Response is becoming slow (12412ms)
+----------------------------
+
+   ? All payments have orderGuid
+
+>>> TC108: Transaction Ref ID For Successful Payments <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 13109 ms
+   ??  WARNING: Response is becoming slow (13109ms)
+----------------------------
+
+   ? All successful online payments have transaction ref
+
+>>> TC109: Payment Amount Matches Invoice <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12799 ms
+   ??  WARNING: Response is becoming slow (12799ms)
+----------------------------
+
+   ? All payment amounts valid
+
+>>> TC110: Payment Details Match Transaction History <<<
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA2MzIwLCJleHAiOjE3ODQ3OTgzMjB9.A7bNuH3ugYvGuEl4hHo0AJ1VPJVZBx83cFAA7GTXmZM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763
+   Time    : ? 12349 ms
+   ??  WARNING: Response is becoming slow (12349ms)
+----------------------------
+
+   ? All Transaction History fields present - Records: 10
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /gateway/getPaymentByUserId/null                                                
+   > Status: [FAST] | Avg: 100 ms | Max: 109 ms | Calls: 2
+   > History: [109, 91]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/60cdff44-e801-4c75-a873-69caf965e763                
+   > Status: [VERY SLOW] | Avg: 11257 ms | Max: 15824 ms | Calls: 82
+   > History: [6710, 6464, 7172, 6411, 6250, 6367, 6311, 6522, 6398, 6742, 6403, 6916, 8143, 7151, 6984, 6525, 6496, 12217, 12533, 11419, 12881, 12862, 12871, 12561, 12462, 13260, 12866, 13232, 12758, 12553, 12615, 12773, 12896, 13698, 12937, 12416, 13000, 12711, 12168, 13291, 12938, 12900, 6394, 100, 6499, 12272, 12588, 13019, 13096, 12581, 12691, 13034, 12772, 12620, 12402, 12714, 12874, 12944, 12769, 12694, 12690, 12705, 12289, 15824, 13978, 13081, 12949, 12397, 12765, 12552, 13270, 14037, 12687, 13209, 12758, 13244, 12524, 12673, 12412, 13109, 12799, 12349]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/22222222-3333-4444-5555-666666666666                
+   > Status: [FAST] | Avg: 135 ms | Max: 135 ms | Calls: 1
+   > History: [135]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/00000000-0000-0000-0000-000000000000                
+   > Status: [FAST] | Avg: 112 ms | Max: 112 ms | Calls: 1
+   > History: [112]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+   > Status: [FAST] | Avg: 333 ms | Max: 333 ms | Calls: 1
+   > History: [333]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/!@#$%^&*()                                          
+   > Status: [FAST] | Avg: 108 ms | Max: 108 ms | Calls: 1
+   > History: [108]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/abc_string_value                                    
+   > Status: [FAST] | Avg: 106 ms | Max: 106 ms | Calls: 1
+   > History: [106]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/0                                                   
+   > Status: [FAST] | Avg: 126 ms | Max: 126 ms | Calls: 1
+   > History: [126]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/                                                    
+   > Status: [FAST] | Avg: 84 ms | Max: 85 ms | Calls: 2
+   > History: [85, 84]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/invalid-user-id-12345                               
+   > Status: [FAST] | Avg: 101 ms | Max: 101 ms | Calls: 1
+   > History: [101]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/' OR 1=1 --                                         
+   > Status: [FAST] | Avg: 85 ms | Max: 85 ms | Calls: 1
+   > History: [85]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee                
+   > Status: [FAST] | Avg: 146 ms | Max: 146 ms | Calls: 1
+   > History: [146]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/-1                                                  
+   > Status: [FAST] | Avg: 143 ms | Max: 143 ms | Calls: 1
+   > History: [143]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserIdInvalid/60cdff44-e801-4c75-a873-69caf965e763         
+   > Status: [FAST] | Avg: 104 ms | Max: 104 ms | Calls: 1
+   > History: [104]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/xyz-invalid                                         
+   > Status: [FAST] | Avg: 94 ms | Max: 94 ms | Calls: 1
+   > History: [94]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/DROP TABLE users                                    
+   > Status: [FAST] | Avg: 111 ms | Max: 111 ms | Calls: 1
+   > History: [111]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/11111111-2222-3333-4444-555555555555                
+   > Status: [FAST] | Avg: 90 ms | Max: 90 ms | Calls: 1
+   > History: [90]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/not-a-uuid                                          
+   > Status: [FAST] | Avg: 103 ms | Max: 103 ms | Calls: 1
+   > History: [103]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/'; INVALID SQL                                      
+   > Status: [FAST] | Avg: 88 ms | Max: 88 ms | Calls: 1
+   > History: [88]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/<script>alert(1)</script>                           
+   > Status: [FAST] | Avg: 82 ms | Max: 82 ms | Calls: 1
+   > History: [82]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 444 ms | Max: 766 ms | Calls: 2
+   > History: [766, 122]
+   --------------------------------------------------------------------------------
+   /gateway/getPaymentByUserId/invalid-uuid-format                                 
+   > Status: [FAST] | Avg: 119 ms | Max: 119 ms | Calls: 1
+   > History: [119]
+   --------------------------------------------------------------------------------
+====================================================
+
+[INFO] Tests run: 99, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 934.6 s -- in TestSuite
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 99, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15:39 min
+[INFO] Finished at: 2026-06-23T15:04:12+05:30
+[INFO] ------------------------------------------------------------------------

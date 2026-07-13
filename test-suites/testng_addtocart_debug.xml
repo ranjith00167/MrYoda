@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="AddToCart Debug Suite" verbose="10">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <test name="Debug - Member Add to Cart" preserve-order="true">
+        <parameter name="userType" value="member"/>
+
+        <classes>
+            <!-- Login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><exclude name="testLoginWithOTP_NewlyRegisteredUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForMember"/></methods>
+            </class>
+
+            <!-- Only success test -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartValidationTest">
+                <methods><include name="testAddToCart_SuccessResponse"/></methods>
+            </class>
+
+        </classes>
+    </test>
+
+</suite>

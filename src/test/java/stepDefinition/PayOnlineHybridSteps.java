@@ -1567,4 +1567,157 @@ public class PayOnlineHybridSteps extends BaseSteps {
 
         System.out.println("========== ✅ FREE MEMBERSHIP REMARKS VALIDATION COMPLETE ==========\n");
     }
+
+    // =========================================================================
+    // VALIDATE ZERO REWARD BALANCES – FREE MEMBERSHIP ONLY
+    // =========================================================================
+
+    @Then("validate zero reward balances for new free membership")
+    public void validate_zero_reward_balances_for_new_free_membership() {
+        System.out.println("\n========== 🎁 VALIDATE ZERO REWARD BALANCES (FREE MEMBERSHIP) ==========");
+
+        String mobile = com.mryoda.diagnostics.api.utils.RequestContext.getMobile();
+        if (mobile == null || mobile.isEmpty()) {
+            throw new AssertionError("❌ Mobile number not available in RequestContext");
+        }
+        String token = com.mryoda.diagnostics.api.utils.RequestContext.getToken();
+        if (token == null || token.isEmpty()) {
+            token = ScenarioContext.authToken;
+        }
+        if (token == null || token.isEmpty()) {
+            throw new AssertionError("❌ Auth token not available");
+        }
+
+        String endpoint = APIEndpoints.MEMBER_BASE_URL
+                + APIEndpoints.GET_REWARDS_BY_MOBILE.replace("{mobile_number}", mobile);
+
+        Response response = new RequestBuilder()
+                .setEndpoint(endpoint)
+                .addHeader("Authorization", "Bearer " + token)
+                .get();
+
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyEquals(
+                response.getStatusCode(), 200,
+                "getRewardsByMobile must return HTTP 200");
+
+        String totalRewards    = response.jsonPath().getString("data.total_rewards");
+        String rewardsUsed     = response.jsonPath().getString("data.rewards_used");
+        String revertedRewards = response.jsonPath().getString("data.reverted_rewards");
+
+        System.out.println("   total_rewards    : " + totalRewards);
+        System.out.println("   rewards_used     : " + rewardsUsed);
+        System.out.println("   reverted_rewards : " + revertedRewards);
+
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyEquals(
+                totalRewards, "0.00",
+                "total_rewards must be '0.00' for a newly created free membership");
+        System.out.println("✅ VALIDATED: total_rewards is '0.00'");
+
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyEquals(
+                rewardsUsed, "0.00",
+                "rewards_used must be '0.00' for a newly created free membership");
+        System.out.println("✅ VALIDATED: rewards_used is '0.00'");
+
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyEquals(
+                revertedRewards, "0.00",
+                "reverted_rewards must be '0.00' for a newly created free membership");
+        System.out.println("✅ VALIDATED: reverted_rewards is '0.00'");
+
+        System.out.println("========== ✅ ZERO REWARD BALANCES VALIDATION COMPLETE ==========\n");
+    }
+
+    // =========================================================================
+    // CREATE FAMILY MEMBERS VIA API – FREE MEMBERSHIP MULTI-MEMBER SCENARIO
+    // =========================================================================
+
+    @When("create family members via API for free membership multi member scenario")
+    public void create_family_members_via_api_for_free_membership_multi_member_scenario() {
+        System.out.println("\n========== 👨\u200d👩\u200d👧\u200d👦 CREATE FAMILY MEMBERS VIA API (FREE MEMBERSHIP) ==========");
+
+        // Resolve user ID – set by create_account_with_random_mobile_number via RequestContext.setUserId()
+        String userId = com.mryoda.diagnostics.api.utils.RequestContext.getUserId();
+        if (userId == null || userId.isEmpty()) {
+            userId = com.mryoda.diagnostics.api.utils.RequestContext.getNewUserUserId();
+        }
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyNotNull(userId,
+                "User ID must be available (from account creation) before creating family members");
+
+        String token = com.mryoda.diagnostics.api.utils.RequestContext.getToken();
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyNotNull(token,
+                "Auth token must be available before creating family members");
+
+        System.out.println("   User ID : " + userId);
+
+        String endpoint = APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.ADD_FAMILY_MEMBER;
+
+        // ── Member 1: random name ────────────────────────────────────────────────────
+        String m1First = com.mryoda.diagnostics.api.utils.RandomDataUtil.getRandomFirstName();
+        String m1Last  = com.mryoda.diagnostics.api.utils.RandomDataUtil.getRandomLastName();
+        String m1Dob   = com.mryoda.diagnostics.api.utils.RandomDataUtil.getRandomDOB();
+        String m1Gender = com.mryoda.diagnostics.api.utils.RandomDataUtil.getRandomGender();
+        String m1FullName = (m1First + " " + m1Last).trim();
+        System.out.println("   Member 1 (random): " + m1FullName);
+
+        Map<String, Object> payload1 = com.mryoda.diagnostics.api.payloads.OrderPayloadBuilder
+                .buildAddFamilyMemberPayload(
+                        userId, m1First, m1Last, "",
+                        "", m1Gender, "+91", m1Dob,
+                        "", "#fdefca", "Brother", "Mr.");
+
+        Response response1 = new RequestBuilder()
+                .setEndpoint(endpoint)
+                .addHeader("Authorization", "Bearer " + token)
+                .setRequestBody(payload1)
+                .post();
+
+        System.out.println("   Member 1 HTTP Status : " + response1.getStatusCode());
+        System.out.println("   Member 1 Response    : " + response1.getBody().asString());
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyTrue(
+                response1.getStatusCode() == 200 || response1.getStatusCode() == 201,
+                "Add family member '" + m1FullName + "' must return HTTP 200 or 201");
+
+        // Use the name the API actually stored (source of truth for UI validation)
+        String m1ApiFirst = response1.jsonPath().getString("data.first_name");
+        String m1ApiLast  = response1.jsonPath().getString("data.last_name");
+        String m1ApiName  = (m1ApiFirst != null ? m1ApiFirst : m1First)
+                          + (m1ApiLast  != null && !m1ApiLast.isBlank() ? " " + m1ApiLast : "");
+        System.out.println("   ✅ Member 1 Created — GUID: " + response1.jsonPath().getString("data.guid") + " | Name: " + m1ApiName);
+        stepDefinition.TestSession.registeredMemberNames.add(m1ApiName.trim());
+
+        // ── Member 2: random name ────────────────────────────────────────────────────
+        String m2First  = com.mryoda.diagnostics.api.utils.RandomDataUtil.getRandomFirstName();
+        String m2Last   = com.mryoda.diagnostics.api.utils.RandomDataUtil.getRandomLastName();
+        String m2Dob    = com.mryoda.diagnostics.api.utils.RandomDataUtil.getRandomDOB();
+        String m2Gender = com.mryoda.diagnostics.api.utils.RandomDataUtil.getRandomGender();
+        String m2FullName = (m2First + " " + m2Last).trim();
+        System.out.println("   Member 2 (random): " + m2FullName);
+
+        Map<String, Object> payload2 = com.mryoda.diagnostics.api.payloads.OrderPayloadBuilder
+                .buildAddFamilyMemberPayload(
+                        userId, m2First, m2Last, "",
+                        "", m2Gender, "+91", m2Dob,
+                        "", "#cde7f0", "Friend", "Mr.");
+
+        Response response2 = new RequestBuilder()
+                .setEndpoint(endpoint)
+                .addHeader("Authorization", "Bearer " + token)
+                .setRequestBody(payload2)
+                .post();
+
+        System.out.println("   Member 2 HTTP Status : " + response2.getStatusCode());
+        System.out.println("   Member 2 Response    : " + response2.getBody().asString());
+        com.mryoda.diagnostics.api.utils.AssertionUtil.verifyTrue(
+                response2.getStatusCode() == 200 || response2.getStatusCode() == 201,
+                "Add family member '" + m2FullName + "' must return HTTP 200 or 201");
+
+        String m2ApiFirst = response2.jsonPath().getString("data.first_name");
+        String m2ApiLast  = response2.jsonPath().getString("data.last_name");
+        String m2ApiName  = (m2ApiFirst != null ? m2ApiFirst : m2First)
+                          + (m2ApiLast  != null && !m2ApiLast.isBlank() ? " " + m2ApiLast : "");
+        System.out.println("   ✅ Member 2 Created — GUID: " + response2.jsonPath().getString("data.guid") + " | Name: " + m2ApiName);
+        stepDefinition.TestSession.registeredMemberNames.add(m2ApiName.trim());
+
+        System.out.println("   Registered members (incl. profile owner): " + stepDefinition.TestSession.registeredMemberNames);
+        System.out.println("========== ✅ FAMILY MEMBERS CREATED SUCCESSFULLY ==========\n");
+    }
 }

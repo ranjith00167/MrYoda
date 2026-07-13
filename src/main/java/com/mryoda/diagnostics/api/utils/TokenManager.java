@@ -17,6 +17,9 @@ public class TokenManager {
     @Deprecated
     public static final String EXISTING_MEMBER = "EXISTING_MEMBER";
 
+    private static final int MAX_RETRIES = 3;
+    private static final long RETRY_DELAY_MS = 3000;
+
     /**
      * Generate token with user type - stores all fields in appropriate
      * RequestContext fields
@@ -30,28 +33,51 @@ public class TokenManager {
         String countryCode = ConfigLoader.getConfig().countryCode();
         String otp = ConfigLoader.getConfig().staticOtp();
 
-        // STEP 1: REQUEST OTP
-        JSONObject otpReq = new JSONObject();
-        otpReq.put("mobile", mobile);
-        otpReq.put("country_code", countryCode);
+        Response verifyResponse = null;
+        Exception lastException = null;
 
-        new RequestBuilder()
-                .setEndpoint(APIEndpoints.OTP_REQUEST)
-                .setRequestBody(otpReq.toString())
-                .expectStatus(200)
-                .post();
+        for (int attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+            try {
+                if (attempt > 1) {
+                    System.out.println("   ⟳ Retry attempt " + attempt + "/" + MAX_RETRIES + " (waiting " + RETRY_DELAY_MS + "ms)...");
+                    Thread.sleep(RETRY_DELAY_MS);
+                }
 
-        // STEP 2: VERIFY OTP
-        JSONObject verifyReq = new JSONObject();
-        verifyReq.put("mobile", mobile);
-        verifyReq.put("country_code", countryCode);
-        verifyReq.put("otp", otp);
+                // STEP 1: REQUEST OTP
+                JSONObject otpReq = new JSONObject();
+                otpReq.put("mobile", mobile);
+                otpReq.put("country_code", countryCode);
 
-        Response verifyResponse = new RequestBuilder()
-                .setEndpoint(APIEndpoints.OTP_VERIFY)
-                .setRequestBody(verifyReq.toString())
-                .expectStatus(200)
-                .post();
+                new RequestBuilder()
+                        .setEndpoint(APIEndpoints.OTP_REQUEST)
+                        .setRequestBody(otpReq.toString())
+                        .expectStatus(200)
+                        .post();
+
+                // STEP 2: VERIFY OTP
+                JSONObject verifyReq = new JSONObject();
+                verifyReq.put("mobile", mobile);
+                verifyReq.put("country_code", countryCode);
+                verifyReq.put("otp", otp);
+
+                verifyResponse = new RequestBuilder()
+                        .setEndpoint(APIEndpoints.OTP_VERIFY)
+                        .setRequestBody(verifyReq.toString())
+                        .expectStatus(200)
+                        .post();
+
+                // If we get here, success - break retry loop
+                lastException = null;
+                break;
+            } catch (Exception e) {
+                lastException = e;
+                System.out.println("   ⚠️ Attempt " + attempt + " failed: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+            }
+        }
+
+        if (lastException != null) {
+            throw new RuntimeException("Token generation failed after " + MAX_RETRIES + " attempts: " + lastException.getMessage(), lastException);
+        }
 
         String token = verifyResponse.jsonPath().getString("data.access_token");
         String firstName = verifyResponse.jsonPath().getString("data.first_name");

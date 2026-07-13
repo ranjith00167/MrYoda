@@ -11,25 +11,39 @@ public class APIEndpoints {
     // ========== AUTHENTICATION & USER MANAGEMENT ==========
     public static final String OTP_REQUEST = "/otps/getOtp";
     public static final String OTP_VERIFY = "/otps/getOtp";
+    public static final String OTP_SEND = "/otps/send";
+    public static final String OTP_RESEND = "/otps/resend";
     public static final String USER_CREATE = "/users/addUser";
     public static final String USER_PROFILE = "/user/profile";
     public static final String UPDATE_PROFILE = "/user/update";
     public static final String UPDATE_USER   = "/users/updateUser";
     public static final String GET_USER      = "/users/getUser/{user_id}";
+    public static final String GET_BY_GUIDS  = "/users/getByGuids";
     public static final String GET_ALL_USERS              = "/users/getAllUsers";
     public static final String GET_ADMIN_USERS            = "/users/getAdminUsers";
     public static final String GET_ALL_DELETED_USERS      = "/users/getAllDeletedUsers";
     public static final String DELETE_USER                 = "/users/deleteUser/{user_guid}";
     public static final String GET_USER_REWARDS_BY_MOBILE  = "/users/getRewardsByMobile/{mobile}";
     public static final String GET_USERS_BY_MOBILE         = "/users/getUsersByMobile/{mobile}";
+    public static final String GET_USER_BY_MOBILE          = "/users/mobile/";
     public static final String GET_USER_NOTIFICATIONS      = "/users/notifications/user/{user_id}";
 
     // ========== LOCATION & SEARCH ==========
     public static final String GET_LOCATION = "/tests/getlocations";
+    public static final String GET_ALL_LOCATIONS = "/tests/getAllLocations";
     public static final String GLOBAL_SEARCH = "tests/adminTests";
+    public static final String GLOBAL_SEARCH_API = "/tests/global-search";
     public static final String GET_ALL_TESTS = "/tests/getAllTests";
+    public static final String GET_TEST_BY_SLUG = "/tests/getTestBySlug";
     public static final String GET_FETAL_MEDICINE_TESTS = "/tests/getFetalMedicineTests";
     public static final String GET_ALL_PACKAGES = "/tests/getAllPackages";
+    public static final String GET_PACKAGE_BY_ID = "/tests/getPackageById/";
+    public static final String GET_PACKAGE_BY_SLUG = "/tests/getPackageBySlug/";
+    public static final String GET_ALL_SYMPTOMS = "/tests/getAllSymptoms";
+    public static final String GET_ORGANS       = "/tests/getOrgans";
+    public static final String GET_ALL_DISEASES = "/tests/getAllDiseases";
+    public static final String SEARCH_STRING    = "/tests/searchString";
+    public static final String ADMIN_TESTS      = "/tests/adminTests";
 
     // ========== BRAND & MEMBERSHIP ==========
     public static final String GET_ALL_BRANDS = "https://staging-api-membership.yodaprojects.com/brand/getAllBrands";
@@ -56,13 +70,20 @@ public class APIEndpoints {
     public static final String VERIFY_PAYMENT = "/gateway/v2/VerifyPayment";
     public static final String GET_PAYMENT_BY_ID = "/gateway/getPaymentById";
     public static final String GET_ORDER_BY_ID = "/order/getOrderById/";
+    public static final String GET_ALL_ORDERS_BY_USER = "/order/getAllOrdersByUser/";
+    public static final String UPDATE_ORDER_SLOTS = "/order/updateOrderSlots";
     public static final String PHLEBO_LOGIN = "/phlebo/loginPhlebo";
 
     // ========== BASE URLS ==========
     public static final String MEMBER_BASE_URL = "https://staging-api-membership.yodaprojects.com";
     public static final String DIAGNOSTICS_BASE_URL = "https://staging-api-diagnostics.yodaprojects.com";
+    public static final String DEV_DIAGNOSTICS_BASE_URL = "https://dev-api-yodadiagnostics.yodaprojects.com";
 
-    // ========== MEMBERSHIP ==========
+    // ========== SUPER ADMIN OTP ==========
+    public static final String SUPER_ADMIN_OTP_VERIFY = "/auth/admin/otp/verify";
+
+    // ========== MEMBERSHIP & CUSTOMER ==========
+    public static final String ADD_CUSTOMER = "/membership/customer/addCustomer";
 
     // ========== ORDER & TRACKING ==========
     public static final String ASSIGN_ORDER = "/order_tracking/assignOrder";

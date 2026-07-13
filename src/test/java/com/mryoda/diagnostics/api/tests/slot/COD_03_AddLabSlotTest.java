@@ -30,6 +30,11 @@ public class COD_03_AddLabSlotTest extends CreateOrderCODAPITest {
         RequestContext.setCurrentSlotGuid(slotGuid);
         RequestContext.setExpectedSlotTiming(slotDetails.get("date"), slotDetails.get("time"));
 
+        // Sync slot date/time to fields read by COD_04
+        RequestContext.setSlotStartDate(slotDetails.get("date"));
+        RequestContext.setMemberSlotTime(slotDetails.get("time"));
+        RequestContext.setCurrentAddressId(null); // Lab flow has no home address
+
         // Store Location Name for Validation
         String locationName = DEFAULT_LOCATION;
         if (RequestContext.getSelectedLocationId() != null) {

@@ -7,5 +7,6 @@ public class UserEndpoints {
     public static final String USER_PROFILE = "/user/profile";
     public static final String UPDATE_PROFILE = "/user/update";
     public static final String GET_USER = "/users/getUser/{user_id}";
+    public static final String GET_BY_GUIDS = "/users/getByGuids";
     public static final String PHLEBO_LOGIN = "/phlebo/loginPhlebo";
 }

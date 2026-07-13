@@ -136,7 +136,10 @@ public class COD_01_LoginTest extends CreateOrderCODAPITest {
         // Ensure TokenManager updated specific contexts, but we also set generic ones
         // above.
 
-        // clearCart(token, userId); // Removed to allow AddToCart step to function in
-        // modular flow
+        // Clear cart disabled - causes DB issues
+        // new RequestBuilder()
+        //         .setEndpoint("/carts/v2/clearCart/" + userId)
+        //         .addHeader("Authorization", "Bearer " + token)
+        //         .post();
     }
 }

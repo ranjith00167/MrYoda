@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+  OTP API Test Suite — All Modules (OTP_001 – OTP_093)
+  Endpoint : POST https://staging-api-diagnostics.yodaprojects.com/otps/getOtp
+  Run with : mvn test -Dsurefire.suiteXmlFiles=test-suites/testng_otp_suite.xml
+-->
+<suite name="OTP API Test Suite" parallel="none" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ============================================================
+         Module 1 — Happy Path Validation (OTP_001 – OTP_006)
+         ============================================================ -->
+    <test name="Module 1 - Happy Path Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPHappyPathTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 2 — Mobile Number Validation (OTP_007 – OTP_020)
+         ============================================================ -->
+    <test name="Module 2 - Mobile Number Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPMobileValidationTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 3 — Country Code Validation (OTP_021 – OTP_029)
+         ============================================================ -->
+    <test name="Module 3 - Country Code Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPCountryCodeValidationTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 4 — Authorization Validation (OTP_030 – OTP_037)
+         ============================================================ -->
+    <test name="Module 4 - Authorization Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPAuthorizationTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 5 — Header Validation (OTP_038 – OTP_044)
+         ============================================================ -->
+    <test name="Module 5 - Header Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPHeaderValidationTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 6 — Request Payload Validation (OTP_045 – OTP_050)
+         ============================================================ -->
+    <test name="Module 6 - Payload Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPPayloadValidationTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 7 — OTP Functional Validation (OTP_051 – OTP_057)
+         ============================================================ -->
+    <test name="Module 7 - OTP Functional Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPFunctionalTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 8 — Response Validation (OTP_058 – OTP_064)
+         ============================================================ -->
+    <test name="Module 8 - Response Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPResponseValidationTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 9 — Security Testing (OTP_065 – OTP_072)
+         ============================================================ -->
+    <test name="Module 9 - Security Testing" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPSecurityTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 10 — Rate Limiting (OTP_073 – OTP_077)
+         ============================================================ -->
+    <test name="Module 10 - Rate Limiting" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPRateLimitTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 11 — Database Validation (OTP_078 – OTP_083)
+         ============================================================ -->
+    <test name="Module 11 - Database Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPDatabaseValidationTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 12 — Performance Validation (OTP_084 – OTP_089)
+         NOTE: Full load testing requires k6 / JMeter / Gatling.
+         These tests provide a sequential API-level baseline only.
+         ============================================================ -->
+    <test name="Module 12 - Performance Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPPerformanceTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 13 — Contract Testing (OTP_090 – OTP_093)
+         ============================================================ -->
+    <test name="Module 13 - Contract Testing" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPContractTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 14 — Extended Negative Scenarios (OTP_094 – OTP_132)
+         Covers:
+           - Wrong HTTP methods (GET/PUT/DELETE/PATCH/HEAD/OPTIONS)
+           - Wrong JSON data types (mobile/country_code as int/bool/float)
+           - Exact boundary values (7-digit below min, 14-digit above max,
+             8-digit at min, 13-digit at max)
+           - country_code edge cases (+only, 5 digits, internal space, +0)
+           - Both fields empty / null simultaneously
+           - Unusual Content-Type (multipart/form-data, application/xml,
+             application/x-www-form-urlencoded)
+           - Mobile with control characters (newline, null byte, tab, CR)
+           - Body as JSON array instead of object
+           - Wrong endpoint path (404)
+           - Duplicate field key in JSON
+           - Oversized body with 50+ extra fields
+           - Wrong field key casing ('Mobile', 'Country_Code')
+           - Mobile with sign prefix ('-' and '+')
+           - country_code with unicode plus sign
+           - Mobile as empty object {}
+         ============================================================ -->
+    <test name="Module 14 - Extended Negative Scenarios" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPNegativeTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 15 — Mobile Number Validation Extended (OTP_121 – OTP_145)
+         Extends Module 2 with additional mobile field scenarios:
+           Section A: Phone-format separators (hyphens, dots, parentheses,
+                       internal spaces, slash, backslash)
+           Section B: Digit-only edge cases (single digit, single zero,
+                       all-zeros, all-same-digit, scientific notation)
+           Section C: Embedded/prefixed values (embedded country code,
+                       negative prefix, plus prefix, padded zeros)
+           Section D: Symbol/encoding attacks (hash, asterisk, percent,
+                       pipe, angle brackets)
+           Section E: Locale/unicode numerals (Chinese, Devanagari, Thai,
+                       full-width ASCII, Persian/Urdu-Indic digits)
+         ============================================================ -->
+    <test name="Module 15 - Mobile Number Validation Extended" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPMobileValidationExtendedTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 16 — Country Code vs Mobile Length Validation (OTP_146 – OTP_155)
+         Validates CC/length coupling across India (+91), USA (+1), UK (+44),
+         and unsupported CC (+999).
+           Section A: India (+91) length scenarios (OTP_146–148)
+                       10-digit valid, 9-digit (per-country gap), 11-digit (gap)
+           Section B: USA (+1) scenarios (OTP_149–150)
+                       10-digit valid, 9-digit per-country gap
+           Section C: UK (+44) scenarios (OTP_151–152)
+                       10-digit valid, 5-digit (below global minimum)
+           Section D: Unsupported CC / mismatches (OTP_153–155)
+                       +999 CC (known gap), +91/5-digit (below minimum), CC mismatch
+         NOTE: OTP_126–OTP_135 are allocated to Module 15. This module uses
+               OTP_146–OTP_155.
+         ============================================================ -->
+    <test name="Module 16 - Country Code vs Mobile Length Validation" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.OTPCountryCodeMobileLengthTest"/>
+        </classes>
+    </test>
+
+    <!-- ============================================================
+         Module 17 — Rescheduling OTP API (RS_001 – RS_057)
+         Endpoint: POST /otps/send
+         Covers:
+           - Positive: Valid requests, supported country codes (RS_001–RS_009)
+           - Negative: Mandatory field validation — mobile, country_code (RS_014–RS_028)
+           - Negative: Type and is_rescheduling flag validation (RS_029–RS_040)
+           - Negative: Business rules — max 3 reschedules (RS_041–RS_045)
+           - Security: Injection, XSS, large payload, rate limiting (RS_046–RS_052)
+           - Schema: Response structure, data types, OTP exposure (RS_053–RS_057)
+         ============================================================ -->
+    <test name="Module 17 - Rescheduling OTP API" preserve-order="true">
+        <classes>
+            <class name="com.mryoda.diagnostics.api.tests.otp.ReschedulingOTPTest"/>
+        </classes>
+    </test>
+
+</suite>

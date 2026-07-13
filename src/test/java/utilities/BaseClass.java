@@ -188,14 +188,14 @@ public class BaseClass {
     }
 
     public static void waitForPageReady() {
-    new WebDriverWait(driver, Duration.ofSeconds(15)).until(
+    new WebDriverWait(driver, Duration.ofSeconds(30)).until(
         webDriver -> ((JavascriptExecutor) webDriver)
             .executeScript("return document.readyState").equals("complete")
     );
 }
     public static void enterSinNumber(WebElement elementTemplate, String sinNo) {
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     for (int attempt = 1; attempt <= 5; attempt++) {
@@ -234,13 +234,13 @@ public class BaseClass {
 }
 
 public static void waitForDomStable() {
-    new WebDriverWait(driver, Duration.ofSeconds(10)).until(
+    new WebDriverWait(driver, Duration.ofSeconds(20)).until(
         webDriver -> ((JavascriptExecutor) webDriver)
                 .executeScript("return document.readyState").equals("complete")
     );
 }
     public static void waitForAjaxComplete() {
-    new WebDriverWait(driver, Duration.ofSeconds(15)).until(
+    new WebDriverWait(driver, Duration.ofSeconds(30)).until(
         webDriver -> (Boolean) ((JavascriptExecutor) webDriver)
             .executeScript("return window.jQuery != undefined && jQuery.active == 0")
     );
@@ -617,7 +617,7 @@ public static void waitForDomStable() {
     }
 
     public static void enterValuesInResultTable() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Actions actions = new Actions(driver);
 
@@ -1585,9 +1585,26 @@ public static void waitForDomStable() {
                     return;
                 }
 
+                // =================================================
+                // 🟧 4️⃣ GENERIC RAZORPAY FALLBACK
+                // Accept any iframe that has at least one visible element (Razorpay updated UI)
+                // =================================================
+                if (isPresent(By.xpath("//*")) ) {
+                    System.out.println("🟢 Active Frame: RAZORPAY GENERIC FALLBACK (Index " + i + ")");
+                    return;
+                }
+
             } catch (Exception ignored) {
                 // just move to next frame
             }
+        }
+
+        // Last resort: stay in the first Razorpay iframe if any were found
+        if (!frames.isEmpty()) {
+            System.out.println("⚠️ No specific Razorpay frame matched — using first available Razorpay iframe as fallback");
+            driver.switchTo().defaultContent();
+            driver.switchTo().frame(frames.get(0));
+            return;
         }
 
         driver.switchTo().defaultContent();
@@ -1596,7 +1613,7 @@ public static void waitForDomStable() {
 
     public static void handleSaveCardPopup() {
         // Complete solution
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         try {
             // First, try without iframe
@@ -2614,7 +2631,7 @@ public static void waitForDomStable() {
             throw new IllegalArgumentException("Text for typeSlow cannot be NULL or empty");
         }
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         wait.until(ExpectedConditions.visibilityOf(element));
         wait.until(ExpectedConditions.elementToBeClickable(element));

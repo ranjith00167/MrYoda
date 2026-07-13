@@ -1,0 +1,3504 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< MrYoda:MrYoda >----------------------------
+[INFO] Building MrYoda 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ MrYoda ---
+[INFO] Deleting C:\Users\RANJITH\MrYoda\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ MrYoda ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ MrYoda ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 24 source files with javac [debug release 11] to target\classes
+[WARNING] /C:/Users/RANJITH/MrYoda/src/main/java/com/mryoda/diagnostics/api/utils/ApiReportContext.java:[153,24] deprecated item is not annotated with @Deprecated
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ MrYoda ---
+[INFO] Copying 24 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ MrYoda ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 200 source files with javac [debug release 11] to target\test-classes
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[396,53] getExistingMemberUserId() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2156,38] getExistingMemberToken() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2157,39] getExistingMemberUserId() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2256,54] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java:[285,93] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java:[583,85] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/SingleMemberCancellationFlowTest.java:[1176,42] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/SingleMemberCancellationFlowTest.java:[1181,58] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    capture#1 of ?
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[243,82] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[244,74] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[296,74] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[1016,85] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/COD_17_ReportGenerationTest.java:[449,89] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/otp/SuperAdminOTPVerifyTest.java:[935,46] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>[]
+  found:    java.util.Map[]
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[171,57] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[173,73] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[175,72] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[177,72] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[286,53] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[288,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[290,68] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[292,68] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java:[420,65] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java:[47,77] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java:[103,77] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/customer/AddCustomerAPITest.java:[205,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/customer/AddCustomerAPITest.java:[446,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ MrYoda ---
+[INFO] Using auto detected provider org.apache.maven.surefire.testng.TestNGProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+SLF4J(W): Class path contains multiple SLF4J providers.
+SLF4J(W): Found provider [org.slf4j.simple.SimpleServiceProvider@578486a3]
+SLF4J(W): Found provider [org.apache.logging.slf4j.SLF4JServiceProvider@551aa95a]
+SLF4J(W): See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J(I): Actual provider is of type [org.slf4j.simple.SimpleServiceProvider@578486a3]
+...
+... TestNG 7.8.0 by CΘdric Beust (cedric@beust.com)
+...
+
+
+#########################################################
+  STARTING NEW XML TEST FLOW - RESETTING CONTEXT
+#########################################################
+
+[CLEANING] RequestContext Flow State...
+[SUCCESS] RequestContext State Successfully Cleared.
+
+========================================
+  GET TRANSACTION BY MOBILE - TEST SETUP
+========================================
+
+==================================================
+========== TOKEN GENERATION START (MEMBER) ==========
+==================================================
+Request Body: {"country_code":"+91","mobile":"8056477884"}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/otps/getOtp
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "country_code": "+91",
+    "mobile": "8056477884"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /otps/getOtp
+   Time    : ? 883 ms
+----------------------------
+
+Request Body: {"country_code":"+91","mobile":"8056477884","otp":"123456"}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/otps/getOtp
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "country_code": "+91",
+    "mobile": "8056477884",
+    "otp": "123456"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /otps/getOtp
+   Time    : ? 220 ms
+----------------------------
+
+Token generated for MEMBER: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+   ? Login Successful
+   Valid Mobile: 8056477884
+   New Member Mobile: 8056477884
+========================================
+
+
+>>> TC09: Valid Registered Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 380 ms
+----------------------------
+
+   ? Valid mobile returned 200
+
+>>> TC10: Existing Mobile With Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 281 ms
+----------------------------
+
+   ? Mobile has 1546 transactions
+
+>>> TC11: Mobile With Multiple Transactions <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 192 ms
+----------------------------
+
+   ? Multiple transactions: 10
+
+>>> TC12: Mobile With Single Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 513 ms
+----------------------------
+
+   ? Transaction count: 10
+
+>>> TC13: Non-Existing Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/0000000000
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/0000000000
+   Time    : ? 282 ms
+----------------------------
+
+   ? Non-existing mobile handled: total=0
+
+>>> TC14: Invalid Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/invalid_mobile
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/invalid_mobile
+   Time    : ? 163 ms
+----------------------------
+
+   ?? BUG: Invalid mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC15: Mobile Less Than 8 Digits <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/1234567
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/1234567
+   Time    : ? 157 ms
+----------------------------
+
+   ?? BUG: Short mobile (7 digits) NOT rejected (returns 200 with 0 results)
+
+>>> TC16: Mobile Greater Than 13 Digits <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/12345678901234
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/12345678901234
+   Time    : ? 265 ms
+----------------------------
+
+   ?? BUG: Long mobile (14 digits) NOT rejected (returns 200 with 0 results)
+
+>>> TC17: Mobile With Alphabets <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/abcdefghij
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/abcdefghij
+   Time    : ? 376 ms
+----------------------------
+
+   ?? BUG: Alphabetic mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC18: Mobile With Special Characters <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/%21%40%23%24%25%5E%26*%28%29
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/!@#$%^&*()
+   Time    : ? 158 ms
+----------------------------
+
+   ?? BUG: Special char mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC19: Mobile With Spaces <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/805%20647%207884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/805 647 7884
+   Time    : ? 257 ms
+----------------------------
+
+   ?? BUG: Mobile with spaces NOT rejected (returns 200 with 0 results)
+
+>>> TC20: Mobile With Country Code <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/%2B918056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/+918056477884
+   Time    : ? 230 ms
+----------------------------
+
+   ?? BUG: Mobile with country code NOT rejected (returns 200 with 0 results)
+
+>>> TC21: Empty Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/
+   Time    : ? 261 ms
+----------------------------
+
+   ?? BUG: Empty mobile NOT rejected (returns 200)
+
+>>> TC22: Null Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/null
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/null
+   Time    : ? 282 ms
+----------------------------
+
+   ?? BUG: Null mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC23: Mobile As Decimal <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477.884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477.884
+   Time    : ? 262 ms
+----------------------------
+
+   ?? BUG: Decimal mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC24: Membership Transaction Details Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 738 ms
+----------------------------
+
+   ? Transaction details returned with 10 records
+
+>>> TC25: Transaction History Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 145 ms
+----------------------------
+
+   ? Transaction history: 1546 records
+
+>>> TC26: Latest Transaction Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 375 ms
+----------------------------
+
+   ? Latest transaction date: 2026-06-10 18:24:16+05:30
+
+>>> TC27: All Transactions Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 506 ms
+----------------------------
+
+   ? Total: 1546 | Page data: 10 | Limit: 1546
+
+>>> TC28: Transaction Belongs To Requested Mobile <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 142 ms
+----------------------------
+
+   ? All 10 transactions belong to 8056477884
+
+>>> TC29: Membership ID Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 147 ms
+----------------------------
+
+   ? Membership ID present: 87b805da-a94a-4501-9d7a-6d244220921b
+
+>>> TC30: Transaction ID Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 152 ms
+----------------------------
+
+   ? Transaction ID: 01KTRSJ1YBX1H1KJ0WVD8TVE1W
+
+>>> TC31: Payment Status Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 262 ms
+----------------------------
+
+   ? Payment status: Successful
+
+>>> TC32: Payment Mode Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 274 ms
+----------------------------
+
+   ? Payment mode field present
+
+>>> TC33: Membership Amount Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 162 ms
+----------------------------
+
+   ? Membership amount (actual_price): 1025.00
+
+>>> TC34: Transaction Date Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 269 ms
+----------------------------
+
+   ? Transaction date: 2026-06-10 18:24:16+05:30
+
+>>> TC35: Membership Plan Details Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 143 ms
+----------------------------
+
+   ? Membership plan details present
+
+>>> TC36: Success Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 275 ms
+----------------------------
+
+   ? Successful transactions found
+
+>>> TC37: Pending Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 180 ms
+----------------------------
+
+   ? Pending transactions: 0
+
+>>> TC38: Failed Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 148 ms
+----------------------------
+
+   ? Failed transactions: 0
+
+>>> TC39: Cancelled Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 283 ms
+----------------------------
+
+   ? Cancelled transactions: 2
+
+>>> TC40: Refunded Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 222 ms
+----------------------------
+
+   ? Refunded transactions: 0
+
+>>> TC41: Payment Status Accuracy <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 457 ms
+----------------------------
+
+   ? All statuses are valid
+
+>>> TC42: UPI Payment <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 327 ms
+----------------------------
+
+   ? UPI payments: 0
+
+>>> TC43: Card Payment <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 371 ms
+----------------------------
+
+   ? Card payments: 0
+
+>>> TC44: Net Banking Payment <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 135 ms
+----------------------------
+
+   ? Net Banking payments: 0
+
+>>> TC45: Wallet Payment <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 239 ms
+----------------------------
+
+   ? Wallet payments: 0
+
+>>> TC46: Membership Payment <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 263 ms
+----------------------------
+
+   ? Payment modes found: []
+
+>>> TC47: Payment Mode Accuracy <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 154 ms
+----------------------------
+
+   ? Payment mode accuracy validated
+
+>>> TC48: Membership Plan Name <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 306 ms
+----------------------------
+
+   ? Membership plan validated
+
+>>> TC49: Membership Amount <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 265 ms
+----------------------------
+
+   ? Membership amount: 1025.00
+
+>>> TC50: Membership Start Date <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 143 ms
+----------------------------
+
+   ? Membership start date: 2026-06-10 18:24:16+05:30
+
+>>> TC51: Membership Expiry Date <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 150 ms
+----------------------------
+
+   ? Membership expiry date check completed
+
+>>> TC52: Membership Status <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 148 ms
+----------------------------
+
+   ? Membership status: Successful
+
+>>> TC53: Membership Benefits <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 282 ms
+----------------------------
+
+   ? Membership benefits validated
+
+>>> TC54: Membership ID <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 124 ms
+----------------------------
+
+   ? All membership IDs present
+
+>>> TC55: Active Membership <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 135 ms
+----------------------------
+
+   ? Active membership found
+
+>>> TC56: Expired Membership <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 252 ms
+----------------------------
+
+   ? Expired membership check completed (10 total records)
+
+>>> TC57: Transaction ID Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 133 ms
+----------------------------
+
+   ? trnsc_id field present in all 10 records
+
+>>> TC58: Membership ID Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 360 ms
+----------------------------
+
+   ? All membership IDs present
+
+>>> TC59: Mobile Number Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 254 ms
+----------------------------
+
+   ? All mobiles match: 8056477884
+
+>>> TC60: Amount Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 136 ms
+----------------------------
+
+   ? Amount (actual_price) present in all records
+
+>>> TC61: Payment Status Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 254 ms
+----------------------------
+
+   ? Payment status present in all records
+
+>>> TC62: Payment Mode Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 123 ms
+----------------------------
+
+   ? Payment mode field present in all records
+
+>>> TC63: Transaction Date Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 369 ms
+----------------------------
+
+   ? Transaction date present in all records
+
+>>> TC64: Mandatory Fields Not Null <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 252 ms
+----------------------------
+
+   ? All mandatory fields are not null
+
+>>> TC65: Mandatory Fields Not Empty <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 239 ms
+----------------------------
+
+   ? All mandatory fields are not empty
+
+>>> TC66: Invalid Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/abc123
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/abc123
+   Time    : ? 122 ms
+----------------------------
+
+   ?? BUG: Invalid mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC67: Non-Existing Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/1111111111
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/1111111111
+   Time    : ? 264 ms
+----------------------------
+
+   ? Non-existing mobile returns 0 transactions
+
+>>> TC68: Empty Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/
+   Time    : ? 332 ms
+----------------------------
+
+   ?? BUG: Empty mobile NOT rejected (returns 200)
+
+>>> TC69: Null Mobile Number <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/null
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/null
+   Time    : ? 140 ms
+----------------------------
+
+   ?? BUG: Null mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC70: Mobile With Special Characters <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/%40%23%24%25%5E%26*%28%29%21
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/@#$%^&*()!
+   Time    : ? 141 ms
+----------------------------
+
+   ?? BUG: Special char mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC71: Mobile With Alphabets <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/ABCDEFGHIJ
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/ABCDEFGHIJ
+   Time    : ? 326 ms
+----------------------------
+
+   ?? BUG: Alphabetic mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC72: Mobile With Spaces <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/805%20647%207884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/805 647 7884
+   Time    : ? 379 ms
+----------------------------
+
+   ?? BUG: Mobile with spaces NOT rejected (returns 200 with 0 results)
+
+>>> TC73: No Membership Transaction Available <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/9876543210
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/9876543210
+   Time    : ? 148 ms
+----------------------------
+
+   ? No transactions: total = 0
+
+>>> TC74: SQL Injection - OR 1=1 <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/%27%20OR%201%3D1%20--
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/' OR 1=1 --
+   Time    : ? 118 ms
+----------------------------
+
+   ? SQL injection safe (no data leaked): status=200
+
+>>> TC75: SQL Injection - DROP TABLE <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/DROP%20TABLE%20users
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/DROP TABLE users
+   Time    : ? 147 ms
+----------------------------
+
+   ? SQL injection blocked: 200
+
+>>> TC76: XSS Injection <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/%3Cscript%3Ealert%281%29%3C/script%3E
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/<script>alert(1)</script>
+   Time    : ? 217 ms
+----------------------------
+
+   ? XSS injection blocked: 404
+
+>>> TC77: Sensitive Info Masked <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 152 ms
+----------------------------
+
+   ? No sensitive data leaked
+
+>>> TC78: No Stack Trace Exposed <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/invalid_input_xyz
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/invalid_input_xyz
+   Time    : ? 239 ms
+----------------------------
+
+   ? No stack trace in response
+
+>>> TC79: No DB Details Exposed <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/invalid
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/invalid
+   Time    : ? 373 ms
+----------------------------
+
+   ? No DB details exposed
+
+>>> TC80: Status Code 200 <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 130 ms
+----------------------------
+
+   ? Status code: 200
+
+>>> TC81: Response Schema <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 144 ms
+----------------------------
+
+   ? Response schema validated
+
+>>> TC82: Response Message <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 261 ms
+----------------------------
+
+   ? Response message: Transaction fetched successfully ?
+
+>>> TC83: Response Success Flag <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 131 ms
+----------------------------
+
+   ? Success flag: true
+
+>>> TC84: Response Data Object <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 137 ms
+----------------------------
+
+   ? Data is a list with 10 items
+
+>>> TC85: Response Count <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 284 ms
+----------------------------
+
+   ? Total: 1546 | Page data: 10 | Limit: 1546
+
+>>> TC86: Response Time <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 135 ms
+----------------------------
+
+   ? Response time: 146ms
+
+>>> TC87: Concurrent Requests <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 490 ms
+----------------------------
+
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 250 ms
+----------------------------
+
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 350 ms
+----------------------------
+
+   ? All 3 concurrent requests returned 200
+
+>>> TC88: Repeated Requests <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 142 ms
+----------------------------
+
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 267 ms
+----------------------------
+
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 151 ms
+----------------------------
+
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 179 ms
+----------------------------
+
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 151 ms
+----------------------------
+
+   ? All 5 repeated requests successful
+
+>>> TC89: Large Transaction History Retrieval <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 261 ms
+----------------------------
+
+   Total records: 1546 | Time: 269ms
+   ? Large history retrieved successfully
+
+>>> TC95: Valid Mobile Number Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 134 ms
+----------------------------
+
+   ? Valid mobile validation passed
+
+>>> TC96: Invalid Mobile Number Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/xyz123
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/xyz123
+   Time    : ? 262 ms
+----------------------------
+
+   ?? BUG: Invalid mobile NOT rejected (returns 200 with 0 results)
+
+>>> TC97: No Transaction Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/5555555555
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/5555555555
+   Time    : ? 181 ms
+----------------------------
+
+   ? No transaction validated
+
+>>> TC98: Payment Status Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 244 ms
+----------------------------
+
+   ? Payment status validated for 10 records
+
+>>> TC99: Membership Amount Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 185 ms
+----------------------------
+
+   ? All amounts are non-negative
+
+>>> TC100: Membership Plan Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 361 ms
+----------------------------
+
+   ? Membership plan validation completed
+
+>>> TC101: Transaction ID Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 263 ms
+----------------------------
+
+   ? trnsc_id field present in all 10 records
+
+>>> TC103: Response Schema Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 400 ms
+----------------------------
+
+   ? Response schema validated
+
+>>> TC104: Response Time Validation <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 248 ms
+----------------------------
+
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 291 ms
+----------------------------
+
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 257 ms
+----------------------------
+
+   Average response time: 278ms over 3 calls
+   ? Response time validated
+
+>>> TC105: Cancelled Membership Transactions <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 139 ms
+----------------------------
+
+   ? Cancelled transactions: 2
+
+>>> TC106: Successful Membership Payments <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 154 ms
+----------------------------
+
+   ? Successful payments: 8
+
+>>> TC107: Membership Amount Value <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 246 ms
+----------------------------
+
+   ? Non-zero membership amounts found
+
+>>> TC108: Reference Code Generated <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 148 ms
+----------------------------
+
+   ? Reference codes found: 10
+
+>>> TC109: Order ID Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 130 ms
+----------------------------
+
+   ? Order IDs found: 10
+
+>>> TC110: Customer ID Matches <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 242 ms
+----------------------------
+
+   ? All transactions belong to customer: 08743efb-4871-4c3f-8fbd-73f4906dcf01
+
+>>> TC111: Membership Discount Present <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 172 ms
+----------------------------
+
+   ? Membership discount present
+
+>>> TC112: Membership Expiry Date Correct <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 143 ms
+----------------------------
+
+   ? Date fields present
+
+>>> TC113: Transaction Reference ID For Successful <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 258 ms
+----------------------------
+
+   ? All successful transactions have reference IDs
+
+>>> TC114: Transaction Amount Matches Actual Price <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 689 ms
+----------------------------
+
+   ? All amounts are valid numbers
+
+>>> TC115: Mobile Search Returns Only User Transactions <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 147 ms
+----------------------------
+
+   ? All 10 records belong to 8056477884
+
+>>> TC116: New Member Transaction Returned <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 126 ms
+----------------------------
+
+   ? New member transactions: 1546
+
+>>> TC117: New Member Amount Correct <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 242 ms
+----------------------------
+
+   ? New member amounts validated
+
+>>> TC118: New Member Payment Status <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 368 ms
+----------------------------
+
+   ? New member payment status validated
+
+>>> TC119: New Member Reference ID <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 128 ms
+----------------------------
+
+   ? New member reference ID validated
+
+>>> TC120: New Member Membership ID <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 136 ms
+----------------------------
+
+   ? New member membership ID validated
+
+>>> TC121: Existing Member Transaction History <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 180 ms
+----------------------------
+
+   ? Existing member has 1546 transactions
+
+>>> TC122: Multiple Membership Transactions <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 374 ms
+----------------------------
+
+   ? Multiple transactions: 10
+
+>>> TC123: Latest Membership Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 369 ms
+----------------------------
+
+   ? Latest transaction: 2026-06-10 18:24:16+05:30
+
+>>> TC124: Membership Renewal Transaction <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 233 ms
+----------------------------
+
+   ? Membership renewal transactions present
+
+>>> TC125: Active Membership Details <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 352 ms
+----------------------------
+
+   ? Active membership found
+
+>>> TC126: Membership Expiry Date <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 266 ms
+----------------------------
+
+   ? Membership dates validated
+
+>>> TC127: Payment Amount Correct <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 165 ms
+----------------------------
+
+   ? All payment amounts are valid
+
+>>> TC128: Transaction Reference ID Correct <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 375 ms
+----------------------------
+
+   ? Reference codes: 10
+
+>>> TC129: Is Reverted Field <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 177 ms
+----------------------------
+
+   ? is_reverted field present in all records
+
+>>> TC130: Brand ID Consistent <<<
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/membership/transaction/getTransactionByMobile/8056477884
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjYwY2RmZjQ0LWU4MDEtNGM3NS1hODczLTY5Y2FmOTY1ZTc2MyIsIm1vYmlsZSI6IjgwNTY0Nzc4ODQiLCJmaXJzdF9uYW1lIjoiSmFuZTE3ODA0OTAwNTkzNDQiLCJsYXN0X25hbWUiOiJKYWNrc29uIiwiZW1haWwiOm51bGwsInJvbGUiOiJ1c2VyX29ubHkiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzgyMjA0OTM3LCJleHAiOjE3ODQ3OTY5Mzd9.yGw2RsQ6PQ25SjLorNhwCUwL2Z4yONw8a6us_ikKQWM
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /membership/transaction/getTransactionByMobile/8056477884
+   Time    : ? 284 ms
+----------------------------
+
+   ? Brand ID consistent: 967a5f02-2e38-47c8-b850-c4aeee8898ed
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /membership/transaction/getTransactionByMobile/!@#$%^&*()                       
+   > Status: [FAST] | Avg: 158 ms | Max: 158 ms | Calls: 1
+   > History: [158]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/0000000000                       
+   > Status: [FAST] | Avg: 282 ms | Max: 282 ms | Calls: 1
+   > History: [282]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/DROP TABLE users                 
+   > Status: [FAST] | Avg: 147 ms | Max: 147 ms | Calls: 1
+   > History: [147]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/xyz123                           
+   > Status: [FAST] | Avg: 262 ms | Max: 262 ms | Calls: 1
+   > History: [262]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/                                 
+   > Status: [FAST] | Avg: 296 ms | Max: 332 ms | Calls: 2
+   > History: [261, 332]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/abcdefghij                       
+   > Status: [FAST] | Avg: 376 ms | Max: 376 ms | Calls: 1
+   > History: [376]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/invalid_input_xyz                
+   > Status: [FAST] | Avg: 239 ms | Max: 239 ms | Calls: 1
+   > History: [239]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/1234567                          
+   > Status: [FAST] | Avg: 157 ms | Max: 157 ms | Calls: 1
+   > History: [157]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/<script>alert(1)</script>        
+   > Status: [FAST] | Avg: 217 ms | Max: 217 ms | Calls: 1
+   > History: [217]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 551 ms | Max: 883 ms | Calls: 2
+   > History: [883, 220]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/1111111111                       
+   > Status: [FAST] | Avg: 264 ms | Max: 264 ms | Calls: 1
+   > History: [264]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/805 647 7884                     
+   > Status: [FAST] | Avg: 318 ms | Max: 379 ms | Calls: 2
+   > History: [257, 379]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/invalid                          
+   > Status: [FAST] | Avg: 373 ms | Max: 373 ms | Calls: 1
+   > History: [373]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/abc123                           
+   > Status: [FAST] | Avg: 122 ms | Max: 122 ms | Calls: 1
+   > History: [122]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/invalid_mobile                   
+   > Status: [FAST] | Avg: 163 ms | Max: 163 ms | Calls: 1
+   > History: [163]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/8056477884                       
+   > Status: [FAST] | Avg: 243 ms | Max: 738 ms | Calls: 98
+   > History: [380, 281, 192, 513, 738, 145, 375, 506, 142, 147, 152, 262, 274, 162, 269, 143, 275, 180, 148, 283, 222, 457, 327, 371, 135, 239, 263, 154, 306, 265, 143, 150, 148, 282, 124, 135, 252, 133, 360, 254, 136, 254, 123, 369, 252, 239, 152, 130, 144, 261, 131, 137, 284, 135, 490, 250, 350, 142, 267, 151, 179, 151, 261, 134, 244, 185, 361, 263, 400, 248, 291, 257, 139, 154, 246, 148, 130, 242, 172, 143, 258, 689, 147, 126, 242, 368, 128, 136, 180, 374, 369, 233, 352, 266, 165, 375, 177, 284]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/null                             
+   > Status: [FAST] | Avg: 211 ms | Max: 282 ms | Calls: 2
+   > History: [282, 140]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/' OR 1=1 --                      
+   > Status: [FAST] | Avg: 118 ms | Max: 118 ms | Calls: 1
+   > History: [118]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/9876543210                       
+   > Status: [FAST] | Avg: 148 ms | Max: 148 ms | Calls: 1
+   > History: [148]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/ABCDEFGHIJ                       
+   > Status: [FAST] | Avg: 326 ms | Max: 326 ms | Calls: 1
+   > History: [326]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/+918056477884                    
+   > Status: [FAST] | Avg: 230 ms | Max: 230 ms | Calls: 1
+   > History: [230]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/@#$%^&*()!                       
+   > Status: [FAST] | Avg: 141 ms | Max: 141 ms | Calls: 1
+   > History: [141]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/8056477.884                      
+   > Status: [FAST] | Avg: 262 ms | Max: 262 ms | Calls: 1
+   > History: [262]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/5555555555                       
+   > Status: [FAST] | Avg: 181 ms | Max: 181 ms | Calls: 1
+   > History: [181]
+   --------------------------------------------------------------------------------
+   /membership/transaction/getTransactionByMobile/12345678901234                   
+   > Status: [FAST] | Avg: 265 ms | Max: 265 ms | Calls: 1
+   > History: [265]
+   --------------------------------------------------------------------------------
+====================================================
+
+[INFO] Tests run: 116, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 39.58 s -- in TestSuite
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 116, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:03 min
+[INFO] Finished at: 2026-06-23T14:26:13+05:30
+[INFO] ------------------------------------------------------------------------

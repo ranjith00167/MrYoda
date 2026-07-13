@@ -36,4 +36,16 @@ public class PaymentClient {
                 .setQueryParams(queryParams) 
                 .get();
     }
+
+    /**
+     * Fetch payment details by user ID.
+     * POST /gateway/getPaymentByUserId/{userId}
+     */
+    public Response getPaymentByUserId(String token, String userId) {
+        String endpoint = PaymentEndpoints.GET_PAYMENT_BY_USER_ID.replace("{user_id}", userId);
+        return new RequestBuilder()
+                .setEndpoint(endpoint)
+                .addHeader("Authorization", "Bearer " + token)
+                .postWithoutStatusCheck();
+    }
 }

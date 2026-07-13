@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Reschedule Flow Suite" verbose="2">
+
+    <listeners>
+        <listener class-name="utilities.TestNGExtentReportListener"/>
+    </listeners>
+
+    <!-- ===================================================== -->
+    <!-- SCENARIO 1 — MEMBER COD + RESCHEDULE FLOW            -->
+    <!-- ===================================================== -->
+
+    <test name="Member COD + Reschedule Flow" preserve-order="true">
+        <parameter name="userType" value="member"/>
+        <parameter name="flowType" value="reschedule"/>
+
+        <classes>
+
+            <!-- Login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForMember"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForMember"/></methods>
+            </class>
+
+            <!-- COD Flow -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+
+            <!-- RESCHEDULE FLOW (After Order Creation) -->
+            <class name="com.mryoda.diagnostics.api.tests.order.RescheduleFlowTest"/>
+
+        </classes>
+    </test>
+
+    <!-- ===================================================== -->
+    <!-- SCENARIO 2 — NEW USER COD + RESCHEDULE FLOW          -->
+    <!-- ===================================================== -->
+
+    <test name="New User COD + Reschedule Flow" preserve-order="true">
+        <parameter name="userType" value="new_user"/>
+        <parameter name="flowType" value="reschedule"/>
+
+        <classes>
+
+            <!-- Create New User & Login -->
+            <class name="com.mryoda.diagnostics.api.tests.auth.UserCreateAPITest">
+                <methods><include name="testUserRegistration_CreateNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.LoginAPITest">
+                <methods><include name="testLoginWithOTP_NewlyRegisteredUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest"/>
+
+            <!-- Tests & Packages -->
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.LocationAPITest">
+                <methods><include name="testGetLocations_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.BrandAPITest">
+                <methods><include name="testGetBrands_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest">
+                <methods><include name="testGlobalSearch_ForNewUser"/></methods>
+            </class>
+            <class name="com.mryoda.diagnostics.api.tests.tests_packages.CatalogVerificationAPITest"/>
+            <class name="com.mryoda.diagnostics.api.tests.cart.AddToCartAPITest">
+                <methods><include name="testAddToCart_ForNewUser"/></methods>
+            </class>
+
+            <!-- COD Flow -->
+            <class name="com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
+            <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+
+            <!-- RESCHEDULE FLOW (After Order Creation) -->
+            <class name="com.mryoda.diagnostics.api.tests.order.RescheduleFlowTest"/>
+
+        </classes>
+    </test>
+
+</suite>
