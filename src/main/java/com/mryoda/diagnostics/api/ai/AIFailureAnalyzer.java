@@ -228,14 +228,9 @@ public class AIFailureAnalyzer {
                     return;
                 }
 
-                // Resolve API key
+                // Resolve API key from environment variable only (never from config)
                 String apiKey = System.getenv("GEMINI_API_KEY");
                 System.out.println(TAG + " GEMINI_API_KEY env: " + (apiKey != null ? "found" : "not set"));
-                if (apiKey == null || apiKey.trim().isEmpty()) {
-                    apiKey = readFromProperties("gemini.api.key", "");
-                    System.out.println(TAG + " gemini.api.key from config: "
-                            + (apiKey.isEmpty() ? "EMPTY" : "found (" + apiKey.length() + " chars)"));
-                }
 
                 if (apiKey.contains("${") || apiKey.trim().isEmpty()) {
                     System.out.println(TAG + " WARNING: API key not set. AI analysis disabled.");
