@@ -1,0 +1,47 @@
+{
+  "id": 30795,
+  "guid": "22f55d52-84bc-4186-b19a-6efc861aca55",
+  "order_id": "13a0ad3b-5da5-481b-a600-d06d892b8ece",
+  "product_id": "675921110856fe1e1e992d21",
+  "product_name": "T4 - THYROXINE",
+  "product_type": "test",
+  "product_code": "BIO356",
+  "quantity": 1,
+  "actual_price": 300,
+  "final_price": 270,
+  "original_price": 300,
+  "b2b_price": 300,
+  "order_status": "Sample Collected",
+  "family_member_id": null,
+  "membership_discount": 30,
+  "order_item_number": "MY26AAA7509-1",
+  "cancelled_at": null,
+  "admin_approval_status": null,
+  "admin_approval_by": null,
+  "admin_approval_at": null,
+  "cancel_order_remarks": null,
+  "department_name": "BIOCHEMISTRY",
+  "completed_date": null,
+  "department_received_at": null,
+  "phlebotomist_assigned_at": null,
+  "sample_collected_at": null,
+  "created_at": "2026-10-13T07:16:11.332Z",
+  "deleted_at": null,
+  "order_quantity": 1,
+  "price": 270,
+  "family_member_details": null,
+  "status": "ACTIVE",
+  "sample_types": [
+    {
+      "DefaultSampleType": "Serum",
+      "Tests": [
+        {
+          "TestName": "T4 - THYROXINE",
+          "OtherSampleType": ""
+        }
+      ]
+    }
+  ],
+  "it_dose_order_items_status": "Sample Collected",
+  "itdose_price": 300
+}

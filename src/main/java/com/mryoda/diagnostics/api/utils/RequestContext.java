@@ -71,6 +71,7 @@ public class RequestContext {
         memberCouponGuid = null;
         nonMemberCouponGuid = null;
         newUserCouponGuid = null;
+        newUserMobile = null;
         memberCouponFlowEnabled = false;
         nonMemberCouponFlowEnabled = false;
         newUserCouponFlowEnabled = false;
@@ -380,7 +381,7 @@ public class RequestContext {
     // ============================================================
     private static String memberFirstName, memberLastName, memberUserId;
     private static String existingMemberFirstName, existingMemberLastName, existingMemberUserId;
-    private static String newUserFirstName, newUserLastName, newUserUserId;
+    private static String newUserFirstName, newUserLastName, newUserUserId, newUserMobile;
 
     // Generic (used by TokenManager)
     private static String token;
@@ -618,6 +619,10 @@ public class RequestContext {
         newUserUserId = v;
     }
 
+    public static void setNewUserMobile(String v) {
+        newUserMobile = v;
+    }
+
     public static void setMobile(String v) {
         mobile = v;
     }
@@ -709,6 +714,10 @@ public class RequestContext {
 
     public static String getNewUserUserId() {
         return newUserUserId;
+    }
+
+    public static String getNewUserMobile() {
+        return newUserMobile;
     }
 
     public static String getMobile() {

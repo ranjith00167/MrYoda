@@ -23,7 +23,11 @@ public class UserPayloadBuilder {
         // Add title based on gender as requested
         body.put("title", gender.equalsIgnoreCase("male") ? "Mr" : "Mrs");
         body.put("dob", RandomDataUtil.getRandomDOB());
-        body.put("mobile", RequestContext.getMobile());
+        String mobile = RequestContext.getNewUserMobile();
+        if (mobile == null || mobile.isBlank()) {
+            mobile = RequestContext.getMobile();
+        }
+        body.put("mobile", mobile);
         body.put("country_code", ConfigLoader.getConfig().countryCode());
         body.put("email", RandomDataUtil.getRandomEmail());
         body.put("profile_pic", RandomDataUtil.getRandomProfilePic());

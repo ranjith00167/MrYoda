@@ -64,7 +64,10 @@ public class LoginAPITest extends BaseTest {
         System.out.println("==========================================================");
         RequestContext.setCurrentFlowName("new_user_flow");
 
-        String mobile = RequestContext.getMobile();
+        String mobile = RequestContext.getNewUserMobile();
+        if (mobile == null || mobile.isBlank()) {
+            mobile = RequestContext.getMobile();
+        }
         String token = TokenManager.generateToken(mobile, TokenManager.NEW_USER);
 
         System.out.println("🟢 NEW USER LOGIN SUCCESS");

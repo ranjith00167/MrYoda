@@ -47,9 +47,11 @@ public class TokenManager {
                 JSONObject otpReq = new JSONObject();
                 otpReq.put("mobile", mobile);
                 otpReq.put("country_code", countryCode);
+                otpReq.put("turnstileToken", ConfigLoader.getConfig().turnstileToken());
 
                 new RequestBuilder()
                         .setEndpoint(APIEndpoints.OTP_REQUEST)
+                    .addHeader("type", "Mr.Yoda Web")
                         .setRequestBody(otpReq.toString())
                         .expectStatus(200)
                         .post();
@@ -62,6 +64,7 @@ public class TokenManager {
 
                 verifyResponse = new RequestBuilder()
                         .setEndpoint(APIEndpoints.OTP_VERIFY)
+                    .addHeader("type", "Mr.Yoda Web")
                         .setRequestBody(verifyReq.toString())
                         .expectStatus(200)
                         .post();
@@ -115,6 +118,7 @@ public class TokenManager {
                 RequestContext.setNewUserFirstName(firstName);
                 RequestContext.setNewUserLastName(lastName);
                 RequestContext.setNewUserUserId(userId);
+                RequestContext.setNewUserMobile(actualMobile != null ? actualMobile : mobile);
                 // Also set generic context for compatibility
                 RequestContext.setToken(token);
                 RequestContext.setUserId(userId);

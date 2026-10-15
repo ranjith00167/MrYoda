@@ -1,6 +1,10 @@
 package utilities;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -222,8 +226,8 @@ public class FailureLogger {
             html.append("</body>\n");
             html.append("</html>\n");
             
-            // Write to file
-            try (FileWriter fw = new FileWriter(REPORT_FILE)) {
+            // Write to file (UTF-8 — FileWriter would use the platform charset and mangle emoji)
+            try (Writer fw = Files.newBufferedWriter(Paths.get(REPORT_FILE), StandardCharsets.UTF_8)) {
                 fw.write(html.toString());
                 System.out.println("\n✅ Validation Report Generated: " + REPORT_FILE);
             }
@@ -239,8 +243,8 @@ public class FailureLogger {
     private static void logToFile(FailureRecord record) {
         try {
             String filename = LOGS_DIR + "/failures_" + record.timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ".log";
-            try (FileWriter fw = new FileWriter(filename, true);
-                 BufferedWriter bw = new BufferedWriter(fw)) {
+            try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(filename),
+                     StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
                 
                 bw.write("\n" + "═".repeat(80) + "\n");
                 bw.write("[" + record.timestamp.format(TIMESTAMP_FORMAT) + "] " + record.category + "\n");

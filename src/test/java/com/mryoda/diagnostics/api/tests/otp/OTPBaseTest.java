@@ -1,6 +1,7 @@
 package com.mryoda.diagnostics.api.tests.otp;
 
 import com.mryoda.diagnostics.api.base.BaseTest;
+import com.mryoda.diagnostics.api.config.ConfigLoader;
 import com.mryoda.diagnostics.api.endpoints.APIEndpoints;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 import io.restassured.RestAssured;
@@ -31,6 +32,7 @@ public class OTPBaseTest extends BaseTest {
         Map<String, Object> payload = new HashMap<>();
         payload.put("mobile", mobile);
         payload.put("country_code", countryCode);
+        payload.put("turnstileToken", ConfigLoader.getConfig().turnstileToken());
 
         return baseSpec()
                 .contentType(ContentType.JSON)

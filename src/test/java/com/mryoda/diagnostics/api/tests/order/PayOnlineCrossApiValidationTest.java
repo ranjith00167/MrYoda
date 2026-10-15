@@ -2,6 +2,7 @@ package com.mryoda.diagnostics.api.tests.order;
 
 import com.mryoda.diagnostics.api.utils.RequestContext;
 import com.mryoda.diagnostics.api.utils.PackageComponentResolver;
+import com.mryoda.diagnostics.api.utils.RewardHelper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -539,18 +540,18 @@ public class PayOnlineCrossApiValidationTest {
                 double paidAmount = Double.parseDouble(paidAmountStr);
                 double totalPrice = toDoubleSafe(totalPriceObj);
                 
-                // Formula: ceil(paidAmount * 0.05)
-                long expectedGain = (long) Math.ceil(paidAmount * 0.05);
+                double rewardsRate = RewardHelper.getRewardsRate();
+                long expectedGain = (long) Math.ceil(paidAmount * rewardsRate);
                 long ceiledActual = (long) Math.ceil(actualGain);
 
                 System.out.println("      Order: " + orderId);
                 System.out.println("         Total Price     : ₹" + totalPrice);
                 System.out.println("         Paid Amount     : ₹" + paidAmount);
-                System.out.println("         Expected Reward (5% ceiled): " + expectedGain);
+                System.out.println("         Expected Reward (" + (rewardsRate * 100.0) + "% ceiled): " + expectedGain);
                 System.out.println("         Actual Reward Gain         : " + actualGain + " (Ceiled: " + ceiledActual + ")");
 
                 if (ceiledActual == expectedGain) {
-                    System.out.println("         ✅ PASS: Reward gain is calculated correctly (5% ceiled)");
+                    System.out.println("         ✅ PASS: Reward gain is calculated correctly (configured-rate ceiled)");
                 } else {
                     System.out.println("         ⚠️ WARN: Reward gain mismatch! Expected ceiled " + expectedGain + " but got " + ceiledActual);
                 }

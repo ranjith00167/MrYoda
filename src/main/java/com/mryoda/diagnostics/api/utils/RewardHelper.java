@@ -6,6 +6,18 @@ import io.restassured.response.Response;
 
 public class RewardHelper {
 
+    private static final String REWARDS_RATE_PROPERTY = "mryoda.rewards.rate";
+
+    public static double getRewardsRate() {
+        String configuredRate = System.getProperty(REWARDS_RATE_PROPERTY);
+        if (configuredRate == null || configuredRate.trim().isEmpty()) {
+            return 0.0;
+        }
+
+        double rate = Double.parseDouble(configuredRate.trim());
+        return rate > 1.0 ? rate / 100.0 : rate;
+    }
+
     /**
      * Call Get Rewards By Mobile API
      * @param mobile Mobile number
@@ -39,7 +51,7 @@ public class RewardHelper {
     }
 
     /**
-     * Validate Rewards Gain against expected percentage (5%)
+      * Validate Rewards Gain against the configured rewards percentage.
      * @param actualGain Actual rewards gain from response
      * @param dueAmount The amount paid
      */
@@ -48,10 +60,11 @@ public class RewardHelper {
         
         // Use ceiling rounding as requested by user (even 0.1 rounds up to next whole number)
         long roundedActualGain = (long) Math.ceil(actualGain);
-        long expectedGainRounded = (long) Math.ceil(dueAmount * 0.05);
+          double rewardsRate = getRewardsRate();
+          long expectedGainRounded = (long) Math.ceil(dueAmount * rewardsRate);
 
         System.out.println("🎁 Actual Rewards Gained: " + actualGain + " (Ceiled: " + roundedActualGain + ")");
-        System.out.println("📊 Expected Rewards (5% of " + dueAmount + "): " + (dueAmount * 0.05) + " (Ceiled: " + expectedGainRounded + ")");
+          System.out.println("📊 Expected Rewards (" + (rewardsRate * 100.0) + "% of " + dueAmount + "): " + (dueAmount * rewardsRate) + " (Ceiled: " + expectedGainRounded + ")");
 
         // Special case: if rewards_used >= dueAmount (entire payment covered by rewards redemption),
         // no new cash was paid, so rewards_gain = 0 is valid API behavior.
@@ -64,17 +77,17 @@ public class RewardHelper {
             return;
         }
 
-        // Hard assertion: ceil(dueAmount × 5%) must equal ceiled actual gain (tolerance < 1)
+        // Hard assertion: ceil(dueAmount × configured rate) must equal ceiled actual gain (tolerance < 1)
         boolean gainCorrect = (roundedActualGain == expectedGainRounded)
-                || Math.abs(actualGain - (dueAmount * 0.05)) < 1.0;
+            || Math.abs(actualGain - (dueAmount * rewardsRate)) < 1.0;
         AssertionUtil.verifyTrue(gainCorrect,
-                "REWARDS GAIN FORMULA: ceil(" + dueAmount + " × 5%) = " + expectedGainRounded
+            "REWARDS GAIN FORMULA: ceil(" + dueAmount + " × " + (rewardsRate * 100.0) + "%) = " + expectedGainRounded
                         + " but actual ceiled gain = " + roundedActualGain
                         + " (raw actual = " + actualGain + ")");
 
         if (gainCorrect) {
             System.out.println("✅ VALIDATION PASSED: Rewards Gain = " + actualGain
-                    + " matches ceil(" + dueAmount + " × 5%) = " + expectedGainRounded);
+                + " matches ceil(" + dueAmount + " × " + (rewardsRate * 100.0) + "%) = " + expectedGainRounded);
         }
 
         RequestContext.setRewardsGain(actualGain);

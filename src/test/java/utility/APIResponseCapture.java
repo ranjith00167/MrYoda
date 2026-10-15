@@ -3,8 +3,11 @@ package utility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mryoda.diagnostics.api.utils.LoggerUtil;
 import io.restassured.response.Response;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -72,7 +75,7 @@ public class APIResponseCapture {
         try {
             String filename = RESPONSE_LOG_DIR + endpoint.replaceAll("[^a-zA-Z0-9]", "_") + "_" + 
                              System.currentTimeMillis() + ".json";
-            FileWriter writer = new FileWriter(filename);
+            Writer writer = new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8);
             writer.write(responseJson);
             writer.close();
             LoggerUtil.info("📝 Response captured: " + filename);
@@ -88,7 +91,7 @@ public class APIResponseCapture {
         try {
             String reportPath = RESPONSE_LOG_DIR + "CAPTURE_REPORT_" + 
                                System.currentTimeMillis() + ".txt";
-            FileWriter writer = new FileWriter(reportPath);
+            Writer writer = new OutputStreamWriter(new FileOutputStream(reportPath), StandardCharsets.UTF_8);
             
             writer.write("=".repeat(80) + "\n");
             writer.write("API RESPONSE CAPTURE REPORT\n");

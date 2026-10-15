@@ -1,6 +1,9 @@
 package utilities;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -81,8 +84,8 @@ public class TestExecutionReporter {
             html.append("</body>\n");
             html.append("</html>\n");
             
-            // Write to file
-            try (FileWriter fw = new FileWriter(filename)) {
+            // Write to file (UTF-8 — FileWriter would use the platform charset and mangle emoji)
+            try (Writer fw = Files.newBufferedWriter(Paths.get(filename), StandardCharsets.UTF_8)) {
                 fw.write(html.toString());
                 System.out.println("\n✅ Execution Report Generated: " + filename);
             }

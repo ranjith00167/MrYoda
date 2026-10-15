@@ -1,9 +1,12 @@
 package com.mryoda.diagnostics.api.builders;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.ResponseBuilder;
 import io.restassured.response.Response;
+import org.json.JSONObject;
 import io.restassured.specification.RequestSpecification;
 import com.mryoda.diagnostics.api.utils.LogManager;
+import com.mryoda.diagnostics.api.utils.CryptoUtil;
 import com.mryoda.diagnostics.api.utils.RequestContext;
 import com.mryoda.diagnostics.api.utils.ApiReportContext;
 
@@ -116,6 +119,9 @@ public class RequestBuilder {
     private RequestSpecification prepare() {
         RequestSpecification req = RestAssured.given()
                 .relaxedHTTPSValidation()
+                // Never print bearer tokens in the console / CI logs
+                .config(RestAssured.config().logConfig(
+                        io.restassured.config.LogConfig.logConfig().blacklistHeader("Authorization")))
                 .log().all(); // 🔍 DEBUG: Log all request details
 
         if (!headers.isEmpty()) {
@@ -128,16 +134,38 @@ public class RequestBuilder {
         // back on error
         req.contentType("application/json; charset=UTF-8");
 
+        // Transparently decrypt encrypted responses (plain responses pass through untouched)
+        req.filter((requestSpec, responseSpec, ctx) -> {
+            Response response = ctx.next(requestSpec, responseSpec);
+            String raw = response.getBody().asString();
+            String plain = CryptoUtil.decryptResponseBody(raw);
+            if (plain == null || plain.equals(raw)) {
+                return response;
+            }
+            return new ResponseBuilder().clone(response).setBody(plain)
+                    .setContentType("application/json").build();
+        });
+
         if (bodyParams != null && !bodyParams.isEmpty()) {
             System.out.println("Request Body Params: " + bodyParams);
-            req.body(bodyParams);
+            req.body(CryptoUtil.shouldEncryptRequest()
+                    ? CryptoUtil.encryptRequestBody(new JSONObject(bodyParams).toString())
+                    : bodyParams);
         } else if (body != null) {
             System.out.println("Request Body: " + body);
-            req.body(body);
+            req.body(CryptoUtil.shouldEncryptRequest()
+                    ? CryptoUtil.encryptRequestBody(body instanceof String ? (String) body : String.valueOf(body))
+                    : body);
         } else {
             // For POST/PUT with no body, some servers might still expect a JSON structure
             // Using an empty JSON object as a safe default for application/json
             req.body("{}");
+        }
+
+        // Per spec: encrypted requests MUST carry X-Encrypted: true, otherwise the
+        // server responds with plain JSON instead of the { "__enc": "..." } envelope.
+        if (CryptoUtil.shouldEncryptRequest()) {
+            req.header("X-Encrypted", "true");
         }
 
         if (queryParams != null && !queryParams.isEmpty()) {
@@ -201,6 +229,17 @@ public class RequestBuilder {
         Response r = prepare().when().delete(endpoint).then().extract().response();
         logPerformance(r, "DELETE");
         return r;
+    }
+
+    public String decryptResponseBody(Response response) {
+        if (response == null) {
+            return null;
+        }
+        return CryptoUtil.decryptResponseBody(response.getBody().asString());
+    }
+
+    public String decryptResponseBody(String responseBody) {
+        return CryptoUtil.decryptResponseBody(responseBody);
     }
 
     // -----------------------------

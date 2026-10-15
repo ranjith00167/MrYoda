@@ -27,6 +27,7 @@ public class UserCreateAPITest extends BaseTest {
         // Generate random mobile
         String mobile = "9" + RandomDataUtil.getRandomMobile().substring(1);
         RequestContext.setMobile(mobile);
+        RequestContext.setNewUserMobile(mobile);
 
         System.out.println("\n📱 Generated Mobile: " + mobile);
 

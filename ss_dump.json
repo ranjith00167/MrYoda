@@ -1,0 +1,89 @@
+{
+  "LabNo": "MYD24196",
+  "Test": [
+    {
+      "Test Code": "BIO356",
+      "Test Name": "T4 - THYROXINE",
+      "Delivery Date": "",
+      "Sample Collected Date": "2026-10-13 12:43:43",
+      "SRADate": "2026-10-13 12:48:44",
+      "Department Recieved": "",
+      "Report Approved Date": "",
+      "TATHour": 0,
+      "TatDelay": "0",
+      "Current Status": "SRA Done"
+    },
+    {
+      "Test Code": "HEMAT019",
+      "Test Name": "CLOTTING TIME",
+      "Delivery Date": "",
+      "Sample Collected Date": "2026-10-13 12:43:43",
+      "SRADate": "2026-10-13 12:48:44",
+      "Department Recieved": "",
+      "Report Approved Date": "",
+      "TATHour": 0,
+      "TatDelay": "0",
+      "Current Status": "SRA Done"
+    },
+    {
+      "Test Code": "BIO034",
+      "Test Name": "ALP(ALKALINE PHOSPHATASE)",
+      "Delivery Date": "",
+      "Sample Collected Date": "2026-10-13 12:43:43",
+      "SRADate": "2026-10-13 12:48:44",
+      "Department Recieved": "",
+      "Report Approved Date": "",
+      "TATHour": 0,
+      "TatDelay": "0",
+      "Current Status": "SRA Done"
+    },
+    {
+      "Test Code": "BIO254",
+      "Test Name": "PHOSPHORUS SERUM ",
+      "Delivery Date": "",
+      "Sample Collected Date": "2026-10-13 12:43:43",
+      "SRADate": "2026-10-13 12:48:44",
+      "Department Recieved": "",
+      "Report Approved Date": "",
+      "TATHour": 0,
+      "TatDelay": "0",
+      "Current Status": "SRA Done"
+    },
+    {
+      "Test Code": "BIO096",
+      "Test Name": "CALCIUM - TOTAL",
+      "Delivery Date": "",
+      "Sample Collected Date": "2026-10-13 12:43:43",
+      "SRADate": "2026-10-13 12:48:44",
+      "Department Recieved": "",
+      "Report Approved Date": "",
+      "TATHour": 0,
+      "TatDelay": "0",
+      "Current Status": "SRA Done"
+    },
+    {
+      "Test Code": "HEMAT016",
+      "Test Name": "CBC(COMPLETE BLOOD COUNT)",
+      "Delivery Date": "",
+      "Sample Collected Date": "2026-10-13 12:43:43",
+      "SRADate": "2026-10-13 12:48:44",
+      "Department Recieved": "",
+      "Report Approved Date": "",
+      "TATHour": 0,
+      "TatDelay": "0",
+      "Current Status": "SRA Done"
+    },
+    {
+      "Test Code": "BIO274",
+      "Test Name": "RANDOM BLOOD GLUCOSE (RBS)",
+      "Delivery Date": "",
+      "Sample Collected Date": "2026-10-13 12:43:43",
+      "SRADate": "2026-10-13 12:48:44",
+      "Department Recieved": "",
+      "Report Approved Date": "",
+      "TATHour": 0,
+      "TatDelay": "0",
+      "Current Status": "SRA Done"
+    }
+  ]
+}

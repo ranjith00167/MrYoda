@@ -26,6 +26,7 @@
 
                     <include name="PHLEBO_REG_01_LoginPhlebo"/>
                     <include name="PHLEBO_REG_02_CreatePhlebo"/>
+                    <include name="PHLEBO_REG_03_UpdatePhlebo"/>
 
                 </methods>
 

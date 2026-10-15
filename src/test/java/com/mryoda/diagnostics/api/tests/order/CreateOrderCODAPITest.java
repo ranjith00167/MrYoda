@@ -1,6 +1,7 @@
 package com.mryoda.diagnostics.api.tests.order;
 
 import com.mryoda.diagnostics.api.base.BaseTest;
+import com.mryoda.diagnostics.api.config.ConfigLoader;
 import com.mryoda.diagnostics.api.endpoints.APIEndpoints;
 import com.mryoda.diagnostics.api.utils.AssertionUtil;
 import com.mryoda.diagnostics.api.utils.RequestContext;
@@ -2367,6 +2368,7 @@ public class CreateOrderCODAPITest extends BaseTest {
         // 1. Request OTP
         Map<String, Object> otpPayload = new HashMap<>();
         otpPayload.put("mobile", mobile);
+        otpPayload.put("turnstileToken", ConfigLoader.getConfig().turnstileToken());
 
         String otpUrl = APIEndpoints.DIAGNOSTICS_BASE_URL + APIEndpoints.OTP_REQUEST;
         new RequestBuilder().setEndpoint(otpUrl).setRequestBody(otpPayload).post();

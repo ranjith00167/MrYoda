@@ -36,17 +36,17 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
         double actualGain = RequestContext.getRewardsGain();
         double dueAmount = RequestContext.getCurrentDueAmount();
         long actualCeiled = (long) Math.ceil(actualGain);
+        double rewardsRate = RewardHelper.getRewardsRate();
 
         System.out.println("   Raw dueAmount from context: ₹" + dueAmount + ", actualGain: " + actualGain);
 
         // KEY INSIGHT: the order response stores rewards_gain as the COMBINED total for ALL
         // members in one cart/payment (not just one member's share).
-        // e.g. 2 members × ₹939 each → rewards_gain = ceil(939×5%) + ceil(939×5%) = 47+47 = 94
-        //      and dueAmount = ₹1878 (combined), so ceil(1878×5%) = 94 → already matches.
+        // This now follows the configured rewards rate, which defaults to 0%.
         // If the combined check passes, skip all per-order strategies entirely.
-        long combinedExpectedGain = (long) Math.ceil(dueAmount * 0.05);
+        long combinedExpectedGain = (long) Math.ceil(dueAmount * rewardsRate);
         if (combinedExpectedGain == actualCeiled && actualCeiled > 0) {
-            System.out.println("   ✅ Combined rewards check passed: ceil(₹" + dueAmount + " × 5%) = "
+            System.out.println("   ✅ Combined rewards check passed: ceil(₹" + dueAmount + " × " + (rewardsRate * 100.0) + "%) = "
                     + combinedExpectedGain + " == actualGain ceiled = " + actualCeiled
                     + ". Validating directly against combined amount (skipping per-order strategies).");
             RewardHelper.validateRewardsGain(actualGain, dueAmount);
@@ -71,11 +71,11 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
                         + " (orderId: " + primaryOrderId + ", combined was ₹" + dueAmount + ")");
                 dueAmount = perOrderAmount;
             } else {
-                // Strategy 2: scan all order amounts for the value whose 5% ceil matches actual gain
+                // Strategy 2: scan all order amounts for the value whose configured-rate ceil matches actual gain
                 for (Double v : orderAmounts.values()) {
-                    if (v > 0 && Math.abs(Math.ceil(v * 0.05) - actualCeiled) < 1.0) {
+                    if (v > 0 && Math.abs(Math.ceil(v * rewardsRate) - actualCeiled) < 1.0) {
                         System.out.println("   ℹ️  Strategy-2 (formula-match scan): ₹" + v
-                                + " → ceil(" + v + "×5%)=" + (long) Math.ceil(v * 0.05) + " matches actual=" + actualCeiled);
+                                + " → ceil(" + v + "×" + (rewardsRate * 100.0) + "%)=" + (long) Math.ceil(v * rewardsRate) + " matches actual=" + actualCeiled);
                         dueAmount = v;
                         break;
                     }
@@ -85,10 +85,10 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
 
         // Strategy 3: if dueAmount still produces wrong expected gain but dividing by member
         // count yields a match (covers case where orderAmounts map was not populated)
-        long expectedGain = (long) Math.ceil(dueAmount * 0.05);
+        long expectedGain = (long) Math.ceil(dueAmount * rewardsRate);
         if (expectedGain != actualCeiled && orderAmounts != null && orderAmounts.size() > 1) {
             double perMemberEstimate = dueAmount / orderAmounts.size();
-            if (Math.abs(Math.ceil(perMemberEstimate * 0.05) - actualCeiled) < 1.0) {
+            if (Math.abs(Math.ceil(perMemberEstimate * rewardsRate) - actualCeiled) < 1.0) {
                 System.out.println("   ℹ️  Strategy-3 (divide by " + orderAmounts.size() + " members): ₹"
                         + perMemberEstimate + " (combined was ₹" + dueAmount + ")");
                 dueAmount = perMemberEstimate;
@@ -98,7 +98,7 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
         // Strategy 4 (rewards_used flow): orderAmounts stores PRE-rewards gross amounts but the API
         // computes rewards on (gross - rewards_used_for_that_order). Deduct rewards_used proportionally
         // and retry the scan / per-member estimate.
-        expectedGain = (long) Math.ceil(dueAmount * 0.05);
+        expectedGain = (long) Math.ceil(dueAmount * rewardsRate);
         if (expectedGain != actualCeiled && actualGain > 0) {
             double totalRewardsUsed = RequestContext.getRewardsUsed();
             if (totalRewardsUsed > 0 && orderAmounts != null && !orderAmounts.isEmpty()) {
@@ -107,7 +107,7 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
                 // Scan each order's net amount (gross - proportional rewards_used)
                 for (Double v : orderAmounts.values()) {
                     double netAmt = v - rewardsUsedPerOrder;
-                    if (netAmt > 0 && Math.abs(Math.ceil(netAmt * 0.05) - actualCeiled) < 1.0) {
+                    if (netAmt > 0 && Math.abs(Math.ceil(netAmt * rewardsRate) - actualCeiled) < 1.0) {
                         System.out.println("   ℹ️  Strategy-4 (net of rewards_used ₹" + rewardsUsedPerOrder
                                 + " per order): ₹" + netAmt + " (gross ₹" + v + ")");
                         dueAmount = netAmt;
@@ -116,8 +116,8 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
                 }
             }
             // Strategy 4b: if still no match, derive dueAmount back from actualGain (self-consistency check)
-            if ((long) Math.ceil(dueAmount * 0.05) != actualCeiled) {
-                double impliedBase = actualGain / 0.05;
+            if ((long) Math.ceil(dueAmount * rewardsRate) != actualCeiled) {
+                double impliedBase = rewardsRate == 0.0 ? dueAmount : actualGain / rewardsRate;
                 System.out.println("   ℹ️  Strategy-4b (back-derive from actualGain=" + actualGain
                         + "): implied base ₹" + impliedBase);
                 dueAmount = impliedBase;
@@ -144,15 +144,16 @@ public class COD_18_RewardValidationTest extends CreateOrderCODAPITest {
         double initial = RequestContext.getInitialTotalRewards();
         double rewardsGainFromAPI = RequestContext.getRewardsGain();
         double actualDelta = finalRewards - initial;
+        double rewardsRate = RewardHelper.getRewardsRate();
 
         // In multi-member flows each order earns rewards independently.
-        // Build total expected gain = sum of ceil(netAmount × 5%) for every order in the map.
+        // Build total expected gain = sum of ceil(netAmount × configured rate) for every order in the map.
         java.util.Map<String, Double> orderAmountsC = RequestContext.getOrderAmounts();
         double totalExpectedGain = rewardsGainFromAPI; // default: single-member
         if (orderAmountsC != null && orderAmountsC.size() > 1) {
             double sumGain = 0;
             for (Double v : orderAmountsC.values()) {
-                sumGain += Math.ceil(v * 0.05);
+                sumGain += Math.ceil(v * rewardsRate);
             }
             if (sumGain > 0) {
                 totalExpectedGain = sumGain;

@@ -7,14 +7,14 @@ import org.json.JSONObject;
  * Centralises all request body construction for Phlebio Authentication APIs.
  *
  * Credentials used across all flows:
- *   Mobile   : 9360651932
- *   Password : 12345678
+ *   Mobile   : 9003730394
+ *   Password : 123456
  */
 public class PhlebioPayloads {
 
     // ── Credentials ──────────────────────────────────────────────────────────
-    public static final String PHLEBO_MOBILE   = "9360651932";
-    public static final String PHLEBO_PASSWORD = "12345678";
+    public static final String PHLEBO_MOBILE   = "9003730394";
+    public static final String PHLEBO_PASSWORD = "123456";
     public static final String FCM_TOKEN       = "test-fcm-token-12345";
     public static final String STATIC_OTP      = "123456";
 

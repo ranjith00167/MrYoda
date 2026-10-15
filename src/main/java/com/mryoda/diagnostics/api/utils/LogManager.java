@@ -2,8 +2,11 @@ package com.mryoda.diagnostics.api.utils;
 
 import io.restassured.response.Response;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,8 +54,10 @@ public class LogManager {
     }
 
     private static synchronized void appendToFile(String filePath, String content) {
-        try (FileWriter fw = new FileWriter(filePath, true)) {
-            fw.write(content);
+        // Explicit UTF-8 — FileWriter would use the platform charset (cp1252 on
+        // Windows) and corrupt non-ASCII characters in the log content.
+        try (Writer w = new OutputStreamWriter(new FileOutputStream(filePath, true), StandardCharsets.UTF_8)) {
+            w.write(content);
         } catch (IOException e) {
             System.err.println("Failed to write to log file: " + filePath + " | Error: " + e.getMessage());
         }

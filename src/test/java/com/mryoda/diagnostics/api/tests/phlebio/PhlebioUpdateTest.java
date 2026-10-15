@@ -19,14 +19,18 @@ import java.util.UUID;
  * PHLEBIO — UPDATE PHLEBO  (PUT /api/v1/phlebo)
  * Base URL : https://staging-api-phlebo-notification.yodadiagnostics.com
  *
+ * Flow:
+ *   @BeforeClass  → savePhlebo (POST /api/v1/phlebo/savePhlebo)
+ *                   extracts guid, mobile, password of the newly created phlebo.
+ *
  * Request body: { "guid": "<uuid>", "name": "<name>", "email": "<email>" }
  * Token type  : phlebo Bearer JWT (role=phlebo)
  *               Falls back to admin token if phlebo login is unavailable.
  *
  * ── POSITIVE ──────────────────────────────────────────────
- *   UPDATE_01 : Valid guid + new name + new email            → 200
- *   UPDATE_02 : Valid guid + second new name + same email    → 200
- *   UPDATE_03 : Valid guid + same name + second new email    → 200
+ *   UPDATE_01 : Valid guid + new name + new email            → 200 + GET cross-verify
+ *   UPDATE_02 : Valid guid + second new name + same email    → 200 + GET cross-verify
+ *   UPDATE_03 : Valid guid + same name + second new email    → 200 + GET cross-verify
  *
  * ── NEGATIVE — GUID VALIDATION ────────────────────────────
  *   UPDATE_NEG_01 : Empty guid ("")              → 400
@@ -217,16 +221,91 @@ public class PhlebioUpdateTest extends BaseTest {
     // Shared helpers
     // ─────────────────────────────────────────────────────────────────────────
 
-    private void assertUpdateSuccess(String testId, Response response) {
+    /**
+     * Validates the PUT response: HTTP 200/201 and success==true.
+     * Optionally checks that expectedName / expectedEmail appear in the response body
+     * (pass null to skip a field check).
+     */
+    private void assertUpdateSuccess(String testId, Response response,
+                                     String expectedName, String expectedEmail) {
         int status = response.getStatusCode();
         System.out.println("   [" + testId + "] Status : " + status);
         System.out.println("   [" + testId + "] Body   : " + response.asString());
+
         Assert.assertTrue(status == 200 || status == 201,
                 testId + ": Expected HTTP 200/201 from PUT /api/v1/phlebo but got " + status);
+
         Boolean success = response.jsonPath().getBoolean("success");
         Assert.assertTrue(Boolean.TRUE.equals(success),
                 testId + ": 'success' must be true in response. Got: " + response.asString());
+
+        // Validate updated name in response body (if API echoes it back)
+        if (expectedName != null) {
+            String nameInResp = response.jsonPath().getString("data.name");
+            if (nameInResp != null) {
+                Assert.assertEquals(nameInResp, expectedName,
+                        testId + ": Response 'data.name' must reflect the updated name");
+                System.out.println("   [" + testId + "] data.name verified: " + nameInResp);
+            } else {
+                System.out.println("   [" + testId + "] data.name not in PUT response body — will verify via GET");
+            }
+        }
+
+        // Validate updated email in response body (if API echoes it back)
+        if (expectedEmail != null) {
+            String emailInResp = response.jsonPath().getString("data.email");
+            if (emailInResp != null) {
+                Assert.assertEquals(emailInResp, expectedEmail,
+                        testId + ": Response 'data.email' must reflect the updated email");
+                System.out.println("   [" + testId + "] data.email verified: " + emailInResp);
+            } else {
+                System.out.println("   [" + testId + "] data.email not in PUT response body — will verify via GET");
+            }
+        }
+
         System.out.println("   [PASS] " + testId + "\n");
+    }
+
+    /**
+     * Cross-verifies that the update persisted by calling GET /api/v1/phlebo/{guid}
+     * and asserting that the returned name and email match what was sent in the PUT.
+     */
+    private void assertFieldPersisted(String testId, String guid,
+                                      String expectedName, String expectedEmail) {
+        System.out.println("   [" + testId + "] Cross-verifying via GET /api/v1/phlebo/" + guid);
+        Response getResp = phlebioClient.getPhleboByGuid(guid, adminToken);
+
+        System.out.println("   [" + testId + "] GET Status : " + getResp.getStatusCode());
+        System.out.println("   [" + testId + "] GET Body   : " + getResp.asString());
+
+        Assert.assertEquals(getResp.getStatusCode(), 200,
+                testId + ": GET after update must return 200. Actual: " + getResp.getStatusCode());
+
+        // Verify name persisted
+        if (expectedName != null) {
+            String nameInGet = getResp.jsonPath().getString("data.name");
+            Assert.assertNotNull(nameInGet, testId + ": GET response must contain data.name");
+            Assert.assertEquals(nameInGet, expectedName,
+                    testId + ": Persisted name must match updated name. Expected: '"
+                            + expectedName + "' Actual: '" + nameInGet + "'");
+            System.out.println("   [" + testId + "] Persisted name  : " + nameInGet + " ✓");
+        }
+
+        // Verify email persisted (field name may differ: email / emailId)
+        if (expectedEmail != null) {
+            String emailInGet = getResp.jsonPath().getString("data.email");
+            if (emailInGet == null) emailInGet = getResp.jsonPath().getString("data.emailId");
+            if (emailInGet != null) {
+                Assert.assertEquals(emailInGet, expectedEmail,
+                        testId + ": Persisted email must match updated email. Expected: '"
+                                + expectedEmail + "' Actual: '" + emailInGet + "'");
+                System.out.println("   [" + testId + "] Persisted email : " + emailInGet + " ✓");
+            } else {
+                System.out.println("   [" + testId + "] data.email not in GET response — field may not be returned by this API version");
+            }
+        }
+
+        System.out.println("   [" + testId + "] GET cross-verify PASSED\n");
     }
 
     private void assertValidationError(String testId, Response response, String context) {
@@ -244,7 +323,10 @@ public class PhlebioUpdateTest extends BaseTest {
     // =========================================================
 
     @Test(priority = 1,
-          description = "UPDATE_01: PUT /api/v1/phlebo with valid guid, new name, new email → 200 OK.")
+          description = "UPDATE_01: PUT /api/v1/phlebo with valid guid, new name, new email → 200 OK. "
+                      + "GUID is extracted from savePhlebo response (@BeforeClass). "
+                      + "Name and email are dynamically generated. "
+                      + "Cross-verifies persisted changes via GET /api/v1/phlebo/{guid}.")
     public void UPDATE_01_ValidUpdate() {
         System.out.println("\n>>> UPDATE_01: VALID UPDATE — guid + new name + new email <<<");
 
@@ -254,28 +336,38 @@ public class PhlebioUpdateTest extends BaseTest {
         System.out.println("   name  : " + newName);
         System.out.println("   email : " + newEmail);
 
+        // PUT — update the phlebo
         Response response = phlebioClient.updatePhlebo(updateGuid, newName, newEmail, adminToken);
-        assertUpdateSuccess("UPDATE_01", response);
+        assertUpdateSuccess("UPDATE_01", response, newName, newEmail);
+
+        // Cross-verify — GET must reflect the updated values
+        assertFieldPersisted("UPDATE_01", updateGuid, newName, newEmail);
     }
 
     @Test(priority = 2,
-          description = "UPDATE_02: PUT /api/v1/phlebo — second update with a different name → 200 OK. "
-                      + "Verifies sequential updates work and last-write wins.")
+          description = "UPDATE_02: PUT /api/v1/phlebo — second sequential update with a different dynamic name → 200 OK. "
+                      + "Verifies last-write-wins behaviour. "
+                      + "Cross-verifies persisted changes via GET /api/v1/phlebo/{guid}.")
     public void UPDATE_02_SecondNameUpdate() {
         System.out.println("\n>>> UPDATE_02: SECOND UPDATE — different name <<<");
 
-        String newName  = "Revised " + PhlebioPayloads.randomName();
+        String newName   = "Revised " + PhlebioPayloads.randomName();
         String sameEmail = "stable_" + System.currentTimeMillis() + "@testmail.com";
         System.out.println("   guid  : " + updateGuid);
         System.out.println("   name  : " + newName);
         System.out.println("   email : " + sameEmail);
 
+        // PUT — second sequential update
         Response response = phlebioClient.updatePhlebo(updateGuid, newName, sameEmail, adminToken);
-        assertUpdateSuccess("UPDATE_02", response);
+        assertUpdateSuccess("UPDATE_02", response, newName, sameEmail);
+
+        // Cross-verify — previous name must be overwritten, new name must be stored
+        assertFieldPersisted("UPDATE_02", updateGuid, newName, sameEmail);
     }
 
     @Test(priority = 3,
-          description = "UPDATE_03: PUT /api/v1/phlebo — update with a new email address → 200 OK.")
+          description = "UPDATE_03: PUT /api/v1/phlebo — update with a new dynamic email address → 200 OK. "
+                      + "Cross-verifies that the new email is persisted via GET /api/v1/phlebo/{guid}.")
     public void UPDATE_03_EmailUpdate() {
         System.out.println("\n>>> UPDATE_03: EMAIL UPDATE — new email address <<<");
 
@@ -285,8 +377,12 @@ public class PhlebioUpdateTest extends BaseTest {
         System.out.println("   name  : " + sameName);
         System.out.println("   email : " + newEmail);
 
+        // PUT — update with new email
         Response response = phlebioClient.updatePhlebo(updateGuid, sameName, newEmail, adminToken);
-        assertUpdateSuccess("UPDATE_03", response);
+        assertUpdateSuccess("UPDATE_03", response, sameName, newEmail);
+
+        // Cross-verify — updated email must be persisted
+        assertFieldPersisted("UPDATE_03", updateGuid, sameName, newEmail);
     }
 
     // =========================================================

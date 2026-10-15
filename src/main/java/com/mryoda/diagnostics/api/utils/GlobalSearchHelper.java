@@ -147,7 +147,7 @@ public class GlobalSearchHelper {
             storeData.put("discount_percentage",
                     found.get("discount_percentage") != null ? found.get("discount_percentage") : 0);
             storeData.put("discount_rate", found.get("discount_rate"));
-            storeData.put("rewards_percentage", found.get("rewards_percentage"));
+                storeData.put("rewards_percentage", normalizeRewardsPercentage(found.get("rewards_percentage")));
             storeData.put("membership_discount",
                     found.get("membership_discount") != null ? found.get("membership_discount") : 0);
             storeData.put("courier_charges", found.get("courier_charges") != null ? found.get("courier_charges") : 0);
@@ -704,7 +704,16 @@ public class GlobalSearchHelper {
      */
     public static String getRewardsPercentage(String testName) {
         Object value = getTestField(testName, "rewards_percentage");
-        return value != null ? value.toString() : null;
+        return String.valueOf(normalizeRewardsPercentage(value));
+    }
+
+    private static Object normalizeRewardsPercentage(Object value) {
+        if (value == null) {
+            return 0;
+        }
+
+        String normalizedValue = value.toString().trim();
+        return normalizedValue.isEmpty() ? 0 : normalizedValue;
     }
 
     /**

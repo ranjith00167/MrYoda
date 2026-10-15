@@ -326,6 +326,10 @@
            <!-- Support for both TestNG Suite XML and Cucumber Runners -->
             <testFailureIgnore>true</testFailureIgnore>
             <useSystemClassLoader>false</useSystemClassLoader>
+            <!-- Force UTF-8 in the forked test JVM. Without this, Windows defaults
+                 (cp1252) mangle emoji/arrow glyphs in the console and corrupt any
+                 non-ASCII text written to log files (mojibake like "Skipping ù"). -->
+            <argLine>-Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8</argLine>
             <systemPropertyVariables>
                 <browser>${browser}</browser>
                 <headless>${headless}</headless>

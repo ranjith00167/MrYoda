@@ -17,11 +17,14 @@ import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchSessionException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.TimeoutException;
+import utilities.DriverFactory;
 
 public class CodItDose extends BaseSteps {
 
@@ -653,6 +656,18 @@ public class CodItDose extends BaseSteps {
                         System.out.println("⚠️ Table not immediately populated, continuing anyway...");
                     }
                 } catch (Exception e) {
+                    if (isSessionDead(e)) {
+                        System.out.println("💥 Chrome session died during search — restarting browser...");
+                        try {
+                            restartBrowserAndNavigateToResultEntry();
+                            js = (JavascriptExecutor) BaseClass.driver;
+                            consecutiveFailures = 0;
+                        } catch (Throwable restartEx) {
+                            System.out.println("❌ Browser restart failed: " + restartEx.getMessage());
+                            consecutiveFailures++;
+                        }
+                        continue;
+                    }
                     String searchFailMsg = "Search failed for SIN " + sinNo + ": " + e.getClass().getSimpleName();
                     System.out.println("⚠️ " + searchFailMsg + ". Retrying...");
                     logUIWarning("Test Entry", "SIN_SEARCH_ERROR", searchFailMsg);
@@ -711,17 +726,37 @@ public class CodItDose extends BaseSteps {
                         js.executeScript("arguments[0].click();", approveButtons.get(0));
                         System.out.println("✅ Approval clicked for visit: " + visitId);
                         BaseClass.waitInSeconds(3);
+                    } else {
+                        // Not fatal: the dedicated "I click on the approve button" step retries
+                        // with parent-visibility / disabled-attribute handling.
+                        System.out.println("⚠️ Approve button not visible for visit " + visitId
+                                + " — deferring to the approval step.");
                     }
 
                     processedVisits++;
                     consecutiveFailures = 0; // Reset on success
 
                 } catch (Exception e) {
-                    System.out.println("⚠️ Error processing visit " + visitId + ": " + e.getMessage());
+                    Throwable realCause = unwrap(e);
+                    System.out.println("⚠️ Error processing visit " + visitId + ": "
+                            + realCause.getClass().getSimpleName() + " - " + realCause.getMessage());
+                    if (isSessionDead(e)) {
+                        System.out.println("💥 Chrome session died during visit processing — restarting browser...");
+                        try {
+                            restartBrowserAndNavigateToResultEntry();
+                            js = (JavascriptExecutor) BaseClass.driver;
+                            consecutiveFailures = 0;
+                        } catch (Throwable restartEx) {
+                            System.out.println("❌ Browser restart failed: " + restartEx.getMessage());
+                            consecutiveFailures++;
+                        }
+                        continue;
+                    }
                     consecutiveFailures++;
-                    logUIFailure("COD_EntryValues", "VISIT_PROCESSING_FAILURE", 
-                        "Error processing visit " + visitId + ": " + e.getClass().getSimpleName());
-                    
+                    logUIFailure("COD_EntryValues", "VISIT_PROCESSING_FAILURE",
+                        "Error processing visit " + visitId + ": " + realCause.getClass().getSimpleName()
+                                + " - " + realCause.getMessage());
+
                     // Try to force back to list for next attempt
                     try {
                         js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
@@ -731,19 +766,105 @@ public class CodItDose extends BaseSteps {
                 }
 
             } catch (Exception e) {
-                System.out.println("⚠️ Iteration " + (i + 1) + " failed: " + e.getMessage());
+                Throwable iterCause = unwrap(e);
+                System.out.println("⚠️ Iteration " + (i + 1) + " failed: "
+                        + iterCause.getClass().getSimpleName() + " - " + iterCause.getMessage());
+                if (isSessionDead(e)) {
+                    System.out.println("💥 Chrome session died at iteration level — restarting browser...");
+                    try {
+                        restartBrowserAndNavigateToResultEntry();
+                        js = (JavascriptExecutor) BaseClass.driver;
+                        consecutiveFailures = 0;
+                    } catch (Exception restartEx) {
+                        System.out.println("❌ Browser restart failed: " + restartEx.getMessage());
+                        consecutiveFailures++;
+                    }
+                    continue;
+                }
                 consecutiveFailures++;
-                logUIFailure("COD_EntryValues", "ITERATION_FAILURE", 
-                    "Iteration " + (i + 1) + " failed: " + e.getClass().getSimpleName());
+                logUIFailure("COD_EntryValues", "ITERATION_FAILURE",
+                    "Iteration " + (i + 1) + " failed: " + iterCause.getClass().getSimpleName()
+                            + " - " + iterCause.getMessage());
             }
         }
 
         System.out.println("\n>>> RESULT ENTRY SUMMARY: Processed " + processedVisits + " visits");
         if (processedVisits == 0) {
-            logUIFailure("COD_EntryValues", "NO_VISITS_PROCESSED", 
+            logUIFailure("COD_EntryValues", "NO_VISITS_PROCESSED",
                 "Failed to process any visits. SIN: " + sinNo);
             throw new RuntimeException("❌ FAILED: No visits were processed. Check SIN No extraction and search functionality.");
         }
+    }
+
+    /**
+     * Healenium wraps WebDriver exceptions in UndeclaredThrowableException (or
+     * InvocationTargetException), whose own message is null. Returns the first
+     * non-wrapper cause so logs show what actually went wrong.
+     */
+    private static Throwable unwrap(Throwable t) {
+        Throwable cur = t;
+        for (int depth = 0; depth < 8 && cur != null; depth++) {
+            Throwable next = null;
+            if (cur instanceof java.lang.reflect.UndeclaredThrowableException) {
+                next = ((java.lang.reflect.UndeclaredThrowableException) cur).getUndeclaredThrowable();
+            } else if (cur instanceof java.lang.reflect.InvocationTargetException) {
+                next = ((java.lang.reflect.InvocationTargetException) cur).getTargetException();
+            }
+            if (next == null) {
+                return cur;
+            }
+            cur = next;
+        }
+        return cur != null ? cur : t;
+    }
+
+    /**
+     * Returns true when the exception indicates the Chrome session has died
+     * (invalid session id / disconnected). Checks both the exception itself and
+     * its cause chain because Healenium wraps WebDriver exceptions in
+     * UndeclaredThrowableException.
+     */
+    private boolean isSessionDead(Exception e) {
+        Throwable t = e;
+        for (int depth = 0; depth < 5 && t != null; depth++) {
+            if (t instanceof NoSuchSessionException) return true;
+            if (t instanceof WebDriverException) {
+                String msg = t.getMessage() != null ? t.getMessage().toLowerCase() : "";
+                if (msg.contains("invalid session id") || msg.contains("session deleted")
+                        || msg.contains("not connected to devtools")) return true;
+            }
+            t = t.getCause();
+        }
+        return false;
+    }
+
+    /**
+     * Quits the dead Chrome session, creates a fresh driver, logs in to ITDose
+     * and navigates back to the Result Entry page so the calling loop can resume.
+     */
+    private void restartBrowserAndNavigateToResultEntry() throws Throwable {
+        System.out.println("   🔄 Quitting dead Chrome session...");
+        try { BaseClass.driver.quit(); } catch (Exception ignored) {}
+
+        System.out.println("   🔄 Starting new Chrome session...");
+        BaseClass.driver = DriverFactory.getDriver("chrome");
+        System.out.println("   ✅ New Chrome session ready.");
+
+        // Login to ITDose
+        i_am_on_the_login_page();
+        BaseClass.waitInSeconds(2);
+        i_enter_valid_credentials();
+        BaseClass.waitInSeconds(3);
+
+        // Navigate: Department → Laboratory → List View → Sample Management → Sample Processing → Result Entry
+        i_click_on_the_department_button();
+        i_click_on_the_laboratory_button();
+        i_click_on_the_list_view_button();
+        i_click_on_the_sample_management_button();
+        i_click_on_the_sample_processing_button();
+        i_click_on_the_result_entry_button();
+        BaseClass.waitInSeconds(2);
+        System.out.println("   ✅ Navigated to Result Entry — resuming loop.");
     }
 
     @When("I click on the approve button")

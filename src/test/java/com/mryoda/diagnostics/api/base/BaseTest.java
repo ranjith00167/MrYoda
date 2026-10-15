@@ -20,9 +20,17 @@ import com.mryoda.diagnostics.api.utils.LoggerUtil;
  * Contains setup and teardown methods
  */
 public class BaseTest {
-    protected static final String DEFAULT_LOCATION = ConfigLoader.getConfig().defaultLocationName();
+    protected static final String DEFAULT_LOCATION = resolveDefaultLocation();
 
     private static boolean filterRegistered = false;
+
+    private static String resolveDefaultLocation() {
+        try {
+            return ConfigLoader.getConfig().defaultLocationName();
+        } catch (Throwable t) {
+            return "Ameerpet (HQ)";
+        }
+    }
 
     @org.testng.annotations.BeforeSuite(alwaysRun = true)
     public void beforeTestFlowSetup() {

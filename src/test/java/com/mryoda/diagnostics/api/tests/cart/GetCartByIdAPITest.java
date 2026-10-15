@@ -9,9 +9,11 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,8 +31,8 @@ public class GetCartByIdAPITest extends BaseTest {
      */
     private void clearErrorLog() {
         if (!logFileCleared) {
-            try (FileWriter fw = new FileWriter(ERROR_LOG_FILE, false);
-                    PrintWriter pw = new PrintWriter(fw)) {
+            try (PrintWriter pw = new PrintWriter(new OutputStreamWriter(
+                    new FileOutputStream(ERROR_LOG_FILE, false), StandardCharsets.UTF_8))) {
                 pw.println("===========================================================");
                 pw.println("VALIDATION ERROR LOG - TEST EXECUTION");
                 pw.println("EXECUTION DATE: " + dateFormat.format(new Date()));
@@ -49,8 +51,8 @@ public class GetCartByIdAPITest extends BaseTest {
     private void logError(String testName, String errorMessage) {
         clearErrorLog(); // Ensure log is cleared on first call
 
-        try (FileWriter fw = new FileWriter(ERROR_LOG_FILE, true);
-                PrintWriter pw = new PrintWriter(fw)) {
+        try (PrintWriter pw = new PrintWriter(new OutputStreamWriter(
+                new FileOutputStream(ERROR_LOG_FILE, true), StandardCharsets.UTF_8))) {
 
             pw.println("===========================================================");
             pw.println("TIMESTAMP: " + dateFormat.format(new Date()));

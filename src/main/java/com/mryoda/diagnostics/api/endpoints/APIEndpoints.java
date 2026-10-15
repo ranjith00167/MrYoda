@@ -93,6 +93,7 @@ public class APIEndpoints {
     // ========== BRAND ==========
     public static final String GET_ALL_BRANDS_PATH = "/brand/getAllBrands";
     public static final String ADMIN_VERIFY_OTP = "/order_tracking/admin/verifyotp";
+    public static final String VERIFY_OTP = "/order_tracking/verifyotp";
     public static final String GET_SAMPLE_TYPE = "/tests/getSampleType";
     public static final String APPROVE_PAYMENT = "/order/approvepayment";
     public static final String VISIT_STATUS_UAT = "http://uat.yodalifeline.in/yoda_uat_8.0/api/StatusApi/GetStatus";

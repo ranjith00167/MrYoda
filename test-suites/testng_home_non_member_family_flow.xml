@@ -41,32 +41,32 @@
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest"/>
             <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
             
-            <!-- 5. Phlebotomist Workflow (Home Visit Specific) -->
-            <class name="com.mryoda.diagnostics.api.tests.auth.COD_06_PhlebotomistLoginTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_07_AssignOrderTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_08_VerifyStatusAssignedTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_09_UpdateOrderTrackingTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_10_FinalVerificationTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_11_AdminVerifyOtpTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.tests_packages.COD_12_GetSampleTypeTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_13_UpdateStatusSamplesCollectedTest"/>
-            <class name="com.mryoda.diagnostics.api.tests.order.COD_14_VerifySamplesCollectedStatusTest"/>
+           <class name="com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest"/>
+                       <class name="com.mryoda.diagnostics.api.tests.phlebio.PhlebioManagementTest">
 
-            <!-- 6. Rewards (Will skip automatically for non-member) -->
-            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
-                <methods><include name="step18_A_VerifyInitialRewards"/></methods>
+                <methods>
+
+                    <include name="PHLEBO_MGMT_01_LoginPhlebo"/>
+                    <include name="PHLEBO_MGMT_02_AdminLogin"/>
+                    <include name="PHLEBO_MGMT_03_AssignShifts"/>
+                    <include name="PHLEBO_MGMT_04_GetPhleboShifts"/>
+                    <include name="PHLEBO_MGMT_05_ClockIn"/>
+                    <include name="PHLEBO_MGMT_06_AssignOrder"/>
+                    <include name="PHLEBO_MGMT_07_UpdateOrderTracking"/>
+                    <include name="PHLEBO_MGMT_08_UploadImage"/>
+                    <include name="PHLEBO_MGMT_09_VerifyOtp"/>
+                    <include name="PHLEBO_MGMT_10_GetSampleDetails"/>
+                    <include name="PHLEBO_MGMT_11_GenerateBarcode"/>
+                    <include name="PHLEBO_MGMT_12_UpdateOrderTrackingSamplesCollected"/>
+
+                </methods>
+
             </class>
 
             <!-- 7. Approve Payment -->
             <class name="com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest"/>
 
-            <!-- Rewards (Will skip automatically for non-member) -->
-            <class name="com.mryoda.diagnostics.api.tests.rewards.COD_18_RewardValidationTest">
-                <methods>
-                    <include name="step18_B_VerifyRewardsGain"/>
-                    <include name="step18_C_VerifyFinalRewardsBalance"/>
-                </methods>
-            </class>
+   
 
             <!-- 8. UI Integration & Status -->
             <class name="com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest"/>

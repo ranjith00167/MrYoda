@@ -4,6 +4,7 @@ import com.mryoda.diagnostics.api.builders.RequestBuilder;
 import com.mryoda.diagnostics.api.endpoints.APIEndpoints;
 import com.mryoda.diagnostics.api.utils.AssertionUtil;
 import com.mryoda.diagnostics.api.utils.RequestContext;
+import com.mryoda.diagnostics.api.utils.RewardHelper;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -2232,17 +2233,18 @@ public class COD_20_CancellationRefundTest {
             System.out.println("   ℹ️  initialRewards not stored (step18_A may not have run)");
         }
 
-        // ── (4) formula cross-check: rewardsGain = ceil(paidAmount * 5%) ────────────
+        // ── (4) formula cross-check: rewardsGain = ceil(paidAmount * configured rate) ────────────
         // Expected post-cancel = initialRewards (both rewards_used and rewardsGain fully refunded)
         if (paidAmount > 0) {
             double storedRewardsUsedF4 = RequestContext.getRewardsUsed();
-            double expectedGain       = Math.ceil(paidAmount * 0.05);
+            double rewardsRate = RewardHelper.getRewardsRate();
+            double expectedGain       = Math.ceil(paidAmount * rewardsRate);
             // Accept either scenario A (initialRewards + rewards_used) or scenario B (initialRewards)
             double expectedPostCancelA = (initialRewards > 0) ? initialRewards + storedRewardsUsedF4
                     : (finalRewards + storedRewardsUsedF4 - expectedGain);
             double expectedPostCancelB = (initialRewards > 0) ? initialRewards
                     : (finalRewards - expectedGain);
-            System.out.printf("   formula: ceil(%.2f * 5%%) = %.2f (rewardsGain earned then reversed)%n", paidAmount, expectedGain);
+            System.out.printf("   formula: ceil(%.2f * %.2f%%) = %.2f (rewardsGain earned then reversed)%n", paidAmount, rewardsRate * 100.0, expectedGain);
             System.out.printf("   formula A: step18_A(%.2f) + rewards_used(%.2f) = %.2f%n",
                     initialRewards, storedRewardsUsedF4, expectedPostCancelA);
             System.out.printf("   formula B: step18_A(%.2f) (sub-order cancel, no per-sub rewards_used refund)%n",

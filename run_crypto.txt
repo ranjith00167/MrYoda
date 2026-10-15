@@ -1,0 +1,2775 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< MrYoda:MrYoda >----------------------------
+[INFO] Building MrYoda 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ MrYoda ---
+[INFO] Deleting C:\Users\RANJITH\MrYoda\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ MrYoda ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ MrYoda ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 25 source files with javac [debug release 11] to target\classes
+[WARNING] /C:/Users/RANJITH/MrYoda/src/main/java/com/mryoda/diagnostics/api/utils/ApiReportContext.java:[153,24] deprecated item is not annotated with @Deprecated
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ MrYoda ---
+[INFO] Copying 25 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ MrYoda ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 210 source files with javac [debug release 11] to target\test-classes
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[396,53] getExistingMemberUserId() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2160,38] getExistingMemberToken() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2161,39] getExistingMemberUserId() in com.mryoda.diagnostics.api.utils.RequestContext has been deprecated
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/CreateOrderCODAPITest.java:[2260,54] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java:[285,93] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/cart/AddToCartAPITest.java:[583,85] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/SingleMemberCancellationFlowTest.java:[1176,42] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/SingleMemberCancellationFlowTest.java:[1181,58] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    capture#1 of ?
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[243,82] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[244,74] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[296,74] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponComprehensiveTest.java:[1016,85] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/order/COD_17_ReportGenerationTest.java:[449,89] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/otp/SuperAdminOTPVerifyTest.java:[935,46] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>[]
+  found:    java.util.Map[]
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[171,57] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[173,73] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[175,72] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[177,72] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[286,53] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[288,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[290,68] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/tests_packages/CatalogVerificationAPITest.java:[292,68] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/family/FamilyMemberCompleteTest.java:[420,65] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java:[47,77] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/coupons/CouponValidationTest.java:[103,77] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/customer/AddCustomerAPITest.java:[205,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /C:/Users/RANJITH/MrYoda/src/test/java/com/mryoda/diagnostics/api/tests/customer/AddCustomerAPITest.java:[446,69] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ MrYoda ---
+[INFO] Using auto detected provider org.apache.maven.surefire.testng.TestNGProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+SLF4J(W): Class path contains multiple SLF4J providers.
+SLF4J(W): Found provider [org.slf4j.simple.SimpleServiceProvider@578486a3]
+SLF4J(W): Found provider [org.apache.logging.slf4j.SLF4JServiceProvider@551aa95a]
+SLF4J(W): See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J(I): Actual provider is of type [org.slf4j.simple.SimpleServiceProvider@578486a3]
+...
+... TestNG 7.8.0 by CΘdric Beust (cedric@beust.com)
+...
+
+
+#########################################################
+  STARTING NEW XML TEST FLOW - RESETTING CONTEXT
+#########################################################
+
+[CLEANING] RequestContext Flow State...
+[SUCCESS] RequestContext State Successfully Cleared.
+
+==========================================================
+           USER REGISTRATION TEST
+==========================================================
+
+? Generated Mobile: 9683361322
+
+?? USER REGISTRATION REQUEST:
+{
+  "country_code": "+91",
+  "gender": "female",
+  "dob": "1975-02-19",
+  "mobile": "9683361322",
+  "profile_pic": "https://cdn.test.com/profile/default_avatar_12345.png",
+  "last_name": "Miller",
+  "middle_name": "Kumar",
+  "title": "Mrs",
+  "first_name": "Leo1791953953962",
+  "alt_mobile": "6927518683",
+  "email": "test2422305292200@example.com"
+}
+Request Body: {"country_code":"+91","gender":"female","dob":"1975-02-19","mobile":"9683361322","profile_pic":"https://cdn.test.com/profile/default_avatar_12345.png","last_name":"Miller","middle_name":"Kumar","title":"Mrs","first_name":"Leo1791953953962","alt_mobile":"6927518683","email":"test2422305292200@example.com"}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/users/addUser
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "country_code": "+91",
+    "gender": "female",
+    "dob": "1975-02-19",
+    "mobile": "9683361322",
+    "profile_pic": "https://cdn.test.com/profile/default_avatar_12345.png",
+    "last_name": "Miller",
+    "middle_name": "Kumar",
+    "title": "Mrs",
+    "first_name": "Leo1791953953962",
+    "alt_mobile": "6927518683",
+    "email": "test2422305292200@example.com"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /users/addUser
+   Time    : ? 886 ms
+----------------------------
+
+
+? USER REGISTRATION RESPONSE RECEIVED
+
+? ===== EXTRACTED USER REGISTRATION DATA =====
+? User ID (GUID)  : eecc3125-b3d2-404c-a07a-9817b5e7a587
+? First Name      : Leo1791953953962
+? Last Name       : Miller
+? Email           : test2422305292200@example.com
+?  Gender          : female
+? DOB             : 1975-02-19
+? Mobile          : 9683361322
+? Country Code    : +91
+? Status          : null
+? Created At      : null
+? Updated At      : null
+==============================================
+
+? STORED IN RequestContext (GENERIC):
+? User ID: eecc3125-b3d2-404c-a07a-9817b5e7a587
+? First Name: Leo1791953953962
+? Last Name: Miller
+? Mobile: 9683361322 (already stored)
+
+==========================================================
+        USER REGISTRATION COMPLETED
+==========================================================
+
+[PASS] UserCreateAPITest.testUserRegistration_CreateNewUser
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+==========================================================
+            NEW USER LOGIN TEST
+==========================================================
+
+==================================================
+========== TOKEN GENERATION START (NEW_USER) ==========
+==================================================
+Request Body: {"country_code":"+91","mobile":"9683361322"}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/otps/getOtp
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		type=Mr.Yoda Web
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "country_code": "+91",
+    "mobile": "9683361322"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /otps/getOtp
+   Time    : ? 90 ms
+----------------------------
+
+
+[FAIL] LoginAPITest.testLoginWithOTP_NewlyRegisteredUser
+[ExtentListener] Calling AIFailureAnalyzer for: testLoginWithOTP_NewlyRegisteredUser | records=1
+[AIFailureAnalyzer] ai.failure.analyzer.enabled = false
+[AIFailureAnalyzer] Disabled via config
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 90 ms | Max: 90 ms | Calls: 1
+   > History: [90]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> STEP 1: DETAILED FLOW - LOGIN & SETUP <<<
+   ? Clearing Context for clean flow execution...
+>>> STORED VISIT NUMBER: null
+   ? ScenarioContext Cleared.
+   Test Configuration User Type: new_user | normalized: new_user
+   Using NEW USER credentials.
+Token missing for new_user, attempting generateToken...
+
+==================================================
+========== TOKEN GENERATION START (NEW_USER) ==========
+==================================================
+Request Body: {"country_code":"+91","mobile":"9003730394"}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/otps/getOtp
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		type=Mr.Yoda Web
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "country_code": "+91",
+    "mobile": "9003730394"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /otps/getOtp
+   Time    : ? 68 ms
+----------------------------
+
+
+[FAIL] COD_01_LoginTest.step01_LoginAndSetup
+[ExtentListener] Calling AIFailureAnalyzer for: step01_LoginAndSetup | records=1
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+===== LOCATION API ù NEW USER =====
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getlocations
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=null
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getlocations
+   Time    : ? 346 ms
+----------------------------
+
+
+? Total Locations Found: 8
+   Location: Ameerpet (HQ) | City: Hyderabad | State: Telangana | Status: ACTIVE | ID: 64870066842708a0d5ae6c77
+   ? Coordinates: Lat=17.4358447, Long=78.452737
+? Stored: Ameerpet (HQ) ? ID: 64870066842708a0d5ae6c77 | City: Hyderabad | State: Telangana | Coordinates: (17.4358447, 78.452737)
+   Location: Kakinada | City: Ramanayyapeta | State: Andhra Pradesh | Status: ACTIVE | ID: 69faca74ea511475d6ebd956
+   ? Coordinates: Lat=16.9864821, Long=82.2398183
+? Stored: Kakinada ? ID: 69faca74ea511475d6ebd956 | City: Ramanayyapeta | State: Andhra Pradesh | Coordinates: (16.9864821, 82.2398183)
+   Location: Khammam | City: Khammam | State: Telangana | Status: ACTIVE | ID: 68ecce703d573db19b650c76
+   ? Coordinates: Lat=17.248727, Long=80.1668882
+? Stored: Khammam ? ID: 68ecce703d573db19b650c76 | City: Khammam | State: Telangana | Coordinates: (17.248727, 80.1668882)
+   Location: Miyapur | City: Hyderabad | State: Telangana | Status: ACTIVE | ID: 69facb75ea511475d6ebe361
+   ? Coordinates: Lat=17.5062225, Long=78.3570888
+? Stored: Miyapur ? ID: 69facb75ea511475d6ebe361 | City: Hyderabad | State: Telangana | Coordinates: (17.5062225, 78.3570888)
+   Location: Tirupati | City: Tirupati | State: Andhra Pradesh | Status: ACTIVE | ID: 64870066842708a0d5ae6c75
+   ? Coordinates: Lat=13.6350832, Long=79.42642049999999
+? Stored: Tirupati ? ID: 64870066842708a0d5ae6c75 | City: Tirupati | State: Andhra Pradesh | Coordinates: (13.6350832, 79.42642049999999)
+   Location: Visakhapatnam | City: Visakhapatnam | State: Andhra Pradesh | Status: ACTIVE | ID: 67346a7655a51ec8ef586bb1
+   ? Coordinates: Lat=17.7087874, Long=83.3106882
+? Stored: Visakhapatnam ? ID: 67346a7655a51ec8ef586bb1 | City: Visakhapatnam | State: Andhra Pradesh | Coordinates: (17.7087874, 83.3106882)
+   Location: Warangal | City: Hyderabad | State: Telangana | Status: ACTIVE | ID: 69facbc3ea511475d6ebed6c
+   ? Coordinates: Lat=18.0042956, Long=79.5693886
+? Stored: Warangal ? ID: 69facbc3ea511475d6ebed6c | City: Hyderabad | State: Telangana | Coordinates: (18.0042956, 79.5693886)
+   Location: gachibowli | City: Hyderabad | State: Telangana | Status: ACTIVE | ID: 69fb0523ea511475d6ec0295
+   ? Coordinates: Lat=17.4383993, Long=78.3637355
+? Stored: gachibowli ? ID: 69fb0523ea511475d6ec0295 | City: Hyderabad | State: Telangana | Coordinates: (17.4383993, 78.3637355)
+
+? Critical Location 'Ameerpet (HQ)' found and stored: 64870066842708a0d5ae6c77
+   ? Ameerpet (HQ) Coordinates: Lat=17.4358447, Long=78.452737
+   This location will be used in GlobalSearch and AddToCart APIs
+
+? Locations stored for reuse in next APIs
+
+
+[PASS] LocationAPITest.testGetLocations_ForNewUser
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+????????????????????????????????????????????????????????????
+?         GET ALL BRANDS API ù NEW USER                    ?
+????????????????????????????????????????????????????????????
+? Requesting page: 1
+Request Body Params: {page=1}
+Request method:	POST
+Request URI:	https://staging-api-membership.yodaprojects.com/brand/getAllBrands
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=null
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: https://staging-api-membership.yodaprojects.com/brand/getAllBrands
+   Time    : ? 154 ms
+----------------------------
+
+
+?? Total Brands Found: 4
+   Brand: Diagnostics | Status: true | ID: 967a5f02-2e38-47c8-b850-c4aeee8898ed
+? Stored: Diagnostics ? brand_id: 967a5f02-2e38-47c8-b850-c4aeee8898ed
+   Brand: DNA Decoder | Status: true | ID: e4041fd4-ee8d-43c6-87ef-c2599f824850
+? Stored: DNA Decoder ? brand_id: e4041fd4-ee8d-43c6-87ef-c2599f824850
+   Brand: MedMatch | Status: true | ID: f45d6359-198a-4afa-bb96-5fb00f12141f
+? Stored: MedMatch ? brand_id: f45d6359-198a-4afa-bb96-5fb00f12141f
+   Brand: Yodaara | Status: true | ID: c81b8bc9-6625-4e79-9f06-8f02f2880f30
+? Stored: Yodaara ? brand_id: c81b8bc9-6625-4e79-9f06-8f02f2880f30
+
+? Critical Brand 'Diagnostics' found and stored: 967a5f02-2e38-47c8-b850-c4aeee8898ed
+   This brand will be used in AddToCart API
+   ? Set as selected brand
+
+? Brands stored for reuse in next APIs
+
+
+[PASS] BrandAPITest.testGetBrands_ForNewUser
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+====================================================
+
+Running Global Search as part of NEW USER flow...
+
+==========================================================
+         GLOBAL SEARCH API TEST - COMPLETE FLOW
+==========================================================
+? DEBUG ? STORED LOCATIONS: {Tirupati=64870066842708a0d5ae6c75, gachibowli=69fb0523ea511475d6ec0295, Kakinada=69faca74ea511475d6ebd956, Visakhapatnam=67346a7655a51ec8ef586bb1, Khammam=68ecce703d573db19b650c76, Ameerpet (HQ)=64870066842708a0d5ae6c77, Warangal=69facbc3ea511475d6ebed6c, Miyapur=69facb75ea511475d6ebe361}
+
+? STEP 1: Validating Location from Previous API (LocationAPI)
+   ? Location 'Ameerpet (HQ)' validated from LocationAPI: 64870066842708a0d5ae6c77
+   ? This location will be used for Global Search
+
+?  IMPORTANT: Tests to search have been configured.
+
+? Tests to Search: Bone Profile -1, T4 - THYROXINE, RANDOM BLOOD GLUCOSE (RBS), CLOTTING TIME
+? Total Tests: 4
+
+? SEARCHING FOR 4 TESTS
+? LOCATION: Ameerpet (HQ) ? 64870066842708a0d5ae6c77
+
+[FAIL] GlobalSearchAPITest.testGlobalSearch_ForNewUser
+[ExtentListener] Calling AIFailureAnalyzer for: testGlobalSearch_ForNewUser | records=0
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+==========================================================
+      CATALOG VERIFICATION - DIAGNOSTICS
+==========================================================
+?? No tests found in Context. Fetching dynamically from API...
+Request Body: {limit=10, diseases=[], location=64870066842708a0d5ae6c77, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllTests
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 10,
+    "diseases": [
+        
+    ],
+    "location": "64870066842708a0d5ae6c77",
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllTests
+   Time    : ? 777 ms
+----------------------------
+
+? Final Verification Target: radiop
+? Searching for 'radiop' in Diagnostics catalog...
+   ? Scanning Page: 1
+Request Body: {limit=10, diseases=[], location=64870066842708a0d5ae6c77, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllTests
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 10,
+    "diseases": [
+        
+    ],
+    "location": "64870066842708a0d5ae6c77",
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllTests
+   Time    : ? 507 ms
+----------------------------
+
+
+? FOUND MATCH: radiop
+   ? Details for: Unknown Item
+      Price Verified: ?37.0
+      ID Verified: 69b3b5e2e212b20e79646158
+      Home Collection: AVAILABLE
+
+[PASS] CatalogVerificationAPITest.verifyDiagnosticsCatalog
+
+==========================================================
+      CATALOG VERIFICATION - DNA DECODER
+==========================================================
+Request Body: {dnadecoder=true, limit=20, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllTests
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "dnadecoder": true,
+    "limit": 20,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllTests
+   Time    : ? 179 ms
+----------------------------
+
+? Dynamic Target Selected: Endometritis Diagnostic Panel (Advanced)
+? Searching for 'Endometritis Diagnostic Panel (Advanced)' in DNA Decoder catalog...
+   ? Scanning Page: 1
+Request Body: {dnadecoder=true, limit=20, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllTests
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "dnadecoder": true,
+    "limit": 20,
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllTests
+   Time    : ? 146 ms
+----------------------------
+
+
+? FOUND MATCH: Endometritis Diagnostic Panel (Advanced)
+   ? Details for: Unknown Item
+      Price Verified: ?1300.0
+      ID Verified: 691c51d9ea05374989185d85
+      Home Collection: NOT AVAILABLE
+
+[PASS] CatalogVerificationAPITest.verifyDnaDecoderCatalog
+
+==========================================================
+      CATALOG VERIFICATION - PGX (PHARMACOGENOMICS)
+==========================================================
+Request Body: {limit=20, location=64870066842708a0d5ae6c77, pharmacogenomics=true, page=1, popular=true}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllTests
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 20,
+    "location": "64870066842708a0d5ae6c77",
+    "pharmacogenomics": true,
+    "page": 1,
+    "popular": true
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllTests
+   Time    : ? 143 ms
+----------------------------
+
+? Dynamic Target Selected: Diabetes Pgx
+? Searching for 'Diabetes Pgx' in PGX catalog...
+   ? Scanning Page: 1
+Request Body: {pharmacogenomics=true, limit=20, location=64870066842708a0d5ae6c77, page=1, popular=true}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllTests
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "pharmacogenomics": true,
+    "limit": 20,
+    "location": "64870066842708a0d5ae6c77",
+    "page": 1,
+    "popular": true
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllTests
+   Time    : ? 143 ms
+----------------------------
+
+
+? FOUND MATCH: Diabetes Pgx
+   ? Details for: Unknown Item
+      Price Verified: ?13000.0
+      ID Verified: 675921110856fe1e1e9930da
+      Home Collection: AVAILABLE
+
+[PASS] CatalogVerificationAPITest.verifyPgxCatalog
+
+==========================================================
+      CATALOG VERIFICATION - FETAL MEDICINE
+==========================================================
+Request Body: {filter=, limit=10, location=64870066842708a0d5ae6c77, page=1, popular=true}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getFetalMedicineTests
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "filter": "",
+    "limit": 10,
+    "location": "64870066842708a0d5ae6c77",
+    "page": 1,
+    "popular": true
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getFetalMedicineTests
+   Time    : ? 167 ms
+----------------------------
+
+? Dynamic Target Selected: Cervical Length
+? Searching for 'Cervical Length' in Fetal Medicine catalog...
+   ? Scanning Page: 1
+Request Body: {filter=, limit=10, location=64870066842708a0d5ae6c77, page=1, popular=true}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getFetalMedicineTests
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "filter": "",
+    "limit": 10,
+    "location": "64870066842708a0d5ae6c77",
+    "page": 1,
+    "popular": true
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getFetalMedicineTests
+   Time    : ? 152 ms
+----------------------------
+
+
+? FOUND MATCH: Cervical Length
+   ? Details for: Cervical Length
+      Price Verified: ?800.0
+      ID Verified: 67a48777ed34cc920fc6b7ab
+      Home Collection: NOT AVAILABLE
+
+[PASS] CatalogVerificationAPITest.verifyFetalMedicineCatalog
+
+==========================================================
+      CATALOG VERIFICATION - PACKAGES
+==========================================================
+Request Body: {limit=10, diseases=[], location=64870066842708a0d5ae6c77, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 10,
+    "diseases": [
+        
+    ],
+    "location": "64870066842708a0d5ae6c77",
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 157 ms
+----------------------------
+
+? Dynamic Target Selected: Type 1 Diabetes Autoimmune Profile
+? Searching for 'Type 1 Diabetes Autoimmune Profile' in Packages catalog...
+   ? Scanning Page: 1
+Request Body: {limit=10, diseases=[], location=64870066842708a0d5ae6c77, page=1}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/tests/getAllPackages
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "limit": 10,
+    "diseases": [
+        
+    ],
+    "location": "64870066842708a0d5ae6c77",
+    "page": 1
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /tests/getAllPackages
+   Time    : ? 144 ms
+----------------------------
+
+
+? FOUND MATCH: Type 1 Diabetes Autoimmune Profile
+   ? Details for: Unknown Item
+      Price Verified: ?15000.0
+      ID Verified: 675921b2ba6f16b8c0d7bf10
+      Home Collection: NOT AVAILABLE
+
+[PASS] CatalogVerificationAPITest.verifyPackagesCatalog
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+--- AddToCart For New User (Parameter: home, applyCoupon: false) ---
+
+? CUSTOM PAYLOAD BUILDER for null
+   ??  No tests found in RequestContext (must run GlobalSearch first)
+
+[PASS] AddToCartAPITest.testAddToCart_ForNewUser
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> STEP 2: GET CART & VERIFY PRICE <<<
+
+[FAIL] COD_02_GetCartTest.step02_VerifyCartAndPrice
+[ExtentListener] Calling AIFailureAnalyzer for: step02_VerifyCartAndPrice | records=0
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> STEP 3: ADD ADDRESS & SLOT <<<
+
+==========================================================
+      ADD ADDRESS API (Required for Home Order)
+==========================================================
+Request Body: {country=India, city=Hyderabad, recipient_mobile_number=9999999999, latitude=17.4358447, type=home, country_code=+91, user_id=eecc3125-b3d2-404c-a07a-9817b5e7a587, address_line1=Hyderabad, name=Ameerpet (HQ), receiver_name=Test User, state=Telangana, postal_code=500016, longitude=78.452737}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/address/addAddress
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=null
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "country": "India",
+    "city": "Hyderabad",
+    "recipient_mobile_number": "9999999999",
+    "latitude": "17.4358447",
+    "type": "home",
+    "country_code": "+91",
+    "user_id": "eecc3125-b3d2-404c-a07a-9817b5e7a587",
+    "address_line1": "Hyderabad",
+    "name": "Ameerpet (HQ)",
+    "receiver_name": "Test User",
+    "state": "Telangana",
+    "postal_code": "500016",
+    "longitude": "78.452737"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /address/addAddress
+   Time    : ? 193 ms
+----------------------------
+
+Response Status: 201
+Response Body: {"status":201,"success":true,"msg":"Address saved successfully","data":{"id":2497,"guid":"631d2a41-e36d-4fb3-86d6-2277f1940967","user_id":"eecc3125-b3d2-404c-a07a-9817b5e7a587","_user_id":6852,"receiver_name":"Test User","recipient_mobile_number":"9999999999","address_line1":"Hyderabad","address_line2":null,"land_mark":null,"city":"Hyderabad","state":"Telangana","country":"India","postal_code":"500016","name":"Ameerpet (HQ)","type":"home","latitude":"17.4358447","longitude":"78.452737","is_default":true,"serving_location":true,"country_code":"+91","floor_number":null,"created_at":"2026-10-14T04:59:21.935Z","updated_at":"2026-10-14T04:59:21.935Z","deleted_at":null}}
+Created Address ID: 2497
+? SEARCHING FOR AVAILABLE LAB SLOTS...
+Request Body: {slot_start_time=2026-10-14, center_id=64870066842708a0d5ae6c77, limit=100, page=1, type=lab}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/slot/getSlotCountByTime
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=null
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "slot_start_time": "2026-10-14",
+    "center_id": "64870066842708a0d5ae6c77",
+    "limit": 100,
+    "page": 1,
+    "type": "lab"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /slot/getSlotCountByTime
+   Time    : ? 122 ms
+----------------------------
+
+--- Lab Slot Search ---
+Date Searched: 2026-10-14 | Center: 64870066842708a0d5ae6c77
+Status Code: 200
+? Found Lab Slot: b63cab28-d6fb-4fc3-8f0d-85d0b60e0ab4 on 2026-10-14
+
+? UPDATING CART WITH SLOT...
+   ?? No activeProductDetails found in context, rebuilding generic list...
+
+[FAIL] COD_03_AddAddressAndSlotTest.step03_AddAddressAndSlot
+[ExtentListener] Calling AIFailureAnalyzer for: step03_AddAddressAndSlot | records=2
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /address/addAddress                                                             
+   > Status: [FAST] | Avg: 193 ms | Max: 193 ms | Calls: 1
+   > History: [193]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /slot/getSlotCountByTime                                                        
+   > Status: [FAST] | Avg: 122 ms | Max: 122 ms | Calls: 1
+   > History: [122]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> STEP 4: VERIFY PAYMENT (PRE-CHECK) <<<
+
+==========================================================
+      GET CART API (Order Type: home)
+==========================================================
+Query Params: {location=64870066842708a0d5ae6c77, order_type=home, brand=967a5f02-2e38-47c8-b850-c4aeee8898ed}
+Request method:	GET
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/carts/v2/getCartById/eecc3125-b3d2-404c-a07a-9817b5e7a587?location=64870066842708a0d5ae6c77&order_type=home&brand=967a5f02-2e38-47c8-b850-c4aeee8898ed
+Proxy:			<none>
+Request params:	<none>
+Query params:	location=64870066842708a0d5ae6c77
+				order_type=home
+				brand=967a5f02-2e38-47c8-b850-c4aeee8898ed
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=null
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /carts/v2/getCartById/eecc3125-b3d2-404c-a07a-9817b5e7a587
+   Time    : ? 242 ms
+----------------------------
+
+Response Status: 404
+?? GetCart Failed with status 404
+Response Body: {"status":404,"success":false,"msg":"Cart not found for user_id: eecc3125-b3d2-404c-a07a-9817b5e7a587"}
+
+[FAIL] COD_04_VerifyPaymentPreCheckTest.step04_VerifyPaymentPreCheck
+[ExtentListener] Calling AIFailureAnalyzer for: step04_VerifyPaymentPreCheck | records=1
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /address/addAddress                                                             
+   > Status: [FAST] | Avg: 193 ms | Max: 193 ms | Calls: 1
+   > History: [193]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /carts/v2/getCartById/eecc3125-b3d2-404c-a07a-9817b5e7a587                      
+   > Status: [FAST] | Avg: 242 ms | Max: 242 ms | Calls: 1
+   > History: [242]
+   --------------------------------------------------------------------------------
+   /slot/getSlotCountByTime                                                        
+   > Status: [FAST] | Avg: 122 ms | Max: 122 ms | Calls: 1
+   > History: [122]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> STEP 5: CROSS-API VALIDATION <<<
+
+==========================================================
+      GET PAYMENT BY ID API (DEV)
+==========================================================
+? callGetPaymentByIdAPI: paymentId is null or empty ù cannot call API.
+
+[FAIL] COD_05_CrossApiValidationTest.step05_CrossApiValidation
+[ExtentListener] Calling AIFailureAnalyzer for: step05_CrossApiValidation | records=0
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /address/addAddress                                                             
+   > Status: [FAST] | Avg: 193 ms | Max: 193 ms | Calls: 1
+   > History: [193]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /carts/v2/getCartById/eecc3125-b3d2-404c-a07a-9817b5e7a587                      
+   > Status: [FAST] | Avg: 242 ms | Max: 242 ms | Calls: 1
+   > History: [242]
+   --------------------------------------------------------------------------------
+   /slot/getSlotCountByTime                                                        
+   > Status: [FAST] | Avg: 122 ms | Max: 122 ms | Calls: 1
+   > History: [122]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> PHLEBO_MGMT_01: LOGIN PHLEBO <<<
+   Request Body : {
+  "password": "123456",
+  "mobile": "9003730394",
+  "token": "test-fcm-token-12345"
+}
+Request Body: {"password":"123456","mobile":"9003730394","token":"test-fcm-token-12345"}
+Request method:	POST
+Request URI:	https://staging-api-phlebo-notification.yodadiagnostics.com/api/v1/phlebo/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "password": "123456",
+    "mobile": "9003730394",
+    "token": "test-fcm-token-12345"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /api/v1/phlebo/login
+   Time    : ? 161 ms
+----------------------------
+
+   Response Status : 200
+{
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "phlebo": {
+            "guid": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+            "id": 559,
+            "name": "Ranjith",
+            "mobileNumber": "9003730394",
+            "password": "$2b$10$GhZfXAoCIwhBaHTmsI7IvO.cHHmlmY8iJK.gSuoP9O7bBjvha0Ev.",
+            "employeeId": "TEK123",
+            "employeeCode": "2313ed",
+            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+            "profilePic": null,
+            "email": null,
+            "isActive": true,
+            "firebaseToken": "test-fcm-token-12345",
+            "type": "{phlebo}",
+            "createdAt": "2026-10-12T07:06:17.529Z",
+            "updatedAt": "2026-10-14T04:59:22.656Z",
+            "deletedAt": null
+        },
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaGxlYm9faWQiOiIxZjI4OWVjOS02NWM2LTQzZTMtYjM5Ni1mZTVkYTMzZGJhZTMiLCJtb2JpbGUiOiI5MDAzNzMwMzk0IiwibmFtZSI6IlJhbmppdGgiLCJyb2xlIjoicGhsZWJvIiwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MiwiZXhwIjoxNzk0NTQ1OTYyfQ.XkCq54iWnR6JpXRxs4MzPmVkX9KoL5dAMWNyzjvpN_c",
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaGxlYm9faWQiOiIxZjI4OWVjOS02NWM2LTQzZTMtYjM5Ni1mZTVkYTMzZGJhZTMiLCJtb2JpbGUiOiI5MDAzNzMwMzk0IiwibmFtZSI6IlJhbmppdGgiLCJyb2xlIjoicGhsZWJvIiwidHlwZSI6IlJFRlJFU0giLCJpYXQiOjE3OTE5NTM5NjIsImV4cCI6MTc5OTcyOTk2Mn0.e7W_g6nywMCkKiqUFU3b4gJFbr8msC0GyxIooXAUCQE",
+        "expires_in": 2592000,
+        "hub_id": null,
+        "hub_name": null
+    }
+}
+   Response Body   : {
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "phlebo": {
+            "guid": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+            "id": 559,
+            "name": "Ranjith",
+            "mobileNumber": "9003730394",
+            "password": "$2b$10$GhZfXAoCIwhBaHTmsI7IvO.cHHmlmY8iJK.gSuoP9O7bBjvha0Ev.",
+            "employeeId": "TEK123",
+            "employeeCode": "2313ed",
+            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+            "profilePic": null,
+            "email": null,
+            "isActive": true,
+            "firebaseToken": "test-fcm-token-12345",
+            "type": "{phlebo}",
+            "createdAt": "2026-10-12T07:06:17.529Z",
+            "updatedAt": "2026-10-14T04:59:22.656Z",
+            "deletedAt": null
+        },
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaGxlYm9faWQiOiIxZjI4OWVjOS02NWM2LTQzZTMtYjM5Ni1mZTVkYTMzZGJhZTMiLCJtb2JpbGUiOiI5MDAzNzMwMzk0IiwibmFtZSI6IlJhbmppdGgiLCJyb2xlIjoicGhsZWJvIiwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MiwiZXhwIjoxNzk0NTQ1OTYyfQ.XkCq54iWnR6JpXRxs4MzPmVkX9KoL5dAMWNyzjvpN_c",
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaGxlYm9faWQiOiIxZjI4OWVjOS02NWM2LTQzZTMtYjM5Ni1mZTVkYTMzZGJhZTMiLCJtb2JpbGUiOiI5MDAzNzMwMzk0IiwibmFtZSI6IlJhbmppdGgiLCJyb2xlIjoicGhsZWJvIiwidHlwZSI6IlJFRlJFU0giLCJpYXQiOjE3OTE5NTM5NjIsImV4cCI6MTc5OTcyOTk2Mn0.e7W_g6nywMCkKiqUFU3b4gJFbr8msC0GyxIooXAUCQE",
+        "expires_in": 2592000,
+        "hub_id": null,
+        "hub_name": null
+    }
+}
+   --- PHLEBO_MGMT_01 login: field & cross-API validation ---
+      [OK]   http status expected 200/201 but was 200
+      [OK]   success success flag must be true
+      [OK]   message present [Login successful]
+      [OK]   data.phlebo.guid valid UUID
+      [OK]   data.phlebo.name present [Ranjith]
+      [OK]   data.phlebo.mobileNumber == login mobile = [9003730394]
+      [OK]   data.phlebo.isActive = [true]
+      [OK]   data.phlebo.zoneId present [6a5487f5bf5622a2bebd0ba3]
+      [OK]   data.phlebo.employeeId present [TEK123]
+      [OK]   data.phlebo.type present [{phlebo}]
+      [OK]   data.access_token is a JWT access_token must have 3 JWT segments
+      [OK]   data.refresh_token is a JWT refresh_token must have 3 JWT segments
+      [OK]   access_token != refresh_token access and refresh tokens must differ
+      [OK]   JWT.phlebo_id == data.phlebo.guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   JWT.mobile == data.phlebo.mobileNumber = [9003730394]
+      [OK]   JWT.name == data.phlebo.name = [Ranjith]
+      [OK]   JWT.role = [phlebo]
+      [OK]   JWT.type = [ACCESS]
+      [OK]   JWT.exp > JWT.iat token lifetime must be positive but was 2592000
+      [OK]   data.expires_in == JWT.exp - JWT.iat = [2592000]
+      [OK]   refresh JWT.phlebo_id == data.phlebo.guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+   --- PHLEBO_MGMT_01 login: 21 checks passed, 0 failed, 0 backend defect(s) ---
+   Phlebo GUID      : 1f289ec9-65c6-43e3-b396-fe5da33dbae3
+   JWT Token Present: true
+   [PASS] PHLEBO_MGMT_01 PASSED -- Phlebo login successful.
+
+
+[PASS] PhlebioManagementTest.PHLEBO_MGMT_01_LoginPhlebo
+
+>>> PHLEBO_MGMT_02: ADMIN LOGIN <<<
+   Target URL   : https://staging-api-diagnostics.yodaprojects.com/auth/login
+   Identifier   : 7878434343
+Request Body: {identifier=7878434343, password=123456, type=login, fcmToken=ec0gPKSrIUs443ILfDLHaM:APA91bG_test_admin_fcm}
+Request method:	POST
+Request URI:	https://staging-api-diagnostics.yodaprojects.com/auth/login
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "identifier": "7878434343",
+    "password": "123456",
+    "type": "login",
+    "fcmToken": "ec0gPKSrIUs443ILfDLHaM:APA91bG_test_admin_fcm"
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: https://staging-api-diagnostics.yodaprojects.com/auth/login
+   Time    : ? 204 ms
+----------------------------
+
+   Response Status : 200
+{
+    "status": 201,
+    "success": true,
+    "msg": "User login successfully ",
+    "total_amount": 0,
+    "data": {
+        "userdData": {
+            "user_guid": "54419a89-0e71-4c40-9354-17b28b05230b",
+            "user_name": "Testing09",
+            "email": "maruthi.adepu@tekreant.com",
+            "location_id": null,
+            "role_id": "fe8f83b1-ca45-4991-8e10-9c9e2444e344",
+            "entity_type": null,
+            "login_type": "TestGo-US",
+            "currency_symbol": null
+        },
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjU0NDE5YTg5LTBlNzEtNGM0MC05MzU0LTE3YjI4YjA1MjMwYiIsInJvbGVfaWQiOiJmZThmODNiMS1jYTQ1LTQ5OTEtOGUxMC05YzllMjQ0NGUzNDQiLCJsb2NhdGlvbiI6bnVsbCwicm9sZSI6ImFkbWluX29ubHkiLCJtb2JpbGUiOiI3ODc4NDM0MzQzIiwiaXNfYWRtaW5fdXNlciI6dHJ1ZSwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MywiZXhwIjoxNzk0NTQ1OTYzfQ.80NNj9ImKtyBubR0nQR4ExVXou0T61NyAgr48qem7jo",
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjU0NDE5YTg5LTBlNzEtNGM0MC05MzU0LTE3YjI4YjA1MjMwYiIsInJvbGVfaWQiOiJmZThmODNiMS1jYTQ1LTQ5OTEtOGUxMC05YzllMjQ0NGUzNDQiLCJsb2NhdGlvbiI6bnVsbCwicm9sZSI6ImFkbWluX29ubHkiLCJtb2JpbGUiOiI3ODc4NDM0MzQzIiwiaXNfYWRtaW5fdXNlciI6dHJ1ZSwidHlwZSI6IlJFRlJFU0giLCJpYXQiOjE3OTE5NTM5NjMsImV4cCI6MTc5NzEzNzk2M30.BuKR3p966FQwPBLr4mH8jXEDH9EPfFunEXCW1bjMJkc",
+        "permission": {
+            "*": [
+                "*"
+            ]
+        },
+        "wellness_b2b_locations": [
+            
+        ],
+        "userType": "Super Admin"
+    }
+}
+   Response Body   : {
+    "status": 201,
+    "success": true,
+    "msg": "User login successfully ",
+    "total_amount": 0,
+    "data": {
+        "userdData": {
+            "user_guid": "54419a89-0e71-4c40-9354-17b28b05230b",
+            "user_name": "Testing09",
+            "email": "maruthi.adepu@tekreant.com",
+            "location_id": null,
+            "role_id": "fe8f83b1-ca45-4991-8e10-9c9e2444e344",
+            "entity_type": null,
+            "login_type": "TestGo-US",
+            "currency_symbol": null
+        },
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjU0NDE5YTg5LTBlNzEtNGM0MC05MzU0LTE3YjI4YjA1MjMwYiIsInJvbGVfaWQiOiJmZThmODNiMS1jYTQ1LTQ5OTEtOGUxMC05YzllMjQ0NGUzNDQiLCJsb2NhdGlvbiI6bnVsbCwicm9sZSI6ImFkbWluX29ubHkiLCJtb2JpbGUiOiI3ODc4NDM0MzQzIiwiaXNfYWRtaW5fdXNlciI6dHJ1ZSwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MywiZXhwIjoxNzk0NTQ1OTYzfQ.80NNj9ImKtyBubR0nQR4ExVXou0T61NyAgr48qem7jo",
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjU0NDE5YTg5LTBlNzEtNGM0MC05MzU0LTE3YjI4YjA1MjMwYiIsInJvbGVfaWQiOiJmZThmODNiMS1jYTQ1LTQ5OTEtOGUxMC05YzllMjQ0NGUzNDQiLCJsb2NhdGlvbiI6bnVsbCwicm9sZSI6ImFkbWluX29ubHkiLCJtb2JpbGUiOiI3ODc4NDM0MzQzIiwiaXNfYWRtaW5fdXNlciI6dHJ1ZSwidHlwZSI6IlJFRlJFU0giLCJpYXQiOjE3OTE5NTM5NjMsImV4cCI6MTc5NzEzNzk2M30.BuKR3p966FQwPBLr4mH8jXEDH9EPfFunEXCW1bjMJkc",
+        "permission": {
+            "*": [
+                "*"
+            ]
+        },
+        "wellness_b2b_locations": [
+            
+        ],
+        "userType": "Super Admin"
+    }
+}
+   --- PHLEBO_MGMT_02 admin login: field & cross-API validation ---
+      [OK]   http status expected 200/201 but was 200
+      [OK]   success success flag must be true
+      [OK]   data.userdData.user_guid valid UUID
+      [OK]   data.userdData.user_name present [Testing09]
+      [OK]   data.userdData.email present [maruthi.adepu@tekreant.com]
+      [OK]   data.userdData.role_id present [fe8f83b1-ca45-4991-8e10-9c9e2444e344]
+      [OK]   data.userType present [Super Admin]
+      [OK]   data.access_token is a JWT access_token must have 3 JWT segments
+      [OK]   JWT.mobile == admin identifier = [7878434343]
+      [OK]   JWT.is_admin_user = [true]
+      [OK]   JWT.role present [admin_only]
+      [OK]   JWT.type = [ACCESS]
+      [OK]   JWT.exp > JWT.iat token lifetime must be positive
+   --- PHLEBO_MGMT_02 admin login: 13 checks passed, 0 failed, 0 backend defect(s) ---
+   Admin Token Present: true
+   [PASS] PHLEBO_MGMT_02 PASSED -- Admin login successful.
+
+
+[PASS] PhlebioManagementTest.PHLEBO_MGMT_02_AdminLogin
+
+>>> PHLEBO_MGMT_03: ASSIGN SHIFTS <<<
+   Using phlebo GUID  : 1f289ec9-65c6-43e3-b396-fe5da33dbae3
+   Using admin token  : [present=true]
+   Request Payload : {slots=[{start_time=08:00, end_time=12:00}], from_date=2026-10-14, to_date=2026-10-14, phlebo_guids=[1f289ec9-65c6-43e3-b396-fe5da33dbae3]}
+Request Body: {slots=[{start_time=08:00, end_time=12:00}], from_date=2026-10-14, to_date=2026-10-14, phlebo_guids=[1f289ec9-65c6-43e3-b396-fe5da33dbae3]}
+Request method:	POST
+Request URI:	https://staging-api-phlebo-notification.yodadiagnostics.com/api/v1/phlebo/assign-shifts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjU0NDE5YTg5LTBlNzEtNGM0MC05MzU0LTE3YjI4YjA1MjMwYiIsInJvbGVfaWQiOiJmZThmODNiMS1jYTQ1LTQ5OTEtOGUxMC05YzllMjQ0NGUzNDQiLCJsb2NhdGlvbiI6bnVsbCwicm9sZSI6ImFkbWluX29ubHkiLCJtb2JpbGUiOiI3ODc4NDM0MzQzIiwiaXNfYWRtaW5fdXNlciI6dHJ1ZSwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MywiZXhwIjoxNzk0NTQ1OTYzfQ.80NNj9ImKtyBubR0nQR4ExVXou0T61NyAgr48qem7jo
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "slots": [
+        {
+            "start_time": "08:00",
+            "end_time": "12:00"
+        }
+    ],
+    "from_date": "2026-10-14",
+    "to_date": "2026-10-14",
+    "phlebo_guids": [
+        "1f289ec9-65c6-43e3-b396-fe5da33dbae3"
+    ]
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /api/v1/phlebo/assign-shifts
+   Time    : ? 67 ms
+----------------------------
+
+   Response Status : 400
+{
+    "message": "Phlebo already has shift on one or more selected dates.",
+    "error": "Bad Request",
+    "statusCode": 400
+}
+   Response Body   : {
+    "message": "Phlebo already has shift on one or more selected dates.",
+    "error": "Bad Request",
+    "statusCode": 400
+}
+   [INFO] Shift already assigned for the selected date - skipping assignment: Phlebo already has shift on one or more selected dates.
+Request method:	GET
+Request URI:	https://staging-api-phlebo-notification.yodadiagnostics.com/api/v1/phlebo/1f289ec9-65c6-43e3-b396-fe5da33dbae3/shifts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjU0NDE5YTg5LTBlNzEtNGM0MC05MzU0LTE3YjI4YjA1MjMwYiIsInJvbGVfaWQiOiJmZThmODNiMS1jYTQ1LTQ5OTEtOGUxMC05YzllMjQ0NGUzNDQiLCJsb2NhdGlvbiI6bnVsbCwicm9sZSI6ImFkbWluX29ubHkiLCJtb2JpbGUiOiI3ODc4NDM0MzQzIiwiaXNfYWRtaW5fdXNlciI6dHJ1ZSwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MywiZXhwIjoxNzk0NTQ1OTYzfQ.80NNj9ImKtyBubR0nQR4ExVXou0T61NyAgr48qem7jo
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /api/v1/phlebo/1f289ec9-65c6-43e3-b396-fe5da33dbae3/shifts
+   Time    : ? 63 ms
+----------------------------
+
+   --- PHLEBO_MGMT_03 read-back (shift already present): field & cross-API validation ---
+      [OK]   http status = [200]
+      [OK]   success success flag must be true
+      [OK]   data.phlebo_id == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   data.phlebo_name == login name = [Ranjith]
+      [OK]   data.zone_id == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   data.shifts_by_date present must contain at least one date
+      [OK]   shift[2026-10-12].shift_map.phleboId == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   shift[2026-10-12].shift_map.slotId == shift.guid = [2f8739b7-bce7-473d-aa7f-f18be7f718b8]
+      [OK]   shift[2026-10-12].shift.zoneId == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   shift[2026-10-12].shift_map.shiftDate == date shiftDate [2026-10-12] must start with [2026-10-12]
+      [OK]   shift[2026-10-12].shift.shiftStartTime on 2026-10-12 start [2026-10-12 08:00:00] must be on 2026-10-12
+      [OK]   shift[2026-10-12] end > start end [2026-10-12 12:00:00] must be after start [2026-10-12 08:00:00]
+      [OK]   shift[2026-10-12].shift.status present [ACTIVE]
+      [OK]   shift[2026-10-13].shift_map.phleboId == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   shift[2026-10-13].shift_map.slotId == shift.guid = [f21f3cab-4d14-4d4d-9f5c-d3289a9b9626]
+      [OK]   shift[2026-10-13].shift.zoneId == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   shift[2026-10-13].shift_map.shiftDate == date shiftDate [2026-10-13] must start with [2026-10-13]
+      [OK]   shift[2026-10-13].shift.shiftStartTime on 2026-10-13 start [2026-10-13 08:00:00] must be on 2026-10-13
+      [OK]   shift[2026-10-13] end > start end [2026-10-13 12:00:00] must be after start [2026-10-13 08:00:00]
+      [OK]   shift[2026-10-13].shift.status present [ACTIVE]
+      [OK]   shift[2026-10-14].shift_map.phleboId == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   shift[2026-10-14].shift_map.slotId == shift.guid = [cf08985d-8269-440f-86cd-184a56629821]
+      [OK]   shift[2026-10-14].shift.zoneId == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   shift[2026-10-14].shift_map.shiftDate == date shiftDate [2026-10-14] must start with [2026-10-14]
+      [OK]   shift[2026-10-14].shift.shiftStartTime on 2026-10-14 start [2026-10-14 08:00:00] must be on 2026-10-14
+      [OK]   shift[2026-10-14] end > start end [2026-10-14 12:00:00] must be after start [2026-10-14 08:00:00]
+      [OK]   shift[2026-10-14].shift.status present [ACTIVE]
+      [OK]   today's 08:00-12:00 shift.status = [ACTIVE]
+      [OK]   today's shift_map.status = [ACTIVE]
+      [OK]   shift[2034-07-15].shift_map.phleboId == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   shift[2034-07-15].shift_map.slotId == shift.guid = [98ebffbe-06d1-4c69-93ff-d44f71f74061]
+      [OK]   shift[2034-07-15].shift.zoneId == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   shift[2034-07-15].shift_map.shiftDate == date shiftDate [2034-07-15] must start with [2034-07-15]
+      [OK]   shift[2034-07-15].shift.shiftStartTime on 2034-07-15 start [2034-07-15 08:00:00] must be on 2034-07-15
+      [OK]   shift[2034-07-15] end > start end [2034-07-15 12:00:00] must be after start [2034-07-15 08:00:00]
+      [OK]   shift[2034-07-15].shift.status present [ACTIVE]
+      [OK]   today's 08:00-12:00 shift exists no shift for 2026-10-14 08:00-12:00 in the response
+      [OK]   data.total_shifts == sum(shifts) = [4]
+      [OK]   data.total_dates == shifts_by_date.size() = [4]
+   --- PHLEBO_MGMT_03 read-back (shift already present): 39 checks passed, 0 failed, 0 backend defect(s) ---
+   [PASS] PHLEBO_MGMT_03 PASSED -- Shift already present.
+
+
+[PASS] PhlebioManagementTest.PHLEBO_MGMT_03_AssignShifts
+
+>>> PHLEBO_MGMT_04: GET PHLEBO SHIFTS <<<
+   Phlebo GUID : 1f289ec9-65c6-43e3-b396-fe5da33dbae3
+Request method:	GET
+Request URI:	https://staging-api-phlebo-notification.yodadiagnostics.com/api/v1/phlebo/1f289ec9-65c6-43e3-b396-fe5da33dbae3/shifts
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjU0NDE5YTg5LTBlNzEtNGM0MC05MzU0LTE3YjI4YjA1MjMwYiIsInJvbGVfaWQiOiJmZThmODNiMS1jYTQ1LTQ5OTEtOGUxMC05YzllMjQ0NGUzNDQiLCJsb2NhdGlvbiI6bnVsbCwicm9sZSI6ImFkbWluX29ubHkiLCJtb2JpbGUiOiI3ODc4NDM0MzQzIiwiaXNfYWRtaW5fdXNlciI6dHJ1ZSwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MywiZXhwIjoxNzk0NTQ1OTYzfQ.80NNj9ImKtyBubR0nQR4ExVXou0T61NyAgr48qem7jo
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : GET
+   Endpoint: /api/v1/phlebo/1f289ec9-65c6-43e3-b396-fe5da33dbae3/shifts
+   Time    : ? 86 ms
+----------------------------
+
+   Response Status : 200
+{
+    "success": true,
+    "message": "Retrieved all 4 shifts",
+    "data": {
+        "phlebo_id": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+        "phlebo_name": "Ranjith",
+        "zone_id": "6a5487f5bf5622a2bebd0ba3",
+        "date_range": {
+            "from": "all",
+            "to": "all"
+        },
+        "total_shifts": 4,
+        "total_dates": 4,
+        "shifts_by_date": [
+            {
+                "date": "2026-10-12",
+                "shifts": [
+                    {
+                        "shift_map": {
+                            "guid": "2fc51018-d34c-47a0-bf25-c46bf1a8f746",
+                            "id": 773,
+                            "phleboId": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+                            "slotId": "2f8739b7-bce7-473d-aa7f-f18be7f718b8",
+                            "shift": {
+                                "guid": "2f8739b7-bce7-473d-aa7f-f18be7f718b8",
+                                "id": 1085,
+                                "shiftStartTime": "2026-10-12 08:00:00",
+                                "shiftEndTime": "2026-10-12 12:00:00",
+                                "status": "ACTIVE",
+                                "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                                "purpose": "Phlebo Shift Timing",
+                                "createdAt": "2026-10-12T10:07:38.657Z",
+                                "updatedAt": "2026-10-12T10:07:38.657Z"
+                            },
+                            "status": "ACTIVE",
+                            "shiftDate": "2026-10-12",
+                            "createdAt": "2026-10-12T10:07:38.666Z",
+                            "updatedAt": "2026-10-12T10:07:38.666Z"
+                        },
+                        "shift_slot": {
+                            "guid": "2f8739b7-bce7-473d-aa7f-f18be7f718b8",
+                            "id": 1085,
+                            "shiftStartTime": "2026-10-12 08:00:00",
+                            "shiftEndTime": "2026-10-12 12:00:00",
+                            "status": "ACTIVE",
+                            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                            "purpose": "Phlebo Shift Timing",
+                            "createdAt": "2026-10-12T10:07:38.657Z",
+                            "updatedAt": "2026-10-12T10:07:38.657Z"
+                        }
+                    }
+                ]
+            },
+            {
+                "date": "2026-10-13",
+                "shifts": [
+                    {
+                        "shift_map": {
+                            "guid": "b0e97d49-63f6-46d7-bb3f-a68224d40a8a",
+                            "id": 775,
+                            "phleboId": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+                            "slotId": "f21f3cab-4d14-4d4d-9f5c-d3289a9b9626",
+                            "shift": {
+                                "guid": "f21f3cab-4d14-4d4d-9f5c-d3289a9b9626",
+                                "id": 1087,
+                                "shiftStartTime": "2026-10-13 08:00:00",
+                                "shiftEndTime": "2026-10-13 12:00:00",
+                                "status": "ACTIVE",
+                                "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                                "purpose": "Phlebo Shift Timing",
+                                "createdAt": "2026-10-13T05:01:03.437Z",
+                                "updatedAt": "2026-10-13T05:01:03.437Z"
+                            },
+                            "status": "ACTIVE",
+                            "shiftDate": "2026-10-13",
+                            "createdAt": "2026-10-13T05:01:03.446Z",
+                            "updatedAt": "2026-10-13T05:01:03.446Z"
+                        },
+                        "shift_slot": {
+                            "guid": "f21f3cab-4d14-4d4d-9f5c-d3289a9b9626",
+                            "id": 1087,
+                            "shiftStartTime": "2026-10-13 08:00:00",
+                            "shiftEndTime": "2026-10-13 12:00:00",
+                            "status": "ACTIVE",
+                            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                            "purpose": "Phlebo Shift Timing",
+                            "createdAt": "2026-10-13T05:01:03.437Z",
+                            "updatedAt": "2026-10-13T05:01:03.437Z"
+                        }
+                    }
+                ]
+            },
+            {
+                "date": "2026-10-14",
+                "shifts": [
+                    {
+                        "shift_map": {
+                            "guid": "1edeab40-6587-4af7-821a-c4656c8d2402",
+                            "id": 776,
+                            "phleboId": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+                            "slotId": "cf08985d-8269-440f-86cd-184a56629821",
+                            "shift": {
+                                "guid": "cf08985d-8269-440f-86cd-184a56629821",
+                                "id": 1088,
+                                "shiftStartTime": "2026-10-14 08:00:00",
+                                "shiftEndTime": "2026-10-14 12:00:00",
+                                "status": "ACTIVE",
+                                "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                                "purpose": "Phlebo Shift Timing",
+                                "createdAt": "2026-10-14T04:35:47.660Z",
+                                "updatedAt": "2026-10-14T04:35:47.660Z"
+                            },
+                            "status": "ACTIVE",
+                            "shiftDate": "2026-10-14",
+                            "createdAt": "2026-10-14T04:35:47.667Z",
+                            "updatedAt": "2026-10-14T04:35:47.667Z"
+                        },
+                        "shift_slot": {
+                            "guid": "cf08985d-8269-440f-86cd-184a56629821",
+                            "id": 1088,
+                            "shiftStartTime": "2026-10-14 08:00:00",
+                            "shiftEndTime": "2026-10-14 12:00:00",
+                            "status": "ACTIVE",
+                            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                            "purpose": "Phlebo Shift Timing",
+                            "createdAt": "2026-10-14T04:35:47.660Z",
+                            "updatedAt": "2026-10-14T04:35:47.660Z"
+                        }
+                    }
+                ]
+            },
+            {
+                "date": "2034-07-15",
+                "shifts": [
+                    {
+                        "shift_map": {
+                            "guid": "f9c30b9f-7b6c-4ca5-b385-591356edf951",
+                            "id": 774,
+                            "phleboId": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+                            "slotId": "98ebffbe-06d1-4c69-93ff-d44f71f74061",
+                            "shift": {
+                                "guid": "98ebffbe-06d1-4c69-93ff-d44f71f74061",
+                                "id": 1086,
+                                "shiftStartTime": "2034-07-15 08:00:00",
+                                "shiftEndTime": "2034-07-15 12:00:00",
+                                "status": "ACTIVE",
+                                "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                                "purpose": "Phlebo Shift Timing",
+                                "createdAt": "2026-10-12T10:07:44.653Z",
+                                "updatedAt": "2026-10-12T10:07:44.653Z"
+                            },
+                            "status": "ACTIVE",
+                            "shiftDate": "2034-07-15",
+                            "createdAt": "2026-10-12T10:07:44.662Z",
+                            "updatedAt": "2026-10-12T10:07:44.662Z"
+                        },
+                        "shift_slot": {
+                            "guid": "98ebffbe-06d1-4c69-93ff-d44f71f74061",
+                            "id": 1086,
+                            "shiftStartTime": "2034-07-15 08:00:00",
+                            "shiftEndTime": "2034-07-15 12:00:00",
+                            "status": "ACTIVE",
+                            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                            "purpose": "Phlebo Shift Timing",
+                            "createdAt": "2026-10-12T10:07:44.653Z",
+                            "updatedAt": "2026-10-12T10:07:44.653Z"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
+   Response Body   : {
+    "success": true,
+    "message": "Retrieved all 4 shifts",
+    "data": {
+        "phlebo_id": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+        "phlebo_name": "Ranjith",
+        "zone_id": "6a5487f5bf5622a2bebd0ba3",
+        "date_range": {
+            "from": "all",
+            "to": "all"
+        },
+        "total_shifts": 4,
+        "total_dates": 4,
+        "shifts_by_date": [
+            {
+                "date": "2026-10-12",
+                "shifts": [
+                    {
+                        "shift_map": {
+                            "guid": "2fc51018-d34c-47a0-bf25-c46bf1a8f746",
+                            "id": 773,
+                            "phleboId": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+                            "slotId": "2f8739b7-bce7-473d-aa7f-f18be7f718b8",
+                            "shift": {
+                                "guid": "2f8739b7-bce7-473d-aa7f-f18be7f718b8",
+                                "id": 1085,
+                                "shiftStartTime": "2026-10-12 08:00:00",
+                                "shiftEndTime": "2026-10-12 12:00:00",
+                                "status": "ACTIVE",
+                                "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                                "purpose": "Phlebo Shift Timing",
+                                "createdAt": "2026-10-12T10:07:38.657Z",
+                                "updatedAt": "2026-10-12T10:07:38.657Z"
+                            },
+                            "status": "ACTIVE",
+                            "shiftDate": "2026-10-12",
+                            "createdAt": "2026-10-12T10:07:38.666Z",
+                            "updatedAt": "2026-10-12T10:07:38.666Z"
+                        },
+                        "shift_slot": {
+                            "guid": "2f8739b7-bce7-473d-aa7f-f18be7f718b8",
+                            "id": 1085,
+                            "shiftStartTime": "2026-10-12 08:00:00",
+                            "shiftEndTime": "2026-10-12 12:00:00",
+                            "status": "ACTIVE",
+                            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                            "purpose": "Phlebo Shift Timing",
+                            "createdAt": "2026-10-12T10:07:38.657Z",
+                            "updatedAt": "2026-10-12T10:07:38.657Z"
+                        }
+                    }
+                ]
+            },
+            {
+                "date": "2026-10-13",
+                "shifts": [
+                    {
+                        "shift_map": {
+                            "guid": "b0e97d49-63f6-46d7-bb3f-a68224d40a8a",
+                            "id": 775,
+                            "phleboId": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+                            "slotId": "f21f3cab-4d14-4d4d-9f5c-d3289a9b9626",
+                            "shift": {
+                                "guid": "f21f3cab-4d14-4d4d-9f5c-d3289a9b9626",
+                                "id": 1087,
+                                "shiftStartTime": "2026-10-13 08:00:00",
+                                "shiftEndTime": "2026-10-13 12:00:00",
+                                "status": "ACTIVE",
+                                "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                                "purpose": "Phlebo Shift Timing",
+                                "createdAt": "2026-10-13T05:01:03.437Z",
+                                "updatedAt": "2026-10-13T05:01:03.437Z"
+                            },
+                            "status": "ACTIVE",
+                            "shiftDate": "2026-10-13",
+                            "createdAt": "2026-10-13T05:01:03.446Z",
+                            "updatedAt": "2026-10-13T05:01:03.446Z"
+                        },
+                        "shift_slot": {
+                            "guid": "f21f3cab-4d14-4d4d-9f5c-d3289a9b9626",
+                            "id": 1087,
+                            "shiftStartTime": "2026-10-13 08:00:00",
+                            "shiftEndTime": "2026-10-13 12:00:00",
+                            "status": "ACTIVE",
+                            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                            "purpose": "Phlebo Shift Timing",
+                            "createdAt": "2026-10-13T05:01:03.437Z",
+                            "updatedAt": "2026-10-13T05:01:03.437Z"
+                        }
+                    }
+                ]
+            },
+            {
+                "date": "2026-10-14",
+                "shifts": [
+                    {
+                        "shift_map": {
+                            "guid": "1edeab40-6587-4af7-821a-c4656c8d2402",
+                            "id": 776,
+                            "phleboId": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+                            "slotId": "cf08985d-8269-440f-86cd-184a56629821",
+                            "shift": {
+                                "guid": "cf08985d-8269-440f-86cd-184a56629821",
+                                "id": 1088,
+                                "shiftStartTime": "2026-10-14 08:00:00",
+                                "shiftEndTime": "2026-10-14 12:00:00",
+                                "status": "ACTIVE",
+                                "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                                "purpose": "Phlebo Shift Timing",
+                                "createdAt": "2026-10-14T04:35:47.660Z",
+                                "updatedAt": "2026-10-14T04:35:47.660Z"
+                            },
+                            "status": "ACTIVE",
+                            "shiftDate": "2026-10-14",
+                            "createdAt": "2026-10-14T04:35:47.667Z",
+                            "updatedAt": "2026-10-14T04:35:47.667Z"
+                        },
+                        "shift_slot": {
+                            "guid": "cf08985d-8269-440f-86cd-184a56629821",
+                            "id": 1088,
+                            "shiftStartTime": "2026-10-14 08:00:00",
+                            "shiftEndTime": "2026-10-14 12:00:00",
+                            "status": "ACTIVE",
+                            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                            "purpose": "Phlebo Shift Timing",
+                            "createdAt": "2026-10-14T04:35:47.660Z",
+                            "updatedAt": "2026-10-14T04:35:47.660Z"
+                        }
+                    }
+                ]
+            },
+            {
+                "date": "2034-07-15",
+                "shifts": [
+                    {
+                        "shift_map": {
+                            "guid": "f9c30b9f-7b6c-4ca5-b385-591356edf951",
+                            "id": 774,
+                            "phleboId": "1f289ec9-65c6-43e3-b396-fe5da33dbae3",
+                            "slotId": "98ebffbe-06d1-4c69-93ff-d44f71f74061",
+                            "shift": {
+                                "guid": "98ebffbe-06d1-4c69-93ff-d44f71f74061",
+                                "id": 1086,
+                                "shiftStartTime": "2034-07-15 08:00:00",
+                                "shiftEndTime": "2034-07-15 12:00:00",
+                                "status": "ACTIVE",
+                                "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                                "purpose": "Phlebo Shift Timing",
+                                "createdAt": "2026-10-12T10:07:44.653Z",
+                                "updatedAt": "2026-10-12T10:07:44.653Z"
+                            },
+                            "status": "ACTIVE",
+                            "shiftDate": "2034-07-15",
+                            "createdAt": "2026-10-12T10:07:44.662Z",
+                            "updatedAt": "2026-10-12T10:07:44.662Z"
+                        },
+                        "shift_slot": {
+                            "guid": "98ebffbe-06d1-4c69-93ff-d44f71f74061",
+                            "id": 1086,
+                            "shiftStartTime": "2034-07-15 08:00:00",
+                            "shiftEndTime": "2034-07-15 12:00:00",
+                            "status": "ACTIVE",
+                            "zoneId": "6a5487f5bf5622a2bebd0ba3",
+                            "purpose": "Phlebo Shift Timing",
+                            "createdAt": "2026-10-12T10:07:44.653Z",
+                            "updatedAt": "2026-10-12T10:07:44.653Z"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
+   --- PHLEBO_MGMT_04 get shifts: field & cross-API validation ---
+      [OK]   http status = [200]
+      [OK]   success success flag must be true
+      [OK]   data.phlebo_id == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   data.phlebo_name == login name = [Ranjith]
+      [OK]   data.zone_id == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   data.shifts_by_date present must contain at least one date
+      [OK]   shift[2026-10-12].shift_map.phleboId == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   shift[2026-10-12].shift_map.slotId == shift.guid = [2f8739b7-bce7-473d-aa7f-f18be7f718b8]
+      [OK]   shift[2026-10-12].shift.zoneId == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   shift[2026-10-12].shift_map.shiftDate == date shiftDate [2026-10-12] must start with [2026-10-12]
+      [OK]   shift[2026-10-12].shift.shiftStartTime on 2026-10-12 start [2026-10-12 08:00:00] must be on 2026-10-12
+      [OK]   shift[2026-10-12] end > start end [2026-10-12 12:00:00] must be after start [2026-10-12 08:00:00]
+      [OK]   shift[2026-10-12].shift.status present [ACTIVE]
+      [OK]   shift[2026-10-13].shift_map.phleboId == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   shift[2026-10-13].shift_map.slotId == shift.guid = [f21f3cab-4d14-4d4d-9f5c-d3289a9b9626]
+      [OK]   shift[2026-10-13].shift.zoneId == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   shift[2026-10-13].shift_map.shiftDate == date shiftDate [2026-10-13] must start with [2026-10-13]
+      [OK]   shift[2026-10-13].shift.shiftStartTime on 2026-10-13 start [2026-10-13 08:00:00] must be on 2026-10-13
+      [OK]   shift[2026-10-13] end > start end [2026-10-13 12:00:00] must be after start [2026-10-13 08:00:00]
+      [OK]   shift[2026-10-13].shift.status present [ACTIVE]
+      [OK]   shift[2026-10-14].shift_map.phleboId == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   shift[2026-10-14].shift_map.slotId == shift.guid = [cf08985d-8269-440f-86cd-184a56629821]
+      [OK]   shift[2026-10-14].shift.zoneId == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   shift[2026-10-14].shift_map.shiftDate == date shiftDate [2026-10-14] must start with [2026-10-14]
+      [OK]   shift[2026-10-14].shift.shiftStartTime on 2026-10-14 start [2026-10-14 08:00:00] must be on 2026-10-14
+      [OK]   shift[2026-10-14] end > start end [2026-10-14 12:00:00] must be after start [2026-10-14 08:00:00]
+      [OK]   shift[2026-10-14].shift.status present [ACTIVE]
+      [OK]   today's 08:00-12:00 shift.status = [ACTIVE]
+      [OK]   today's shift_map.status = [ACTIVE]
+      [OK]   shift[2034-07-15].shift_map.phleboId == login guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   shift[2034-07-15].shift_map.slotId == shift.guid = [98ebffbe-06d1-4c69-93ff-d44f71f74061]
+      [OK]   shift[2034-07-15].shift.zoneId == login zoneId = [6a5487f5bf5622a2bebd0ba3]
+      [OK]   shift[2034-07-15].shift_map.shiftDate == date shiftDate [2034-07-15] must start with [2034-07-15]
+      [OK]   shift[2034-07-15].shift.shiftStartTime on 2034-07-15 start [2034-07-15 08:00:00] must be on 2034-07-15
+      [OK]   shift[2034-07-15] end > start end [2034-07-15 12:00:00] must be after start [2034-07-15 08:00:00]
+      [OK]   shift[2034-07-15].shift.status present [ACTIVE]
+      [OK]   today's 08:00-12:00 shift exists no shift for 2026-10-14 08:00-12:00 in the response
+      [OK]   data.total_shifts == sum(shifts) = [4]
+      [OK]   data.total_dates == shifts_by_date.size() = [4]
+   --- PHLEBO_MGMT_04 get shifts: 39 checks passed, 0 failed, 0 backend defect(s) ---
+Request method:	GET
+Request URI:	https://staging-api-phlebo-notification.yodadiagnostics.com/api/v1/phlebo/1f289ec9-65c6-43e3-b396-fe5da33dbae3
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3VpZCI6IjU0NDE5YTg5LTBlNzEtNGM0MC05MzU0LTE3YjI4YjA1MjMwYiIsInJvbGVfaWQiOiJmZThmODNiMS1jYTQ1LTQ5OTEtOGUxMC05YzllMjQ0NGUzNDQiLCJsb2NhdGlvbiI6bnVsbCwicm9sZSI6ImFkbWluX29ubHkiLCJtb2JpbGUiOiI3ODc4NDM0MzQzIiwiaXNfYWRtaW5fdXNlciI6dHJ1ZSwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MywiZXhwIjoxNzk0NTQ1OTYzfQ.80NNj9ImKtyBubR0nQR4ExVXou0T61NyAgr48qem7jo
+				type=Mr.Yoda-Admin
+				Accept=*/*
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+   --- PHLEBO_MGMT_04 profile (GET phlebo by guid) vs login: field & cross-API validation ---
+      [OK]   http status = [200]
+      [OK]   profile data present profile response has no data
+      [OK]   guid = [1f289ec9-65c6-43e3-b396-fe5da33dbae3]
+      [OK]   name (login vs profile) = [Ranjith]
+      [NOTE] profile response does not expose [mobileNumber]
+      [NOTE] profile response does not expose [zoneId]
+      [NOTE] profile response does not expose [isActive]
+      [NOTE] profile response does not expose [employeeId]
+      [NOTE] profile response does not expose [employeeCode]
+      [DEFECT] type has the same representation in login and profile -> login={phlebo} profile=[phlebo]
+      [OK]   type (login vs profile) = [phlebo]
+   --- PHLEBO_MGMT_04 profile (GET phlebo by guid) vs login: 5 checks passed, 0 failed, 1 backend defect(s) ---
+   [PASS] PHLEBO_MGMT_04 PASSED -- Phlebo shifts retrieved successfully.
+
+
+[PASS] PhlebioManagementTest.PHLEBO_MGMT_04_GetPhleboShifts
+
+>>> PHLEBO_MGMT_05: CLOCK IN <<<
+   Using phlebo JWT : [present=true]
+   Request Payload : {lng=78.4867, image_url=https://example.com/test-selfie.jpg, lat=17.385}
+Request Body: {lng=78.4867, image_url=https://example.com/test-selfie.jpg, lat=17.385}
+Request method:	POST
+Request URI:	https://staging-api-phlebo-notification.yodadiagnostics.com/api/v1/phlebo/shift/clock-in
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaGxlYm9faWQiOiIxZjI4OWVjOS02NWM2LTQzZTMtYjM5Ni1mZTVkYTMzZGJhZTMiLCJtb2JpbGUiOiI5MDAzNzMwMzk0IiwibmFtZSI6IlJhbmppdGgiLCJyb2xlIjoicGhsZWJvIiwidHlwZSI6IkFDQ0VTUyIsImlhdCI6MTc5MTk1Mzk2MiwiZXhwIjoxNzk0NTQ1OTYyfQ.XkCq54iWnR6JpXRxs4MzPmVkX9KoL5dAMWNyzjvpN_c
+				Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "lng": 78.4867,
+    "image_url": "https://example.com/test-selfie.jpg",
+    "lat": 17.385
+}
+
+--- ? PERFORMANCE STATS ---
+   Method  : POST
+   Endpoint: /api/v1/phlebo/shift/clock-in
+   Time    : ? 76 ms
+----------------------------
+
+   Response Status : 400
+{
+    "message": "Already clocked in. Please clock out first.",
+    "error": "Bad Request",
+    "statusCode": 400
+}
+   Response Body   : {
+    "message": "Already clocked in. Please clock out first.",
+    "error": "Bad Request",
+    "statusCode": 400
+}
+   --- PHLEBO_MGMT_05 clock-in: field & cross-API validation ---
+      [OK]   business rejection status unexpected HTTP status 400
+      [OK]   rejection message present [Already clocked in. Please clock out first.]
+      [OK]   success is not true on rejection rejection must not report success
+      [NOTE] clock-in rejected as business state: Already clocked in. Please clock out first.
+   --- PHLEBO_MGMT_05 clock-in: 3 checks passed, 0 failed, 0 backend defect(s) ---
+   [PASS] PHLEBO_MGMT_05 PASSED -- Clock-in response validated (HTTP 400).
+
+
+[PASS] PhlebioManagementTest.PHLEBO_MGMT_05_ClockIn
+
+>>> PHLEBO_MGMT_06: ASSIGN ORDER <<<
+
+[SKIP] PhlebioManagementTest.PHLEBO_MGMT_06_AssignOrder
+
+[SKIP] PhlebioManagementTest.PHLEBO_MGMT_07_UpdateOrderTracking
+
+[SKIP] PhlebioManagementTest.PHLEBO_MGMT_08_UploadImage
+
+[SKIP] PhlebioManagementTest.PHLEBO_MGMT_09_VerifyOtp
+
+[SKIP] PhlebioManagementTest.PHLEBO_MGMT_10_GetSampleDetails
+
+[SKIP] PhlebioManagementTest.PHLEBO_MGMT_11_GenerateBarcode
+
+[SKIP] PhlebioManagementTest.PHLEBO_MGMT_12_UpdateOrderTrackingSamplesCollected
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /api/v1/phlebo/assign-shifts                                                    
+   > Status: [FAST] | Avg: 67 ms | Max: 67 ms | Calls: 1
+   > History: [67]
+   --------------------------------------------------------------------------------
+   https://staging-api-diagnostics.yodaprojects.com/auth/login                     
+   > Status: [FAST] | Avg: 204 ms | Max: 204 ms | Calls: 1
+   > History: [204]
+   --------------------------------------------------------------------------------
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/shift/clock-in                                                   
+   > Status: [FAST] | Avg: 76 ms | Max: 76 ms | Calls: 1
+   > History: [76]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/login                                                            
+   > Status: [FAST] | Avg: 161 ms | Max: 161 ms | Calls: 1
+   > History: [161]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /address/addAddress                                                             
+   > Status: [FAST] | Avg: 193 ms | Max: 193 ms | Calls: 1
+   > History: [193]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/1f289ec9-65c6-43e3-b396-fe5da33dbae3/shifts                      
+   > Status: [FAST] | Avg: 74 ms | Max: 86 ms | Calls: 2
+   > History: [63, 86]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /carts/v2/getCartById/eecc3125-b3d2-404c-a07a-9817b5e7a587                      
+   > Status: [FAST] | Avg: 242 ms | Max: 242 ms | Calls: 1
+   > History: [242]
+   --------------------------------------------------------------------------------
+   /slot/getSlotCountByTime                                                        
+   > Status: [FAST] | Avg: 122 ms | Max: 122 ms | Calls: 1
+   > History: [122]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> STEP 15: APPROVE PAYMENT <<<
+
+==========================================================
+      APPROVE PAYMENT API
+==========================================================
+? Cannot Approve Payment: orderId is null or empty. Ensure COD_04 (VerifyPayment) ran successfully.
+
+[FAIL] COD_15_ApprovePaymentTest.step15_ApprovePayment
+[ExtentListener] Calling AIFailureAnalyzer for: step15_ApprovePayment | records=0
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /api/v1/phlebo/assign-shifts                                                    
+   > Status: [FAST] | Avg: 67 ms | Max: 67 ms | Calls: 1
+   > History: [67]
+   --------------------------------------------------------------------------------
+   https://staging-api-diagnostics.yodaprojects.com/auth/login                     
+   > Status: [FAST] | Avg: 204 ms | Max: 204 ms | Calls: 1
+   > History: [204]
+   --------------------------------------------------------------------------------
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/shift/clock-in                                                   
+   > Status: [FAST] | Avg: 76 ms | Max: 76 ms | Calls: 1
+   > History: [76]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/login                                                            
+   > Status: [FAST] | Avg: 161 ms | Max: 161 ms | Calls: 1
+   > History: [161]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /address/addAddress                                                             
+   > Status: [FAST] | Avg: 193 ms | Max: 193 ms | Calls: 1
+   > History: [193]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/1f289ec9-65c6-43e3-b396-fe5da33dbae3/shifts                      
+   > Status: [FAST] | Avg: 74 ms | Max: 86 ms | Calls: 2
+   > History: [63, 86]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /carts/v2/getCartById/eecc3125-b3d2-404c-a07a-9817b5e7a587                      
+   > Status: [FAST] | Avg: 242 ms | Max: 242 ms | Calls: 1
+   > History: [242]
+   --------------------------------------------------------------------------------
+   /slot/getSlotCountByTime                                                        
+   > Status: [FAST] | Avg: 122 ms | Max: 122 ms | Calls: 1
+   > History: [122]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+>>> SETUP: Ensure RequestContext has visit numbers for UI automation <<<
+   ?? No visit numbers found in RequestContext - UI trigger may fail.
+
+=======================================================
+>>> TRIGGERING UI AUTOMATION (Cucumber TestNG Runner) <<<
+=======================================================
+
+[FAIL] COD_99_TriggerUITest.triggerUIAutomation
+[ExtentListener] Calling AIFailureAnalyzer for: triggerUIAutomation | records=0
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+>>> SETUP: Ensuring visit numbers are present in RequestContext <<<
+   ?? No visit numbers found in RequestContext. Tests may fail unless visits are provided.
+
+>>> STEP 16: GET VISIT STATUS API (UAT) WITH MULTI-TEST VALIDATION <<<
+
+[FAIL] COD_16_VisitStatusAPITest.testGetVisitStatus
+[ExtentListener] Calling AIFailureAnalyzer for: testGetVisitStatus | records=0
+[AIFailureAnalyzer] Skipping ù analyzerEnabled=false, httpClientReady=false
+[ExtentListener] Analysis result: null
+
+[PASS] COD_17_ReportGenerationTest.testGetReportAndVerifyPDF
+
+[PERFORMANCE] === COMPREHENSIVE API PERFORMANCE SUMMARY ===
+   /api/v1/phlebo/assign-shifts                                                    
+   > Status: [FAST] | Avg: 67 ms | Max: 67 ms | Calls: 1
+   > History: [67]
+   --------------------------------------------------------------------------------
+   https://staging-api-diagnostics.yodaprojects.com/auth/login                     
+   > Status: [FAST] | Avg: 204 ms | Max: 204 ms | Calls: 1
+   > History: [204]
+   --------------------------------------------------------------------------------
+   /tests/getFetalMedicineTests                                                    
+   > Status: [FAST] | Avg: 159 ms | Max: 167 ms | Calls: 2
+   > History: [167, 152]
+   --------------------------------------------------------------------------------
+   /users/addUser                                                                  
+   > Status: [FAST] | Avg: 886 ms | Max: 886 ms | Calls: 1
+   > History: [886]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/shift/clock-in                                                   
+   > Status: [FAST] | Avg: 76 ms | Max: 76 ms | Calls: 1
+   > History: [76]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/login                                                            
+   > Status: [FAST] | Avg: 161 ms | Max: 161 ms | Calls: 1
+   > History: [161]
+   --------------------------------------------------------------------------------
+   /tests/getAllTests                                                              
+   > Status: [FAST] | Avg: 315 ms | Max: 777 ms | Calls: 6
+   > History: [777, 507, 179, 146, 143, 143]
+   --------------------------------------------------------------------------------
+   /address/addAddress                                                             
+   > Status: [FAST] | Avg: 193 ms | Max: 193 ms | Calls: 1
+   > History: [193]
+   --------------------------------------------------------------------------------
+   /tests/getlocations                                                             
+   > Status: [FAST] | Avg: 346 ms | Max: 346 ms | Calls: 1
+   > History: [346]
+   --------------------------------------------------------------------------------
+   /api/v1/phlebo/1f289ec9-65c6-43e3-b396-fe5da33dbae3/shifts                      
+   > Status: [FAST] | Avg: 74 ms | Max: 86 ms | Calls: 2
+   > History: [63, 86]
+   --------------------------------------------------------------------------------
+   https://staging-api-membership.yodaprojects.com/brand/getAllBrands              
+   > Status: [FAST] | Avg: 154 ms | Max: 154 ms | Calls: 1
+   > History: [154]
+   --------------------------------------------------------------------------------
+   /tests/getAllPackages                                                           
+   > Status: [FAST] | Avg: 150 ms | Max: 157 ms | Calls: 2
+   > History: [157, 144]
+   --------------------------------------------------------------------------------
+   /carts/v2/getCartById/eecc3125-b3d2-404c-a07a-9817b5e7a587                      
+   > Status: [FAST] | Avg: 242 ms | Max: 242 ms | Calls: 1
+   > History: [242]
+   --------------------------------------------------------------------------------
+   /slot/getSlotCountByTime                                                        
+   > Status: [FAST] | Avg: 122 ms | Max: 122 ms | Calls: 1
+   > History: [122]
+   --------------------------------------------------------------------------------
+   /otps/getOtp                                                                    
+   > Status: [FAST] | Avg: 79 ms | Max: 90 ms | Calls: 2
+   > History: [90, 68]
+   --------------------------------------------------------------------------------
+====================================================
+
+
+
+
+==========================================================================================
+                               TEST EXECUTION SUMMARY                                     
+==========================================================================================
+Test Method                                                                      | Status    
+------------------------------------------------------------------------------------------
+UserCreateAPITest.testUserRegistration_CreateNewUser                             | PASS ?
+LoginAPITest.testLoginWithOTP_NewlyRegisteredUser                                | FAIL ?
+COD_01_LoginTest.step01_LoginAndSetup                                            | FAIL ?
+LocationAPITest.testGetLocations_ForNewUser                                      | PASS ?
+BrandAPITest.testGetBrands_ForNewUser                                            | PASS ?
+GlobalSearchAPITest.testGlobalSearch_ForNewUser                                  | FAIL ?
+CatalogVerificationAPITest.verifyDiagnosticsCatalog                              | PASS ?
+CatalogVerificationAPITest.verifyDnaDecoderCatalog                               | PASS ?
+CatalogVerificationAPITest.verifyPgxCatalog                                      | PASS ?
+CatalogVerificationAPITest.verifyFetalMedicineCatalog                            | PASS ?
+CatalogVerificationAPITest.verifyPackagesCatalog                                 | PASS ?
+AddToCartAPITest.testAddToCart_ForNewUser                                        | PASS ?
+COD_02_GetCartTest.step02_VerifyCartAndPrice                                     | FAIL ?
+COD_03_AddAddressAndSlotTest.step03_AddAddressAndSlot                            | FAIL ?
+COD_04_VerifyPaymentPreCheckTest.step04_VerifyPaymentPreCheck                    | FAIL ?
+COD_05_CrossApiValidationTest.step05_CrossApiValidation                          | FAIL ?
+PhlebioManagementTest.PHLEBO_MGMT_01_LoginPhlebo                                 | PASS ?
+PhlebioManagementTest.PHLEBO_MGMT_02_AdminLogin                                  | PASS ?
+PhlebioManagementTest.PHLEBO_MGMT_03_AssignShifts                                | PASS ?
+PhlebioManagementTest.PHLEBO_MGMT_04_GetPhleboShifts                             | PASS ?
+PhlebioManagementTest.PHLEBO_MGMT_05_ClockIn                                     | PASS ?
+PhlebioManagementTest.PHLEBO_MGMT_06_AssignOrder                                 | SKIP ??
+PhlebioManagementTest.PHLEBO_MGMT_07_UpdateOrderTracking                         | SKIP ??
+PhlebioManagementTest.PHLEBO_MGMT_08_UploadImage                                 | SKIP ??
+PhlebioManagementTest.PHLEBO_MGMT_09_VerifyOtp                                   | SKIP ??
+PhlebioManagementTest.PHLEBO_MGMT_10_GetSampleDetails                            | SKIP ??
+PhlebioManagementTest.PHLEBO_MGMT_11_GenerateBarcode                             | SKIP ??
+PhlebioManagementTest.PHLEBO_MGMT_12_UpdateOrderTrackingSamplesCollected         | SKIP ??
+COD_15_ApprovePaymentTest.step15_ApprovePayment                                  | FAIL ?
+COD_99_TriggerUITest.triggerUIAutomation                                         | FAIL ?
+COD_16_VisitStatusAPITest.testGetVisitStatus                                     | FAIL ?
+COD_17_ReportGenerationTest.testGetReportAndVerifyPDF                            | PASS ?
+==========================================================================================
+
+
+[ERROR] Tests run: 32, Failures: 10, Errors: 0, Skipped: 7, Time elapsed: 13.72 s <<< FAILURE! -- in TestSuite
+[ERROR] com.mryoda.diagnostics.api.tests.auth.LoginAPITest.testLoginWithOTP_NewlyRegisteredUser -- Time elapsed: 0.134 s <<< FAILURE!
+java.lang.AssertionError: 
+Expected HTTP 200 but got 403 | Endpoint: /otps/getOtp
+Body:
+{"success":false,"message":"Security verification token (Turnstile) is required for web requests."}
+	at com.mryoda.diagnostics.api.builders.RequestBuilder.assertExpectedStatus(RequestBuilder.java:284)
+	at com.mryoda.diagnostics.api.builders.RequestBuilder.post(RequestBuilder.java:176)
+	at com.mryoda.diagnostics.api.utils.TokenManager.generateToken(TokenManager.java:56)
+	at com.mryoda.diagnostics.api.tests.auth.LoginAPITest.testLoginWithOTP_NewlyRegisteredUser(LoginAPITest.java:71)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest.step01_LoginAndSetup -- Time elapsed: 0.090 s <<< FAILURE!
+java.lang.AssertionError: 
+Expected HTTP 200 but got 403 | Endpoint: /otps/getOtp
+Body:
+{"success":false,"message":"Security verification token (Turnstile) is required for web requests."}
+	at com.mryoda.diagnostics.api.builders.RequestBuilder.assertExpectedStatus(RequestBuilder.java:284)
+	at com.mryoda.diagnostics.api.builders.RequestBuilder.post(RequestBuilder.java:176)
+	at com.mryoda.diagnostics.api.utils.TokenManager.generateToken(TokenManager.java:56)
+	at com.mryoda.diagnostics.api.tests.auth.COD_01_LoginTest.step01_LoginAndSetup(COD_01_LoginTest.java:107)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNewUser -- Time elapsed: 0.010 s <<< FAILURE!
+java.lang.RuntimeException: ? Token is null! Please login first.
+	at com.mryoda.diagnostics.api.utils.GlobalSearchHelper.searchTestsByFullNames(GlobalSearchHelper.java:405)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.performGlobalSearch(GlobalSearchAPITest.java:66)
+	at com.mryoda.diagnostics.api.tests.tests_packages.GlobalSearchAPITest.testGlobalSearch_ForNewUser(GlobalSearchAPITest.java:208)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest.step02_VerifyCartAndPrice[home](1) -- Time elapsed: 0.005 s <<< FAILURE!
+java.lang.AssertionError: Token required from Step 1 expected object to not be null
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.assertNotNull(Assert.java:1484)
+	at com.mryoda.diagnostics.api.tests.cart.COD_02_GetCartTest.step02_VerifyCartAndPrice(COD_02_GetCartTest.java:20)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest.step03_AddAddressAndSlot -- Time elapsed: 0.465 s <<< FAILURE!
+java.lang.RuntimeException: No tests found in RequestContext.
+	at com.mryoda.diagnostics.api.tests.order.CreateOrderCODAPITest.updateCartWithSlot(CreateOrderCODAPITest.java:2032)
+	at com.mryoda.diagnostics.api.tests.slot.COD_03_AddAddressAndSlotTest.step03_AddAddressAndSlot(COD_03_AddAddressAndSlotTest.java:44)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest.step04_VerifyPaymentPreCheck -- Time elapsed: 0.260 s <<< FAILURE!
+java.lang.AssertionError: [ERROR] Get Cart should return 200 mismatch ù expected: 200 but found: 404
+	at com.mryoda.diagnostics.api.utils.AssertionUtil.verifyEquals(AssertionUtil.java:104)
+	at com.mryoda.diagnostics.api.tests.order.CreateOrderCODAPITest.callGetCartAPI(CreateOrderCODAPITest.java:350)
+	at com.mryoda.diagnostics.api.tests.payment.COD_04_VerifyPaymentPreCheckTest.step04_VerifyPaymentPreCheck(COD_04_VerifyPaymentPreCheckTest.java:27)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest.step05_CrossApiValidation -- Time elapsed: 0.005 s <<< FAILURE!
+java.lang.AssertionError: ? callGetPaymentByIdAPI: paymentId is null or empty ù cannot call API.
+	at org.testng.Assert.fail(Assert.java:111)
+	at com.mryoda.diagnostics.api.tests.order.CreateOrderCODAPITest.callGetPaymentByIdAPI(CreateOrderCODAPITest.java:728)
+	at com.mryoda.diagnostics.api.tests.order.CreateOrderCODAPITest.callGetPaymentByIdAPI(CreateOrderCODAPITest.java:716)
+	at com.mryoda.diagnostics.api.tests.order.COD_05_CrossApiValidationTest.step05_CrossApiValidation(COD_05_CrossApiValidationTest.java:23)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest.step15_ApprovePayment -- Time elapsed: 0.005 s <<< FAILURE!
+java.lang.AssertionError: ? Cannot Approve Payment: orderId is null or empty. Ensure COD_04 (VerifyPayment) ran successfully.
+	at org.testng.Assert.fail(Assert.java:111)
+	at com.mryoda.diagnostics.api.tests.order.CreateOrderCODAPITest.callApprovePaymentAPI(CreateOrderCODAPITest.java:2703)
+	at com.mryoda.diagnostics.api.tests.payment.COD_15_ApprovePaymentTest.step15_ApprovePayment(COD_15_ApprovePaymentTest.java:18)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest.triggerUIAutomation -- Time elapsed: 0.004 s <<< FAILURE!
+java.lang.RuntimeException: ? No Visit Numbers found in RequestContext for UI Automation!
+	at com.mryoda.diagnostics.api.tests.ui_integration.COD_99_TriggerUITest.triggerUIAutomation(COD_99_TriggerUITest.java:69)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[ERROR] com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest.testGetVisitStatus -- Time elapsed: 0.004 s <<< FAILURE!
+java.lang.AssertionError: ? No Visit Numbers found in RequestContext!
+	at org.testng.Assert.fail(Assert.java:111)
+	at com.mryoda.diagnostics.api.tests.order.COD_16_VisitStatusAPITest.testGetVisitStatus(COD_16_VisitStatusAPITest.java:73)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   COD_01_LoginTest.step01_LoginAndSetup:107 Expected HTTP 200 but got 403 | Endpoint: /otps/getOtp
+Body:
+{"success":false,"message":"Security verification token (Turnstile) is required for web requests."}
+[ERROR]   LoginAPITest.testLoginWithOTP_NewlyRegisteredUser:71 Expected HTTP 200 but got 403 | Endpoint: /otps/getOtp
+Body:
+{"success":false,"message":"Security verification token (Turnstile) is required for web requests."}
+[ERROR]   COD_02_GetCartTest.step02_VerifyCartAndPrice:20 Token required from Step 1 expected object to not be null
+[ERROR]   COD_05_CrossApiValidationTest.step05_CrossApiValidation:23->CreateOrderCODAPITest.callGetPaymentByIdAPI:716->CreateOrderCODAPITest.callGetPaymentByIdAPI:728 ? callGetPaymentByIdAPI: paymentId is null or empty ù cannot call API.
+[ERROR]   COD_16_VisitStatusAPITest.testGetVisitStatus:73 ? No Visit Numbers found in RequestContext!
+[ERROR]   COD_04_VerifyPaymentPreCheckTest.step04_VerifyPaymentPreCheck:27->CreateOrderCODAPITest.callGetCartAPI:350 [ERROR] Get Cart should return 200 mismatch ù expected: 200 but found: 404
+[ERROR]   COD_15_ApprovePaymentTest.step15_ApprovePayment:18->CreateOrderCODAPITest.callApprovePaymentAPI:2703 ? Cannot Approve Payment: orderId is null or empty. Ensure COD_04 (VerifyPayment) ran successfully.
+[ERROR]   COD_03_AddAddressAndSlotTest.step03_AddAddressAndSlot:44->CreateOrderCODAPITest.updateCartWithSlot:2032 ╗ Runtime No tests found in RequestContext.
+[ERROR]   GlobalSearchAPITest.testGlobalSearch_ForNewUser:208->performGlobalSearch:66 ╗ Runtime ? Token is null! Please login first.
+[ERROR]   COD_99_TriggerUITest.triggerUIAutomation:69 Runtime ? No Visit Numbers found in RequestContext for UI Automation!
+[INFO] 
+[ERROR] Tests run: 32, Failures: 10, Errors: 0, Skipped: 7
+[INFO] 
+[ERROR] There are test failures.
+
+Please refer to C:\Users\RANJITH\MrYoda\target\surefire-reports for the individual test results.
+Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  35.097 s
+[INFO] Finished at: 2026-10-14T10:29:25+05:30
+[INFO] ------------------------------------------------------------------------

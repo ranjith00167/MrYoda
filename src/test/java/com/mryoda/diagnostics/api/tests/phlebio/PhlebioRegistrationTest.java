@@ -14,34 +14,31 @@ import org.testng.annotations.Test;
 
 /**
  * ============================================================
- * PHLEBIO -- REGISTRATION  (Create Phlebo API)
- * Endpoint: POST /api/v1/phlebo/savePhlebo
- * Base URL : https://staging-api-phlebo-notification.yodadiagnostics.com
- * ============================================================
+ * PHLEBIO -- REGISTRATION + UPDATE  (Create → Update Phlebo)
  *
- * Auth strategy:
- *   PHLEBO_REG_01 — Login to the phlebo notification service as the existing
- *                   test phlebotomist (mobile 9360651932 / pw 12345678).
- *                   This gives a JWT for that service; used as Bearer token for
- *                   savePhlebo (the service may accept any authenticated user
- *                   or an admin-phlebo account for creation).
- *   PHLEBO_REG_02 — Create Phlebo with dynamic payload.
+ * PHLEBO_REG_01 : Admin Login          — obtain admin Bearer token
+ * PHLEBO_REG_02 : Create Phlebo        — POST /api/v1/phlebo/savePhlebo (form-data)
+ *                                         extracts created phlebo guid for REG-03
+ * PHLEBO_REG_03 : Update Phlebo        — PUT  /api/v1/phlebo
+ *                                         { guid (from REG-02), name (dynamic), email (dynamic) }
+ *                                         Cross-verifies persisted changes via
+ *                                         GET /api/v1/phlebo/{guid}
+ *
+ * Base URL : https://staging-api-phlebo-notification.yodadiagnostics.com
  *
  * Dynamic fields (randomised per run to prevent duplicate-key errors):
  *   mobileNumber  — random 10-digit Indian mobile (7xx / 8xx / 9xx prefix)
  *   password      — random password satisfying complexity rules
  *   email         — phlebo_<timestamp>@testmail.com
- *
- * Static fields:
- *   name, zoneId, home_address, home_latitude, home_longitude, isActive, type
  * ============================================================
  */
 public class PhlebioRegistrationTest extends BaseTest {
 
     // ── Shared state ──────────────────────────────────────────────────────────
-    /** JWT from the phlebo notification service login — used to auth savePhlebo. */
+    /** Admin token from diagnostics service — used to auth savePhlebo and updatePhlebo. */
     private static String phleboToken;
-    private static String createdPhleboId;     // from PHLEBO_REG_02 response (if returned)
+    /** GUID of the phlebo created in PHLEBO_REG_02 — used by PHLEBO_REG_03 (update). */
+    private static String createdPhleboGuid;
 
     private final PhlebioClient phlebioClient = new PhlebioClient();
 
@@ -156,17 +153,115 @@ public class PhlebioRegistrationTest extends BaseTest {
                     "PHLEBO_REG_02: Response 'success' must be true");
         }
 
-        // Capture created phlebo identifier if returned
-        createdPhleboId = response.jsonPath().getString("data._id");
-        if (createdPhleboId == null) createdPhleboId = response.jsonPath().getString("data.id");
-        if (createdPhleboId == null) createdPhleboId = response.jsonPath().getString("data.guid");
+        // Capture the GUID — try all known field paths
+        createdPhleboGuid = response.jsonPath().getString("data.guid");
+        if (createdPhleboGuid == null) createdPhleboGuid = response.jsonPath().getString("data._id");
+        if (createdPhleboGuid == null) createdPhleboGuid = response.jsonPath().getString("data.id");
 
-        if (createdPhleboId != null && !createdPhleboId.isEmpty()) {
-            System.out.println("   Created Phlebo ID : " + createdPhleboId);
+        if (createdPhleboGuid != null && !createdPhleboGuid.isEmpty()) {
+            System.out.println("   Created Phlebo GUID : " + createdPhleboGuid);
         } else {
-            System.out.println("   (No phlebo ID in response — creation confirmed by status code)");
+            System.out.println("   (No phlebo GUID in response — creation confirmed by status code)");
         }
 
         System.out.println("   [PASS] PHLEBO_REG_02 PASSED\n");
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // PHLEBO_REG_03 : Update Phlebo (PUT /api/v1/phlebo)
+    // Uses the GUID captured from PHLEBO_REG_02 (savePhlebo).
+    // name and email are dynamically generated on every run.
+    // Cross-verifies the update persisted via GET /api/v1/phlebo/{guid}.
+    // ─────────────────────────────────────────────────────────────────────────
+    @Test(priority = 3,
+          dependsOnMethods = {"PHLEBO_REG_02_CreatePhlebo"},
+          description = "PHLEBO REG-03: Update Phlebo — PUT /api/v1/phlebo with the guid from "
+                      + "PHLEBO_REG_02 (savePhlebo), a dynamically generated name, and a "
+                      + "dynamically generated email. Expects HTTP 200/201 + success:true. "
+                      + "Cross-verifies the updated values are persisted via "
+                      + "GET /api/v1/phlebo/{guid}.")
+    public void PHLEBO_REG_03_UpdatePhlebo() {
+        System.out.println("\n>>> PHLEBO_REG_03: UPDATE PHLEBO (PUT /api/v1/phlebo) <<<");
+
+        if (createdPhleboGuid == null || createdPhleboGuid.isEmpty()) {
+            throw new org.testng.SkipException(
+                    "PHLEBO_REG_03: Skipped — no phlebo GUID was captured from PHLEBO_REG_02. "
+                    + "The savePhlebo response may not have returned a 'data.guid' field.");
+        }
+
+        // Dynamic name and email — unique per run
+        String updatedName  = "Updated " + PhlebioPayloads.randomName();
+        String updatedEmail = "reg_update_" + System.currentTimeMillis() + "@testmail.com";
+
+        System.out.println("   guid  : " + createdPhleboGuid);
+        System.out.println("   name  : " + updatedName);
+        System.out.println("   email : " + updatedEmail);
+
+        // ── PUT — update the freshly created phlebo ────────────────────────────
+        Response updateResponse = phlebioClient.updatePhlebo(
+                createdPhleboGuid, updatedName, updatedEmail, phleboToken);
+
+        System.out.println("   [PHLEBO_REG_03] PUT Status : " + updateResponse.getStatusCode());
+        System.out.println("   [PHLEBO_REG_03] PUT Body   : " + updateResponse.asString());
+
+        Assert.assertTrue(
+                updateResponse.getStatusCode() == 200 || updateResponse.getStatusCode() == 201,
+                "PHLEBO_REG_03: PUT /api/v1/phlebo must return HTTP 200 or 201. Actual: "
+                        + updateResponse.getStatusCode() + " | Body: " + updateResponse.asString());
+
+        Assert.assertTrue(Boolean.TRUE.equals(updateResponse.jsonPath().getBoolean("success")),
+                "PHLEBO_REG_03: Response 'success' must be true");
+
+        // Check if API echoes back the updated name / email in the PUT response
+        String nameInPut = updateResponse.jsonPath().getString("data.name");
+        if (nameInPut != null) {
+            Assert.assertEquals(nameInPut, updatedName,
+                    "PHLEBO_REG_03: PUT response 'data.name' must equal the updated name");
+            System.out.println("   data.name in PUT response verified: " + nameInPut);
+        } else {
+            System.out.println("   data.name not echoed in PUT response — will verify via GET");
+        }
+
+        String emailInPut = updateResponse.jsonPath().getString("data.email");
+        if (emailInPut != null) {
+            Assert.assertEquals(emailInPut, updatedEmail,
+                    "PHLEBO_REG_03: PUT response 'data.email' must equal the updated email");
+            System.out.println("   data.email in PUT response verified: " + emailInPut);
+        } else {
+            System.out.println("   data.email not echoed in PUT response — will verify via GET");
+        }
+
+        // ── GET cross-verify — confirm changes persisted in the backend ─────────
+        System.out.println("   Cross-verifying via GET /api/v1/phlebo/" + createdPhleboGuid);
+        Response getResponse = phlebioClient.getPhleboByGuid(createdPhleboGuid, phleboToken);
+
+        System.out.println("   [PHLEBO_REG_03] GET Status : " + getResponse.getStatusCode());
+        System.out.println("   [PHLEBO_REG_03] GET Body   : " + getResponse.asString());
+
+        Assert.assertEquals(getResponse.getStatusCode(), 200,
+                "PHLEBO_REG_03: GET /api/v1/phlebo/{guid} after update must return 200. Actual: "
+                        + getResponse.getStatusCode());
+
+        // Verify name persisted
+        String persistedName = getResponse.jsonPath().getString("data.name");
+        Assert.assertNotNull(persistedName, "PHLEBO_REG_03: GET response must contain 'data.name'");
+        Assert.assertEquals(persistedName, updatedName,
+                "PHLEBO_REG_03: Persisted name must match updated name. "
+                        + "Expected: '" + updatedName + "' Actual: '" + persistedName + "'");
+        System.out.println("   Persisted name  : " + persistedName + " ✓");
+
+        // Verify email persisted (field may be 'email' or 'emailId' depending on API version)
+        String persistedEmail = getResponse.jsonPath().getString("data.email");
+        if (persistedEmail == null) persistedEmail = getResponse.jsonPath().getString("data.emailId");
+        if (persistedEmail != null) {
+            Assert.assertEquals(persistedEmail, updatedEmail,
+                    "PHLEBO_REG_03: Persisted email must match updated email. "
+                            + "Expected: '" + updatedEmail + "' Actual: '" + persistedEmail + "'");
+            System.out.println("   Persisted email : " + persistedEmail + " ✓");
+        } else {
+            System.out.println("   data.email not returned by GET — field may not be exposed in this API version");
+        }
+
+        System.out.println("   [PASS] PHLEBO_REG_03 PASSED — phlebo created and updated successfully\n");
     }
 }

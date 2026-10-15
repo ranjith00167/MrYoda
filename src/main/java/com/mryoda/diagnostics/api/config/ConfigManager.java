@@ -78,4 +78,65 @@ public interface ConfigManager extends Config {
     @DefaultValue("")
     String phleboAdminPassword();
 
+    /** off | on | auto. See CryptoUtil for semantics. */
+    @Key("encryption.mode")
+    @DefaultValue("auto")
+    String encryptionMode();
+
+    /** Optional JSON field to wrap the encrypted request body in. Blank = raw ciphertext body. */
+    @Key("encryption.request.field")
+    @DefaultValue("")
+    String encryptionRequestField();
+
+    @Key("encryption.transformation")
+    @DefaultValue("AES/GCM/NoPadding")
+    String encryptionTransformation();
+
+    @Key("encryption.key")
+    @DefaultValue("")
+    String encryptionKey();
+
+    @Key("encryption.iv")
+    @DefaultValue("")
+    String encryptionIv();
+
+    @Key("turnstile.token")
+    @DefaultValue("test-token")
+    String turnstileToken();
+
+    // ---- Report (lab PDF) polling - see PollConfig; every key can be overridden with -D<key> ----
+
+    @Key("report.poll.intervalMs")
+    @DefaultValue("15000")
+    Long reportPollIntervalMs();
+
+    @Key("report.poll.maxAttempts")
+    @DefaultValue("20")
+    int reportPollMaxAttempts();
+
+    @Key("report.poll.timeoutMs")
+    @DefaultValue("600000")
+    Long reportPollTimeoutMs();
+
+    @Key("report.poll.transientRetries")
+    @DefaultValue("3")
+    int reportPollTransientRetries();
+
+    @Key("report.poll.transientBackoffMs")
+    @DefaultValue("2000")
+    Long reportPollTransientBackoffMs();
+
+    /** true: a result value in the PDF completes a test even when the API entry is still header-only. */
+    @Key("report.acceptPdfOnly")
+    @DefaultValue("true")
+    boolean reportAcceptPdfOnly();
+
+    @Key("report.pdf.minChars")
+    @DefaultValue("20")
+    int reportPdfMinChars();
+
+    @Key("report.pdf.recheckEvery")
+    @DefaultValue("3")
+    int reportPdfRecheckEvery();
+
 }

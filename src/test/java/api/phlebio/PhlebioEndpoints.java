@@ -46,6 +46,16 @@ public class PhlebioEndpoints {
      *  Requires: phlebo's own Bearer token. */
     public static final String CLOCK_IN         = "/api/v1/phlebo/shift/clock-in";
 
+    /** POST  — Upload an image (multipart/form-data, field name: "image").
+     *  Returns data.url of the stored image. Phlebo Bearer token is sent by the app. */
+    public static final String UPLOAD_IMAGE     = "/api/v1/phlebo/upload";
+
+    // ── Barcode (external UAT LIS service — absolute URL, not on the diagnostics host) ──
+    /** POST  — Map a barcode to a visit (lab number).
+     *  Payload: { "labno": "<visit_number>", "Barcodeno": "<barcode_number>" } */
+    public static final String CHANGE_BARCODE   =
+            "http://43.204.199.216/yoda_uat_8.0/API/ChangeBarcode/ChangeBarCodedata";
+
     // ── Registration (Phlebo Notification Service) ──────────────────────────
     /** POST  — Create (register) a new phlebotomist in the system.
      *  Requires: admin Bearer token. */
