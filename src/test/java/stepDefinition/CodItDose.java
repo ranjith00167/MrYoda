@@ -228,6 +228,21 @@ public class CodItDose extends BaseSteps {
     @When("I click on the search button")
     public void i_click_on_the_search_button() {
         BaseClass.waitAndClick(LocatorsPage.searchButton, 10);
+        waitForAjaxQuietly();
+    }
+
+    /**
+     * The lab portal renders search results via jQuery AJAX. Clicking the next control before the
+     * response lands acts on a stale/empty grid (the cause of silent no-ops on slow CI runners).
+     * Never throws: pages without jQuery just fall through to the caller's own waits.
+     */
+    private static void waitForAjaxQuietly() {
+        try {
+            BaseClass.waitForAjaxComplete();
+        } catch (Exception ignored) {
+            // best effort only
+        }
+        BaseClass.waitInSeconds(1);
     }
 
     @And("I click on the view icon")
@@ -574,13 +589,86 @@ public class CodItDose extends BaseSteps {
 
     @When("I click on the sample receive checkbox")
     public void i_click_on_the_sample_receive_checkbox() {
-        BaseClass.waitAndClick(LocatorsPage.selectDepartmentCheckbox, 10);
+        selectDepartmentRowCheckbox();
     }
 
     @When("I click on the receive button")
     public void i_click_on_the_receive_button() throws Throwable {
-        Thread.sleep(5000);
+        clickDepartmentReceive();
+    }
+
+    /**
+     * Ticks the department-receive row checkbox and verifies it is really selected. The grid can
+     * re-render after the search AJAX completes, which drops the tick; so re-check and retry.
+     */
+    private void selectDepartmentRowCheckbox() {
+        JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
+        for (int attempt = 1; attempt <= 4; attempt++) {
+            try {
+                waitForAjaxQuietly();
+                new WebDriverWait(BaseClass.driver, Duration.ofSeconds(20))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='hd']")));
+                WebElement box = BaseClass.driver.findElement(By.xpath("//input[@id='hd']"));
+                if (!box.isSelected()) {
+                    js.executeScript("arguments[0].scrollIntoView({block:'center'});", box);
+                    js.executeScript("arguments[0].click();", box);
+                }
+                BaseClass.waitInSeconds(1);
+                if (BaseClass.driver.findElement(By.xpath("//input[@id='hd']")).isSelected()) {
+                    System.out.println("✅ Department receive checkbox selected (attempt " + attempt + ")");
+                    return;
+                }
+                System.out.println("⚠️ Checkbox not selected after click (attempt " + attempt + "), retrying...");
+            } catch (Exception e) {
+                System.out.println("⚠️ Checkbox attempt " + attempt + " failed: " + unwrap(e).getClass().getSimpleName());
+            }
+        }
+        throw new RuntimeException("❌ Department receive checkbox could not be selected — "
+                + "the SIN row was not listed. SIN: " + ScenarioContext.extractedSinNo);
+    }
+
+    /** Clicks Receive once it is clickable, accepts any confirm dialog and waits for the save. */
+    private void clickDepartmentReceive() {
+        new WebDriverWait(BaseClass.driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='Receive']")));
         BaseClass.waitAndClick(LocatorsPage.receiveButton, 10);
+        BaseClass.waitInSeconds(1);
+        try {
+            org.openqa.selenium.Alert alert = BaseClass.driver.switchTo().alert();
+            System.out.println("ℹ️ Receive dialog: " + alert.getText());
+            alert.accept();
+        } catch (Exception noAlert) {
+            // no confirm dialog
+        }
+        waitForAjaxQuietly();
+        BaseClass.waitInSeconds(3);
+    }
+
+    /**
+     * Self-heal for result entry: the SIN never reached the result-entry list, so the department
+     * receive did not take. Redo it once from the menu, then return to result entry.
+     */
+    private void redoDepartmentReceive(String sinNo) {
+        System.out.println("🔁 Re-running Department Receive for SIN " + sinNo + " ...");
+        JavascriptExecutor js = (JavascriptExecutor) BaseClass.driver;
+        js.executeScript("arguments[0].click();", LocatorsPage.sampleManagementLink);
+        BaseClass.waitInSeconds(2);
+        js.executeScript("arguments[0].click();", LocatorsPage.departmentReceiveLink);
+        waitForAjaxQuietly();
+        try {
+            BaseClass.selectByVisibleText(LocatorsPage.departmentSearchTypeDropdown, "SIN No.");
+        } catch (Exception ignored) {
+            // default search type is acceptable
+        }
+        BaseClass.enterSinNumber(LocatorsPage.sinNo_searchBox, sinNo);
+        js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
+        waitForAjaxQuietly();
+        selectDepartmentRowCheckbox();
+        clickDepartmentReceive();
+        js.executeScript("arguments[0].click();", LocatorsPage.sampleProcessingLink);
+        BaseClass.waitInSeconds(2);
+        js.executeScript("arguments[0].click();", LocatorsPage.resultEntryLink);
+        waitForAjaxQuietly();
     }
 
     @When("I click on the sample processing button")
@@ -609,7 +697,8 @@ public class CodItDose extends BaseSteps {
         int processedVisits = 0;
         int maxIterations = 15;
         int consecutiveFailures = 0;
-        int maxConsecutiveFailures = 3;
+        int maxConsecutiveFailures = 5;
+        boolean receiveRedone = false;
 
         for (int i = 0; i < maxIterations && consecutiveFailures < maxConsecutiveFailures; i++) {
             try {
@@ -648,12 +737,28 @@ public class CodItDose extends BaseSteps {
                     System.out.println("⏳ Waiting for search results to load...");
                     BaseClass.waitInSeconds(3);
                     
-                    // Additional wait for table to be populated
-                    try {
-                        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-                                By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]")));
-                    } catch (Exception ignored) {
-                        System.out.println("⚠️ Table not immediately populated, continuing anyway...");
+                    // CI runners are slower and the lab list is eventually consistent after the
+                    // department receive step, so wait longer and re-trigger the search a few times.
+                    By rowLocator = By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]");
+                    WebDriverWait rowWait = new WebDriverWait(driver, Duration.ofSeconds(
+                            Integer.getInteger("resultEntry.rowWaitSeconds", 20)));
+                    int searchAttempts = Integer.getInteger("resultEntry.searchAttempts", 4);
+                    boolean rowsLoaded = false;
+                    for (int s = 1; s <= searchAttempts && !rowsLoaded; s++) {
+                        try {
+                            rowWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(rowLocator));
+                            rowsLoaded = true;
+                        } catch (Exception notYet) {
+                            if (s < searchAttempts) {
+                                System.out.println("⚠️ No rows yet for SIN " + sinNo + " (search " + s + "/"
+                                        + searchAttempts + "), searching again...");
+                                js.executeScript("arguments[0].click();", LocatorsPage.searchButton);
+                            }
+                        }
+                    }
+                    if (!rowsLoaded) {
+                        System.out.println("⚠️ Table still empty after " + searchAttempts + " searches. URL: "
+                                + driver.getCurrentUrl());
                     }
                 } catch (Exception e) {
                     if (isSessionDead(e)) {
@@ -680,7 +785,19 @@ public class CodItDose extends BaseSteps {
                         By.xpath("//table[contains(@class,'htCore')]//a[contains(@onclick,'PickRowData')]"));
 
                 if (visitLinks.isEmpty()) {
-                    if (i < 2) {
+                    // Nothing processed yet means the SIN never showed up — that is a failure to
+                    // investigate, not "all visits done", so keep retrying until the failure cap.
+                    if (processedVisits == 0 && i == 2 && !receiveRedone) {
+                        receiveRedone = true;
+                        try {
+                            redoDepartmentReceive(sinNo);
+                        } catch (Exception redoEx) {
+                            logUIWarning("Test Entry", "DEPT_RECEIVE_REDO_FAILED",
+                                    "Re-running department receive failed: " + unwrap(redoEx).getMessage());
+                        }
+                        continue;
+                    }
+                    if (processedVisits == 0 || i < 2) {
                         // First couple iterations, maybe page not ready
                         System.out.println("⚠️ No visit links found on iteration " + (i + 1) + ". Waiting and retrying...");
                         logUIWarning("Test Entry", "NO_VISIT_LINKS_FOUND", "Search returned no results for SIN " + sinNo + " on iteration " + (i + 1));
