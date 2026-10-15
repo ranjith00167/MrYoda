@@ -8,6 +8,9 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * AES-256-GCM decryption helper for encrypted API payloads.
+ *
  * Payload format (per spec):
  *   base64( IV[12 bytes] + ciphertext + authTag[16 bytes] )
  *   delivered inside JSON as  { "__enc": "&lt;base64&gt;" }
@@ -17,10 +20,7 @@ import java.nio.charset.StandardCharsets;
  * Output    : UTF-8 JSON string.
  *
  * Key resolution order:
- *   1. env var  API_DECRYPTION_KEY                    (documented 
-/**
- * AES-256-GCM decryption helper for encrypted API payloads.
- *entry point)
+ *   1. env var  API_DECRYPTION_KEY                    (documented entry point)
  *   2. env var  NEXT_PUBLIC_PAYLOAD_ENCRYPTION_KEY     (project standard)
  *   3. sys prop encryption.key
  *   4. config  encryption.key  (src/test/resources/config.properties)
